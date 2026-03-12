@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ST8 AI · Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0A0F1A;
+  --bg2:#0E1525;
+  --card:#111827;
+  --card2:#1a2235;
+  --border:#1e2d45;
+  --accent:#D4A017;
+  --accent2:#F0C030;
+  --blue:#2E86C1;
+  --blue2:#5DADE2;
+  --white:#FFFFFF;
+  --text:#E8EDF5;
+  --muted:#6B7FA0;
+  --green:#1A9655;
+  --red:#C0392B;
+  --orange:#D68910;
+  --purple:#7D3C98;
+  --teal:#148F77;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;overflow-x:hidden}
+button{cursor:pointer;font-family:inherit;transition:all .15s}
+input,select,textarea{font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)!important}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* ══════ HEADER ══════ */
+.hdr{
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:300;
+  box-shadow:0 2px 20px rgba(0,0,0,.5);
+}
+.hdr-top{
+  padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-badge{
+  background:var(--accent);color:#000;
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;
+  letter-spacing:2px;padding:5px 10px;border-radius:4px;flex-shrink:0;
+}
+.logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;letter-spacing:3px;color:var(--white)}
+.logo-sub{font-size:9px;color:var(--muted);letter-spacing:.5px;margin-top:1px}
+.nav{
+  display:flex;gap:4px;padding:8px 12px;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  -webkit-overflow-scrolling:touch;
+}
+.nav::-webkit-scrollbar{display:none}
+.nb{
+  padding:7px 13px;border:none;border-radius:3px;flex-shrink:0;
+  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.5px;white-space:nowrap;
+  background:transparent;color:var(--muted);
+  border:1px solid transparent;
+}
+.nb:hover{color:var(--white);background:rgba(255,255,255,.05)}
+.nb.active{background:var(--accent);color:#000;border-color:var(--accent)}
+
+/* ══════ MAIN ══════ */
+.wrap{padding:20px;max-width:1040px;margin:0 auto}
+
+/* ══════ STATS ══════ */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+@media(min-width:600px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:16px 18px;position:relative;overflow:hidden;
+}
+.stat-accent{position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
+.stat-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.stat-val{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--white);line-height:1}
+.stat-sub{font-size:10px;color:var(--muted);margin-top:4px}
+
+/* ══════ SECTION TITLE ══════ */
+.stitle{
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;color:var(--accent);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.stitle::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ══════ FILTERS ══════ */
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.fbtn{
+  padding:5px 13px;border-radius:2px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;
+  white-space:nowrap;
+}
+.fbtn:hover{border-color:var(--accent);color:var(--accent)}
+.fbtn.on{background:var(--accent);border-color:var(--accent);color:#000}
+
+/* ══════ TABLE ══════ */
+.tw{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+thead tr{background:var(--card2)}
+th{
+  padding:11px 14px;text-align:left;
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;
+  color:var(--white);letter-spacing:1.5px;text-transform:uppercase;
+  border-bottom:1px solid var(--accent);white-space:nowrap;
+}
+tbody tr{cursor:pointer;border-bottom:1px solid var(--border)}
+tbody tr:nth-child(even) td{background:#0d1522}
+tbody tr:nth-child(odd) td{background:var(--card)}
+tbody tr:hover td{background:#1a2540!important}
+tbody tr.sel td{background:rgba(212,160,23,.08)!important;border-bottom-color:var(--accent)}
+td{padding:11px 14px;font-size:13px;color:var(--text)}
+.bold{font-weight:600}
+.muted{color:var(--muted);font-size:12px}
+.badge{
+  display:inline-block;padding:3px 9px;border-radius:2px;
+  font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;
+  letter-spacing:.5px;color:var(--white);
+}
+/* Mobile cards */
+.client-cards{display:none;flex-direction:column;gap:8px}
+.cc{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:14px;cursor:pointer;transition:border-color .15s;
+}
+.cc:active{border-color:var(--accent)}
+.cc.sel{border-color:var(--accent);background:rgba(212,160,23,.05)}
+.cc-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}
+.cc-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--white)}
+.cc-pri{font-size:18px}
+.cc-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.cc-meta{font-size:12px;color:var(--muted)}
+.cc-pot{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--accent)}
+@media(max-width:660px){
+  .tw{display:none}
+  .client-cards{display:flex}
+}
+
+/* ══════ DETAIL PANEL ══════ */
+.dp{
+  margin-top:10px;background:var(--card);border:1px solid var(--accent);border-radius:6px;
+  padding:20px;animation:up .2s ease;
+}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.dp-hdr{display:flex;justify-content:space-between;align-items:start;margin-bottom:14px}
+.dp-name{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--white)}
+.dp-meta{font-size:12px;color:var(--muted);margin-top:4px}
+.dp-notes{
+  border-left:2px solid var(--accent);padding:10px 14px;
+  background:rgba(212,160,23,.05);border-radius:0 4px 4px 0;
+  font-size:13px;line-height:1.6;margin-bottom:14px;color:var(--text)
+}
+.dp-stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.sbt{
+  padding:4px 11px;border-radius:2px;font-family:'Montserrat',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.3px;border:1px solid;
+}
+.dp-actions{display:flex;gap:8px;flex-wrap:wrap}
+.dp-actions .btn-g,.dp-actions .btn-s{flex:1;min-width:120px;text-align:center}
+.btn-g{
+  padding:9px 18px;background:var(--accent);border:none;border-radius:3px;
+  color:#000;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:.5px;
+}
+.btn-g:hover{background:var(--accent2)}
+.btn-s{
+  padding:9px 18px;background:transparent;border:1px solid var(--border);border-radius:3px;
+  color:var(--text);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.5px;
+}
+.btn-s:hover{border-color:var(--accent);color:var(--accent)}
+.btn-x{background:transparent;border:none;color:var(--muted);font-size:20px;line-height:1}
+
+/* ══════ PIPELINE ══════ */
+.pgrid{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:500px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.pgrid{grid-template-columns:repeat(5,1fr)}}
+.pcol{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.phead{padding:10px 13px}
+.phead-t{font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--white)}
+.phead-s{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px}
+.pbody{padding:8px;display:flex;flex-direction:column;gap:6px;min-height:50px}
+.pcard{background:var(--card2);border-radius:4px;padding:10px 12px;border-left:2px solid}
+.pcard-n{font-weight:600;font-size:12px;color:var(--white);margin-bottom:2px}
+.pcard-c{font-size:11px;color:var(--muted)}
+.pcard-f{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+
+/* ══════ CHART ══════ */
+.cw{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:18px}
+.crow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.clabel{width:120px;font-size:11px;color:var(--muted);text-align:right;flex-shrink:0}
+.cbar-w{flex:1;background:var(--bg2);border-radius:2px;height:20px;overflow:hidden}
+.cbar{height:100%;border-radius:2px;transition:width .7s ease}
+.cval{width:75px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--accent);flex-shrink:0}
+.ccnt{width:18px;font-size:11px;color:var(--muted)}
+
+/* ══════ FORMS ══════ */
+.fg2{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}
+@media(min-width:600px){.fg2{grid-template-columns:1fr 1fr}}
+label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.inp{
+  width:100%;background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:10px 13px;color:var(--text);font-size:14px;
+}
+select.inp{-webkit-appearance:none}
+textarea.inp{resize:vertical}
+.inp:focus{border-color:var(--accent)}
+.btn-gen{
+  width:100%;padding:13px;background:var(--accent);border:none;border-radius:3px;
+  color:#000;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;
+}
+.btn-gen:hover:not(:disabled){background:var(--accent2)}
+.btn-gen:disabled{opacity:.4;cursor:not-allowed}
+
+/* ══════ RESULT ══════ */
+.res{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:20px;line-height:1.75;font-size:14px;white-space:pre-wrap;word-break:break-word;
+  border-left:3px solid var(--accent);
+}
+.res-copy{
+  margin-top:10px;padding:7px 16px;background:transparent;
+  border:1px solid var(--border);border-radius:3px;color:var(--muted);
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.5px;
+}
+.res-copy:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ══════ KP LIBRARY ══════ */
+.kp-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:640px){.kp-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.kp-grid{grid-template-columns:repeat(3,1fr)}}
+.kp-card{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:16px;cursor:pointer;transition:border-color .15s;
+}
+.kp-card:hover{border-color:var(--accent)}
+.kp-card.open{border-color:var(--accent);background:var(--card2)}
+.kp-card-h{display:flex;justify-content:space-between;align-items:start}
+.kp-card-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--white)}
+.kp-card-pkg{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.5px;color:var(--accent);margin-top:4px;text-transform:uppercase}
+.kp-card-city{font-size:11px;color:var(--muted);margin-top:2px}
+.kp-arrow{font-size:18px;color:var(--accent);transition:transform .2s}
+.kp-arrow.open{transform:rotate(90deg)}
+.kp-body{margin-top:14px;border-top:1px solid var(--border);padding-top:14px;
+  line-height:1.75;font-size:13px;white-space:pre-wrap;word-break:break-word;color:var(--text);display:none}
+.kp-body.open{display:block}
+
+/* ══════ HOT TAGS ══════ */
+.htags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.htag{
+  padding:4px 12px;border-radius:2px;border:1px solid var(--accent);
+  background:transparent;color:var(--accent);
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;
+}
+.htag:hover{background:var(--accent);color:#000}
+
+/* ══════ API SECTION ══════ */
+.api-box{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:18px;margin-bottom:16px;
+}
+.api-box.ok{border-color:var(--green)}
+.api-title{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:10px}
+.api-row{display:flex;gap:8px}
+.api-hint{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
+.api-hint a{color:var(--accent)}
+.api-status{margin-top:8px;font-size:12px}
+
+/* ══════ WARN ══════ */
+.warn{
+  background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.3);
+  border-radius:4px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--accent);
+}
+.warn a{color:var(--accent2);cursor:pointer;text-decoration:underline}
+
+/* ══════ PRIORITY ══════ */
+.p-h::before{content:'🔥 '}
+.p-m::before{content:'📌 '}
+.p-l::before{content:'💤 '}
+
+/* ══════ INFO BOX ══════ */
+.info{background:var(--card2);border-radius:6px;padding:16px;margin-top:16px}
+.info-title{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.info-text{font-size:13px;color:var(--muted);line-height:1.8}
+.info-text b{color:var(--text)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-top">
+    <div class="logo">
+      <div class="logo-badge">ST8</div>
+      <div>
+        <div class="logo-name">AI HUB</div>
+        <div class="logo-sub">СИСТЕМА УПРАВЛЕНИЯ ПРОДАЖАМИ</div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav" id="nav">
+    <button class="nb active" data-tab="crm">CRM</button>
+    <button class="nb" data-tab="pipeline">Воронка</button>
+    <button class="nb" data-tab="kplib">Библиотека КП</button>
+    <button class="nb" data-tab="kpgen">Генератор КП</button>
+    <button class="nb" data-tab="call">Звонки</button>
+    <button class="nb" data-tab="settings">⚙ API</button>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <!-- ═══════════ CRM ═══════════ -->
+  <div id="tab-crm">
+    <div class="stats" id="stats"></div>
+    <div class="stitle">Клиенты</div>
+    <div class="frow" id="frow"></div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th>Клиент</th><th>Контакт</th><th>Город</th>
+        <th>Стадия</th><th>Пакет</th><th>Потенциал</th><th></th>
+      </tr></thead>
+      <tbody id="crm-body"></tbody>
+    </table></div>
+    <div class="client-cards" id="crm-cards"></div>
+    <div id="detail"></div>
+  </div>
+
+  <!-- ═══════════ PIPELINE ═══════════ -->
+  <div id="tab-pipeline" style="display:none">
+    <div class="stitle">Воронка продаж</div>
+    <div class="pgrid" id="pgrid"></div>
+    <div class="cw">
+      <div class="stitle">Потенциал по стадиям</div>
+      <div id="chart"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ КП БИБЛИОТЕКА ═══════════ -->
+  <div id="tab-kplib" style="display:none">
+    <div class="stitle">Готовые КП</div>
+    <div class="kp-grid" id="kp-grid"></div>
+  </div>
+
+  <!-- ═══════════ ГЕНЕРАТОР КП ═══════════ -->
+  <div id="tab-kpgen" style="display:none">
+    <div class="stitle">Генератор КП</div>
+    <div id="warn-kp"></div>
+    <div class="fg2">
+      <div><label>Название клиента</label><input class="inp" id="kp-client" placeholder="Polyana Group"></div>
+      <div><label>Контакт</label><input class="inp" id="kp-contact" placeholder="Роман Вавилин"></div>
+      <div><label>Город</label><input class="inp" id="kp-city" placeholder="Самара"></div>
+      <div><label>Тип бизнеса</label><input class="inp" id="kp-type" placeholder="Ресторан, холдинг..."></div>
+    </div>
+    <div style="margin-bottom:12px">
+      <label>Пакет</label>
+      <select class="inp" id="kp-pkg">
+        <option>Пакет 1 — Под ключ с передачей прав (1 000 000 ₽)</option>
+        <option>Пакет 2 — Старт (150 000 ₽ вход + 60 000 ₽/мес)</option>
+        <option selected>Пакет 2 — Оптимум (250 000 ₽ вход + 90 000 ₽/мес)</option>
+        <option>Пакет 2 — Максимум (400 000 ₽ вход + 130 000 ₽/мес)</option>
+      </select>
+    </div>
+    <div style="margin-bottom:16px">
+      <label>Боль клиента / особенности</label>
+      <input class="inp" id="kp-pain" placeholder="Низкая возвращаемость гостей, нет аналитики, нужна интеграция с CRM...">
+    </div>
+    <button class="btn-gen" id="kp-btn" onclick="generateKP()">✦ СГЕНЕРИРОВАТЬ КП</button>
+    <div id="kp-res"></div>
+  </div>
+
+  <!-- ═══════════ ЗВОНКИ ═══════════ -->
+  <div id="tab-call" style="display:none">
+    <div class="stitle">Подготовка к звонку</div>
+    <div id="warn-call"></div>
+    <div class="fg2">
+      <div><label>Клиент</label><input class="inp" id="call-client" placeholder="Polyana Group"></div>
+      <div><label>Контакт</label><input class="inp" id="call-contact" placeholder="Роман Вавилин"></div>
+    </div>
+    <div style="margin-bottom:12px">
+      <label>Контекст — что уже знаем</label>
+      <textarea class="inp" id="call-ctx" rows="3" placeholder="Интересует интеграция с Mcrm, несколько точек в Самаре, хочет эксклюзив..."></textarea>
+    </div>
+    <div style="margin-bottom:16px">
+      <label>Быстрый выбор 🔥 горячие</label>
+      <div class="htags" id="htags"></div>
+    </div>
+    <button class="btn-gen" id="call-btn" onclick="generateCall()">✦ ПОДГОТОВИТЬ ШПАРГАЛКУ</button>
+    <div id="call-res"></div>
+  </div>
+
+  <!-- ═══════════ SETTINGS ═══════════ -->
+  <div id="tab-settings" style="display:none">
+    <div class="stitle">Настройки</div>
+    <div class="api-box" id="api-box">
+      <div class="api-title">🔑 Anthropic API Key</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5">
+        Нужен для генератора КП и подготовки к звонкам. Хранится только в памяти браузера — никуда не передаётся кроме Anthropic.
+      </p>
+      <div class="api-row">
+        <input class="inp" type="password" id="api-inp" placeholder="sk-ant-api03-..." style="flex:1">
+        <button class="btn-g" onclick="saveKey()" style="white-space:nowrap">Сохранить</button>
+      </div>
+      <div class="api-hint">Получить ключ: <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys → Create Key → пополнить баланс от $5</div>
+      <div class="api-status" id="api-status"></div>
+    </div>
+    <div class="info">
+      <div class="info-title">📱 Как запустить на телефоне</div>
+      <div class="info-text">
+        1. Скачай файл <b>st8ai-hub.html</b><br>
+        2. Отправь себе в Telegram (Избранное) или Google Drive<br>
+        3. Скачай на телефон → открой в <b>Chrome / Safari</b><br>
+        4. Введи API-ключ в этом разделе<br>
+        5. В Safari: «Поделиться → На экран Home» — будет как <b>приложение</b> 📲
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+// ══════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════
+const CLIENTS = [
+  {id:1,name:"Polyana Group",contact:"Роман Вавилин",city:"Самара",type:"HoReCa / Сеть",stage:"переговоры",pkg:"Пакет 2 — Оптимум",potential:250000,notes:"Harat's, DuPain, Поляна Delivery и др. Интеграция Mcrm. Эксклюзив по Самаре.",priority:"high",last:"2026-03-10"},
+  {id:2,name:"Kalinka na Neglinke",contact:"Кристина",city:"Москва",type:"Ресторан",stage:"КП отправлено",pkg:"Пакет 2 — Старт",potential:150000,notes:"КП создано, контакт с Кристиной установлен.",priority:"high",last:"2026-03-08"},
+  {id:3,name:"Atelier Family",contact:"Марк + Ира",city:"Москва",type:"HoReCa / Цифровизация",stage:"переговоры",pkg:"Пакет 2 — Оптимум",potential:250000,notes:"Цифровизация, ReMarked. Шпаргалка для звонка готова.",priority:"high",last:"2026-03-09"},
+  {id:4,name:"Pinskiy & Co",contact:"Елена Пинская",city:"Москва",type:"Ресторанный холдинг",stage:"первый контакт",pkg:"Пакет 1",potential:1000000,notes:"Холдинг. КП без цен.",priority:"medium",last:"2026-03-05"},
+  {id:5,name:"Perelman People",contact:"—",city:"Москва",type:"Ресторан",stage:"первый контакт",pkg:"Пакет 2 — Максимум",potential:400000,notes:"Сеть ресторанов.",priority:"medium",last:"2026-03-01"},
+  {id:6,name:"HERE Catering",contact:"—",city:"Москва",type:"Кейтеринг",stage:"КП отправлено",pkg:"Пакет 2 — Оптимум",potential:250000,notes:"Кейтеринг. КП отправлено.",priority:"medium",last:"2026-03-06"},
+  {id:7,name:"Алёна Абдурахманова",contact:"Алёна",city:"—",type:"Банкеты",stage:"первый контакт",pkg:"Пакет 2 — Старт",potential:150000,notes:"banquet_expert / Мелодия.",priority:"low",last:"2026-02-28"},
+  {id:8,name:"ПСБ Патриот",contact:"—",city:"Екатеринбург",type:"Отель / Cosmos",stage:"КП отправлено",pkg:"Пакет 2 — Максимум",potential:400000,notes:"Cosmos Hotels, Екб.",priority:"medium",last:"2026-03-04"},
+  {id:9,name:"Жигунов С.В.",contact:"Жигунов С.В.",city:"Москва",type:"Корпоратив / Кино",stage:"первый контакт",pkg:"Пакет 1",potential:1000000,notes:"Кино. КП без цен.",priority:"low",last:"2026-02-25"},
+  {id:10,name:"S7 Airlines",contact:"Директор маркетинга",city:"Москва",type:"B2B / Авиация",stage:"первый контакт",pkg:"Пакет 1",potential:1000000,notes:"Выход через знакомых. КП без цен.",priority:"high",last:"2026-03-07"},
+  {id:11,name:"ТПХ Русклимат",contact:"Георгий Алиханович",city:"Москва",type:"Enterprise / Климат",stage:"КП отправлено",pkg:"Пакет 1",potential:1000000,notes:"Крупнейший климатический холдинг РФ. Дилерский ассистент, автоматизация сервиса, координация СЦ.",priority:"high",last:"2026-03-11"},
+];
+
+const STAGES = ["первый контакт","КП отправлено","переговоры","договор","закрыто"];
+
+// ══════════════════════════════════════════
+//  КП БИБЛИОТЕКА — все финальные КП
+// ══════════════════════════════════════════
+const KPS = [
+  {
+    name:"Polyana Group",
+    contact:"Роман Вавилин",
+    city:"Самара",
+    pkg:"Пакет 2 — Оптимум",
+    text:`Роман, добрый день!
+
+Команда ST8 AI подготовила для Polyana Group персональное предложение по AI-автоматизации — с учётом масштаба вашей сети и интеграции с Mcrm.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ПРОБЛЕМА, КОТОРУЮ МЫ РЕШАЕМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Сети ресторанов сталкиваются с одними и теми же вызовами: гости уходят и не возвращаются, администраторы тонут в рутине, данные из разных точек не сводятся в единую картину. Ни Harat's, ни DuPain, ни Поляна Delivery не застрахованы от этого — и именно здесь ST8 AI создаёт реальное конкурентное преимущество.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+НАШЕ РЕШЕНИЕ ДЛЯ POLYANA GROUP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 AI-консьерж для каждой точки сети
+Принимает брони 24/7 в Telegram и мессенджерах, помнит каждого гостя — его предпочтения, дни рождения, аллергии. Никакого «подождите, я уточню».
+
+📊 Интеграция с Mcrm
+Все данные о гостях, визитах и бронированиях автоматически попадают в вашу CRM. AI дополняет профиль каждого гостя и запускает персональные возвратные кампании.
+
+📈 Предиктивная аналитика
+Система анализирует загрузку, сезонность и предпочтения — и предлагает оптимальное меню дня, объём закупки и спецпредложения для постоянных гостей.
+
+🔒 Эксклюзив по Самаре
+Мы работаем с одним партнёром в каждом городе в сегменте HoReCa. Polyana Group получает эксклюзивное преимущество — конкуренты в Самаре этого инструмента иметь не будут.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+РЕЗУЛЬТАТЫ, КОТОРЫЕ ВЫ ПОЛУЧИТЕ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Рост возвращаемости гостей на 25–35%
+• Снижение no-show на 30–40%
+• Экономия 4–5 часов работы администраторов ежедневно
+• Рост среднего чека на 15–20% за счёт персональных предложений
+• Единый дашборд по всей сети — все точки в одном окне
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО ВХОДИТ В ПАКЕТ ОПТИМУМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ AI-консьерж для всех точек сети (Telegram, Instagram Direct)
+✓ Интеграция с Mcrm — двусторонняя синхронизация данных
+✓ Предиктивные закупки и аналитика по 4–10 точкам
+✓ Персонализация предложений для постоянных гостей
+✓ Обучение модели на данных ваших заведений
+✓ Выделенный менеджер проекта
+✓ Поддержка 24/7
+✓ Финальный расчёт — после приёмки и подтверждения результата
+✓ Выход из договора: 30 дней без штрафов
+✓ Инфраструктура РФ, соответствие 152-ФЗ
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+СЛЕДУЮЩИЙ ШАГ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Предлагаю встретиться на 30 минут — покажем демо-пилот на реальных данных схожей сети. Никакой теории, только живая система.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"Kalinka na Neglinke",
+    contact:"Кристина",
+    city:"Москва",
+    pkg:"Пакет 2 — Старт",
+    text:`Кристина, добрый день!
+
+ST8 AI — команда, которая создаёт живые AI-системы для ресторанов. Не чат-боты с кнопками, а полноценный цифровой консьерж, обученный на характере и стиле вашего заведения.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО МЫ ВИДИМ В KALINKA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Kalinka na Neglinke — это репутация, атмосфера и высокий стандарт сервиса. Каждый гость, который пишет в 23:00 с вопросом о столике, — это потенциальный постоянный гость. Вопрос в том, кто ему ответит и как быстро.
+
+AI-консьерж ST8 AI отвечает за 3 секунды, помнит предыдущие визиты, знает меню наизусть и записывает гостя — пока ваш администратор занят залом.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО ВХОДИТ В ПАКЕТ СТАРТ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ AI-консьерж — бронирование и ответы на вопросы 24/7
+✓ Подключение Telegram и Instagram Direct
+✓ Базовая CRM: история гостей, напоминания, дни рождения
+✓ Запуск за 3 рабочих дня
+✓ Обучение на меню и стандартах вашего заведения
+✓ Поддержка 24/7
+✓ Финальный платёж — после приёмки
+✓ Выход: 30 дней без штрафов
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+РЕЗУЛЬТАТЫ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• +25% к возвращаемости гостей
+• −35% no-show (система отправляет напоминания)
+• Администратор освобождается от 4–5 часов рутины ежедневно
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+СЛЕДУЮЩИЙ ШАГ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Готовы показать демо — как консьерж отвечает от лица Kalinka. Займёт 20 минут, удобно в Zoom или лично.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"Atelier Family",
+    contact:"Марк + Ира",
+    city:"Москва",
+    pkg:"Пакет 2 — Оптимум",
+    text:`Марк, Ира, добрый день!
+
+Спасибо за интерес к ST8 AI. Мы подготовили предложение с учётом вашего курса на цифровизацию и уже выстроенной работы с ReMarked.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ПОЧЕМУ ЭТО АКТУАЛЬНО ДЛЯ ATELIER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Вы уже инвестируете в данные о гостях через ReMarked. ST8 AI — это следующий уровень: AI, который эти данные использует в режиме реального времени, чтобы каждый контакт с гостем был персональным и своевременным.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО МЫ ДЕЛАЕМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 Интеграция с ReMarked
+AI читает профили гостей из ReMarked и использует их при каждом обращении. Система знает, кто VIP, кто приходит по пятницам, у кого аллергия на глютен.
+
+🤖 AI-консьерж для бронирования
+Принимает запросы 24/7, бронирует, подтверждает, напоминает. Обучен на стиле и ценностях Atelier — отвечает в вашем tone of voice.
+
+📊 Аналитика и персонализация
+Автоматические follow-up после визита, персональные предложения, сегментация гостевой базы — всё без ручной работы команды.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО ВХОДИТ В ПАКЕТ ОПТИМУМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ AI-консьерж (Telegram, Instagram Direct, WhatsApp)
+✓ Двусторонняя интеграция с ReMarked через API
+✓ Кросс-аналитика по точкам сети
+✓ Персонализация VIP-гостей
+✓ Выделенный менеджер проекта
+✓ Обучение персонала
+✓ Финальный платёж — после приёмки
+✓ Выход: 30 дней без штрафов | Инфраструктура РФ, 152-ФЗ
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+СЛЕДУЮЩИЙ ШАГ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Предлагаю созвон на 30 минут — покажем, как система уже работает у схожих проектов.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"Pinskiy & Co",
+    contact:"Елена Пинская",
+    city:"Москва",
+    pkg:"Пакет 1 — Под ключ",
+    text:`Елена, добрый день!
+
+ST8 AI — команда инженеров и предпринимателей, которая создаёт AI-системы для ресторанного бизнеса. Не коробочные решения, а живые продукты, обученные на данных конкретного заведения.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ДЛЯ ХОЛДИНГА МАСШТАБА PINSKIY & CO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Мы понимаем, что в холдинге с несколькими концепциями задача не в том, чтобы «поставить бота». Задача — создать единую AI-экосистему, которая работает на каждую точку по-своему, но управляется централизованно.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО МЫ ПРЕДЛАГАЕМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 Персональный AI-консьерж для каждой концепции
+Каждое заведение получает своего AI с уникальным характером, tone of voice и знанием меню. Гость Pinskiy & Co получает совсем другой опыт, чем гость другого бренда холдинга.
+
+📊 Единый дашборд управления сетью
+Все точки, все данные, все метрики — в одном окне. Бронирования, отзывы, загрузка, прогнозы закупок.
+
+🔗 Интеграция с вашими системами
+Работаем с iiko, R-Keeper, 1С, вашей CRM — без замены существующей инфраструктуры.
+
+📦 Пакет 1 — передача прав
+Система разрабатывается под вас, весь код и права переходят холдингу. Вы не зависите от нас — это ваш актив.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+РЕЗУЛЬТАТЫ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Рост возвращаемости гостей: +25–35%
+• Снижение no-show: −30–40%
+• Экономия ФОТ администраторов: 4–5 ч/день на точку
+• Рост среднего чека: +15–20%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+УСЛОВИЯ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Оплата поэтапно: 50% / 30% / 20%
+✓ Финальный платёж — только после приёмки
+✓ Срок разработки: 8 недель
+✓ Инфраструктура РФ, соответствие 152-ФЗ
+
+Конкретные цифры — после брифинга: объём задачи, количество точек, необходимые интеграции.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+СЛЕДУЮЩИЙ ШАГ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+30-минутная встреча или звонок — обсудим специфику холдинга и покажем живое демо.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"Perelman People",
+    contact:"—",
+    city:"Москва",
+    pkg:"Пакет 2 — Максимум",
+    text:`Добрый день, команда Perelman People!
+
+ST8 AI — это AI-консьержи и системы автоматизации для ресторанного бизнеса. Мы работаем с сетями и холдингами, которые ценят высокий стандарт сервиса и хотят масштабировать его без потери качества.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ДЛЯ PERELMAN PEOPLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Сеть с сильным брендом и концепцией — это идеальная точка входа для AI. Система обучается на характере каждого заведения и становится продолжением вашего стиля. Не шаблонный бот, а живой цифровой сотрудник.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ПАКЕТ МАКСИМУМ — ПОЛНАЯ АВТОМАТИЗАЦИЯ СЕТИ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ AI-консьерж для каждой точки (Telegram, Instagram Direct, WhatsApp)
+✓ Единая система управления сетью 10+ точек
+✓ Предиктивные закупки и управление остатками
+✓ Автоматические закупки у поставщиков
+✓ Computer vision на кухнях (контроль порций и стандартов)
+✓ On-premise размещение — сервер у вас
+✓ Обучение команды и документация
+✓ Поддержка 24/7
+✓ Финальный платёж — после приёмки
+✓ Выход из договора: 30 дней без штрафов
+✓ Инфраструктура РФ, 152-ФЗ
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+РЕЗУЛЬТАТЫ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Возвращаемость гостей: +30–40%
+• No-show: −35–40%
+• Экономия на закупках: −20–25%
+• ФОТ администраторов: −4–5 ч/день на точку
+
+Условия и стоимость — после брифинга по задаче.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"HERE Catering",
+    contact:"—",
+    city:"Москва",
+    pkg:"Пакет 2 — Оптимум",
+    text:`Добрый день!
+
+ST8 AI создаёт AI-системы для HoReCa. Для кейтеринга мы видим особую точку роста: автоматизация приёма и квалификации заявок, управление расписанием и персональная коммуникация с клиентами.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЗАДАЧИ, КОТОРЫЕ МЫ РЕШАЕМ ДЛЯ КЕЙТЕРИНГА
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 AI принимает заявки 24/7
+Клиент пишет в любое время — AI уточняет формат, дату, количество гостей, бюджет и передаёт менеджеру уже готовый бриф. Без потерь заявок, без ожидания.
+
+📋 Управление расписанием и загрузкой
+Система следит за доступными командами и оборудованием, предотвращает накладки и напоминает клиентам о предстоящих мероприятиях.
+
+💌 Персональная коммуникация
+Follow-up после мероприятия, сбор отзывов, возвратные предложения для постоянных клиентов — всё автоматически.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО ВХОДИТ В ПАКЕТ ОПТИМУМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ AI-ассистент для приёма и квалификации заявок
+✓ Интеграция с вашей CRM и календарём
+✓ Автоматические напоминания и follow-up
+✓ Аналитика по клиентам и мероприятиям
+✓ Поддержка 24/7
+✓ Финальный платёж — после приёмки
+✓ Выход: 30 дней без штрафов
+
+Стоимость и детали — после созвона по задаче.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"ТПХ Русклимат",
+    contact:"Георгий Алиханович",
+    city:"Москва",
+    pkg:"Пакет 1 — Под ключ",
+    text:`Георгий Алиханович, добрый день!
+
+ST8 AI — команда, которая создаёт AI-системы для сложных бизнес-процессов. Для климатического холдинга масштаба Русклимат мы видим три ключевые точки роста.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЗАДАЧИ, КОТОРЫЕ МЫ РЕШАЕМ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 Дилерский AI-ассистент
+Дилеры получают 24/7 доступ к актуальным данным по наличию, ценам, технической документации и статусам заказов. AI отвечает за секунды, разгружает отдел продаж и сокращает цикл сделки.
+
+🔧 Автоматизация сервисного центра
+Приём заявок на обслуживание, координация выезда технических специалистов, контроль сроков гарантии и автоматические напоминания клиентам. Система знает историю каждого объекта.
+
+📊 Координация сети СЦ
+Единая панель управления всеми сервисными центрами: загрузка, статусы, KPI. Руководство видит картину в реальном времени без сбора данных вручную.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ПОЧЕМУ ПАКЕТ 1 — ПРАВИЛЬНЫЙ ВЫБОР
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Для холдинга масштаба Русклимат критически важно владеть системой, а не арендовать её. Пакет 1 — разработка под ключ с полной передачей прав. Это ваш актив, а не подписка.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+УСЛОВИЯ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Оплата поэтапно: 50% / 30% / 20%
+✓ Финальный платёж — только после приёмки
+✓ Срок реализации: 8 недель
+✓ Интеграция с вашими системами (1С, CRM, ERP)
+✓ Инфраструктура РФ, соответствие 152-ФЗ
+✓ Выход: 30 дней без штрафов
+
+Конкретные цифры — после брифинга по объёму задачи и количеству интеграций.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+СЛЕДУЮЩИЙ ШАГ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+30 минут — брифинг и демо похожего кейса. Покажем, как система работает в реальном холдинге.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"S7 Airlines",
+    contact:"Директор маркетинга",
+    city:"Москва",
+    pkg:"Пакет 1 — Под ключ",
+    text:`Добрый день!
+
+ST8 AI — команда, создающая AI-продукты для сложных бизнес-процессов. Для S7 мы видим несколько высокоэффективных точек применения AI.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ВОЗМОЖНОСТИ ДЛЯ S7
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 AI-коммуникация с пассажирами
+Персональный ассистент, который знает историю перелётов, предпочтения и статус лояльности каждого пассажира. Отвечает на вопросы, помогает с изменением билетов, предлагает апгрейды — 24/7, мгновенно.
+
+📊 Предиктивная аналитика и персонализация
+AI анализирует поведение аудитории и формирует персональные предложения — нужный маршрут, нужный момент, нужная цена. Рост конверсии без роста рекламного бюджета.
+
+🔗 Интеграция с корпоративными системами
+Работаем с вашей CRM, PNR-системами и каналами коммуникации без замены существующей инфраструктуры.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+УСЛОВИЯ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Пакет 1 — разработка под ключ, права переходят S7
+✓ Оплата поэтапно: 50% / 30% / 20%
+✓ Финальный платёж — после приёмки
+✓ Инфраструктура РФ, 152-ФЗ
+
+Конкретная стоимость — после брифинга.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+  {
+    name:"Жигунов С.В.",
+    contact:"Сергей Викторович Жигунов",
+    city:"Москва",
+    pkg:"Пакет 1 — Под ключ",
+    text:`Сергей Викторович, добрый день!
+
+ST8 AI — это AI-системы для автоматизации коммуникации и бизнес-процессов. Для корпоративных и event-проектов мы создаём персональные AI-ассистенты, которые работают 24/7 и не требуют постоянного внимания команды.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ЧТО МЫ МОЖЕМ СДЕЛАТЬ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 Персональный AI-ассистент
+Управление входящими обращениями, координация команды, автоматизация типовых коммуникаций — система работает по вашим правилам и в вашем стиле.
+
+📋 Автоматизация документооборота
+Распознавание, классификация и маршрутизация документов. AI извлекает ключевые данные и передаёт нужным людям в нужный момент.
+
+🎯 Корпоративный ассистент для проектов
+Для кино- и медиапроектов: координация съёмочных групп, напоминания, управление расписанием, коммуникация с подрядчиками.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+УСЛОВИЯ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Разработка под ключ — права переходят заказчику
+✓ Оплата поэтапно: 50% / 30% / 20%
+✓ Финальный платёж — после приёмки
+✓ Срок: 8 недель
+✓ Инфраструктура РФ, 152-ФЗ
+
+Конкретная стоимость — после брифинга по задаче.
+
+С уважением,
+Алексей Гагарин | CEO & Co-founder ST8 AI
++7 985 690-52-52 | @Zzima686 | st8-ai.ru
+
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653`
+  },
+];
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+const stageColor = s=>({
+  "первый контакт":"#2E86C1",
+  "КП отправлено":"#D68910",
+  "переговоры":"#7D3C98",
+  "договор":"#1A9655",
+  "закрыто":"#4A5568"
+}[s]||"#2E86C1");
+const pi = p=>({high:"🔥",medium:"📌",low:"💤"}[p]);
+const fmt = n=>n>=1000000?`${(n/1e6).toFixed(1)}М ₽`:`${(n/1000).toFixed(0)}к ₽`;
+const totalPot = CLIENTS.reduce((s,c)=>s+c.potential,0);
+let curFilter="все", selId=null, apiKey="";
+
+// ══════════════════════════════════════════
+//  NAV
+// ══════════════════════════════════════════
+document.querySelectorAll(".nb").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".nb").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  document.querySelectorAll("[id^='tab-']").forEach(t=>t.style.display="none");
+  document.getElementById("tab-"+b.dataset.tab).style.display="block";
+  if(b.dataset.tab==="pipeline") renderPipeline();
+  if(b.dataset.tab==="kplib") renderKPLib();
+}));
+
+// ══════════════════════════════════════════
+//  STATS
+// ══════════════════════════════════════════
+function renderStats(){
+  document.getElementById("stats").innerHTML=[
+    {label:"КЛИЕНТОВ",val:CLIENTS.length,sub:"в базе",c:"var(--accent)"},
+    {label:"ПОТЕНЦИАЛ",val:fmt(totalPot),sub:"совокупный",c:"var(--accent)"},
+    {label:"ПЕРЕГОВОРЫ",val:CLIENTS.filter(c=>c.stage==="переговоры").length,sub:"активных",c:"var(--purple)"},
+    {label:"ГОРЯЧИЕ 🔥",val:CLIENTS.filter(c=>c.priority==="high").length,sub:"в приоритете",c:"var(--accent)"},
+  ].map(s=>`<div class="stat"><div class="stat-accent" style="background:${s.c}"></div>
+    <div class="stat-label">${s.label}</div>
+    <div class="stat-val" style="color:${s.c}">${s.val}</div>
+    <div class="stat-sub">${s.sub}</div>
+  </div>`).join("");
+}
+
+// ══════════════════════════════════════════
+//  FILTERS
+// ══════════════════════════════════════════
+function renderFilters(){
+  const opts=["все",...STAGES,"🔥 горячие"];
+  document.getElementById("frow").innerHTML=opts.map(f=>
+    `<button class="fbtn${f===curFilter?" on":""}" onclick="setFilter('${f}')">${f}</button>`
+  ).join("");
+}
+function setFilter(f){curFilter=f;renderFilters();renderTable();}
+
+// ══════════════════════════════════════════
+//  TABLE
+// ══════════════════════════════════════════
+function renderTable(){
+  const list=curFilter==="все"?CLIENTS:curFilter==="🔥 горячие"?CLIENTS.filter(c=>c.priority==="high"):CLIENTS.filter(c=>c.stage===curFilter);
+  
+  // Desktop table
+  document.getElementById("crm-body").innerHTML=list.map(c=>`
+    <tr class="${selId===c.id?"sel":""}" onclick="selClient(${c.id})">
+      <td class="bold ${c.priority==="high"?"p-h":c.priority==="medium"?"p-m":"p-l"}">${c.name}</td>
+      <td class="muted">${c.contact}</td>
+      <td class="muted">${c.city}</td>
+      <td><span class="badge" style="background:${stageColor(c.stage)}">${c.stage}</span></td>
+      <td class="muted" style="font-size:11px">${c.pkg}</td>
+      <td style="color:var(--accent);font-weight:700;font-family:'Montserrat',sans-serif">${fmt(c.potential)}</td>
+      <td style="font-size:15px">${pi(c.priority)}</td>
+    </tr>`).join("");
+
+  // Mobile cards
+  const cardsEl=document.getElementById("crm-cards");
+  if(cardsEl){
+    cardsEl.innerHTML=list.map(c=>`
+      <div class="cc${selId===c.id?" sel":""}" onclick="selClient(${c.id})">
+        <div class="cc-top">
+          <div>
+            <div class="cc-name">${c.name}</div>
+            <div class="cc-meta" style="margin-top:3px">${c.contact} · ${c.city}</div>
+          </div>
+          <div class="cc-pri">${pi(c.priority)}</div>
+        </div>
+        <div class="cc-row">
+          <span class="badge" style="background:${stageColor(c.stage)}">${c.stage}</span>
+          <span class="cc-pot">${fmt(c.potential)}</span>
+        </div>
+        <div class="cc-meta" style="margin-top:6px;font-size:11px">${c.pkg}</div>
+      </div>`).join("");
+  }
+}
+
+function selClient(id){selId=selId===id?null:id;renderTable();renderDetail();}
+
+// ══════════════════════════════════════════
+//  DETAIL
+// ══════════════════════════════════════════
+function renderDetail(){
+  const el=document.getElementById("detail");
+  if(!selId){el.innerHTML="";return;}
+  const c=CLIENTS.find(x=>x.id===selId);
+  el.innerHTML=`<div class="dp">
+    <div class="dp-hdr">
+      <div>
+        <div class="dp-name">${c.name}</div>
+        <div class="dp-meta">${c.contact} · ${c.city} · ${c.type}</div>
+      </div>
+      <button class="btn-x" onclick="selClient(${c.id})">✕</button>
+    </div>
+    <div class="dp-notes">${c.notes||"Нет заметок"}</div>
+    <div style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Изменить стадию</div>
+    <div class="dp-stages">
+      ${STAGES.map(s=>`<button class="sbt" onclick="updStage(${c.id},'${s}')"
+        style="border-color:${stageColor(s)};background:${c.stage===s?stageColor(s):"transparent"};color:${c.stage===s?"#fff":stageColor(s)}">${s}</button>`).join("")}
+    </div>
+    <div class="dp-actions">
+      <button class="btn-g" onclick="goCall(${c.id})">🎙 К звонку</button>
+      <button class="btn-s" onclick="goKPGen(${c.id})">📄 Генератор КП</button>
+      <button class="btn-s" onclick="goKPLib('${c.name}')">📁 Готовое КП</button>
+    </div>
+  </div>`;
+}
+
+function updStage(id,stage){const c=CLIENTS.find(x=>x.id===id);if(c)c.stage=stage;renderDetail();renderTable();}
+
+// ══════════════════════════════════════════
+//  PIPELINE
+// ══════════════════════════════════════════
+function renderPipeline(){
+  document.getElementById("pgrid").innerHTML=STAGES.map(stage=>{
+    const cl=CLIENTS.filter(c=>c.stage===stage);
+    const sum=cl.reduce((a,b)=>a+b.potential,0);
+    return`<div class="pcol">
+      <div class="phead" style="background:${stageColor(stage)}20;border-bottom:2px solid ${stageColor(stage)}">
+        <div class="phead-t" style="color:${stageColor(stage)}">${stage.toUpperCase()}</div>
+        <div class="phead-s">${cl.length} · ${fmt(sum)}</div>
+      </div>
+      <div class="pbody">
+        ${cl.length?cl.map(c=>`<div class="pcard" style="border-left-color:${stageColor(stage)}">
+          <div class="pcard-n">${c.name}</div>
+          <div class="pcard-c">${c.contact}</div>
+          <div class="pcard-f">
+            <span style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--accent)">${fmt(c.potential)}</span>
+            <span style="font-size:13px">${pi(c.priority)}</span>
+          </div>
+        </div>`).join(""):`<div style="color:var(--muted);font-size:11px;padding:8px">Пусто</div>`}
+      </div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("chart").innerHTML=STAGES.map(stage=>{
+    const sum=CLIENTS.filter(c=>c.stage===stage).reduce((a,b)=>a+b.potential,0);
+    const cnt=CLIENTS.filter(c=>c.stage===stage).length;
+    return`<div class="crow">
+      <div class="clabel">${stage}</div>
+      <div class="cbar-w"><div class="cbar" style="width:${totalPot?(sum/totalPot*100):0}%;background:${stageColor(stage)}"></div></div>
+      <div class="cval">${fmt(sum)}</div>
+      <div class="ccnt">${cnt}</div>
+    </div>`;
+  }).join("");
+}
+
+// ══════════════════════════════════════════
+//  KP LIBRARY
+// ══════════════════════════════════════════
+let openKP=null;
+function renderKPLib(){
+  document.getElementById("kp-grid").innerHTML=KPS.map((kp,i)=>`
+    <div class="kp-card${openKP===i?" open":""}" id="kpc${i}" onclick="toggleKP(${i})">
+      <div class="kp-card-h">
+        <div>
+          <div class="kp-card-name">${kp.name}</div>
+          <div class="kp-card-pkg">${kp.pkg}</div>
+          <div class="kp-card-city">${kp.contact} · ${kp.city}</div>
+        </div>
+        <div class="kp-arrow${openKP===i?" open":""}">›</div>
+      </div>
+      <div class="kp-body${openKP===i?" open":""}">
+        ${kp.text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="res-copy" onclick="event.stopPropagation();copyKP(${i})">Копировать КП</button>
+        </div>
+      </div>
+    </div>`).join("");
+}
+
+function toggleKP(i){openKP=openKP===i?null:i;renderKPLib();}
+function copyKP(i){navigator.clipboard.writeText(KPS[i].text).then(()=>alert("КП скопировано!"));}
+
+// ══════════════════════════════════════════
+//  NAV HELPERS
+// ══════════════════════════════════════════
+function switchTab(name){
+  document.querySelectorAll(".nb").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));
+  document.querySelectorAll("[id^='tab-']").forEach(t=>t.style.display="none");
+  document.getElementById("tab-"+name).style.display="block";
+}
+function goCall(id){
+  const c=CLIENTS.find(x=>x.id===id);
+  document.getElementById("call-client").value=c.name;
+  document.getElementById("call-contact").value=c.contact;
+  document.getElementById("call-ctx").value=c.notes;
+  switchTab("call");
+}
+function goKPGen(id){
+  const c=CLIENTS.find(x=>x.id===id);
+  document.getElementById("kp-client").value=c.name;
+  document.getElementById("kp-contact").value=c.contact;
+  document.getElementById("kp-city").value=c.city;
+  document.getElementById("kp-type").value=c.type;
+  switchTab("kpgen");
+}
+function goKPLib(name){
+  switchTab("kplib");
+  renderKPLib();
+  const idx=KPS.findIndex(k=>k.name===name);
+  if(idx>=0){openKP=idx;renderKPLib();setTimeout(()=>document.getElementById("kpc"+idx)?.scrollIntoView({behavior:"smooth"}),100);}
+}
+
+// ══════════════════════════════════════════
+//  HOT TAGS
+// ══════════════════════════════════════════
+function renderHotTags(){
+  document.getElementById("htags").innerHTML=CLIENTS.filter(c=>c.priority==="high").map(c=>
+    `<button class="htag" onclick="fillCall(${c.id})">${c.name}</button>`
+  ).join("");
+}
+function fillCall(id){
+  const c=CLIENTS.find(x=>x.id===id);
+  document.getElementById("call-client").value=c.name;
+  document.getElementById("call-contact").value=c.contact;
+  document.getElementById("call-ctx").value=c.notes;
+}
+
+// ══════════════════════════════════════════
+//  API KEY
+// ══════════════════════════════════════════
+function saveKey(){
+  const v=document.getElementById("api-inp").value.trim();
+  if(!v.startsWith("sk-")){
+    document.getElementById("api-status").innerHTML=`<span style="color:var(--red)">❌ Ключ должен начинаться с sk-</span>`;return;
+  }
+  apiKey=v;
+  document.getElementById("api-status").innerHTML=`<span style="color:var(--green)">✅ Ключ сохранён — AI-функции активны</span>`;
+  document.getElementById("api-box").classList.add("ok");
+}
+function checkKey(warnId){
+  if(!apiKey){
+    document.getElementById(warnId).innerHTML=`<div class="warn">⚠ Для AI-генерации нужен API-ключ. <a onclick="switchTab('settings')">Добавить →</a></div>`;
+    return false;
+  }
+  document.getElementById(warnId).innerHTML="";return true;
+}
+
+// ══════════════════════════════════════════
+//  API CALL
+// ══════════════════════════════════════════
+async function callAI(prompt){
+  const r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,messages:[{role:"user",content:prompt}]})
+  });
+  const d=await r.json();
+  return d.content?.[0]?.text||d.error?.message||"Ошибка";
+}
+
+// ══════════════════════════════════════════
+//  GENERATE KP
+// ══════════════════════════════════════════
+async function generateKP(){
+  if(!checkKey("warn-kp"))return;
+  const client=document.getElementById("kp-client").value.trim();
+  if(!client)return;
+  const btn=document.getElementById("kp-btn");
+  btn.disabled=true;btn.textContent="⏳ ГЕНЕРИРУЮ...";
+  document.getElementById("kp-res").innerHTML="";
+  const prompt=`Ты — AI-консультант компании ST8 AI (Самара, st8-ai.ru). Создай профессиональное коммерческое предложение.
+
+Клиент: ${client}
+Контакт: ${document.getElementById("kp-contact").value||"—"}
+Город: ${document.getElementById("kp-city").value||"—"}
+Тип бизнеса: ${document.getElementById("kp-type").value||"HoReCa"}
+Пакет: ${document.getElementById("kp-pkg").value}
+Боль / особенности: ${document.getElementById("kp-pain").value||"удержание гостей, рост возвращаемости"}
+
+Структура КП (разделители ━━━):
+1. Приветствие и представление ST8 AI
+2. Проблема клиента (конкретно под их бизнес)
+3. Решение ST8 AI (3-4 пункта с эмодзи)
+4. Что входит в пакет (список с ✓)
+5. Результаты (цифры)
+6. Призыв к действию
+
+Обязательно в конце: финальный платёж после приёмки, выход 30 дней без штрафов, инфраструктура РФ, 152-ФЗ.
+Подпись: Алексей Гагарин | CEO & Co-founder ST8 AI | +7 985 690-52-52 | @Zzima686 | st8-ai.ru
+Исполнитель: ИП Попова Юлия Александровна | ИНН 662607100653
+
+Без цен. Стиль: деловой, уверенный, конкретный. 450-550 слов.`;
+  try{
+    const t=await callAI(prompt);
+    document.getElementById("kp-res").innerHTML=`<div class="res">${t}</div><button class="res-copy" onclick="navigator.clipboard.writeText(document.querySelector('.res').innerText).then(()=>this.textContent='✓ Скопировано!')">Копировать</button>`;
+  }catch(e){
+    document.getElementById("kp-res").innerHTML=`<div class="res" style="border-left-color:var(--red)">Ошибка: ${e.message}</div>`;
+  }
+  btn.disabled=false;btn.textContent="✦ СГЕНЕРИРОВАТЬ КП";
+}
+
+// ══════════════════════════════════════════
+//  GENERATE CALL PREP
+// ══════════════════════════════════════════
+async function generateCall(){
+  if(!checkKey("warn-call"))return;
+  const client=document.getElementById("call-client").value.trim();
+  if(!client)return;
+  const btn=document.getElementById("call-btn");
+  btn.disabled=true;btn.textContent="⏳ ГОТОВЛЮ...";
+  document.getElementById("call-res").innerHTML="";
+  const cl=CLIENTS.find(c=>c.name.toLowerCase().includes(client.toLowerCase()));
+  const prompt=`Ты — опытный sales-консультант ST8 AI (AI-консьержи и автоматизация для HoReCa и бизнеса, Самара, st8-ai.ru).
+Подготовь шпаргалку для звонка.
+
+Клиент: ${client}
+Контакт: ${document.getElementById("call-contact").value||(cl?.contact||"—")}
+Тип: ${cl?.type||"бизнес"}
+Контекст: ${document.getElementById("call-ctx").value||(cl?.notes||"первый звонок")}
+Стадия: ${cl?.stage||"первый контакт"}
+Пакет: ${cl?.pkg||"уточняется"}
+
+Составь структурированную шпаргалку:
+
+━ ЦЕЛЬ ЗВОНКА
+(одно чёткое предложение)
+
+━ БОЛИ КЛИЕНТА
+(3 конкретных пункта под их специфику)
+
+━ ЧТО ПРЕДЛОЖИТЬ
+(3 конкретных решения ST8 AI под их задачи)
+
+━ ВОЗМОЖНЫЕ ВОЗРАЖЕНИЯ И ОТВЕТЫ
+Возражение 1: … / Ответ: …
+Возражение 2: … / Ответ: …
+Возражение 3: … / Ответ: …
+
+━ СЛЕДУЮЩИЙ ШАГ
+(конкретное действие для закрытия на следующий этап)
+
+Коротко, конкретно, на русском. Практически применимо.`;
+  try{
+    const t=await callAI(prompt);
+    document.getElementById("call-res").innerHTML=`<div class="res" style="border-left-color:var(--orange)">${t}</div><button class="res-copy" onclick="navigator.clipboard.writeText(document.querySelectorAll('.res')[1]?.innerText||document.querySelector('.res').innerText).then(()=>this.textContent='✓ Скопировано!')">Копировать</button>`;
+  }catch(e){
+    document.getElementById("call-res").innerHTML=`<div class="res" style="border-left-color:var(--red)">Ошибка: ${e.message}</div>`;
+  }
+  btn.disabled=false;btn.textContent="✦ ПОДГОТОВИТЬ ШПАРГАЛКУ";
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+renderStats();renderFilters();renderTable();renderHotTags();
+</script>
+</body>
+</html>
