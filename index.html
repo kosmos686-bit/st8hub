@@ -409,7 +409,7 @@ var LEAD_STATE = {};
 var LEAD_STATE_KEY = 'st8_lead_state';
 
 function statusColor(status){
-  return status==='новый' ? '#D4A017' : status==='написали' ? '#1A9655' : status==='ответил' ? '#7D3C98' : status==='не ответил' ? '#C0392B' : '#6B7FA0';
+  return status==='новый' ? '#D4A017' : status==='написали' ? '#1A9655' : status==='ответил' ? '#7D3C98' : status==='не ответил' ? '#C0392B' : status==='требует контакт' ? '#2471A3' : '#6B7FA0';
 }
 function formatLeadStatus(status){
   return '<span class="badge" style="background:'+statusColor(status)+'">'+status+'</span>';
@@ -461,7 +461,7 @@ function renderLeadCounters(){
   if(badge) badge.textContent = newCount ? '('+newCount+')' : '';
 }
 function renderLeadFilters(){
-  var statuses = ['все','новый','написали','ответил','не ответил','отказ'];
+  var statuses = ['все','новый','требует контакт','написали','ответил','не ответил','отказ'];
   var statusHtml = '';
   for(var i=0;i<statuses.length;i++){
     var s=statuses[i];
