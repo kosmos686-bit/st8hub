@@ -152,6 +152,7 @@ select.inp option{background:#0E1525}
   <div class="nav" id="nav">
     <button class="nb on" data-tab="crm">CRM</button>
     <button class="nb" data-tab="pipeline">Воронка</button>
+    <button class="nb" data-tab="leads">Лиды <span id="leads-count" style="color:#D4A017;font-weight:800;"></span></button>
     <button class="nb" data-tab="kplib">Библиотека КП</button>
     <button class="nb" data-tab="kpgen">Генератор КП</button>
     <button class="nb" data-tab="call">Звонки</button>
@@ -181,6 +182,20 @@ select.inp option{background:#0E1525}
       <div class="stitle"><span>Потенциал по стадиям</span></div>
       <div id="chart"></div>
     </div>
+  </div>
+
+  <!-- LEADS -->
+  <div class="tab" id="tab-leads">
+    <div class="stitle">
+      <span>Лиды</span>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="badge" style="background:#D4A017;color:#000;">Новые: <span id="new-leads-count">0</span></div>
+      </div>
+    </div>
+    <div class="frow" id="leads-filter-status"></div>
+    <div class="frow" id="leads-filter-segment"></div>
+    <div class="cards" id="leads-cards"></div>
+    <div id="leads-det"></div>
   </div>
 
   <!-- KP LIB -->
@@ -386,6 +401,143 @@ function showToast(msg){
   setTimeout(function(){ t.className="toast"; },2000);
 }
 
+var LEADS = [];
+var leadFilterStatus = 'все';
+var leadFilterSegment = 'все';
+var LEAD_STATE = {};
+var LEAD_STATE_KEY = 'st8_lead_state';
+
+function statusColor(status){
+  return status==='новый' ? '#D4A017' : status==='написали' ? '#1A9655' : status==='ответил' ? '#7D3C98' : status==='не ответил' ? '#C0392B' : '#6B7FA0';
+}
+function formatLeadStatus(status){
+  return '<span class="badge" style="background:'+statusColor(status)+'">'+status+'</span>';
+}
+function leadUid(lead){
+  if(lead.id) return String(lead.id);
+  var key = lead.company_name || lead.site || lead.lpr || '';
+  return key.toString().trim().toLowerCase().replace(/\s+/g,' ').replace(/[^a-z0-9а-яё\.\- ]/gi,'');
+}
+function loadLeadState(){
+  try{ var d=localStorage.getItem(LEAD_STATE_KEY); if(d) LEAD_STATE = JSON.parse(d); }catch(e){ LEAD_STATE={}; }
+}
+function saveLeadState(){
+  try{ localStorage.setItem(LEAD_STATE_KEY, JSON.stringify(LEAD_STATE)); }catch(e){}
+}
+function loadLeadsJson(){
+  fetch('leads.json')
+    .then(function(resp){ return resp.json(); })
+    .then(function(data){
+      LEADS = (data||[]).map(function(lead){
+        lead.response = lead.response || 'новый';
+        lead._uid = leadUid(lead);
+        if(lead._uid && LEAD_STATE[lead._uid]){
+          lead.response = LEAD_STATE[lead._uid].response || lead.response;
+        }
+        return lead;
+      });
+      renderLeads();
+    })
+    .catch(function(){
+      LEADS = [];
+      renderLeads();
+    });
+}
+function renderLeads(){
+  renderLeadCounters();
+  renderLeadFilters();
+  renderLeadCards();
+}
+function renderLeadCounters(){
+  var newCount = LEADS.filter(function(lead){ return lead.response==='новый'; }).length;
+  document.getElementById('new-leads-count').textContent = newCount;
+  var badge = document.getElementById('leads-count');
+  if(badge) badge.textContent = newCount ? '('+newCount+')' : '';
+}
+function renderLeadFilters(){
+  var statuses = ['все','новый','написали','ответил','не ответил','отказ'];
+  var statusHtml = '';
+  for(var i=0;i<statuses.length;i++){
+    var s=statuses[i];
+    statusHtml += '<button class="fb'+(leadFilterStatus===s?' on':'')+'" onclick="setLeadFilter(\'status\', \''+s+'\')">'+s+'</button>';
+  }
+  document.getElementById('leads-filter-status').innerHTML = statusHtml;
+  var segments = ['все','HoReCa','Ритейл','Производство','Логистика','Разные'];
+  var segHtml = '';
+  for(var i=0;i<segments.length;i++){
+    var s=segments[i];
+    segHtml += '<button class="fb'+(leadFilterSegment===s?' on':'')+'" onclick="setLeadFilter(\'segment\', \''+s+'\')">'+s+'</button>';
+  }
+  document.getElementById('leads-filter-segment').innerHTML = segHtml;
+}
+function setLeadFilter(type, value){
+  if(type==='status') leadFilterStatus=value;
+  if(type==='segment') leadFilterSegment=value;
+  renderLeads();
+}
+function getFilteredLeads(){
+  return LEADS.filter(function(lead){
+    var okStatus = leadFilterStatus==='все' || lead.response===leadFilterStatus;
+    var okSeg = leadFilterSegment==='все' || lead.segment===leadFilterSegment;
+    return okStatus && okSeg;
+  });
+}
+function renderLeadCards(){
+  var list = getFilteredLeads();
+  var html = '';
+  if(!list.length){
+    html = '<div style="color:#6B7FA0;text-align:center;padding:30px;font-size:13px">Нет лидов по текущим фильтрам</div>';
+  }
+  for(var i=0;i<list.length;i++){
+    var lead = list[i];
+    html += '<div class="card" style="border-color:'+statusColor(lead.response)+'">';
+    html += '<div class="card-top"><div style="flex:1;min-width:0"><div class="card-name">'+lead.company_name+'</div><div class="card-sub">'+lead.lpr+' · '+(lead.segment||'Неизвестен')+'</div></div><div>'+formatLeadStatus(lead.response)+'</div></div>';
+    html += '<div class="card-bot"><span class="pot">'+(lead.phone||'телефон не найден')+'</span></div>';
+    html += '<div class="card-pkg" style="margin-top:6px;">'+(lead.site||'сайт не найден')+'</div>';
+    html += '<div class="act" style="margin-top:10px">';
+    html += '<button class="btn-gold" style="padding:8px 10px;min-width:110px" onclick="copyTouch('+i+')">Скопировать касание</button>';
+    html += '<button class="btn-out" style="padding:8px 10px;min-width:110px" onclick="showLeadDetail('+i+')">Показать</button>';
+    html += '<button class="btn-red" style="padding:8px 10px;min-width:110px" onclick="changeLeadStatus('+i+',\'ответил\')">Ответил</button>';
+    html += '</div>';
+    html += '</div>';
+  }
+  document.getElementById('leads-cards').innerHTML = html;
+}
+function copyTouch(index){
+  var lead = getFilteredLeads()[index];
+  var text = lead.telegram_touch || lead.max_touch || '';
+  if(text){
+    navigator.clipboard.writeText(text).then(function(){ showToast('Касание скопировано'); });
+  }
+}
+function showLeadDetail(index){
+  var lead = getFilteredLeads()[index];
+  if(!lead) return;
+  var html = '<div class="det"><div class="det-name">'+lead.company_name+'</div>';
+  html += '<div class="det-meta">'+lead.lpr+' · '+(lead.segment||'')+'</div>';
+  html += '<div class="det-notes">'+(lead.telegram_touch||lead.max_touch||'')+'</div>';
+  html += '<div class="act" style="margin-top:12px">';
+  html += '<button class="btn-gold" onclick="copyTouch('+index+')">Скопировать касание</button>';
+  html += '<button class="btn-out" onclick="changeLeadStatus('+index+',\'написали\')">Написали</button>';
+  html += '<button class="btn-out" onclick="changeLeadStatus('+index+',\'ответил\')">Ответил</button>';
+  html += '<button class="btn-out" onclick="changeLeadStatus('+index+',\'не ответил\')">Не ответил</button>';
+  html += '<button class="btn-red" onclick="changeLeadStatus('+index+',\'отказ\')">Отказ</button>';
+  html += '</div></div>';
+  document.getElementById('leads-det').innerHTML = html;
+}
+function changeLeadStatus(index, status){
+  var lead = getFilteredLeads()[index];
+  if(!lead) return;
+  lead.response = status;
+  if(lead._uid){
+    LEAD_STATE[lead._uid] = LEAD_STATE[lead._uid] || {};
+    LEAD_STATE[lead._uid].response = status;
+    saveLeadState();
+  }
+  renderLeads();
+  showToast('Статус изменён: '+status);
+}
+
 // ── NAV ──
 var navBtns = document.querySelectorAll(".nb");
 for(var i=0;i<navBtns.length;i++){
@@ -399,6 +551,7 @@ for(var i=0;i<navBtns.length;i++){
       document.getElementById("tab-"+t).className="tab on";
       if(t==="pipeline") renderPipeline();
       if(t==="kplib") renderKPLib();
+      if(t==="leads") loadLeadsJson();
     };
   })(navBtns[i]);
 }
@@ -752,6 +905,8 @@ renderStats();
 renderFilters();
 renderCards();
 renderHotTags();
+loadLeadState();
+loadLeadsJson();
 if(apiKey) document.getElementById("api-st").innerHTML='<span style="color:#1A9655">✅ Ключ загружен — AI активен</span>';
 </script>
 </body>
