@@ -498,8 +498,15 @@ function renderLeadCards(){
     var lead = list[i];
     html += '<div class="card" style="border-color:'+statusColor(lead.response)+'">';
     html += '<div class="card-top"><div style="flex:1;min-width:0"><div class="card-name">'+lead.company_name+'</div><div class="card-sub">'+lead.lpr+' · '+(lead.segment||'Неизвестен')+'</div></div><div>'+formatLeadStatus(lead.response)+'</div></div>';
-    html += '<div class="card-bot"><span class="pot">'+(lead.phone||'телефон не найден')+'</span></div>';
-    html += '<div class="card-pkg" style="margin-top:6px;">'+(lead.site||'сайт не найден')+'</div>';
+    html += '<div class="card-bot"><span class="pot">'+(lead.phone&&lead.phone!='требует уточнения'?lead.phone:'телефон не найден')+'</span></div>';
+    html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">';
+    if(lead.site && lead.site!='требует уточнения'){
+      html += '<a href="'+lead.site+'" target="_blank" style="display:inline-block;padding:5px 10px;background:transparent;border:1px solid #1e2d45;border-radius:3px;color:#D4A017;font-size:10px;font-weight:700;text-decoration:none;">🌐 Сайт</a>';
+    }
+    if(lead.telegram_social && lead.telegram_social!='требует уточнения'){
+      html += '<a href="'+lead.telegram_social+'" target="_blank" style="display:inline-block;padding:5px 10px;background:transparent;border:1px solid #1e2d45;border-radius:3px;color:#1A9655;font-size:10px;font-weight:700;text-decoration:none;">💬 Контакт</a>';
+    }
+    html += '</div>';
     html += '<div class="act" style="margin-top:10px">';
     html += '<button class="btn-gold" style="padding:8px 10px;min-width:110px" onclick="copyTouch('+i+')">Скопировать касание</button>';
     html += '<button class="btn-out" style="padding:8px 10px;min-width:110px" onclick="showLeadDetail('+i+')">Показать</button>';
