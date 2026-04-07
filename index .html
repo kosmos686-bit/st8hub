@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ST8 AI Hub</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Montserrat,sans-serif;background:#0A0F1A;color:#E8EDF5;min-height:100vh;padding-bottom:80px}
+button{cursor:pointer;font-family:inherit}
+input,select,textarea{font-family:inherit;outline:none}
+a{color:#D4A017}
+
+/* HEADER */
+.hdr{background:#0E1525;border-bottom:1px solid #1e2d45;position:sticky;top:0;z-index:99}
+.hdr-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #1e2d45}
+.logo-b{background:#D4A017;color:#000;font-weight:900;font-size:13px;letter-spacing:2px;padding:5px 10px;border-radius:4px}
+.logo-t{font-weight:800;font-size:15px;letter-spacing:2px}
+.logo-s{font-size:9px;color:#6B7FA0;letter-spacing:1px}
+.nav{display:flex;gap:4px;padding:8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nb{border:none;border-radius:3px;padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:.5px;background:transparent;color:#6B7FA0;white-space:nowrap;flex-shrink:0}
+.nb.on{background:#D4A017;color:#000}
+
+.pg{padding:14px;max-width:960px;margin:0 auto}
+.tab{display:none}
+.tab.on{display:block}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.sc{background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:12px;border-top:2px solid #D4A017}
+.sc-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6B7FA0;margin-bottom:4px}
+.sc-v{font-size:24px;font-weight:900;color:#D4A017}
+
+/* SECTION TITLE */
+.stitle{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#D4A017;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #1e2d45;display:flex;justify-content:space-between;align-items:center}
+
+/* FILTERS */
+.frow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;scrollbar-width:none}
+.frow::-webkit-scrollbar{display:none}
+.fb{border:1px solid #1e2d45;border-radius:3px;padding:6px 11px;font-size:10px;font-weight:700;background:transparent;color:#6B7FA0;white-space:nowrap;flex-shrink:0}
+.fb.on{background:#D4A017;border-color:#D4A017;color:#000}
+
+/* CLIENT CARDS */
+.cards{display:flex;flex-direction:column;gap:8px}
+.card{background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:14px;transition:border-color .15s}
+.card.sel{border-color:#D4A017;background:rgba(212,160,23,.05)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.card-name{font-size:14px;font-weight:800;color:#fff}
+.card-sub{font-size:11px;color:#6B7FA0;margin-top:2px}
+.card-bot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.card-pkg{font-size:10px;color:#6B7FA0;margin-top:4px}
+.badge{display:inline-block;padding:3px 8px;border-radius:2px;font-size:9px;font-weight:800;letter-spacing:.5px;color:#fff;white-space:nowrap}
+.pot{font-size:13px;font-weight:700;color:#D4A017}
+
+/* DETAIL */
+.det{margin-top:10px;background:#111827;border:1px solid #D4A017;border-radius:6px;padding:16px;animation:fadeup .2s}
+@keyframes fadeup{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.det-name{font-size:16px;font-weight:900;color:#fff;margin-bottom:2px}
+.det-meta{font-size:11px;color:#6B7FA0;margin-bottom:10px}
+.det-notes{border-left:2px solid #D4A017;padding:10px 12px;background:rgba(212,160,23,.05);font-size:13px;line-height:1.6;margin-bottom:12px;border-radius:0 4px 4px 0}
+.det-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6B7FA0;margin-bottom:8px}
+.stages{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.stbtn{padding:5px 10px;border-radius:2px;font-size:10px;font-weight:700;border:1px solid}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.btn-gold{flex:1;min-width:90px;padding:10px 8px;background:#D4A017;border:none;border-radius:3px;color:#000;font-size:10px;font-weight:800;letter-spacing:.3px;text-align:center}
+.btn-out{flex:1;min-width:90px;padding:10px 8px;background:transparent;border:1px solid #1e2d45;border-radius:3px;color:#E8EDF5;font-size:10px;font-weight:700;text-align:center}
+.btn-red{padding:10px 14px;background:transparent;border:1px solid #C0392B;border-radius:3px;color:#C0392B;font-size:10px;font-weight:700}
+
+/* ADD/EDIT FORM */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:200;overflow-y:auto;padding:20px 14px}
+.modal-overlay.on{display:block}
+.modal{background:#111827;border:1px solid #D4A017;border-radius:8px;padding:20px;max-width:500px;margin:0 auto}
+.modal-title{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#D4A017;margin-bottom:16px}
+.flabel{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#6B7FA0;display:block;margin-bottom:5px}
+.inp{width:100%;background:#0E1525;border:1px solid #1e2d45;border-radius:4px;padding:10px 12px;color:#E8EDF5;font-size:14px;margin-bottom:12px}
+.inp:focus{border-color:#D4A017}
+select.inp option{background:#0E1525}
+.modal-btns{display:flex;gap:8px;margin-top:4px}
+
+/* KP LIB */
+.kpcard{background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:14px;margin-bottom:10px}
+.kpcard-h{display:flex;justify-content:space-between;align-items:start;cursor:pointer}
+.kpcard-n{font-size:14px;font-weight:800;color:#fff}
+.kpcard-p{font-size:9px;font-weight:700;letter-spacing:.5px;color:#D4A017;text-transform:uppercase;margin-top:3px}
+.kpcard-c{font-size:11px;color:#6B7FA0;margin-top:2px}
+.kpcard-arr{font-size:22px;color:#D4A017;transition:transform .2s;line-height:1;flex-shrink:0}
+.kpcard.open .kpcard-arr{transform:rotate(90deg)}
+.kpcard-body{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #1e2d45;font-size:12px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.kpcard.open .kpcard-body{display:block}
+.copybtn{margin-top:10px;padding:8px 14px;background:transparent;border:1px solid #1e2d45;border-radius:3px;color:#6B7FA0;font-size:10px;font-weight:700}
+
+/* FORMS */
+.form2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.form2{grid-template-columns:1fr}}
+.genbtn{width:100%;padding:13px;background:#D4A017;border:none;border-radius:3px;color:#000;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.genbtn:disabled{opacity:.4;cursor:not-allowed}
+.resbox{background:#111827;border:1px solid #1e2d45;border-left:3px solid #D4A017;border-radius:6px;padding:16px;font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-word;margin-bottom:8px}
+
+/* HOT TAGS */
+.htags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;margin-bottom:12px}
+.htag{padding:5px 11px;border-radius:2px;border:1px solid #D4A017;background:transparent;color:#D4A017;font-size:10px;font-weight:700;flex-shrink:0}
+
+/* WARN */
+.warn{background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.3);border-radius:4px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#D4A017}
+
+/* API BOX */
+.apibox{background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:16px;margin-bottom:14px}
+.api-row{display:flex;gap:8px;margin-top:10px}
+.api-hint{font-size:11px;color:#6B7FA0;margin-top:8px;line-height:1.5}
+
+/* PIPELINE */
+.pcols{display:flex;flex-direction:column;gap:10px}
+.pcol{background:#111827;border:1px solid #1e2d45;border-radius:6px;overflow:hidden}
+.pcol-h{padding:10px 14px}
+.pcol-t{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#fff}
+.pcol-s{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px}
+.pcol-b{padding:8px;display:flex;flex-direction:column;gap:6px}
+.pitem{background:#0E1525;border-radius:4px;padding:10px 12px;border-left:2px solid}
+.pitem-n{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.pitem-c{font-size:10px;color:#6B7FA0}
+.pitem-f{display:flex;justify-content:space-between;margin-top:6px}
+.cw{background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:16px;margin-top:14px}
+.crow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.clbl{font-size:10px;color:#6B7FA0;width:110px;text-align:right;flex-shrink:0}
+.cbw{flex:1;background:#0E1525;border-radius:2px;height:18px;overflow:hidden}
+.cb{height:100%;border-radius:2px}
+.cv{font-size:11px;font-weight:700;color:#D4A017;width:65px;flex-shrink:0}
+.cn{font-size:10px;color:#6B7FA0;width:16px}
+
+.infobox{background:#111827;border-radius:6px;padding:14px;margin-top:12px;border:1px solid #1e2d45}
+.info-t{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#D4A017;margin-bottom:8px}
+.info-b{font-size:12px;color:#6B7FA0;line-height:1.9}
+.info-b b{color:#E8EDF5}
+
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#D4A017;color:#000;padding:10px 20px;border-radius:20px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-top">
+    <div class="logo-b">ST8</div>
+    <div>
+      <div class="logo-t">AI HUB</div>
+      <div class="logo-s">СИСТЕМА УПРАВЛЕНИЯ ПРОДАЖАМИ</div>
+    </div>
+  </div>
+  <div class="nav" id="nav">
+    <button class="nb on" data-tab="crm">CRM</button>
+    <button class="nb" data-tab="pipeline">Воронка</button>
+    <button class="nb" data-tab="kplib">Библиотека КП</button>
+    <button class="nb" data-tab="kpgen">Генератор КП</button>
+    <button class="nb" data-tab="call">Звонки</button>
+    <button class="nb" data-tab="settings">⚙ API</button>
+  </div>
+</header>
+
+<div class="pg">
+
+  <!-- CRM -->
+  <div class="tab on" id="tab-crm">
+    <div class="stats" id="stats"></div>
+    <div class="stitle">
+      <span>Клиенты</span>
+      <button class="btn-gold" style="flex:none;padding:7px 14px;font-size:10px" onclick="openAdd()">+ Добавить</button>
+    </div>
+    <div class="frow" id="frow"></div>
+    <div class="cards" id="cards"></div>
+    <div id="det"></div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="tab" id="tab-pipeline">
+    <div class="stitle"><span>Воронка продаж</span></div>
+    <div class="pcols" id="pcols"></div>
+    <div class="cw">
+      <div class="stitle"><span>Потенциал по стадиям</span></div>
+      <div id="chart"></div>
+    </div>
+  </div>
+
+  <!-- KP LIB -->
+  <div class="tab" id="tab-kplib">
+    <div class="stitle"><span>Готовые КП — 9 клиентов</span></div>
+    <div id="kplist"></div>
+  </div>
+
+  <!-- KP GEN -->
+  <div class="tab" id="tab-kpgen">
+    <div class="stitle"><span>Генератор КП</span></div>
+    <div id="warn-kp"></div>
+    <div class="form2" style="margin-bottom:12px">
+      <div><label class="flabel">Клиент</label><input class="inp" id="kp-client" placeholder="Polyana Group"></div>
+      <div><label class="flabel">Контакт</label><input class="inp" id="kp-contact" placeholder="Роман Вавилин"></div>
+      <div><label class="flabel">Город</label><input class="inp" id="kp-city" placeholder="Самара"></div>
+      <div><label class="flabel">Тип бизнеса</label><input class="inp" id="kp-type" placeholder="Ресторан, холдинг..."></div>
+    </div>
+    <div style="margin-bottom:12px"><label class="flabel">Пакет</label>
+      <select class="inp" id="kp-pkg">
+        <option>Пакет 1 — Под ключ (1 000 000 ₽)</option>
+        <option>Пакет 2 — Старт (150к + 60к/мес)</option>
+        <option selected>Пакет 2 — Оптимум (250к + 90к/мес)</option>
+        <option>Пакет 2 — Максимум (400к + 130к/мес)</option>
+      </select>
+    </div>
+    <div style="margin-bottom:14px"><label class="flabel">Боль клиента</label>
+      <input class="inp" id="kp-pain" placeholder="Низкая возвращаемость гостей...">
+    </div>
+    <button class="genbtn" id="kp-btn" onclick="genKP()">✦ СГЕНЕРИРОВАТЬ КП</button>
+    <div id="kp-res"></div>
+  </div>
+
+  <!-- CALL -->
+  <div class="tab" id="tab-call">
+    <div class="stitle"><span>Подготовка к звонку</span></div>
+    <div id="warn-call"></div>
+    <div class="form2" style="margin-bottom:12px">
+      <div><label class="flabel">Клиент</label><input class="inp" id="call-client" placeholder="Polyana Group"></div>
+      <div><label class="flabel">Контакт</label><input class="inp" id="call-contact" placeholder="Роман Вавилин"></div>
+    </div>
+    <div style="margin-bottom:10px"><label class="flabel">Контекст</label>
+      <textarea class="inp" id="call-ctx" rows="3" placeholder="Что уже знаем о клиенте..."></textarea>
+    </div>
+    <div style="margin-bottom:14px"><label class="flabel">Горячие клиенты 🔥</label>
+      <div class="htags" id="htags"></div>
+    </div>
+    <button class="genbtn" id="call-btn" onclick="genCall()">✦ ПОДГОТОВИТЬ ШПАРГАЛКУ</button>
+    <div id="call-res"></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="tab" id="tab-settings">
+    <div class="stitle"><span>Настройки</span></div>
+    <div class="apibox">
+      <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:6px">🔑 Anthropic API Key</div>
+      <p style="font-size:12px;color:#6B7FA0;line-height:1.6">Для генератора КП и шпаргалок к звонкам. Хранится в браузере.</p>
+      <div class="api-row">
+        <input class="inp" type="password" id="api-inp" placeholder="sk-ant-api03-..." style="flex:1;margin-bottom:0">
+        <button class="btn-gold" style="flex:none;white-space:nowrap" onclick="saveKey()">Сохранить</button>
+      </div>
+      <div class="api-hint">Получить: <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys → Create Key</div>
+      <div id="api-st" style="margin-top:8px;font-size:12px"></div>
+    </div>
+    <div class="infobox">
+      <div class="info-t">📱 Telegram Mini App</div>
+      <div class="info-b">
+        Бот: <b>@st8ai_hub_bot</b><br>
+        Открой бота в Telegram → нажми кнопку <b>Hub</b><br>
+        Все данные сохраняются автоматически в браузере.
+      </div>
+    </div>
+    <div class="infobox">
+      <div class="info-t">💾 Управление данными</div>
+      <div class="info-b" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+        <button class="btn-gold" style="font-size:10px;padding:8px 12px" onclick="exportData()">📤 Экспорт данных</button>
+        <button class="btn-out" style="font-size:10px;padding:8px 12px" onclick="importData()">📥 Импорт данных</button>
+        <button class="btn-red" style="font-size:10px;padding:8px 12px" onclick="resetData()">🗑 Сбросить</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Новый клиент</div>
+    <input type="hidden" id="edit-id">
+    <label class="flabel">Название компании</label>
+    <input class="inp" id="f-name" placeholder="Polyana Group">
+    <label class="flabel">Контакт</label>
+    <input class="inp" id="f-contact" placeholder="Роман Вавилин">
+    <label class="flabel">Город</label>
+    <input class="inp" id="f-city" placeholder="Самара">
+    <label class="flabel">Тип бизнеса</label>
+    <input class="inp" id="f-type" placeholder="HoReCa, Ресторан, Enterprise...">
+    <label class="flabel">Стадия</label>
+    <select class="inp" id="f-stage">
+      <option>первый контакт</option>
+      <option>КП отправлено</option>
+      <option>переговоры</option>
+      <option>договор</option>
+      <option>закрыто</option>
+    </select>
+    <label class="flabel">Пакет</label>
+    <select class="inp" id="f-pkg">
+      <option>Пакет 1 — Под ключ</option>
+      <option>Пакет 2 — Старт</option>
+      <option>Пакет 2 — Оптимум</option>
+      <option>Пакет 2 — Максимум</option>
+    </select>
+    <label class="flabel">Потенциал (₽)</label>
+    <input class="inp" id="f-pot" type="number" placeholder="250000">
+    <label class="flabel">Приоритет</label>
+    <select class="inp" id="f-pri">
+      <option value="high">🔥 Высокий</option>
+      <option value="medium">📌 Средний</option>
+      <option value="low">💤 Низкий</option>
+    </select>
+    <label class="flabel">Заметки</label>
+    <textarea class="inp" id="f-notes" rows="3" placeholder="Детали, особенности, договорённости..."></textarea>
+    <div class="modal-btns">
+      <button class="btn-gold" style="flex:1;padding:12px" onclick="saveClient()">Сохранить</button>
+      <button class="btn-out" style="flex:1;padding:12px" onclick="closeModal()">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Telegram Web App init ──
+if(window.Telegram && window.Telegram.WebApp){
+  window.Telegram.WebApp.ready();
+  window.Telegram.WebApp.expand();
+}
+
+// ── DEFAULT DATA ──
+var DEFAULT_CLIENTS = [
+  {id:1,name:"Polyana Group",contact:"Роман Вавилин",city:"Самара",type:"HoReCa / Сеть",stage:"переговоры",pkg:"Пакет 2 — Оптимум",potential:250000,notes:"Harat's, DuPain, Поляна Delivery. Интеграция Mcrm. Эксклюзив по Самаре.",priority:"high"},
+  {id:2,name:"Kalinka na Neglinke",contact:"Кристина",city:"Москва",type:"Ресторан",stage:"КП отправлено",pkg:"Пакет 2 — Старт",potential:150000,notes:"КП создано, контакт установлен.",priority:"high"},
+  {id:3,name:"Atelier Family",contact:"Марк + Ира",city:"Москва",type:"HoReCa / Цифровизация",stage:"переговоры",pkg:"Пакет 2 — Оптимум",potential:250000,notes:"Цифровизация, ReMarked. Шпаргалка готова.",priority:"high"},
+  {id:4,name:"Pinskiy & Co",contact:"Елена Пинская",city:"Москва",type:"Ресторанный холдинг",stage:"первый контакт",pkg:"Пакет 1 — Под ключ",potential:1000000,notes:"Холдинг. КП без цен.",priority:"medium"},
+  {id:5,name:"Perelman People",contact:"—",city:"Москва",type:"Ресторан",stage:"первый контакт",pkg:"Пакет 2 — Максимум",potential:400000,notes:"Сеть ресторанов.",priority:"medium"},
+  {id:6,name:"HERE Catering",contact:"—",city:"Москва",type:"Кейтеринг",stage:"КП отправлено",pkg:"Пакет 2 — Оптимум",potential:250000,notes:"Кейтеринг.",priority:"medium"},
+  {id:7,name:"Алёна Абдурахманова",contact:"Алёна",city:"—",type:"Банкеты",stage:"первый контакт",pkg:"Пакет 2 — Старт",potential:150000,notes:"banquet_expert / Мелодия.",priority:"low"},
+  {id:8,name:"ПСБ Патриот",contact:"—",city:"Екатеринбург",type:"Отель / Cosmos",stage:"КП отправлено",pkg:"Пакет 2 — Максимум",potential:400000,notes:"Cosmos Hotels.",priority:"medium"},
+  {id:9,name:"Жигунов С.В.",contact:"Жигунов С.В.",city:"Москва",type:"Корпоратив / Кино",stage:"первый контакт",pkg:"Пакет 1 — Под ключ",potential:1000000,notes:"Кино. КП без цен.",priority:"low"},
+  {id:10,name:"S7 Airlines",contact:"Директор маркетинга",city:"Москва",type:"B2B / Авиация",stage:"первый контакт",pkg:"Пакет 1 — Под ключ",potential:1000000,notes:"Выход через знакомых.",priority:"high"},
+  {id:11,name:"ТПХ Русклимат",contact:"Георгий Алиханович",city:"Москва",type:"Enterprise / Климат",stage:"КП отправлено",pkg:"Пакет 1 — Под ключ",potential:1000000,notes:"Крупнейший климатический холдинг РФ. Дилерский ассистент.",priority:"high"}
+];
+
+var KPS = [
+  {name:"Polyana Group",contact:"Роман Вавилин",city:"Самара",pkg:"Пакет 2 — Оптимум",text:"Роман, добрый день!\n\nКоманда ST8 AI подготовила для Polyana Group персональное предложение по AI-автоматизации — с учётом масштаба вашей сети и интеграции с Mcrm.\n\n━━━━━━━━━━━━━━━━━━━━\nПРОБЛЕМА\n━━━━━━━━━━━━━━━━━━━━\n\nГости уходят и не возвращаются. Администраторы тонут в рутине. Данные из разных точек не сводятся в единую картину. ST8 AI создаёт реальное конкурентное преимущество.\n\n━━━━━━━━━━━━━━━━━━━━\nРЕШЕНИЕ\n━━━━━━━━━━━━━━━━━━━━\n\n🤖 AI-консьерж для каждой точки — брони 24/7, помнит каждого гостя\n📊 Интеграция с Mcrm — двусторонняя синхронизация данных\n📈 Предиктивная аналитика — загрузка, сезонность, спецпредложения\n🔒 Эксклюзив по Самаре — конкуренты этого не получат\n\n━━━━━━━━━━━━━━━━━━━━\nРЕЗУЛЬТАТЫ\n━━━━━━━━━━━━━━━━━━━━\n\n• Возвращаемость гостей: +25–35%\n• No-show: −30–40%\n• Экономия администраторов: 4–5 ч/день\n• Средний чек: +15–20%\n\n━━━━━━━━━━━━━━━━━━━━\nЧТО ВХОДИТ — ПАКЕТ ОПТИМУМ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ AI-консьерж для всех точек сети\n✓ Интеграция с Mcrm\n✓ Предиктивные закупки и аналитика\n✓ Персонализация VIP-гостей\n✓ Выделенный менеджер проекта\n✓ Поддержка 24/7\n✓ Финальный платёж — после приёмки\n✓ Выход: 30 дней без штрафов\n✓ Инфраструктура РФ, 152-ФЗ\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"Kalinka na Neglinke",contact:"Кристина",city:"Москва",pkg:"Пакет 2 — Старт",text:"Кристина, добрый день!\n\nST8 AI создаёт живые AI-системы для ресторанов. Не чат-боты с кнопками, а полноценный цифровой консьерж, обученный на стиле вашего заведения.\n\n━━━━━━━━━━━━━━━━━━━━\nЧТО ВХОДИТ — ПАКЕТ СТАРТ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ AI-консьерж — бронирование 24/7\n✓ Telegram и Instagram Direct\n✓ Базовая CRM: история гостей, напоминания, дни рождения\n✓ Запуск за 3 рабочих дня\n✓ Поддержка 24/7\n✓ Финальный платёж — после приёмки\n✓ Выход: 30 дней без штрафов\n\n━━━━━━━━━━━━━━━━━━━━\nРЕЗУЛЬТАТЫ\n━━━━━━━━━━━━━━━━━━━━\n\n• Возвращаемость: +25%\n• No-show: −35%\n• 4–5 часов рутины администраторов — освобождены\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"Atelier Family",contact:"Марк + Ира",city:"Москва",pkg:"Пакет 2 — Оптимум",text:"Марк, Ира, добрый день!\n\nМы подготовили предложение с учётом вашего курса на цифровизацию и работы с ReMarked.\n\n━━━━━━━━━━━━━━━━━━━━\nРЕШЕНИЕ\n━━━━━━━━━━━━━━━━━━━━\n\n🔗 Интеграция с ReMarked — AI читает профили гостей в реальном времени\n🤖 AI-консьерж — обучен на стиле и ценностях Atelier\n📊 Аналитика — follow-up, персональные предложения, сегментация базы\n✨ Персонализация VIP-гостей — каждый контакт уникален\n\n━━━━━━━━━━━━━━━━━━━━\nЧТО ВХОДИТ — ПАКЕТ ОПТИМУМ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ AI-консьерж (Telegram, Instagram Direct)\n✓ Интеграция с ReMarked через API\n✓ Персонализация VIP-гостей\n✓ Выделенный менеджер проекта\n✓ Финальный платёж — после приёмки\n✓ Выход: 30 дней без штрафов\n✓ Инфраструктура РФ, 152-ФЗ\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"Pinskiy & Co",contact:"Елена Пинская",city:"Москва",pkg:"Пакет 1 — Под ключ",text:"Елена, добрый день!\n\nДля холдинга масштаба Pinskiy & Co — единая AI-экосистема, которая работает на каждую точку по-своему, но управляется централизованно.\n\n━━━━━━━━━━━━━━━━━━━━\nРЕШЕНИЕ\n━━━━━━━━━━━━━━━━━━━━\n\n🤖 Персональный AI-консьерж для каждой концепции с уникальным характером\n📊 Единый дашборд — все точки, данные, метрики в одном окне\n🔗 Интеграция с iiko, R-Keeper, 1С — без замены инфраструктуры\n📦 Пакет 1 — права переходят холдингу. Это ваш актив.\n\n━━━━━━━━━━━━━━━━━━━━\nУСЛОВИЯ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ Оплата: 50% / 30% / 20%\n✓ Финальный платёж — после приёмки\n✓ Срок: 8 недель\n✓ Инфраструктура РФ, 152-ФЗ\n\nЦены — после брифинга по объёму задачи.\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"Perelman People",contact:"—",city:"Москва",pkg:"Пакет 2 — Максимум",text:"Добрый день, команда Perelman People!\n\nСеть с сильным брендом — идеальная точка для AI. Система обучается на характере каждого заведения и становится продолжением вашего стиля.\n\n━━━━━━━━━━━━━━━━━━━━\nПАКЕТ МАКСИМУМ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ AI-консьерж для каждой точки\n✓ Единая система управления сетью 10+ точек\n✓ Предиктивные закупки\n✓ Автозакупки у поставщиков\n✓ On-premise — сервер у вас\n✓ Поддержка 24/7\n✓ Финальный платёж — после приёмки\n✓ Выход: 30 дней без штрафов\n✓ Инфраструктура РФ, 152-ФЗ\n\n• Возвращаемость: +30–40% | No-show: −35–40%\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"HERE Catering",contact:"—",city:"Москва",pkg:"Пакет 2 — Оптимум",text:"Добрый день!\n\nДля кейтеринга — автоматизация приёма заявок, управление расписанием и персональная коммуникация с клиентами.\n\n━━━━━━━━━━━━━━━━━━━━\nРЕШЕНИЕ\n━━━━━━━━━━━━━━━━━━━━\n\n🤖 AI принимает заявки 24/7 — уточняет детали, передаёт готовый бриф\n📋 Управление расписанием — контроль команд, предотвращение накладок\n💌 Follow-up после мероприятия — отзывы, возвратные предложения\n\n━━━━━━━━━━━━━━━━━━━━\nЧТО ВХОДИТ — ПАКЕТ ОПТИМУМ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ AI-ассистент для приёма и квалификации заявок\n✓ Интеграция с CRM и календарём\n✓ Автоматические напоминания и follow-up\n✓ Финальный платёж — после приёмки\n✓ Выход: 30 дней без штрафов\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"ТПХ Русклимат",contact:"Георгий Алиханович",city:"Москва",pkg:"Пакет 1 — Под ключ",text:"Георгий Алиханович, добрый день!\n\nДля Русклимат видим три ключевые точки роста.\n\n━━━━━━━━━━━━━━━━━━━━\nРЕШЕНИЕ\n━━━━━━━━━━━━━━━━━━━━\n\n🤖 Дилерский AI-ассистент — 24/7 доступ к данным по наличию, ценам, статусам\n🔧 Автоматизация сервисного центра — приём заявок, координация выездов, контроль гарантий\n📊 Координация сети СЦ — единая панель: загрузка, KPI, статусы по всем 750 СЦ\n\n━━━━━━━━━━━━━━━━━━━━\nУСЛОВИЯ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ Разработка под ключ — права переходят Русклимат\n✓ Оплата: 50% / 30% / 20%\n✓ Финальный платёж — после приёмки\n✓ 8 недель | Инфраструктура РФ, 152-ФЗ\n\nЦены — после брифинга.\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"S7 Airlines",contact:"Директор маркетинга",city:"Москва",pkg:"Пакет 1 — Под ключ",text:"Добрый день!\n\n━━━━━━━━━━━━━━━━━━━━\nВОЗМОЖНОСТИ ДЛЯ S7\n━━━━━━━━━━━━━━━━━━━━\n\n💬 AI-коммуникация — персональный ассистент знает историю перелётов и статус лояльности\n📊 Предиктивная аналитика — нужный маршрут, нужный момент, нужная цена\n🔗 Интеграция с CRM и PNR-системами — без замены инфраструктуры\n\n━━━━━━━━━━━━━━━━━━━━\nУСЛОВИЯ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ Пакет 1 — права переходят S7\n✓ Оплата: 50% / 30% / 20%\n✓ Финальный платёж — после приёмки\n✓ Инфраструктура РФ, 152-ФЗ\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"},
+  {name:"Жигунов С.В.",contact:"Сергей Викторович",city:"Москва",pkg:"Пакет 1 — Под ключ",text:"Сергей Викторович, добрый день!\n\n━━━━━━━━━━━━━━━━━━━━\nЧТО МЫ ДЕЛАЕМ\n━━━━━━━━━━━━━━━━━━━━\n\n🤖 Персональный AI-ассистент — входящие обращения, координация, коммуникации\n📋 Автоматизация документооборота — распознавание, классификация, маршрутизация\n🎯 Ассистент для кино-проектов — координация групп, расписание, подрядчики\n\n━━━━━━━━━━━━━━━━━━━━\nУСЛОВИЯ\n━━━━━━━━━━━━━━━━━━━━\n\n✓ Разработка под ключ — права переходят заказчику\n✓ Оплата: 50% / 30% / 20%\n✓ Финальный платёж — после приёмки\n✓ 8 недель | Инфраструктура РФ, 152-ФЗ\n\nАлексей Гагарин | CEO ST8 AI\n+7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653"}
+];
+
+var STAGES = ["первый контакт","КП отправлено","переговоры","договор","закрыто"];
+var curFilter = "все";
+var selId = null;
+var apiKey = "";
+var openKP = null;
+
+// ── STORAGE ──
+function loadClients(){
+  try{
+    var d = localStorage.getItem("st8_clients");
+    if(d) return JSON.parse(d);
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_CLIENTS));
+}
+function saveClients(){
+  try{ localStorage.setItem("st8_clients", JSON.stringify(CLIENTS)); }catch(e){}
+}
+function loadApiKey(){
+  try{ return localStorage.getItem("st8_apikey")||""; }catch(e){ return ""; }
+}
+
+var CLIENTS = loadClients();
+apiKey = loadApiKey();
+if(apiKey){ document.getElementById("api-inp").value = apiKey; }
+
+// ── HELPERS ──
+function sc(s){
+  return {"первый контакт":"#2E86C1","КП отправлено":"#D68910","переговоры":"#7D3C98","договор":"#1A9655","закрыто":"#4A5568"}[s]||"#2E86C1";
+}
+function pi(p){ return p==="high"?"🔥":p==="medium"?"📌":"💤"; }
+function fmt(n){ return n>=1000000?(n/1000000).toFixed(1)+"М ₽":(n/1000).toFixed(0)+"к ₽"; }
+function getTotalPot(){ var t=0; for(var i=0;i<CLIENTS.length;i++) t+=CLIENTS[i].potential; return t; }
+function nextId(){ var m=0; for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id>m) m=CLIENTS[i].id; return m+1; }
+
+function showToast(msg){
+  var t=document.getElementById("toast");
+  t.textContent=msg; t.className="toast show";
+  setTimeout(function(){ t.className="toast"; },2000);
+}
+
+// ── NAV ──
+var navBtns = document.querySelectorAll(".nb");
+for(var i=0;i<navBtns.length;i++){
+  navBtns[i].onclick = (function(btn){
+    return function(){
+      var t = btn.getAttribute("data-tab");
+      for(var j=0;j<navBtns.length;j++) navBtns[j].className="nb";
+      btn.className="nb on";
+      var tabs=document.querySelectorAll(".tab");
+      for(var j=0;j<tabs.length;j++) tabs[j].className="tab";
+      document.getElementById("tab-"+t).className="tab on";
+      if(t==="pipeline") renderPipeline();
+      if(t==="kplib") renderKPLib();
+    };
+  })(navBtns[i]);
+}
+
+function switchTab(name){
+  var tabs=document.querySelectorAll(".tab");
+  for(var i=0;i<tabs.length;i++) tabs[i].className="tab";
+  document.getElementById("tab-"+name).className="tab on";
+  var btns=document.querySelectorAll(".nb");
+  for(var i=0;i<btns.length;i++) btns[i].className=btns[i].getAttribute("data-tab")===name?"nb on":"nb";
+}
+
+// ── STATS ──
+function renderStats(){
+  var hot=0,nego=0,tot=getTotalPot();
+  for(var i=0;i<CLIENTS.length;i++){
+    if(CLIENTS[i].priority==="high") hot++;
+    if(CLIENTS[i].stage==="переговоры") nego++;
+  }
+  document.getElementById("stats").innerHTML=
+    '<div class="sc"><div class="sc-l">Клиентов</div><div class="sc-v">'+CLIENTS.length+'</div></div>'+
+    '<div class="sc"><div class="sc-l">Потенциал</div><div class="sc-v">'+fmt(tot)+'</div></div>'+
+    '<div class="sc"><div class="sc-l">Переговоры</div><div class="sc-v">'+nego+'</div></div>'+
+    '<div class="sc"><div class="sc-l">🔥 Горячие</div><div class="sc-v">'+hot+'</div></div>';
+}
+
+// ── FILTERS ──
+function renderFilters(){
+  var opts=["все"].concat(STAGES).concat(["🔥 горячие"]);
+  var h="";
+  for(var i=0;i<opts.length;i++)
+    h+='<button class="fb'+(opts[i]===curFilter?" on":"")+'" onclick="setFilter(\''+opts[i]+'\')">'+opts[i]+'</button>';
+  document.getElementById("frow").innerHTML=h;
+}
+function setFilter(f){ curFilter=f; renderFilters(); renderCards(); }
+
+// ── CARDS ──
+function renderCards(){
+  var list=[];
+  for(var i=0;i<CLIENTS.length;i++){
+    var c=CLIENTS[i];
+    if(curFilter==="все"||curFilter==="🔥 горячие"&&c.priority==="high"||c.stage===curFilter) list.push(c);
+  }
+  var h="";
+  for(var i=0;i<list.length;i++){
+    var c=list[i];
+    h+='<div class="card'+(selId===c.id?" sel":"")+'" onclick="selCard('+c.id+')">'+
+      '<div class="card-top">'+
+        '<div style="flex:1;min-width:0">'+
+          '<div class="card-name">'+pi(c.priority)+' '+c.name+'</div>'+
+          '<div class="card-sub">'+c.contact+' · '+c.city+'</div>'+
+        '</div>'+
+        '<span class="badge" style="background:'+sc(c.stage);h+='">'+c.stage+'</span>'+
+      '</div>'+
+      '<div class="card-bot"><span class="pot">'+fmt(c.potential)+'</span></div>'+
+      '<div class="card-pkg">'+c.pkg+'</div>'+
+    '</div>';
+  }
+  document.getElementById("cards").innerHTML=h||'<div style="color:#6B7FA0;text-align:center;padding:30px;font-size:13px">Нет клиентов в этой категории</div>';
+}
+
+function selCard(id){ selId=(selId===id)?null:id; renderCards(); renderDet(); }
+
+// ── DETAIL ──
+function renderDet(){
+  var el=document.getElementById("det");
+  if(!selId){ el.innerHTML=""; return; }
+  var c=null;
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===selId){ c=CLIENTS[i]; break; }
+  if(!c) return;
+  var stbtns="";
+  for(var i=0;i<STAGES.length;i++){
+    var s=STAGES[i],col=sc(s);
+    stbtns+='<button class="stbtn" onclick="updStage('+c.id+',\''+s+'\')" style="border-color:'+col+';background:'+(c.stage===s?col:"transparent")+';color:'+(c.stage===s?"#fff":col)+'">'+s+'</button>';
+  }
+  el.innerHTML='<div class="det">'+
+    '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">'+
+      '<div class="det-name">'+c.name+'</div>'+
+      '<div style="display:flex;gap:6px">'+
+        '<button class="btn-out" style="padding:6px 10px;font-size:10px" onclick="openEdit('+c.id+')">✏️</button>'+
+        '<button onclick="selCard('+c.id+')" style="background:none;border:none;color:#6B7FA0;font-size:20px;line-height:1">✕</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="det-meta">'+c.contact+' · '+c.city+' · '+c.type+'</div>'+
+    '<div class="det-notes">'+(c.notes||"Нет заметок")+'</div>'+
+    '<div class="det-lbl">Изменить стадию</div>'+
+    '<div class="stages">'+stbtns+'</div>'+
+    '<div class="act">'+
+      '<button class="btn-gold" onclick="goCall('+c.id+')">🎙 Звонок</button>'+
+      '<button class="btn-out" onclick="goKPGen('+c.id+')">📄 КП</button>'+
+      '<button class="btn-out" onclick="goKPLib(\''+c.name.replace(/\\/g,"\\\\").replace(/'/g,"\\'")+'\')"  >📁 Готовое</button>'+
+      '<button class="btn-red" onclick="delClient('+c.id+')">🗑</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function updStage(id,stage){
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){ CLIENTS[i].stage=stage; break; }
+  saveClients(); renderDet(); renderCards(); renderStats();
+  showToast("Стадия обновлена");
+}
+
+function delClient(id){
+  if(!confirm("Удалить клиента?")) return;
+  var arr=[];
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id!==id) arr.push(CLIENTS[i]);
+  CLIENTS=arr; selId=null;
+  saveClients(); renderStats(); renderFilters(); renderCards(); renderDet();
+  showToast("Клиент удалён");
+}
+
+// ── ADD/EDIT MODAL ──
+function openAdd(){
+  document.getElementById("modal-title").textContent="Новый клиент";
+  document.getElementById("edit-id").value="";
+  document.getElementById("f-name").value="";
+  document.getElementById("f-contact").value="";
+  document.getElementById("f-city").value="";
+  document.getElementById("f-type").value="";
+  document.getElementById("f-stage").value="первый контакт";
+  document.getElementById("f-pkg").value="Пакет 2 — Оптимум";
+  document.getElementById("f-pot").value="";
+  document.getElementById("f-pri").value="medium";
+  document.getElementById("f-notes").value="";
+  document.getElementById("modal").className="modal-overlay on";
+}
+
+function openEdit(id){
+  var c=null;
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){ c=CLIENTS[i]; break; }
+  if(!c) return;
+  document.getElementById("modal-title").textContent="Редактировать";
+  document.getElementById("edit-id").value=id;
+  document.getElementById("f-name").value=c.name;
+  document.getElementById("f-contact").value=c.contact;
+  document.getElementById("f-city").value=c.city;
+  document.getElementById("f-type").value=c.type;
+  document.getElementById("f-stage").value=c.stage;
+  document.getElementById("f-pkg").value=c.pkg;
+  document.getElementById("f-pot").value=c.potential;
+  document.getElementById("f-pri").value=c.priority;
+  document.getElementById("f-notes").value=c.notes;
+  document.getElementById("modal").className="modal-overlay on";
+}
+
+function closeModal(){ document.getElementById("modal").className="modal-overlay"; }
+
+function saveClient(){
+  var name=document.getElementById("f-name").value.trim();
+  if(!name){ alert("Введите название"); return; }
+  var editId=document.getElementById("edit-id").value;
+  var pot=parseInt(document.getElementById("f-pot").value)||0;
+  if(editId){
+    for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id==editId){
+      CLIENTS[i].name=name;
+      CLIENTS[i].contact=document.getElementById("f-contact").value;
+      CLIENTS[i].city=document.getElementById("f-city").value;
+      CLIENTS[i].type=document.getElementById("f-type").value;
+      CLIENTS[i].stage=document.getElementById("f-stage").value;
+      CLIENTS[i].pkg=document.getElementById("f-pkg").value;
+      CLIENTS[i].potential=pot;
+      CLIENTS[i].priority=document.getElementById("f-pri").value;
+      CLIENTS[i].notes=document.getElementById("f-notes").value;
+      break;
+    }
+    showToast("Клиент обновлён");
+  } else {
+    CLIENTS.push({
+      id:nextId(),name:name,
+      contact:document.getElementById("f-contact").value,
+      city:document.getElementById("f-city").value,
+      type:document.getElementById("f-type").value,
+      stage:document.getElementById("f-stage").value,
+      pkg:document.getElementById("f-pkg").value,
+      potential:pot,
+      priority:document.getElementById("f-pri").value,
+      notes:document.getElementById("f-notes").value
+    });
+    showToast("Клиент добавлен");
+  }
+  saveClients(); closeModal(); renderStats(); renderFilters(); renderCards(); renderDet();
+}
+
+// ── PIPELINE ──
+function renderPipeline(){
+  var tot=getTotalPot(),pcols="",chart="";
+  for(var i=0;i<STAGES.length;i++){
+    var stage=STAGES[i],cl=[],sum=0;
+    for(var j=0;j<CLIENTS.length;j++) if(CLIENTS[j].stage===stage){ cl.push(CLIENTS[j]); sum+=CLIENTS[j].potential; }
+    var items=cl.length?cl.map(function(c){ return '<div class="pitem" style="border-left-color:'+sc(c.stage)+'"><div class="pitem-n">'+c.name+'</div><div class="pitem-c">'+c.contact+'</div><div class="pitem-f"><span style="font-size:11px;font-weight:700;color:#D4A017">'+fmt(c.potential)+'</span><span>'+pi(c.priority)+'</span></div></div>'; }).join("") : '<div style="color:#6B7FA0;font-size:11px;padding:8px">Пусто</div>';
+    pcols+='<div class="pcol"><div class="pcol-h" style="background:'+sc(stage)+'20;border-bottom:2px solid '+sc(stage)+'"><div class="pcol-t" style="color:'+sc(stage)+'">'+stage.toUpperCase()+'</div><div class="pcol-s">'+cl.length+' · '+fmt(sum)+'</div></div><div class="pcol-b">'+items+'</div></div>';
+    chart+='<div class="crow"><div class="clbl">'+stage+'</div><div class="cbw"><div class="cb" style="width:'+(tot?Math.round(sum/tot*100):0)+'%;background:'+sc(stage)+'"></div></div><div class="cv">'+fmt(sum)+'</div><div class="cn">'+cl.length+'</div></div>';
+  }
+  document.getElementById("pcols").innerHTML=pcols;
+  document.getElementById("chart").innerHTML=chart;
+}
+
+// ── KP LIB ──
+function renderKPLib(){
+  var h="";
+  for(var i=0;i<KPS.length;i++){
+    var kp=KPS[i],isOpen=openKP===i;
+    h+='<div class="kpcard'+(isOpen?" open":"")+'" id="kpc'+i+'">'+
+      '<div class="kpcard-h" onclick="toggleKP('+i+')">'+
+        '<div><div class="kpcard-n">'+kp.name+'</div><div class="kpcard-p">'+kp.pkg+'</div><div class="kpcard-c">'+kp.contact+' · '+kp.city+'</div></div>'+
+        '<div class="kpcard-arr">›</div>'+
+      '</div>'+
+      '<div class="kpcard-body">'+kp.text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")+
+        '<br><button class="copybtn" onclick="copyKP('+i+')">Копировать</button></div>'+
+    '</div>';
+  }
+  document.getElementById("kplist").innerHTML=h;
+}
+function toggleKP(i){ openKP=(openKP===i)?null:i; renderKPLib(); }
+function copyKP(i){
+  var t=KPS[i].text;
+  try{ navigator.clipboard.writeText(t).then(function(){ showToast("КП скопировано!"); }); }
+  catch(e){ var ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); showToast("КП скопировано!"); }catch(e2){} document.body.removeChild(ta); }
+}
+
+// ── NAVIGATE ──
+function goCall(id){
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){
+    document.getElementById("call-client").value=CLIENTS[i].name;
+    document.getElementById("call-contact").value=CLIENTS[i].contact;
+    document.getElementById("call-ctx").value=CLIENTS[i].notes;
+    break;
+  }
+  switchTab("call");
+}
+function goKPGen(id){
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){
+    document.getElementById("kp-client").value=CLIENTS[i].name;
+    document.getElementById("kp-contact").value=CLIENTS[i].contact;
+    document.getElementById("kp-city").value=CLIENTS[i].city;
+    document.getElementById("kp-type").value=CLIENTS[i].type;
+    break;
+  }
+  switchTab("kpgen");
+}
+function goKPLib(name){
+  switchTab("kplib"); renderKPLib();
+  for(var i=0;i<KPS.length;i++) if(KPS[i].name===name){ openKP=i; renderKPLib(); var el=document.getElementById("kpc"+i); if(el) setTimeout(function(){ el.scrollIntoView({behavior:"smooth"}); },100); break; }
+}
+
+// ── HOT TAGS ──
+function renderHotTags(){
+  var h="";
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].priority==="high")
+    h+='<button class="htag" onclick="fillCall('+CLIENTS[i].id+')">'+CLIENTS[i].name+'</button>';
+  document.getElementById("htags").innerHTML=h;
+}
+function fillCall(id){
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){
+    document.getElementById("call-client").value=CLIENTS[i].name;
+    document.getElementById("call-contact").value=CLIENTS[i].contact;
+    document.getElementById("call-ctx").value=CLIENTS[i].notes;
+    break;
+  }
+}
+
+// ── API KEY ──
+function saveKey(){
+  var v=document.getElementById("api-inp").value.trim();
+  if(v.indexOf("sk-")!==0){ document.getElementById("api-st").innerHTML='<span style="color:#C0392B">❌ Ключ должен начинаться с sk-</span>'; return; }
+  apiKey=v;
+  try{ localStorage.setItem("st8_apikey",v); }catch(e){}
+  document.getElementById("api-st").innerHTML='<span style="color:#1A9655">✅ Сохранён — AI активен</span>';
+  showToast("API ключ сохранён");
+}
+function checkKey(warnId){
+  if(!apiKey){ document.getElementById(warnId).innerHTML='<div class="warn">⚠ Нужен API-ключ. <span style="text-decoration:underline;cursor:pointer" onclick="switchTab(\'settings\')">Добавить →</span></div>'; return false; }
+  document.getElementById(warnId).innerHTML=""; return true;
+}
+
+// ── AI CALL ──
+function callAI(prompt,cb){
+  var xhr=new XMLHttpRequest();
+  xhr.open("POST","https://api.anthropic.com/v1/messages",true);
+  xhr.setRequestHeader("Content-Type","application/json");
+  xhr.setRequestHeader("x-api-key",apiKey);
+  xhr.setRequestHeader("anthropic-version","2023-06-01");
+  xhr.setRequestHeader("anthropic-dangerous-direct-browser-access","true");
+  xhr.onload=function(){ try{ var d=JSON.parse(xhr.responseText); cb(null,d.content&&d.content[0]?d.content[0].text:(d.error?d.error.message:"Ошибка")); }catch(e){ cb(e.message); } };
+  xhr.onerror=function(){ cb("Ошибка сети"); };
+  xhr.send(JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,messages:[{role:"user",content:prompt}]}));
+}
+
+function genKP(){
+  if(!checkKey("warn-kp")) return;
+  var client=document.getElementById("kp-client").value.trim();
+  if(!client) return;
+  var btn=document.getElementById("kp-btn");
+  btn.disabled=true; btn.textContent="⏳ ГЕНЕРИРУЮ...";
+  document.getElementById("kp-res").innerHTML="";
+  var p="Ты — AI-консультант ST8 AI (st8-ai.ru, Самара).\nКлиент: "+client+"\nКонтакт: "+(document.getElementById("kp-contact").value||"—")+"\nГород: "+(document.getElementById("kp-city").value||"—")+"\nТип: "+(document.getElementById("kp-type").value||"HoReCa")+"\nПакет: "+document.getElementById("kp-pkg").value+"\nБоль: "+(document.getElementById("kp-pain").value||"удержание гостей")+"\n\nСоздай КП: приветствие → проблема → решение (4 пункта с эмодзи) → что входит (с ✓) → результаты → призыв. Без цен. Финальный платёж после приёмки, выход 30 дней, инфраструктура РФ, 152-ФЗ.\nПодпись: Алексей Гагарин | CEO ST8 AI | +7 985 690-52-52 | @Zzima686 | st8-ai.ru\nИП Попова Юлия Александровна | ИНН 662607100653\n400-500 слов.";
+  callAI(p,function(err,text){
+    btn.disabled=false; btn.textContent="✦ СГЕНЕРИРОВАТЬ КП";
+    if(err){ document.getElementById("kp-res").innerHTML='<div class="resbox" style="border-left-color:#C0392B">Ошибка: '+err+'</div>'; return; }
+    document.getElementById("kp-res").innerHTML='<div class="resbox" id="kp-text">'+text+'</div><button class="copybtn" onclick="copyText(\'kp-text\')">Копировать</button>';
+  });
+}
+
+function genCall(){
+  if(!checkKey("warn-call")) return;
+  var client=document.getElementById("call-client").value.trim();
+  if(!client) return;
+  var btn=document.getElementById("call-btn");
+  btn.disabled=true; btn.textContent="⏳ ГОТОВЛЮ...";
+  document.getElementById("call-res").innerHTML="";
+  var cl=null;
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].name.toLowerCase().indexOf(client.toLowerCase())>=0){ cl=CLIENTS[i]; break; }
+  var p="Ты — sales-консультант ST8 AI.\nКлиент: "+client+"\nКонтакт: "+(document.getElementById("call-contact").value||(cl?cl.contact:"—"))+"\nТип: "+(cl?cl.type:"бизнес")+"\nКонтекст: "+(document.getElementById("call-ctx").value||(cl?cl.notes:"первый звонок"))+"\nСтадия: "+(cl?cl.stage:"первый контакт")+"\n\nШпаргалка:\n━ ЦЕЛЬ ЗВОНКА\n━ БОЛИ КЛИЕНТА (3 пункта)\n━ ЧТО ПРЕДЛОЖИТЬ (3 решения ST8 AI)\n━ ВОЗРАЖЕНИЯ И ОТВЕТЫ (3 пары)\n━ СЛЕДУЮЩИЙ ШАГ\n\nКоротко, конкретно, на русском.";
+  callAI(p,function(err,text){
+    btn.disabled=false; btn.textContent="✦ ПОДГОТОВИТЬ ШПАРГАЛКУ";
+    if(err){ document.getElementById("call-res").innerHTML='<div class="resbox" style="border-left-color:#C0392B">Ошибка: '+err+'</div>'; return; }
+    document.getElementById("call-res").innerHTML='<div class="resbox" style="border-left-color:#D68910" id="call-text">'+text+'</div><button class="copybtn" onclick="copyText(\'call-text\')">Копировать</button>';
+  });
+}
+
+function copyText(id){
+  var t=document.getElementById(id).innerText;
+  try{ navigator.clipboard.writeText(t).then(function(){ showToast("Скопировано!"); }); }
+  catch(e){ var ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); showToast("Скопировано!"); }catch(e2){} document.body.removeChild(ta); }
+}
+
+// ── EXPORT/IMPORT ──
+function exportData(){
+  var d=JSON.stringify({clients:CLIENTS,version:1});
+  try{
+    navigator.clipboard.writeText(d).then(function(){ showToast("Данные скопированы в буфер"); });
+  }catch(e){ alert(d); }
+}
+function importData(){
+  var s=prompt("Вставь данные для импорта:");
+  if(!s) return;
+  try{
+    var d=JSON.parse(s);
+    if(d.clients){ CLIENTS=d.clients; saveClients(); renderStats(); renderFilters(); renderCards(); renderDet(); showToast("Данные импортированы: "+CLIENTS.length+" клиентов"); }
+  }catch(e){ alert("Неверный формат данных"); }
+}
+function resetData(){
+  if(!confirm("Сбросить всех клиентов к начальным данным?")) return;
+  CLIENTS=JSON.parse(JSON.stringify(DEFAULT_CLIENTS));
+  saveClients(); renderStats(); renderFilters(); renderCards(); renderDet();
+  showToast("Данные сброшены");
+}
+
+// ── INIT ──
+renderStats();
+renderFilters();
+renderCards();
+renderHotTags();
+if(apiKey) document.getElementById("api-st").innerHTML='<span style="color:#1A9655">✅ Ключ загружен — AI активен</span>';
+</script>
+</body>
+  
+</html>
