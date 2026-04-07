@@ -190,6 +190,7 @@ select.inp option{background:#0E1525}
       <span>Лиды</span>
       <div style="display:flex;gap:10px;align-items:center">
         <div class="badge" style="background:#D4A017;color:#000;">Новые: <span id="new-leads-count">0</span></div>
+        <button id="refresh-leads-btn" onclick="loadLeadsJson()" style="background:transparent;border:1px solid #D4A017;border-radius:3px;color:#D4A017;font-size:10px;font-weight:700;padding:4px 10px;letter-spacing:.5px;">🔄 Обновить</button>
       </div>
     </div>
     <div class="frow" id="leads-filter-status"></div>
@@ -425,7 +426,10 @@ function saveLeadState(){
   try{ localStorage.setItem(LEAD_STATE_KEY, JSON.stringify(LEAD_STATE)); }catch(e){}
 }
 function loadLeadsJson(){
-  fetch('leads.json')
+  var btn = document.getElementById('refresh-leads-btn');
+  if(btn){ btn.textContent = '⏳'; btn.disabled = true; }
+  var url = 'https://raw.githubusercontent.com/kosmos686-bit/st8hub/main/leads.json?t=' + Date.now();
+  fetch(url)
     .then(function(resp){ return resp.json(); })
     .then(function(data){
       LEADS = (data||[]).map(function(lead){
@@ -437,10 +441,12 @@ function loadLeadsJson(){
         return lead;
       });
       renderLeads();
+      if(btn){ btn.textContent = '🔄 Обновить'; btn.disabled = false; }
     })
     .catch(function(){
       LEADS = [];
       renderLeads();
+      if(btn){ btn.textContent = '🔄 Обновить'; btn.disabled = false; }
     });
 }
 function renderLeads(){
