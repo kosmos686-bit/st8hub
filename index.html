@@ -510,6 +510,7 @@ function renderLeadCards(){
     html += '<div class="act" style="margin-top:10px">';
     html += '<button class="btn-gold" style="padding:8px 10px;min-width:110px" onclick="copyTouch('+i+')">Скопировать касание</button>';
     html += '<button class="btn-out" style="padding:8px 10px;min-width:110px" onclick="showLeadDetail('+i+')">Показать</button>';
+    html += '<button style="padding:8px 10px;min-width:110px;background:transparent;border:1px solid #2E86C1;border-radius:3px;color:#2E86C1;font-size:10px;font-weight:700;cursor:pointer" onclick="generateLeadKP('+i+')">📄 Генерировать КП</button>';
     html += '<button class="btn-red" style="padding:8px 10px;min-width:110px" onclick="changeLeadStatus('+i+',\'ответил\')">Ответил</button>';
     html += '</div>';
     html += '</div>';
@@ -921,7 +922,51 @@ renderHotTags();
 loadLeadState();
 loadLeadsJson();
 if(apiKey) document.getElementById("api-st").innerHTML='<span style="color:#1A9655">✅ Ключ загружен — AI активен</span>';
+
+// ── LEAD KP MODAL ──
+function generateLeadKP(index){
+  if(!checkKey("warn-lead-kp")) return;
+  var lead = getFilteredLeads()[index];
+  if(!lead) return;
+  var modal = document.getElementById('lead-kp-modal');
+  var body = document.getElementById('lead-kp-body');
+  modal.style.display = 'block';
+  body.innerHTML = '<div style="color:#6B7FA0;text-align:center;padding:20px">⏳ Генерирую КП...</div>';
+  var p = "Ты — AI-консультант ST8 AI (st8-ai.ru, Самара).\n" +
+    "Клиент: " + lead.company_name + "\n" +
+    "Контакт / ЛПР: " + (lead.lpr||"—") + "\n" +
+    "Сегмент: " + (lead.segment||"—") + "\n" +
+    "Боль клиента: " + (lead.pain||"операционные сложности и фрагментированные данные") + "\n\n" +
+    "Создай КП: приветствие → проблема → решение (4 пункта с эмодзи) → что входит (с ✓) → результаты → призыв. " +
+    "Без цен. Финальный платёж после приёмки, выход 30 дней, инфраструктура РФ, 152-ФЗ.\n" +
+    "Подпись: Алексей Гагарин | CEO ST8 AI | +7 985 690-52-52 | @Zzima686 | st8-ai.ru\n" +
+    "ИП Попова Юлия Александровна | ИНН 662607100653\n400-500 слов.";
+  callAI(p, function(err, text){
+    if(err){
+      body.innerHTML = '<div class="resbox" style="border-left-color:#C0392B">Ошибка: '+err+'</div>';
+    } else {
+      body.innerHTML = '<div class="resbox" id="lead-kp-text" style="max-height:60vh;overflow-y:auto">'+text+'</div>' +
+        '<button class="copybtn" style="margin-top:10px" onclick="copyText(\'lead-kp-text\')">Скопировать</button>';
+    }
+  });
+}
+function closeLeadKP(){
+  document.getElementById('lead-kp-modal').style.display = 'none';
+  document.getElementById('lead-kp-body').innerHTML='';
+}
 </script>
+
+<!-- LEAD KP MODAL -->
+<div id="lead-kp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:300;overflow-y:auto;padding:20px 14px" onclick="if(event.target===this)closeLeadKP()">
+  <div style="background:#111827;border:1px solid #2E86C1;border-radius:8px;padding:20px;max-width:560px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#2E86C1">📄 Коммерческое предложение</span>
+      <button onclick="closeLeadKP()" style="background:transparent;border:none;color:#6B7FA0;font-size:18px;cursor:pointer;line-height:1">✕</button>
+    </div>
+    <div id="warn-lead-kp"></div>
+    <div id="lead-kp-body"></div>
+  </div>
+</div>
 </body>
   
 </html>
