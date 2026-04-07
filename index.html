@@ -152,7 +152,6 @@ select.inp option{background:#0E1525}
   <div class="nav" id="nav">
     <button class="nb on" data-tab="crm">CRM</button>
     <button class="nb" data-tab="pipeline">Воронка</button>
-    <button class="nb" data-tab="leads">Лиды</button>
     <button class="nb" data-tab="kplib">Библиотека КП</button>
     <button class="nb" data-tab="kpgen">Генератор КП</button>
     <button class="nb" data-tab="call">Звонки</button>
@@ -182,30 +181,6 @@ select.inp option{background:#0E1525}
       <div class="stitle"><span>Потенциал по стадиям</span></div>
       <div id="chart"></div>
     </div>
-  </div>
-
-  <!-- LEADS -->
-  <div class="tab" id="tab-leads">
-    <div class="stitle"><span>Лиды</span></div>
-    <div class="infobox">
-      <div class="info-t">CRM таблица лидов</div>
-      <div class="info-b">Данные из <b>leads_status.md</b>. Автоматически обновляется при изменениях в системе.</div>
-    </div>
-    <table id="leads-table" style="width:100%;border-collapse:collapse;margin-top:12px;">
-      <thead>
-        <tr style="background:#111827;color:#D4A017;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">
-          <th style="border:1px solid #1e2d45;padding:10px;text-align:left;">Дата</th>
-          <th style="border:1px solid #1e2d45;padding:10px;text-align:left;">Компания</th>
-          <th style="border:1px solid #1e2d45;padding:10px;text-align:left;">ЛПР</th>
-          <th style="border:1px solid #1e2d45;padding:10px;text-align:left;">Телефон</th>
-          <th style="border:1px solid #1e2d45;padding:10px;text-align:left;">Статус</th>
-          <th style="border:1px solid #1e2d45;padding:10px;text-align:left;">Комментарий</th>
-        </tr>
-      </thead>
-      <tbody id="leads-tbody" style="font-size:12px;color:#E8EDF5;">
-        <!-- Данные будут загружены JS -->
-      </tbody>
-    </table>
   </div>
 
   <!-- KP LIB -->
@@ -772,52 +747,11 @@ function resetData(){
   showToast("Данные сброшены");
 }
 
-// ── LEADS ──
-function loadLeads(){
-  // Симуляция данных из leads_status.md (в реальности можно использовать fetch или API)
-  var leadsData = [
-    ["2026-04-07", "Тест", "Алексей", "+79856905252", "новый", "тест"],
-    ["2026-04-07", "пример компании", "Имя Фамилия, должность", "", "новый", "Впервые найден лид"],
-    ["2026-04-07", "Russian discount supermarket chain moves into Hungarian market", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "'Russian Lidl' supermarket chain Mere 'closing UK store after invasion of Ukraine'", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "bne IntelliNews", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "Lists of review aggregators and review sites", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "'Russian Lidl' supermarket chain is opening in the UK and says it's ...", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "Auchan supermarket chain sells its Russian branch", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "Chain Stores Industry Email Lists | Coldlytics", "Руководитель по маркетингу / директор", "", "новый", ""],
-    ["2026-04-07", "White & Case Advises X5 Retail Group on Acquisition of Russian Retail Supermarket Chain", "Руководитель по маркетингу / директор", "", "новый", ""]
-  ];
-  var tbody = document.getElementById("leads-tbody");
-  tbody.innerHTML = "";
-  leadsData.forEach(function(row){
-    var tr = document.createElement("tr");
-    tr.style.background = "#0E1525";
-    tr.style.borderBottom = "1px solid #1e2d45";
-    row.forEach(function(cell, idx){
-      var td = document.createElement("td");
-      td.style.padding = "10px";
-      td.style.border = "1px solid #1e2d45";
-      if(idx === 4){ // Статус
-        var badge = document.createElement("span");
-        badge.className = "badge";
-        badge.style.background = cell === "новый" ? "#D4A017" : "#6B7FA0";
-        badge.textContent = cell;
-        td.appendChild(badge);
-      } else {
-        td.textContent = cell || "—";
-      }
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-}
-
 // ── INIT ──
 renderStats();
 renderFilters();
 renderCards();
 renderHotTags();
-loadLeads(); // Загрузка лидов
 if(apiKey) document.getElementById("api-st").innerHTML='<span style="color:#1A9655">✅ Ключ загружен — AI активен</span>';
 </script>
 </body>
