@@ -518,8 +518,15 @@ function renderLeadCards(){
   }
   for(var i=0;i<list.length;i++){
     var lead = list[i];
+    var score = lead.score || null;
+    var scoreBadge = '';
+    if(score !== null && score !== undefined){
+      var scoreColor = score>=8 ? '#E74C3C' : score>=5 ? '#D68910' : '#4A5568';
+      var scoreLabel = score>=8 ? 'Горячий' : score>=5 ? 'Тёплый' : 'Холодный';
+      scoreBadge = '<span class="badge" style="background:'+scoreColor+';margin-left:4px">'+scoreLabel+' '+score+'</span>';
+    }
     html += '<div class="card" style="border-color:'+statusColor(lead.response)+'">';
-    html += '<div class="card-top"><div style="flex:1;min-width:0"><div class="card-name">'+lead.company_name+'</div><div class="card-sub">'+lead.lpr+' · '+(lead.segment||'Неизвестен')+'</div></div><div>'+formatLeadStatus(lead.response)+'</div></div>';
+    html += '<div class="card-top"><div style="flex:1;min-width:0"><div class="card-name">'+lead.company_name+'</div><div class="card-sub">'+lead.lpr+' · '+(lead.segment||'Неизвестен')+'</div></div><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end">'+formatLeadStatus(lead.response)+scoreBadge+'</div></div>';
     html += '<div class="card-bot"><span class="pot">'+(lead.phone&&lead.phone!='требует уточнения'?lead.phone:'телефон не найден')+'</span></div>';
     html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">';
     if(lead.site && lead.site!='требует уточнения'){
