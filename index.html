@@ -188,9 +188,10 @@ select.inp option{background:#0E1525}
   <div class="tab" id="tab-leads">
     <div class="stitle">
       <span>Лиды</span>
-      <div style="display:flex;gap:10px;align-items:center">
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <div class="badge" style="background:#D4A017;color:#000;">Новые: <span id="new-leads-count">0</span></div>
         <button id="refresh-leads-btn" onclick="loadLeadsJson()" style="background:transparent;border:1px solid #D4A017;border-radius:3px;color:#D4A017;font-size:10px;font-weight:700;padding:4px 10px;letter-spacing:.5px;">🔄 Обновить</button>
+        <button onclick="clearAllLeads()" style="background:transparent;border:1px solid #4A5568;border-radius:3px;color:#6B7FA0;font-size:10px;font-weight:700;padding:4px 10px;letter-spacing:.5px;">🗑 Очистить всё</button>
       </div>
     </div>
     <div class="frow" id="leads-filter-status"></div>
@@ -260,6 +261,15 @@ select.inp option{background:#0E1525}
       </div>
       <div class="api-hint">Получить: <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → API Keys → Create Key</div>
       <div id="api-st" style="margin-top:8px;font-size:12px"></div>
+    </div>
+    <div class="apibox">
+      <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:6px">🐙 GitHub Token</div>
+      <p style="font-size:12px;color:#6B7FA0;line-height:1.6">Для удаления и очистки лидов (запись в leads.json). Хранится в браузере.</p>
+      <div class="api-row">
+        <input class="inp" type="password" id="github-token-inp" placeholder="ghp_..." style="flex:1;margin-bottom:0">
+        <button class="btn-gold" style="flex:none;white-space:nowrap" onclick="saveGithubToken()">Сохранить</button>
+      </div>
+      <div id="github-token-st" style="margin-top:8px;font-size:12px"></div>
     </div>
     <div class="infobox">
       <div class="info-t">📱 Telegram Mini App</div>
@@ -382,10 +392,22 @@ function saveClients(){
 function loadApiKey(){
   try{ return localStorage.getItem("st8_apikey")||""; }catch(e){ return ""; }
 }
+function loadGithubToken(){
+  try{ return localStorage.getItem("st8_github_token")||""; }catch(e){ return ""; }
+}
+function saveGithubToken(){
+  var v = document.getElementById("github-token-inp").value.trim();
+  try{ localStorage.setItem("st8_github_token", v); }catch(e){}
+  var st = document.getElementById("github-token-st");
+  st.style.color = v ? "#1A9655" : "#C0392B";
+  st.textContent = v ? "✓ Токен сохранён" : "Токен не задан";
+}
 
 var CLIENTS = loadClients();
 apiKey = loadApiKey();
 if(apiKey){ document.getElementById("api-inp").value = apiKey; }
+var _ghToken = loadGithubToken();
+if(_ghToken){ document.getElementById("github-token-inp").value = _ghToken; }
 
 // ── HELPERS ──
 function sc(s){
@@ -512,6 +534,7 @@ function renderLeadCards(){
     html += '<button class="btn-out" style="padding:8px 10px;min-width:110px" onclick="showLeadDetail('+i+')">Показать</button>';
     html += '<button style="padding:8px 10px;min-width:110px;background:transparent;border:1px solid #2E86C1;border-radius:3px;color:#2E86C1;font-size:10px;font-weight:700;cursor:pointer" onclick="generateLeadKP('+i+')">📄 Генерировать КП</button>';
     html += '<button class="btn-red" style="padding:8px 10px;min-width:110px" onclick="changeLeadStatus('+i+',\'ответил\')">Ответил</button>';
+    html += '<button style="padding:8px 6px;background:#E74C3C;border:none;border-radius:3px;color:#fff;font-size:10px;font-weight:700;cursor:pointer" onclick="deleteLead('+i+')">🗑 Удалить</button>';
     html += '</div>';
     html += '</div>';
   }
@@ -550,6 +573,79 @@ function changeLeadStatus(index, status){
   }
   renderLeads();
   showToast('Статус изменён: '+status);
+}
+
+// ── GITHUB LEADS API ──
+function githubUpdateLeads(newLeads, commitMessage, onSuccess, onError) {
+  var token = loadGithubToken();
+  if (!token) {
+    showToast('Укажи GitHub Token в настройках');
+    if (onError) onError('no token');
+    return;
+  }
+  var apiUrl = 'https://api.github.com/repos/kosmos686-bit/st8hub/contents/leads.json';
+  // Step 1: get current SHA
+  fetch(apiUrl, {headers: {'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json'}})
+    .then(function(r){ return r.json(); })
+    .then(function(meta){
+      var sha = meta.sha;
+      var jsonStr = JSON.stringify(newLeads, null, 2);
+      // btoa with UTF-8 support
+      var encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+      return fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        body: JSON.stringify({message: commitMessage, content: encoded, sha: sha})
+      });
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if (res.content) {
+        if (onSuccess) onSuccess();
+      } else {
+        showToast('Ошибка GitHub: ' + (res.message || 'неизвестно'));
+        if (onError) onError(res.message);
+      }
+    })
+    .catch(function(e){
+      showToast('Ошибка соединения с GitHub');
+      if (onError) onError(e);
+    });
+}
+
+function deleteLead(index) {
+  var lead = getFilteredLeads()[index];
+  if (!lead) return;
+  if (!confirm('Удалить лида "' + lead.company_name + '"?')) return;
+  // Remove from LEADS array by uid or reference
+  var uid = lead._uid || null;
+  var newLeads = LEADS.filter(function(l){ return l !== lead && (!uid || l._uid !== uid); });
+  githubUpdateLeads(
+    newLeads.map(function(l){ var c = Object.assign({}, l); delete c._uid; return c; }),
+    'Delete lead: ' + lead.company_name,
+    function(){
+      LEADS = newLeads;
+      renderLeads();
+      showToast('Лид удалён');
+    }
+  );
+}
+
+function clearAllLeads() {
+  if (!confirm('Удалить все лиды? Это действие необратимо.')) return;
+  githubUpdateLeads(
+    [],
+    'Clear all leads',
+    function(){
+      LEADS = [];
+      renderLeads();
+      showToast('Все лиды удалены');
+    }
+  );
 }
 
 // ── NAV ──
