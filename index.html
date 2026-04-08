@@ -106,6 +106,18 @@ select.inp option{background:#0E1525}
 /* WARN */
 .warn{background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.3);border-radius:4px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#D4A017}
 
+/* CALL LEADS TABLE */
+.call-lead-row{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#111827;border:1px solid #1e2d45;border-radius:5px;margin-bottom:6px;flex-wrap:wrap}
+.call-lead-name{font-size:12px;font-weight:700;color:#fff;flex:2;min-width:110px}
+.call-lead-meta{font-size:10px;color:#6B7FA0;flex:1;min-width:80px}
+.call-lead-phone{font-size:11px;font-weight:700;color:#D4A017;flex:2;min-width:110px}
+.btn-call{padding:6px 10px;background:#1A9655;border:none;border-radius:3px;color:#fff;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn-script{padding:6px 10px;background:transparent;border:1px solid #D68910;border-radius:3px;color:#D68910;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap}
+
+/* QUICK LEADS PICKER */
+.ql-btn{padding:7px 12px;background:#111827;border:1px solid #1e2d45;border-radius:4px;color:#E8EDF5;font-size:10px;font-weight:700;cursor:pointer;text-align:left;display:block;width:100%;margin-bottom:6px}
+.ql-btn:hover{border-color:#D4A017;color:#D4A017}
+
 /* API BOX */
 .apibox{background:#111827;border:1px solid #1e2d45;border-radius:6px;padding:16px;margin-bottom:14px}
 .api-row{display:flex;gap:8px;margin-top:10px}
@@ -210,6 +222,7 @@ select.inp option{background:#0E1525}
   <div class="tab" id="tab-kpgen">
     <div class="stitle"><span>Генератор КП</span></div>
     <div id="warn-kp"></div>
+    <div id="kp-quick-leads" style="margin-bottom:14px"></div>
     <div class="form2" style="margin-bottom:12px">
       <div><label class="flabel">Клиент</label><input class="inp" id="kp-client" placeholder="Polyana Group"></div>
       <div><label class="flabel">Контакт</label><input class="inp" id="kp-contact" placeholder="Роман Вавилин"></div>
@@ -233,7 +246,19 @@ select.inp option{background:#0E1525}
 
   <!-- CALL -->
   <div class="tab" id="tab-call">
-    <div class="stitle"><span>Подготовка к звонку</span></div>
+    <div class="stitle"><span>Лиды для звонков</span></div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+      <select class="inp" id="call-filter-seg" onchange="renderCallLeads()" style="flex:1;min-width:120px;margin-bottom:0;font-size:11px;padding:7px 10px">
+        <option value="">Все сегменты</option>
+        <option>HoReCa</option><option>Ритейл</option><option>Производство</option><option>Логистика</option><option>Разные</option>
+      </select>
+      <select class="inp" id="call-filter-status" onchange="renderCallLeads()" style="flex:1;min-width:120px;margin-bottom:0;font-size:11px;padding:7px 10px">
+        <option value="">Все статусы</option>
+        <option>новый</option><option>написали</option><option>ответил</option><option>не ответил</option><option>требует контакт</option>
+      </select>
+    </div>
+    <div id="call-leads-list"></div>
+    <div class="stitle" style="margin-top:16px"><span>Шпаргалка к звонку</span></div>
     <div id="warn-call"></div>
     <div class="form2" style="margin-bottom:12px">
       <div><label class="flabel">Клиент</label><input class="inp" id="call-client" placeholder="Polyana Group"></div>
@@ -475,6 +500,8 @@ function renderLeads(){
   renderLeadCounters();
   renderLeadFilters();
   renderLeadCards();
+  renderKPQuickLeads();
+  renderCallLeads();
 }
 function renderLeadCounters(){
   var newCount = LEADS.filter(function(lead){ return lead.response==='новый'; }).length;
@@ -541,6 +568,7 @@ function renderLeadCards(){
     html += '<button class="btn-out" style="padding:8px 10px;min-width:110px" onclick="showLeadDetail('+i+')">Показать</button>';
     html += '<button style="padding:8px 10px;min-width:110px;background:transparent;border:1px solid #2E86C1;border-radius:3px;color:#2E86C1;font-size:10px;font-weight:700;cursor:pointer" onclick="generateLeadKP('+i+')">📄 Генерировать КП</button>';
     html += '<button class="btn-red" style="padding:8px 10px;min-width:110px" onclick="changeLeadStatus('+i+',\'ответил\')">Ответил</button>';
+    html += '<button style="padding:8px 10px;background:transparent;border:1px solid #1A9655;border-radius:3px;color:#1A9655;font-size:10px;font-weight:700;cursor:pointer" onclick="addLeadToCRM('+i+')">➕ В CRM</button>';
     html += '<button style="padding:8px 6px;background:#E74C3C;border:none;border-radius:3px;color:#fff;font-size:10px;font-weight:700;cursor:pointer" onclick="deleteLead('+i+')">🗑 Удалить</button>';
     html += '</div>';
     html += '</div>';
@@ -1057,7 +1085,145 @@ function closeLeadKP(){
   document.getElementById('lead-kp-modal').style.display = 'none';
   document.getElementById('lead-kp-body').innerHTML='';
 }
+
+// ── ДОБАВИТЬ ЛИД В CRM ──
+function addLeadToCRM(index){
+  var lead = getFilteredLeads()[index];
+  if(!lead) return;
+  // Проверяем дубль
+  for(var i=0;i<CLIENTS.length;i++){
+    if(CLIENTS[i].name.toLowerCase()===lead.company_name.toLowerCase()){
+      showToast('Уже есть в CRM'); return;
+    }
+  }
+  var segToType = {HoReCa:'HoReCa', Ритейл:'Ритейл', Производство:'Производство', Логистика:'Логистика', Разные:'B2B'};
+  CLIENTS.push({
+    id: nextId(),
+    name: lead.company_name,
+    contact: lead.lpr || '—',
+    city: '—',
+    type: segToType[lead.segment] || lead.segment || 'B2B',
+    stage: 'первый контакт',
+    pkg: 'Пакет 2 — Оптимум',
+    potential: 250000,
+    priority: (lead.score && lead.score >= 8) ? 'high' : (lead.score && lead.score >= 5) ? 'medium' : 'low',
+    notes: (lead.pain || '') + (lead.phone && lead.phone !== 'требует уточнения' ? '\nТел: ' + lead.phone : '')
+  });
+  saveClients();
+  // Меняем статус лида
+  changeLeadStatus(index, 'написали');
+  // Переключаем на CRM
+  switchTab('crm');
+  selId = CLIENTS[CLIENTS.length - 1].id;
+  renderStats(); renderFilters(); renderCards(); renderDet();
+  showToast('Добавлен в CRM: ' + lead.company_name);
+}
+
+// ── БЫСТРЫЙ ВЫБОР В ГЕНЕРАТОРЕ КП ──
+function renderKPQuickLeads(){
+  var el = document.getElementById('kp-quick-leads');
+  if(!el) return;
+  var hot = LEADS.filter(function(l){ return l.score && l.score >= 8; }).slice(0,5);
+  if(!hot.length){
+    el.innerHTML = '';
+    return;
+  }
+  var html = '<div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#D4A017;margin-bottom:8px">🔥 Горячие лиды — быстрый выбор</div>';
+  for(var i=0;i<hot.length;i++){
+    var l = hot[i];
+    html += '<button class="ql-btn" onclick="fillKPFromLead('+LEADS.indexOf(l)+')">';
+    html += '<span style="color:#D4A017;font-weight:800">' + l.company_name + '</span>';
+    html += ' <span style="color:#6B7FA0;font-size:9px">' + (l.segment||'') + ' · скор ' + l.score + '</span>';
+    html += '</button>';
+  }
+  el.innerHTML = html;
+}
+function fillKPFromLead(leadsIndex){
+  var lead = LEADS[leadsIndex];
+  if(!lead) return;
+  document.getElementById('kp-client').value = lead.company_name || '';
+  document.getElementById('kp-contact').value = lead.lpr || '';
+  document.getElementById('kp-type').value = lead.segment || '';
+  document.getElementById('kp-pain').value = lead.pain || '';
+  document.getElementById('kp-city').value = '';
+  showToast('Заполнено из лида: ' + lead.company_name);
+}
+
+// ── СПИСОК ЛИДОВ ДЛЯ ЗВОНКОВ ──
+function renderCallLeads(){
+  var el = document.getElementById('call-leads-list');
+  if(!el) return;
+  var segFilter = document.getElementById('call-filter-seg').value;
+  var statusFilter = document.getElementById('call-filter-status').value;
+  var list = LEADS.filter(function(l){
+    var hasPhone = l.phone && l.phone !== 'требует уточнения';
+    var okSeg = !segFilter || l.segment === segFilter;
+    var okStatus = !statusFilter || l.response === statusFilter;
+    return hasPhone && okSeg && okStatus;
+  });
+  // Сортировка: горячие первые
+  list.sort(function(a,b){ return (b.score||0) - (a.score||0); });
+  if(!list.length){
+    el.innerHTML = '<div style="color:#6B7FA0;font-size:12px;padding:10px 0">Нет лидов с телефонами по фильтрам</div>';
+    return;
+  }
+  var html = '';
+  for(var i=0;i<list.length;i++){
+    var l = list[i];
+    var sc2 = l.score || 0;
+    var scColor = sc2>=8?'#E74C3C':sc2>=5?'#D68910':'#4A5568';
+    var scLabel = sc2>=8?'🔥':'';
+    var origIdx = LEADS.indexOf(l);
+    html += '<div class="call-lead-row">';
+    html += '<div class="call-lead-name">' + scLabel + ' ' + l.company_name + '</div>';
+    html += '<div class="call-lead-meta">' + (l.lpr||'—') + '<br><span style="color:' + scColor + ';font-weight:700;font-size:9px">' + (l.segment||'') + ' · ' + sc2 + '</span></div>';
+    html += '<div class="call-lead-phone">' + l.phone + '</div>';
+    html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+    html += '<button class="btn-call" onclick="callLead(' + origIdx + ')">📞 Позвонить</button>';
+    html += '<button class="btn-script" onclick="openCallScript(' + origIdx + ')">📋 Скрипт</button>';
+    html += '</div>';
+    html += '</div>';
+  }
+  el.innerHTML = html;
+}
+function callLead(index){
+  var lead = LEADS[index];
+  if(!lead) return;
+  navigator.clipboard.writeText(lead.phone).then(function(){
+    showToast('Номер скопирован: ' + lead.phone);
+  }).catch(function(){
+    showToast(lead.phone);
+  });
+  changeLeadStatus(index, 'написали');
+  renderCallLeads();
+}
+function openCallScript(index){
+  var lead = LEADS[index];
+  if(!lead) return;
+  var prompt = 'звоню в ' + lead.company_name;
+  var body = document.getElementById('call-script-body');
+  body.innerHTML = '<div style="font-size:12px;color:#6B7FA0;margin-bottom:8px">Отправь этот текст в Jarvis — он подготовит скрипт звонка:</div>' +
+    '<div class="resbox" id="call-script-text" style="font-size:13px;font-weight:700;color:#D68910">' + prompt + '</div>' +
+    '<div style="margin-top:10px;font-size:11px;color:#6B7FA0">Компания: <b style="color:#fff">' + lead.company_name + '</b><br>' +
+    'ЛПР: ' + (lead.lpr||'—') + ' · ' + (lead.segment||'') + '<br>Телефон: ' + lead.phone + '</div>';
+  document.getElementById('call-script-modal').style.display = 'block';
+}
+function closeCallScript(){
+  document.getElementById('call-script-modal').style.display = 'none';
+}
 </script>
+
+<!-- CALL SCRIPT MODAL -->
+<div id="call-script-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:300;overflow-y:auto;padding:20px 14px" onclick="if(event.target===this)closeCallScript()">
+  <div style="background:#111827;border:1px solid #D68910;border-radius:8px;padding:20px;max-width:500px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#D68910">📞 Скрипт для Jarvis</span>
+      <button onclick="closeCallScript()" style="background:transparent;border:none;color:#6B7FA0;font-size:18px;cursor:pointer;line-height:1">✕</button>
+    </div>
+    <div id="call-script-body"></div>
+    <button class="copybtn" style="margin-top:10px;width:100%;text-align:center" onclick="copyText('call-script-text')">Скопировать для Jarvis</button>
+  </div>
+</div>
 
 <!-- LEAD KP MODAL -->
 <div id="lead-kp-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:300;overflow-y:auto;padding:20px 14px" onclick="if(event.target===this)closeLeadKP()">
