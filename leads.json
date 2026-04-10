@@ -1,1 +1,77 @@
-[]
+[
+  {
+    "id": "2026-04-10-0001",
+    "name": "Москва, дом русского бильярда",
+    "phone": "+74951839777",
+    "site": "http://moskva-dom.com",
+    "city": "москва",
+    "category": "Рестораны",
+    "score": 8,
+    "priority": "высокий",
+    "comment": "есть сайт",
+    "source": "2gis",
+    "first_touch": "",
+    "date": "2026-04-10",
+    "status": "новый"
+  },
+  {
+    "id": "2026-04-10-0003",
+    "name": "Москва, ресторан",
+    "phone": "+74956658473",
+    "site": "http://cinema.moscow/restaurant",
+    "city": "москва",
+    "category": "Рестораны",
+    "score": 8,
+    "priority": "высокий",
+    "comment": "есть сайт",
+    "source": "2gis",
+    "first_touch": "",
+    "date": "2026-04-10",
+    "status": "новый"
+  },
+  {
+    "id": "2026-04-10-0005",
+    "name": "Москва, ресторан",
+    "phone": "+74957867373",
+    "site": "http://holidayinnsokolniki.ru/restaurants/restoran-moskva/",
+    "city": "москва",
+    "category": "Рестораны",
+    "score": 8,
+    "priority": "высокий",
+    "comment": "есть сайт",
+    "source": "2gis",
+    "first_touch": "",
+    "date": "2026-04-10",
+    "status": "новый"
+  },
+  {
+    "id": "2026-04-10-0007",
+    "name": "Мясо&Рыба, ресторан",
+    "phone": "+79164952569",
+    "site": "http://meat-and-fish.ru",
+    "city": "москва",
+    "category": "Рестораны",
+    "score": 9,
+    "priority": "высокий",
+    "comment": "1197 отзывов; есть сайт",
+    "source": "2gis",
+    "first_touch": "",
+    "date": "2026-04-10",
+    "status": "новый"
+  },
+  {
+    "id": "2026-04-10-0009",
+    "name": "Мята Platinum Павелецкая, лаундж-бар",
+    "phone": "+79957359999",
+    "site": "http://myataofficial.com",
+    "city": "москва",
+    "category": "Рестораны",
+    "score": 9,
+    "priority": "высокий",
+    "comment": "667 отзывов; есть сайт",
+    "source": "2gis",
+    "first_touch": "",
+    "date": "2026-04-10",
+    "status": "новый"
+  }
+]
