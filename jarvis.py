@@ -410,6 +410,7 @@ def route_to_agent(user_text, claude_client, model):
             ]
         )
         agent_name = response.content[0].text.strip().lower()
+        _log_token_usage(response, model)
         return agent_name if agent_name in ALL_AGENTS else "none"
     except Exception as _exc:
         _live_log.exception("[route_to_agent] unhandled exception")
@@ -657,6 +658,7 @@ def process_with_agent(user_text, history, claude_client, model):
 
         response = claude_client.messages.create(**kwargs)
         reply = response.content[0].text.strip()
+        _log_token_usage(response, kwargs.get('model', model))
 
         # Сохраняем в эстафету
         _save_session_entry(agent_name, user_text, reply)
@@ -672,6 +674,7 @@ def process_with_agent(user_text, history, claude_client, model):
             try:
                 response = claude_client.messages.create(**kwargs)
                 reply = response.content[0].text.strip()
+                _log_token_usage(response, kwargs.get('model', model))
                 _save_session_entry(agent_name, user_text, reply)
                 return reply + _detect_chain_hint(agent_name, reply)
             except Exception as _exc:
@@ -698,6 +701,23 @@ _MODEL_COST   = {
     _HAIKU_MODEL:  {'in': 0.80e-6, 'out': 4.00e-6},
     _SONNET_MODEL: {'in': 3.00e-6, 'out': 15.00e-6},
 }
+
+def _log_token_usage(response, model_name: str) -> None:
+    """Log token usage and cost for a single API call to jarvis_live.log."""
+    try:
+        if response is None or not hasattr(response, 'usage') or response.usage is None:
+            return
+        inp = response.usage.input_tokens
+        out = response.usage.output_tokens
+        cost_info = _MODEL_COST.get(model_name, {'in': 3.00e-6, 'out': 15.00e-6})
+        cost = inp * cost_info['in'] + out * cost_info['out']
+        _live_log.info(
+            '[TOKEN] model=%s input=%d output=%d cost=$%.6f',
+            model_name, inp, out, cost,
+        )
+    except Exception:
+        pass
+
 _RESPONSE_CACHE: dict = {}
 _CACHE_MAX = 256
 
@@ -786,6 +806,7 @@ class ST8ModelRouter:
                 model, tokens_in, tokens_out, cost,
             )
             _cache_set(cache_key, resp)
+            _log_token_usage(resp, model)
             return resp
         return None
 
@@ -1248,6 +1269,7 @@ def call_agent(agent_name, user_message, history, client_memory=None, prefix='',
             messages=messages,
         )
         result = response.content[0].text.strip()
+        _log_token_usage(response, CLAUDE_MODEL)
         agent_short = agent_name.replace('st8-', '').replace('-', ' ').title()
         return agent_short, result
     except Exception as exc:
@@ -1410,7 +1432,9 @@ def generate_jarvis_text(prompt):
             model=CLAUDE_MODEL, max_tokens=400,
             messages=[{"role": "user", "content": prompt}],
         )
-        return response.content[0].text.strip()
+        _text = response.content[0].text.strip()
+        _log_token_usage(response, CLAUDE_MODEL)
+        return _text
     except Exception as exc:
         return f"Jarvis generation failed: {exc}"
 
@@ -1553,7 +1577,9 @@ def generate_smart_response(user_message, history):
             model=CLAUDE_MODEL, max_tokens=600,
             system=system_prompt, messages=messages,
         )
-        return response.content[0].text.strip()
+        _text = response.content[0].text.strip()
+        _log_token_usage(response, CLAUDE_MODEL)
+        return _text
     except Exception as exc:
         return f"РћС€РёР±РєР° Claude: {exc}"
 
@@ -1668,7 +1694,9 @@ def _generate_followup_text(company_name, lpr):
             model=CLAUDE_MODEL, max_tokens=150,
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.content[0].text.strip()
+        _text = response.content[0].text.strip()
+        _log_token_usage(response, CLAUDE_MODEL)
+        return _text
     except Exception as exc:
         return f"(РѕС€РёР±РєР°: {exc})"
 
@@ -1847,6 +1875,7 @@ def cmd_call_prep(user_message):
             messages=[{"role": "user", "content": prompt}]
         )
         script = response.content[0].text.strip()
+        _log_token_usage(response, CLAUDE_MODEL)
     except Exception as exc:
         script = f"РћС€РёР±РєР°: {exc}"
     return f"рџ\"ћ РЎРєСЂРёРїС‚ Р·РІРѕРЅРєР° — {company_name}\nР›РџР : {lpr} | {segment}\n\n{script}"
@@ -1887,6 +1916,7 @@ def extract_lead_data(text: str) -> dict:
             messages=[{"role": "user", "content": prompt}]
         )
         result = response.content[0].text.strip()
+        _log_token_usage(response, 'claude-haiku-4-5-20251001')
         if result.startswith('```'):
             result = result.split('```')[1]
             if result.startswith('json'): result = result[4:]
