@@ -15,7 +15,7 @@ picks the right model before hitting the API. Phase 2 layers per-call token metr
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Smart Routing Core** - @smart_route decorator and ROUTING_RULES config wired into jarvis.py
+- [x] **Phase 1: Smart Routing Core** - @smart_route decorator and ROUTING_RULES config wired into jarvis.py (completed 2026-04-15)
 - [ ] **Phase 2: Token Metrics** - Per-call cost logging and /stats Telegram command
 
 ## Phase Details
@@ -30,11 +30,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. An ambiguous message (medium length, no clear complexity signal) falls through to the existing ST8ModelRouter quality cascade unchanged
   4. Changing ROUTING_RULES_HAIKU_MAX_TOKENS and ROUTING_RULES_SONNET_KEYWORDS in .env alters routing behavior without any code change
   5. jarvis.py passes a syntax check (python -m py_compile jarvis.py) and the bot starts cleanly after changes
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 01-01-PLAN.md -- Routing config (.env) and _pick_model + smart_route functions in jarvis.py
-- [ ] 01-02-PLAN.md -- Wire smart_route onto process_with_agent and verify all routing paths
+- [x] 01-01-PLAN.md -- Routing config (.env) and _pick_model + smart_route functions in jarvis.py
+- [x] 01-02-PLAN.md -- Wire smart_route onto process_with_agent and verify all routing paths
 
 **UI hint**: no
 
@@ -55,5 +55,5 @@ Phases execute in numeric order: 1 → 2
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Smart Routing Core | 0/2 | Planned | - |
+| 1. Smart Routing Core | 2/2 | Complete   | 2026-04-15 |
 | 2. Token Metrics | 0/? | Not started | - |
