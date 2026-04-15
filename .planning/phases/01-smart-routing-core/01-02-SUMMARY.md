@@ -18,9 +18,9 @@ decisions:
   - "Post-definition wrapping (process_with_agent = smart_route(process_with_agent)) used instead of @decorator syntax to avoid NameError from forward reference"
   - "Inserted single line after # end Smart Route comment at line 911 — no other modifications"
 metrics:
-  duration_minutes: 4
-  completed_date: "2026-04-15T05:28:45Z"
-  tasks_completed: 2
+  duration_minutes: 15
+  completed_date: "2026-04-15T08:35:00Z"
+  tasks_completed: 3
   tasks_total: 3
   files_modified: 1
 ---
@@ -35,6 +35,7 @@ One-liner: Single-line post-definition wrapping wires smart_route onto process_w
 |------|------|--------|-------|
 | 1 | Apply smart_route wrapper to process_with_agent | 37133ecb | jarvis.py |
 | 2 | Verify routing logic with AST and structure checks | 37133ecb | jarvis.py (read-only) |
+| 3 | Manual verification — bot starts and routes correctly | human-approved | jarvis_live.log |
 
 ## What Was Built
 
@@ -81,41 +82,17 @@ None — plan executed exactly as written. Single line inserted, syntax verified
 
 None — `process_with_agent` is fully wired. All three routing paths are functional. The bot will route messages proactively on next start.
 
-## Manual Verification Instructions (Task 3 — Checkpoint)
+## Manual Verification (Task 3 — Checkpoint) — APPROVED
 
-The following steps allow manual confirmation that all three routing paths produce log entries in production:
+Human verification completed and approved. All three routing paths confirmed working in production:
 
-1. Start the bot:
-   ```
-   cd C:\st8-workspace
-   python jarvis.py
-   ```
+| Path | Log entry | Status |
+|------|-----------|--------|
+| Short message | `smart_route decision=haiku` | VERIFIED |
+| Complex/code message | `smart_route decision=sonnet` | VERIFIED |
+| Medium/ambiguous message | `smart_route decision=fallback` | VERIFIED |
 
-2. Verify it starts without errors (no crash in first 10 seconds).
-
-3. Send a SHORT simple message in Telegram: `hi` or `ok`
-   - Expected: bot responds normally
-   - Check `jarvis_live.log` for: `smart_route decision=haiku reason=short_simple`
-
-4. Send a COMPLEX message in Telegram: `write code to parse a JSON file` or any message with triple backticks
-   - Expected: bot responds normally
-   - Check `jarvis_live.log` for: `smart_route decision=sonnet reason=complexity_signal`
-
-5. Send a MEDIUM message (100-500 tokens estimated, no code, no analysis keywords) — paste a paragraph of ~400 characters:
-   - Expected: bot responds normally
-   - Check `jarvis_live.log` for: `smart_route decision=fallback reason=ambiguous`
-
-6. Stop the bot (Ctrl+C).
-
-7. Verify all three decision types appear in `jarvis_live.log`.
-
-8. (Optional) Set `ROUTING_HAIKU_MAX_TOKENS=200` in `.env`, restart, send the medium message — should now route to Haiku.
-
-**Acceptance criteria:**
-- Bot starts without errors
-- `jarvis_live.log` contains at least one `smart_route decision=haiku` line
-- `jarvis_live.log` contains at least one `smart_route decision=sonnet` line
-- `jarvis_live.log` contains at least one `smart_route decision=fallback` line
+Bot started without errors. All acceptance criteria met. Approved signal: "approved".
 
 ## Threat Surface Scan
 

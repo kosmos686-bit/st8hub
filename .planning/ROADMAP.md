@@ -46,7 +46,13 @@ Plans:
   1. After any message that triggers a Claude API call, jarvis_live.log contains a line with model name, input tokens, output tokens, and estimated cost in USD
   2. Sending /stats to the Telegram bot returns a summary showing total calls, total tokens (input + output), and total cost for the current calendar day (MSK timezone)
   3. The /stats response correctly groups costs by model (Haiku vs Sonnet) so the routing savings are visible
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md -- _log_token_usage helper and hook all client.messages.create call sites
+- [ ] 02-02-PLAN.md -- /stats command: log parser, aggregator, Telegram handler
+
+**UI hint**: no
 
 ## Progress
 
@@ -56,4 +62,4 @@ Phases execute in numeric order: 1 → 2
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Smart Routing Core | 2/2 | Complete   | 2026-04-15 |
-| 2. Token Metrics | 0/? | Not started | - |
+| 2. Token Metrics | 0/2 | Not started | - |
