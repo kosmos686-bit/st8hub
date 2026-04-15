@@ -16,7 +16,7 @@
 ### Metrics
 
 - [x] **METRIC-01**: Каждый вызов модели логирует: имя модели, input tokens, output tokens, cost $ в `jarvis_live.log`
-- [ ] **METRIC-02**: Команда `/stats` в Telegram возвращает агрегированную сводку за текущий день (кол-во вызовов, токены, сумма расходов по моделям)
+- [x] **METRIC-02**: Команда `/stats` в Telegram возвращает агрегированную сводку за текущий день (кол-во вызовов, токены, сумма расходов по моделям)
 
 ## v2 Requirements (Future)
 
@@ -49,7 +49,7 @@
 | ROUTE-04 | Phase 1 | Complete |
 | ROUTE-05 | Phase 1 | Complete |
 | METRIC-01 | Phase 2 | Complete |
-| METRIC-02 | Phase 2 | Pending |
+| METRIC-02 | Phase 2 | Complete |
 
 **Coverage:**
 - v1.0 requirements: 7 total

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md — _log_token_usage helper and all 10 call sites hooked
-last_updated: "2026-04-15T06:03:38.142Z"
+stopped_at: Completed 02-02-PLAN.md — /stats command and _parse_token_stats added
+last_updated: "2026-04-15T06:06:44.506Z"
 last_activity: 2026-04-15 — Completed 01-01 smart routing config and _pick_model (commit fddbf183)
 progress:
   total_phases: 2
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
-  percent: 75
+  completed_plans: 4
+  percent: 100
 ---
 
 # Project State
@@ -52,6 +52,7 @@ Progress: [█████░░░░░] 50%
 *Updated after each plan completion*
 | Phase 01-smart-routing-core P02 | 4 | 2 tasks | 1 files |
 | Phase 02-token-metrics P01 | 12 | 2 tasks | 1 files |
+| Phase 02-token-metrics P02 | 5 | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - v1.0 init: ROUTING_RULES configurable in .env (no deploy needed to tune thresholds)
 - [Phase 01-smart-routing-core]: Post-definition wrapping used to wire smart_route onto process_with_agent (avoids forward-reference NameError)
 - [Phase 02-token-metrics]: Insert _log_token_usage after _MODEL_COST dict; fallback to Sonnet pricing for unknown models; ST8ModelRouter keeps existing log line and adds [TOKEN] line for /stats parser
+- [Phase 02-token-metrics]: C:/Program Files/Git/stats dispatch placed before weather check so it never consumes Claude tokens
+- [Phase 02-token-metrics]: All Cyrillic in _parse_token_stats uses \uXXXX escapes (mojibake-safe)
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-15T06:03:38.132Z
-Stopped at: Completed 02-01-PLAN.md — _log_token_usage helper and all 10 call sites hooked
+Last session: 2026-04-15T06:06:44.501Z
+Stopped at: Completed 02-02-PLAN.md — /stats command and _parse_token_stats added
 Resume file: None

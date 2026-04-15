@@ -16,7 +16,7 @@ picks the right model before hitting the API. Phase 2 layers per-call token metr
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Smart Routing Core** - @smart_route decorator and ROUTING_RULES config wired into jarvis.py (completed 2026-04-15)
-- [ ] **Phase 2: Token Metrics** - Per-call cost logging and /stats Telegram command
+- [x] **Phase 2: Token Metrics** - Per-call cost logging and /stats Telegram command (completed 2026-04-15)
 
 ## Phase Details
 
@@ -46,11 +46,11 @@ Plans:
   1. After any message that triggers a Claude API call, jarvis_live.log contains a line with model name, input tokens, output tokens, and estimated cost in USD
   2. Sending /stats to the Telegram bot returns a summary showing total calls, total tokens (input + output), and total cost for the current calendar day (MSK timezone)
   3. The /stats response correctly groups costs by model (Haiku vs Sonnet) so the routing savings are visible
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md -- _log_token_usage helper and hook all client.messages.create call sites
-- [ ] 02-02-PLAN.md -- /stats command: log parser, aggregator, Telegram handler
+- [x] 02-02-PLAN.md -- /stats command: log parser, aggregator, Telegram handler
 
 **UI hint**: no
 
@@ -62,4 +62,4 @@ Phases execute in numeric order: 1 → 2
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Smart Routing Core | 2/2 | Complete   | 2026-04-15 |
-| 2. Token Metrics | 1/2 | In Progress|  |
+| 2. Token Metrics | 2/2 | Complete   | 2026-04-15 |
