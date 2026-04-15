@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 1 complete — all 5 routing requirements verified in production
-last_updated: "2026-04-15T08:40:00Z"
+stopped_at: Completed 02-01-PLAN.md — _log_token_usage helper and all 10 call sites hooked
+last_updated: "2026-04-15T06:03:38.142Z"
 last_activity: 2026-04-15 — Completed 01-01 smart routing config and _pick_model (commit fddbf183)
 progress:
   total_phases: 2
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
-  percent: 100
+  total_plans: 4
+  completed_plans: 3
+  percent: 75
 ---
 
 # Project State
@@ -51,6 +51,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 01-smart-routing-core P02 | 4 | 2 tasks | 1 files |
+| Phase 02-token-metrics P01 | 12 | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,7 @@ Recent decisions affecting current work:
 - v1.0 init: Metrics written to jarvis_live.log (existing handler, no new deps)
 - v1.0 init: ROUTING_RULES configurable in .env (no deploy needed to tune thresholds)
 - [Phase 01-smart-routing-core]: Post-definition wrapping used to wire smart_route onto process_with_agent (avoids forward-reference NameError)
+- [Phase 02-token-metrics]: Insert _log_token_usage after _MODEL_COST dict; fallback to Sonnet pricing for unknown models; ST8ModelRouter keeps existing log line and adds [TOKEN] line for /stats parser
 
 ### Pending Todos
 
@@ -91,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-15T08:40:00Z
-Stopped at: Phase 1 complete — human verification approved, all 3 routing paths confirmed in production. ROUTE-02/03/04 marked complete. Ready for Phase 2 (Token Metrics).
+Last session: 2026-04-15T06:03:38.132Z
+Stopped at: Completed 02-01-PLAN.md — _log_token_usage helper and all 10 call sites hooked
 Resume file: None

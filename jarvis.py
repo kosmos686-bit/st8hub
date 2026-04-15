@@ -2039,6 +2039,55 @@ async def extract_file_text(bot, message):
         os.unlink(path)
 
 
+def _parse_token_stats() -> str:
+    """Parse jarvis_live.log for [TOKEN] lines, aggregate today (MSK) by model."""
+    today_str = now_moscow().strftime('%Y-%m-%d')
+    log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'jarvis_live.log')
+    stats: dict = {}  # model -> {calls, inp, out, cost}
+    try:
+        with open(log_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if '[TOKEN]' not in line:
+                    continue
+                # Line format: "2026-04-15 12:34:56,789 [TOKEN] model=X input=N output=N cost=$N"
+                if not line.startswith(today_str):
+                    continue
+                parts = {}
+                for segment in line.split():
+                    if '=' in segment:
+                        k, v = segment.split('=', 1)
+                        parts[k] = v
+                model = parts.get('model', 'unknown')
+                try:
+                    inp = int(parts.get('input', '0'))
+                    out = int(parts.get('output', '0'))
+                    cost = float(parts.get('cost', '$0').lstrip('$'))
+                except (ValueError, TypeError):
+                    continue
+                if model not in stats:
+                    stats[model] = {'calls': 0, 'inp': 0, 'out': 0, 'cost': 0.0}
+                stats[model]['calls'] += 1
+                stats[model]['inp'] += inp
+                stats[model]['out'] += out
+                stats[model]['cost'] += cost
+    except FileNotFoundError:
+        pass
+    if not stats:
+        return '\U0001f4ca ' + today_str + ' \u2014 \u043d\u0435\u0442 \u0432\u044b\u0437\u043e\u0432\u043e\u0432 API \u0441\u0435\u0433\u043e\u0434\u043d\u044f'
+    lines = ['\U0001f4ca \u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430 \u0442\u043e\u043a\u0435\u043d\u043e\u0432 \u2014 ' + today_str + ' \u041c\u0421\u041a\n']
+    grand_total = 0.0
+    for model_name in sorted(stats):
+        s = stats[model_name]
+        grand_total += s['cost']
+        lines.append(f"{model_name}:")
+        lines.append(f"  \u0412\u044b\u0437\u043e\u0432\u044b: {s['calls']}")
+        lines.append(f"  \u0422\u043e\u043a\u0435\u043d\u044b: {s['inp']:,} / {s['out']:,} (in/out)")
+        lines.append(f"  \u0421\u0442\u043e\u0438\u043c\u043e\u0441\u0442\u044c: ${s['cost']:.4f}\n")
+    lines.append('\u2500' * 20)
+    lines.append(f"\u0418\u0442\u043e\u0433\u043e \u0441\u0435\u0433\u043e\u0434\u043d\u044f: ${grand_total:.4f}")
+    return '\n'.join(lines)
+
+
 # в"Ђв"Ђв"Ђ Polling в"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђ
 
 async def poll_jarvis():
@@ -2068,7 +2117,9 @@ async def poll_jarvis():
                     continue
                 history = load_memory()
                 # Погода — отвечаем напрямую, не отдаём в Claude
-                if _is_weather_question(user_text):
+                if user_text.strip().lower().startswith('/stats'):
+                    reply = _parse_token_stats()
+                elif _is_weather_question(user_text):
                     reply = get_moscow_weather()
                 else:
                     reply = process_with_agent(user_text, history, claude_client, CLAUDE_MODEL)
