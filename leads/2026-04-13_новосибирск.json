@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Sabai, ресторан",
+    "address": "улица Щетинкина, 18",
+    "phone": "+79232246719",
+    "category": "Рестораны",
+    "city": "новосибирск",
+    "email": "sabaibarnsk@gmail.com",
+    "website": "http://sabaibar.ru",
+    "rating": 0.0,
+    "reviews": 1467,
+    "source": "2gis"
+  },
+  {
+    "name": "Бочкари, бар-ресторан",
+    "address": "улица Челюскинцев, 21",
+    "phone": "+73832496565",
+    "category": "Рестораны",
+    "city": "новосибирск",
+    "email": "bochkari-group@mail.ru",
+    "website": "http://bochkari-group.ru",
+    "rating": 0.0,
+    "reviews": 1510,
+    "source": "2gis"
+  },
+  {
+    "name": "БонАпарт, апарт-отель",
+    "address": "Ядринцевская улица, 71",
+    "phone": "+79607933090",
+    "category": "Гостиницы",
+    "city": "новосибирск",
+    "email": "info@bonapartnsk.ru",
+    "website": "http://bonapartnsk.ru",
+    "rating": 0.0,
+    "reviews": 815,
+    "source": "2gis"
+  },
+  {
+    "name": "Т-Сервис, офис",
+    "address": "улица Ватутина, 99",
+    "phone": "+79231317117",
+    "category": "Междугородные автогрузоперевозки",
+    "city": "новосибирск",
+    "email": "company@t-servis.com",
+    "website": "http://t-servis.com",
+    "rating": 0.0,
+    "reviews": 11,
+    "source": "2gis"
+  },
+  {
+    "name": "Рабочий Стандарт 54, компания услуг грузчиков, аутсорсинга персонала и грузоперевозок",
+    "address": "Зыряновская улица, 53",
+    "phone": "+73833885528",
+    "category": "Городские автогрузоперевозки",
+    "city": "новосибирск",
+    "email": "nsk@working-standart.ru",
+    "website": "http://nsk.working-standart.ru",
+    "rating": 0.0,
+    "reviews": 7,
+    "source": "2gis"
+  }
+]

@@ -1,0 +1,8 @@
+wing: kp
+rooms:
+- name: frontend
+  description: Files related to frontend
+- name: backend
+  description: Files related to backend
+- name: team
+  description: Files related to team

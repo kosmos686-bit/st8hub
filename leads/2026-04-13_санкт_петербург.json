@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Чайхона, ресторан",
+    "address": "16-я линия В.О., 83",
+    "phone": "+78129283383",
+    "category": "Кафе",
+    "city": "санкт-петербург",
+    "email": "",
+    "website": "http://chaihonaspb.ru",
+    "rating": 0.0,
+    "reviews": 443,
+    "source": "2gis"
+  },
+  {
+    "name": "Lounge Room, сеть лаундж-баров",
+    "address": "Садовая улица, 11",
+    "phone": "+78129989846",
+    "category": "Кафе",
+    "city": "санкт-петербург",
+    "email": "loungeroom_avia@inbox.ru",
+    "website": "http://lounge-room.ru/",
+    "rating": 0.0,
+    "reviews": 932,
+    "source": "2gis"
+  },
+  {
+    "name": "Piter inn, отель",
+    "address": "набережная реки Фонтанки, 130а",
+    "phone": "+78126407272",
+    "category": "Гостиницы",
+    "city": "санкт-петербург",
+    "email": "olga@piterinn.spb.ru",
+    "website": "http://piterinn.spb.ru",
+    "rating": 0.0,
+    "reviews": 88,
+    "source": "2gis"
+  },
+  {
+    "name": "Anima Infinita Packaging SPb",
+    "address": "Свободы, 59 к2",
+    "phone": "+78123362637",
+    "category": "Упаковочные материалы",
+    "city": "санкт-петербург",
+    "email": "",
+    "website": "",
+    "rating": 0.0,
+    "reviews": 0,
+    "source": "2gis"
+  }
+]

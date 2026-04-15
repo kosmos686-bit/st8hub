@@ -1,0 +1,30 @@
+Jarvis polling запущен в фоне.
+Scheduler запущен. Ожидание задач...
+[Jarvis] Polling Р·Р°РїСѓС‰РµРЅ. Offset: 165873501
+Запуск поиска производство и логистика лидов...
+[search_leads:production] Запросы: ['завод фабрика Самара генеральный директор контакты', 'пищевое производство Краснодар директор контакты телефон', 'производственный холдинг Красноярск директор официальный сайт']
+Traceback (most recent call last):
+  File "C:\st8-workspace\scheduler.py", line 1335, in <module>
+    schedule.run_pending()
+  File "C:\st8-workspace\.venv\Lib\site-packages\schedule\__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+  File "C:\st8-workspace\.venv\Lib\site-packages\schedule\__init__.py", line 101, in run_pending
+    self._run_job(job)
+  File "C:\st8-workspace\.venv\Lib\site-packages\schedule\__init__.py", line 173, in _run_job
+    ret = job.run()
+          ^^^^^^^^^
+  File "C:\st8-workspace\.venv\Lib\site-packages\schedule\__init__.py", line 691, in run
+    ret = self.job_func()
+          ^^^^^^^^^^^^^^^
+  File "C:\st8-workspace\scheduler.py", line 1132, in job_production_logistics
+    leads_prod = search_leads("production", 20)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\st8-workspace\scheduler.py", line 302, in search_leads
+    response = tavily_client.search(query=query, max_results=num_leads)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\st8-workspace\.venv\Lib\site-packages\tavily\tavily.py", line 170, in search
+    response_dict = self._search(query,
+                    ^^^^^^^^^^^^^^^^^^^
+  File "C:\st8-workspace\.venv\Lib\site-packages\tavily\tavily.py", line 135, in _search
+    raise ForbiddenError(detail)
+tavily.errors.ForbiddenError: This request exceeds your plan's set usage limit. Please upgrade your plan or contact support@tavily.com

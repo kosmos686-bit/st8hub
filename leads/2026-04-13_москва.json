@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Турандот, ресторан паназиатской кухни с дворцовым интерьером",
+    "address": "Тверской бульвар, 26",
+    "phone": "+74957390011",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "welcome@turandot-palace.ru",
+    "website": "http://turandot-palace.ru",
+    "rating": 0.0,
+    "reviews": 1240,
+    "source": "2gis"
+  },
+  {
+    "name": "Uhvat, ресторан русской печной кухни",
+    "address": "Рочдельская улица, 15 ст41",
+    "phone": "+79771255177",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "info@uhvat.restaurant",
+    "website": "http://uhvat.restaurant",
+    "rating": 0.0,
+    "reviews": 160,
+    "source": "2gis"
+  },
+  {
+    "name": "Каспийка, рыбный ресторан",
+    "address": "улица Богданова, 52а",
+    "phone": "+79057340888",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "",
+    "website": "http://tanukifamily.ru/kaspiika/?utm_source=2gis_web&utm_medium=cpp&utm_campaign=kaspiyka",
+    "rating": 0.0,
+    "reviews": 415,
+    "source": "2gis"
+  },
+  {
+    "name": "Пироги Вино и Гусь, ресторан",
+    "address": "Цветной бульвар, 23 ст1",
+    "phone": "+74992720922",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "info@pvgoose.com",
+    "website": "http://pvgoose.com",
+    "rating": 0.0,
+    "reviews": 138,
+    "source": "2gis"
+  },
+  {
+    "name": "Soluxe Hotel Moscow, гостиница",
+    "address": "улица Вильгельма Пика, 16",
+    "phone": "+74951391818",
+    "category": "Гостиницы",
+    "city": "москва",
+    "email": "info@soluxehotelmoscow.com",
+    "website": "http://soluxehotelmoscow.com",
+    "rating": 0.0,
+    "reviews": 179,
+    "source": "2gis"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Has Kebab HalalFood, кафе-халяль",
+    "address": "улица Куйбышева, 48",
+    "phone": "+79126183366",
+    "category": "Кафе",
+    "city": "екатеринбург",
+    "email": "pizzahas@yandex.ru",
+    "website": "http://haskebab.ru",
+    "rating": 0.0,
+    "reviews": 67,
+    "source": "2gis"
+  },
+  {
+    "name": "Есть Хинкали, грузинское бистро",
+    "address": "проспект Ленина, 26",
+    "phone": "+79120500392",
+    "category": "Кафе",
+    "city": "екатеринбург",
+    "email": "est.khinkali@mail.ru",
+    "website": "http://bistroestkhinkali.artrest.band",
+    "rating": 0.0,
+    "reviews": 598,
+    "source": "2gis"
+  },
+  {
+    "name": "Кемпинг на тракте, кафе",
+    "address": "Челябинский тракт 18 километр, 2",
+    "phone": "+79536064449",
+    "category": "Кафе",
+    "city": "екатеринбург",
+    "email": "hotel_na_trakte@mail.ru",
+    "website": "http://bookonline24.ru/gostinica-kemping",
+    "rating": 0.0,
+    "reviews": 3,
+    "source": "2gis"
+  },
+  {
+    "name": "Kebabra, турецкое бистро",
+    "address": "Шарташская улица, 8",
+    "phone": "",
+    "category": "Кафе",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://kebabra.ru",
+    "rating": 0.0,
+    "reviews": 720,
+    "source": "2gis"
+  },
+  {
+    "name": "Dario, пиццерия",
+    "address": "Героев России, 2",
+    "phone": "+73432865026",
+    "category": "Кафе",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://dariopizza.ru",
+    "rating": 0.0,
+    "reviews": 321,
+    "source": "2gis"
+  },
+  {
+    "name": "Коматек, отель",
+    "address": "улица Кирова, 40Б",
+    "phone": "+73432875707",
+    "category": "Гостиницы",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://komatek-hotel.ru",
+    "rating": 0.0,
+    "reviews": 247,
+    "source": "2gis"
+  },
+  {
+    "name": "Магистраль, компания по организации междугородних переездов и перевозок",
+    "address": "",
+    "phone": "88007076893",
+    "category": "Междугородные автогрузоперевозки",
+    "city": "екатеринбург",
+    "email": "analitika@m-pereezd.ru",
+    "website": "http://переезд-в-другой-город.рф/iz-ekaterinburg?utm_source=2gis&utm_term=ekaterinburg",
+    "rating": 0.0,
+    "reviews": 1,
+    "source": "2gis"
+  }
+]

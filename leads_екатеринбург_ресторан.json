@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Сыроварня, семейный итальянский ресторан",
+    "address": "улица Дзержинского, 2",
+    "phone": "+73433434301",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "ekb@syrovarnya.com",
+    "website": "http://syrovarnya.com/restaurants/ekaterinburg",
+    "rating": 0.0,
+    "reviews": 3214
+  },
+  {
+    "name": "the Barbara, ресторан",
+    "address": "улица Бориса Ельцина, 6",
+    "phone": "+73432859999",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://barbara.rest",
+    "rating": 0.0,
+    "reviews": 577
+  },
+  {
+    "name": "Мама, ресторан",
+    "address": "Ильича, 47",
+    "phone": "+73433171717",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "rolldomoy@yandex.ru",
+    "website": "http://roll66.ru",
+    "rating": 0.0,
+    "reviews": 1004
+  },
+  {
+    "name": "Breadway, ресторан",
+    "address": "улица Бориса Ельцина, 6",
+    "phone": "+73432830880",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "bw.cafe@mail.ru",
+    "website": "http://dostavka.goodcom.rest",
+    "rating": 0.0,
+    "reviews": 723
+  },
+  {
+    "name": "РЫБАLOVE, ресторан",
+    "address": "улица 8 Марта, 46",
+    "phone": "+73433133377",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://rybalove.su",
+    "rating": 0.0,
+    "reviews": 4098
+  },
+  {
+    "name": "Tribu, ресторан",
+    "address": "улица Бориса Ельцина, 8",
+    "phone": "+79222267376",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "tribu.rest@mail.ru",
+    "website": "http://tribu.rest/",
+    "rating": 0.0,
+    "reviews": 124
+  },
+  {
+    "name": "Ресторан-дом для уральской кухни",
+    "address": "улица Ткачей, 23",
+    "phone": "+73432887748",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "info@kitchen23.org",
+    "website": "http://kitchen-doma.ru",
+    "rating": 0.0,
+    "reviews": 1119
+  },
+  {
+    "name": "Лес, ресторан",
+    "address": "Горнощитская территория, 7",
+    "phone": "+73433633100,,,310",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://юга.рф/restoran-les/",
+    "rating": 0.0,
+    "reviews": 11
+  },
+  {
+    "name": "ЧаЩа, ресторан",
+    "address": "Красноармейская улица, 68",
+    "phone": "+73432710506",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "chschrestibist@gmail.com",
+    "website": "http://chsch-rest.ru",
+    "rating": 0.0,
+    "reviews": 467
+  },
+  {
+    "name": "Olio, итальянский ресторан",
+    "address": "Розы Люксембург, 4",
+    "phone": "+79311058077",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "oliorest.ekb@gmail.com",
+    "website": "http://olio-rest.ru",
+    "rating": 0.0,
+    "reviews": 248
+  },
+  {
+    "name": "TomYumBar, сеть ресторанов паназиатской кухни",
+    "address": "улица Малышева, 44",
+    "phone": "+73433123454",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "tomyumbar44@mail.ru",
+    "website": "http://ekb.tomyumbar.ru",
+    "rating": 0.0,
+    "reviews": 892
+  },
+  {
+    "name": "Корова, ресторан мяса, рыбы и авторской кухни",
+    "address": "улица Бориса Ельцина, 6",
+    "phone": "+73432710440",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "moo.korova.info@gmail.com",
+    "website": "http://korova-ekb.ru",
+    "rating": 0.0,
+    "reviews": 652
+  },
+  {
+    "name": "Своя Компания, мягкие рестораны",
+    "address": "проспект Академика Сахарова, 70",
+    "phone": "+73432980044",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "",
+    "website": "http://svoya-kompaniya.ru",
+    "rating": 0.0,
+    "reviews": 2461
+  },
+  {
+    "name": "Вершина Счастья, ресторан грузинской кухни",
+    "address": "улица 8 Марта, 46",
+    "phone": "+73433440123",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "schastye_rest@mail.ru",
+    "website": "http://restohappy.ru",
+    "rating": 0.0,
+    "reviews": 2680
+  },
+  {
+    "name": "Старый Ереван, ресторан армянской кухни",
+    "address": "улица Луначарского, 84",
+    "phone": "+73432902060",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "sterevan_ekb@mail.ru",
+    "website": "http://sterevan96.ru/?utm_source=2gis&utm_medium=cpc&utm_campaign=2gisreklama ",
+    "rating": 0.0,
+    "reviews": 445
+  },
+  {
+    "name": "Norra rok, ресторан",
+    "address": "проспект Ленина, 49",
+    "phone": "+73433020102",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "hello@norrarok.ru",
+    "website": "http://www.norrarok.ru",
+    "rating": 0.0,
+    "reviews": 614
+  },
+  {
+    "name": "Grott Bar, бар",
+    "address": "проспект Ленина, 49",
+    "phone": "+73432877008",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "ostrovkina@grottbar.ru",
+    "website": "http://grottbar.ru",
+    "rating": 0.0,
+    "reviews": 2445
+  },
+  {
+    "name": "Честертон, ресторан",
+    "address": "улица Радищева, 33",
+    "phone": "+79000321331",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "cardamoncafe@mail.ru",
+    "website": "http://cardamoncafe.ru",
+    "rating": 0.0,
+    "reviews": 231
+  },
+  {
+    "name": "PLOV project",
+    "address": "проспект Ленина, 49",
+    "phone": "+73432877171",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "mega.plov@mail.ru",
+    "website": "http://plovproject.rest",
+    "rating": 0.0,
+    "reviews": 2726
+  },
+  {
+    "name": "Соседи, ресторан открытого огня",
+    "address": "Машинная улица, 1Б/5",
+    "phone": "+79126598010",
+    "category": "Рестораны",
+    "city": "екатеринбург",
+    "email": "sosedirest@yandex.ru",
+    "website": "http://ваши-соседи.рф",
+    "rating": 0.0,
+    "reviews": 150
+  }
+]

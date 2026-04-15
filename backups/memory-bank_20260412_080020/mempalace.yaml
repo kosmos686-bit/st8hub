@@ -1,0 +1,4 @@
+wing: st8_memory_bank
+rooms:
+- name: general
+  description: All project files

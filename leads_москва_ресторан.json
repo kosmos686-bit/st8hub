@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Москва, дом русского бильярда",
+    "address": "Вятская улица, 41а",
+    "phone": "+74951839777",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "info@rodinadom.ru",
+    "website": "http://moskva-dom.com",
+    "rating": 0.0,
+    "reviews": 37,
+    "source": "2gis"
+  },
+  {
+    "name": "Москва, ресторан",
+    "address": "Охотный Ряд улица, 2",
+    "phone": "+74956658473",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "m.bazhenov@cinema.moscow",
+    "website": "http://cinema.moscow/restaurant",
+    "rating": 0.0,
+    "reviews": 20,
+    "source": "2gis"
+  },
+  {
+    "name": "Москва, ресторан",
+    "address": "Русаковская улица, 24",
+    "phone": "+74957867373",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "mowso.reservation@holidayinnsokolniki.ru",
+    "website": "http://holidayinnsokolniki.ru/restaurants/restoran-moskva/",
+    "rating": 0.0,
+    "reviews": 6,
+    "source": "2gis"
+  },
+  {
+    "name": "Мясо&Рыба, ресторан",
+    "address": "Тверская улица, 23/12",
+    "phone": "+79164952569",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "fb@meat-and-fish.ru",
+    "website": "http://meat-and-fish.ru",
+    "rating": 0.0,
+    "reviews": 1197,
+    "source": "2gis"
+  },
+  {
+    "name": "Мята Platinum Павелецкая, лаундж-бар",
+    "address": "Дубининская улица, 35",
+    "phone": "+79957359999",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "info@myataofficial.com",
+    "website": "http://myataofficial.com",
+    "rating": 0.0,
+    "reviews": 667,
+    "source": "2gis"
+  }
+]

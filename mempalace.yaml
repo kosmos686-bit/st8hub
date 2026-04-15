@@ -1,0 +1,12 @@
+wing: st8_workspace
+rooms:
+- name: backups
+  description: Files from backups/
+- name: st8_memory_bank
+  description: Files from st8-memory-bank/
+- name: st8_voice_reanimator
+  description: Files from st8-voice-reanimator/
+- name: st8hub
+  description: Files from st8hub/
+- name: general
+  description: Files that don't fit other rooms

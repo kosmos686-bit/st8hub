@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Москва, дом русского бильярда",
+    "address": "Вятская улица, 41а",
+    "phone": "+74951839777",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "info@rodinadom.ru",
+    "website": "http://moskva-dom.com",
+    "rating": 0.0,
+    "reviews": 37
+  },
+  {
+    "name": "Москва, ресторан",
+    "address": "Охотный Ряд улица, 2",
+    "phone": "+74956658473",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "m.bazhenov@cinema.moscow",
+    "website": "http://cinema.moscow/restaurant",
+    "rating": 0.0,
+    "reviews": 20
+  },
+  {
+    "name": "Москва, ресторан",
+    "address": "Русаковская улица, 24",
+    "phone": "+74957867373",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "mowso.reservation@holidayinnsokolniki.ru",
+    "website": "http://holidayinnsokolniki.ru/restaurants/restoran-moskva/",
+    "rating": 0.0,
+    "reviews": 6
+  },
+  {
+    "name": "Мясо&Рыба, ресторан",
+    "address": "Тверская улица, 23/12",
+    "phone": "+79164952569",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "fb@meat-and-fish.ru",
+    "website": "http://meat-and-fish.ru",
+    "rating": 0.0,
+    "reviews": 1197
+  },
+  {
+    "name": "Мята Platinum Павелецкая, лаундж-бар",
+    "address": "Дубининская улица, 35",
+    "phone": "+79957359999",
+    "category": "Рестораны",
+    "city": "москва",
+    "email": "info@myataofficial.com",
+    "website": "http://myataofficial.com",
+    "rating": 0.0,
+    "reviews": 667
+  },
+  {
+    "name": "Руки Вверх!, бар",
+    "address": "Можайское шоссе, 45Б",
+    "phone": "+74951205368",
+    "category": "Кафе",
+    "city": "москва",
+    "email": "",
+    "website": "http://mozhayka.rvbar.ru",
+    "rating": 0.0,
+    "reviews": 313
+  },
+  {
+    "name": "Му-Му, кафе",
+    "address": "Манежная площадь, 1 ст2",
+    "phone": "+74957818781",
+    "category": "Кафе",
+    "city": "москва",
+    "email": "dostavka@cafemumu.ru",
+    "website": "http://cafemumu.ru",
+    "rating": 0.0,
+    "reviews": 1048
+  },
+  {
+    "name": "Дублинец, ирландский паб",
+    "address": "Никольская улица, 10",
+    "phone": "+74959660906",
+    "category": "Кафе",
+    "city": "москва",
+    "email": "irishman@dublinerpub.ru",
+    "website": "http://dublinerpub.ru",
+    "rating": 0.0,
+    "reviews": 156
+  },
+  {
+    "name": "Шон О`Нилл, ирландский паб",
+    "address": "улица Кузнецкий Мост, 11 ст1",
+    "phone": "+74951530966",
+    "category": "Кафе",
+    "city": "москва",
+    "email": "",
+    "website": "http://oneillspub.ru",
+    "rating": 0.0,
+    "reviews": 281
+  },
+  {
+    "name": "Мегрелия, ресторан грузинской кухни",
+    "address": "улица Большие Каменщики, 1",
+    "phone": "+79251132311",
+    "category": "Кафе",
+    "city": "москва",
+    "email": "info@megrelia.ru",
+    "website": "http://megrelia.ru",
+    "rating": 0.0,
+    "reviews": 475
+  }
+]

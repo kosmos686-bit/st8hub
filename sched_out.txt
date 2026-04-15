@@ -1,0 +1,3 @@
+Jarvis polling запущен в фоне.
+Scheduler запущен. Ожидание задач...
+[Jarvis] Polling Р·Р°РїСѓС‰РµРЅ. Offset: 165873511

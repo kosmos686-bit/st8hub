@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Каспийка, рыбный ресторан",
+    "address": "улица Хади Такташа, 35",
+    "phone": "+79050204533",
+    "category": "Рестораны",
+    "city": "казань",
+    "email": "k105@tanuki.ru",
+    "website": "http://tanukifamily.ru/kaspiika/?utm_source=2gis_web&utm_medium=cpp&utm_campaign=kaspiyka",
+    "rating": 0.0,
+    "reviews": 2770,
+    "source": "2gis"
+  },
+  {
+    "name": "Jojo",
+    "address": "Чистопольская улица, 19г",
+    "phone": "+79274955535",
+    "category": "Кафе",
+    "city": "казань",
+    "email": "jojokzn@yandex.ru",
+    "website": "",
+    "rating": 0.0,
+    "reviews": 1386,
+    "source": "2gis"
+  },
+  {
+    "name": "Iq hotel, отель",
+    "address": "улица Баумана, 60",
+    "phone": "+79395050403",
+    "category": "Гостиницы",
+    "city": "казань",
+    "email": "iqhotelkazan@yandex.ru",
+    "website": "http://iqkazan.ru/",
+    "rating": 0.0,
+    "reviews": 343,
+    "source": "2gis"
+  },
+  {
+    "name": "ЗОО, мини-отель",
+    "address": "улица Хади Такташа, 117",
+    "phone": "+78432452123",
+    "category": "Гостиницы",
+    "city": "казань",
+    "email": "info@hostel-zoo.ru",
+    "website": "http://www.hostel-zoo.ru",
+    "rating": 0.0,
+    "reviews": 156,
+    "source": "2gis"
+  },
+  {
+    "name": "Завод сеток, Завод по производству и продаже кладочной сетки, кровельных материалов и металлоизделий",
+    "address": "улица Владимира Кулагина, 1",
+    "phone": "+78432593159",
+    "category": "Металлоизделия",
+    "city": "казань",
+    "email": "2161620@list.ru",
+    "website": "http://angar116.ru",
+    "rating": 0.0,
+    "reviews": 0,
+    "source": "2gis"
+  }
+]
