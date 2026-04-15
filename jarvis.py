@@ -63,7 +63,8 @@ def _get_mem0():
             }
         }
         _mem0_instance = Memory.from_config(config)
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[_get_mem0] unhandled exception")
         _mem0_instance = None
     return _mem0_instance
 
@@ -363,7 +364,8 @@ def load_external_agents():
                     content = f.read()
                 # Извлекаем description или берём весь контент
                 agents[name] = content
-            except Exception:
+            except Exception as _exc:
+                _live_log.exception("[load_external_agents] unhandled exception")
                 pass
     return agents
 
@@ -409,7 +411,8 @@ def route_to_agent(user_text, claude_client, model):
         )
         agent_name = response.content[0].text.strip().lower()
         return agent_name if agent_name in ALL_AGENTS else "none"
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[route_to_agent] unhandled exception")
         return "none"
 
 
@@ -431,7 +434,8 @@ def _load_agent_memory_md():
                     content = f.read().strip()
                 if content:
                     parts.append(f"[{fname}]\n{content[:1000]}")
-            except Exception:
+            except Exception as _exc:
+                _live_log.exception("[_load_agent_memory_md] unhandled exception")
                 pass
 
     # Ключевые файлы из st8-memory-bank/
@@ -449,7 +453,8 @@ def _load_agent_memory_md():
             content = '\n'.join(lines).strip()
             if content:
                 parts.append(f"[{fname}]\n{content[:1200]}")
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[_load_agent_memory_md] unhandled exception")
             pass
 
     return '\n\n'.join(parts)
@@ -464,7 +469,8 @@ def _load_session_log():
     try:
         with open(_SESSION_LOG_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[_load_session_log] unhandled exception")
         return []
 
 
@@ -481,7 +487,8 @@ def _save_session_entry(agent_name, user_text, response_snippet):
     try:
         with open(_SESSION_LOG_PATH, 'w', encoding='utf-8') as f:
             json.dump(log, f, ensure_ascii=False, indent=2)
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[_save_session_entry] unhandled exception")
         pass
 
 
@@ -547,7 +554,8 @@ def _mempalace_search(query, n_results=3):
         results = col.query(query_texts=[query], n_results=n_results, include=['documents'])
         docs = results.get('documents', [[]])[0]
         return [d[:400] for d in docs if d]
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[_mempalace_search] unhandled exception")
         return []
 
 
@@ -666,7 +674,8 @@ def process_with_agent(user_text, history, claude_client, model):
                 reply = response.content[0].text.strip()
                 _save_session_entry(agent_name, user_text, reply)
                 return reply + _detect_chain_hint(agent_name, reply)
-            except Exception:
+            except Exception as _exc:
+                _live_log.exception("[process_with_agent] unhandled exception")
                 pass
         return f"[Ошибка агента {agent_name}]: {e}"
 
@@ -800,6 +809,106 @@ class ST8ModelRouter:
 
 
 _router = ST8ModelRouter(claude_client)
+
+# ── Smart Route (proactive model selection) ───────────────────────────────────
+
+_ROUTING_HAIKU_MAX  = int(os.getenv('ROUTING_HAIKU_MAX_TOKENS', '100'))
+_ROUTING_SONNET_MIN = int(os.getenv('ROUTING_SONNET_MIN_TOKENS', '500'))
+_ROUTING_COMPLEX_KW = [
+    kw.strip() for kw in os.getenv(
+        'ROUTING_COMPLEX_KEYWORDS',
+        '```code,\u0430\u043d\u0430\u043b\u0438\u0437,\u0430\u0440\u0445\u0438\u0442\u0435\u043a\u0442\u0443\u0440,\u0441\u0433\u0435\u043d\u0435\u0440,\u043d\u0430\u043f\u0438\u0448'
+    ).split(',')
+    if kw.strip()
+]
+
+
+def _estimate_tokens(text: str) -> int:
+    """Rough token estimate: 1 token ~ 4 chars for mixed RU/EN text."""
+    return len(text) // 4
+
+
+def _has_complexity_signal(text: str) -> bool:
+    """Check for code blocks or configured complex keywords."""
+    low = text.lower()
+    if '```' in text:
+        return True
+    return any(kw in low for kw in _ROUTING_COMPLEX_KW)
+
+
+def _pick_model(user_text: str, system_prompt: str = '') -> str:
+    """Proactive model selection BEFORE API call.
+
+    Returns:
+        _HAIKU_MODEL  -- simple / short request
+        _SONNET_MODEL -- complex / long request
+        None          -- ambiguous, let ST8ModelRouter cascade decide
+    """
+    combined = user_text + (system_prompt or '')
+    token_est = _estimate_tokens(combined)
+
+    # Rule 1: complexity keywords or code blocks -> Sonnet always
+    if _has_complexity_signal(user_text):
+        _live_log.info(
+            'smart_route decision=sonnet reason=complexity_signal tokens_est=%d',
+            token_est,
+        )
+        return _SONNET_MODEL
+
+    # Rule 2: long request -> Sonnet
+    if token_est >= _ROUTING_SONNET_MIN:
+        _live_log.info(
+            'smart_route decision=sonnet reason=high_tokens tokens_est=%d threshold=%d',
+            token_est, _ROUTING_SONNET_MIN,
+        )
+        return _SONNET_MODEL
+
+    # Rule 3: short + no complexity -> Haiku
+    if token_est <= _ROUTING_HAIKU_MAX:
+        _live_log.info(
+            'smart_route decision=haiku reason=short_simple tokens_est=%d threshold=%d',
+            token_est, _ROUTING_HAIKU_MAX,
+        )
+        return _HAIKU_MODEL
+
+    # Rule 4: ambiguous (between thresholds, no complexity) -> None (fallback)
+    _live_log.info(
+        'smart_route decision=fallback reason=ambiguous tokens_est=%d',
+        token_est,
+    )
+    return None
+
+
+def smart_route(func):
+    """Decorator: pick model proactively before calling the wrapped function.
+
+    The wrapped function MUST accept ``model`` as a positional or keyword arg.
+    If _pick_model returns a model string, it overrides ``model``.
+    If _pick_model returns None, the original model is kept (ST8ModelRouter
+    cascade will handle quality fallback downstream).
+    """
+    import functools
+
+    @functools.wraps(func)
+    def wrapper(user_text, *args, **kwargs):
+        model_override = _pick_model(user_text)
+        if model_override is not None:
+            # Override the model parameter (3rd positional after user_text, history)
+            # or keyword argument
+            if 'model' in kwargs:
+                kwargs['model'] = model_override
+            elif len(args) >= 3:
+                # args = (history, claude_client, model, ...)
+                args = list(args)
+                args[2] = model_override
+                args = tuple(args)
+            else:
+                kwargs['model'] = model_override
+        return func(user_text, *args, **kwargs)
+    return wrapper
+
+# ── end Smart Route ───────────────────────────────────────────────────────────
+
 # ── end ST8ModelRouter ─────────────────────────────────────────────────────────
 
 MOSCOW_TZ = pytz.timezone('Europe/Moscow')
@@ -911,7 +1020,8 @@ def load_agent_memory(client_slug):
                     'response': memory_text,
                 })
             return entries
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[load_agent_memory] unhandled exception")
             pass
 
     # Fallback: JSON file
@@ -922,7 +1032,8 @@ def load_agent_memory(client_slug):
     with open(path, 'r', encoding='utf-8') as f:
         try:
             return json.load(f)
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[load_agent_memory] unhandled exception")
             return []
 
 
@@ -937,7 +1048,8 @@ def search_agent_memory(client_slug, query, limit=5):
         result = mem.search(query, user_id=client_slug, limit=limit)
         items = result.get('results', result) if isinstance(result, dict) else result
         return [item.get('memory', '') for item in items if isinstance(item, dict)]
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[search_agent_memory] unhandled exception")
         return []
 
 
@@ -952,7 +1064,8 @@ def save_agent_memory(client_slug, agent_name, user_msg, agent_response):
             text = f"[{agent_name}] User: {user_msg[:200]} | Agent response: {agent_response[:400]}"
             mem.add(text, user_id=client_slug)
             return
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[save_agent_memory] unhandled exception")
             pass
 
     # Fallback: JSON file
@@ -1222,7 +1335,8 @@ def load_offset():
     with open(OFFSET_PATH, 'r', encoding='utf-8') as f:
         try:
             return json.load(f).get('offset', 0)
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[load_offset] unhandled exception")
             return 0
 
 
@@ -1466,7 +1580,8 @@ def make_good_morning():
         lpr     = (row.get('lpr')     or '—').strip()
         try:
             days_ago = (today - datetime.strptime(row['date'], '%Y-%m-%d').date()).days
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[make_good_morning] unhandled exception")
             days_ago = 0
         label = comment or status
         entry = f"{company} ({lpr})" + (f" — {label}" if label else '')
@@ -1565,7 +1680,8 @@ def make_no_response_reminder():
     for row in status_rows:
         try:
             row_date = datetime.strptime(row['date'], '%Y-%m-%d').date()
-        except Exception:
+        except Exception as _exc:
+            _live_log.exception("[make_no_response_reminder] unhandled exception")
             continue
         if row['status'] == 'РЅР°РїРёСЃР°Р»Рё' and (today - row_date).days >= 3:
             old.append(row)
@@ -1632,7 +1748,8 @@ def cmd_hub():
     try:
         with open(os.path.join(BASE_DIR, 'st8hub', 'leads.json'), 'r', encoding='utf-8') as _f:
             _leads = _json.load(_f)
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[cmd_hub] unhandled exception")
         _leads = []
     total = len(_leads)
     new_count = sum(1 for l in _leads if l.get('status') == '\u043d\u043e\u0432\u044b\u0439')
@@ -1714,7 +1831,8 @@ def cmd_call_prep(user_message):
         sr = _tavily_search(f"{company_name} РЅРѕРІРѕСЃС‚Рё РїСЂРѕР±Р»РµРјС‹ РѕС‚Р·С‹РІС‹")
         if sr:
             tavily_results = sr
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[cmd_call_prep] unhandled exception")
         pass
     prompt = (
         f"РџРѕРґРіРѕС‚РѕРІСЊ СЃРєСЂРёРїС‚ Р·РІРѕРЅРєР° РґР»СЏ ST8-AI. "
@@ -1797,7 +1915,8 @@ def _find_lead_by_company(name: str) -> dict:
             if name_low in lead.get('company_name', '').lower():
                 return lead
         return None
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[_find_lead_by_company] unhandled exception")
         return None
 
 
@@ -1824,7 +1943,8 @@ def _save_lead_to_hub(lead_data: dict) -> None:
 def _count_total_leads() -> int:
     try:
         return len(load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json')))
-    except Exception:
+    except Exception as _exc:
+        _live_log.exception("[_count_total_leads] unhandled exception")
         return 0
 
 
@@ -1862,94 +1982,6 @@ _WEATHER_PATTERNS = (
 def _is_weather_question(text: str) -> bool:
     low = text.lower()
     return any(p in low for p in _WEATHER_PATTERNS)
-
-def process_incoming_message(text, history):
-    text = text.strip()
-
-    # Погода — вызываем напрямую, не отдаём в Claude
-    if _is_weather_question(text):
-        return get_moscow_weather()
-
-    # Умное добавление лида (естественный язык, Haiku, дешево)
-    smart_result = smart_add_lead(text)
-    if smart_result is not None:
-        return smart_result
-
-
-    if text.strip() in ('/start', '/\u043c\u0435\u043d\u044e', '/menu'):
-        return cmd_menu()
-    if text.strip().upper() in ('A', '[A]'):
-        return cmd_plan(history)
-    if text.strip().upper() in ('B', '[B]'):
-        return cmd_leads(history)
-    if text.strip().upper() in ('C', '[C]'):
-        return cmd_hub()
-    if text.strip().upper() in ('D', '[D]'):
-        parts = text.split(maxsplit=1)
-        return ('Format: /agent <name> <task>')
-    if text.strip().upper() in ('E', '[E]'):
-        parts = text.split(maxsplit=1)
-        return ('Format: /\u044e\u043b\u0435 <message>')
-    if text.lower().startswith('/\u0445\u0430\u0431'):
-        return cmd_hub()
-    if text.startswith('/\u043f\u043b\u0430\u043d'):
-        return cmd_plan(history)
-    if text.startswith('/\u043b\u0438\u0434\u044b'):
-        return cmd_leads(history)
-    if text.lower().startswith('/\u043a\u043b\u0438\u0435\u043d\u0442'):
-        parts = text.split(maxsplit=1)
-        client_name = parts[1].strip() if len(parts) > 1 else ''
-        return cmd_client(client_name, history) if client_name else 'РЈРєР°Р¶Рё: /\u043a\u043b\u0438\u0435\u043d\u0442 <РќР°Р·РІР°РЅРёРµ>'
-    if text.lower().startswith('/\u043f\u0430\u043c\u044f\u0442\u044c'):
-        parts = text.split(maxsplit=1)
-        client_name = parts[1].strip() if len(parts) > 1 else ''
-        return cmd_memory(client_name) if client_name else 'РЈРєР°Р¶Рё: /\u043f\u0430\u043c\u044f\u0442\u044c <РљР»РёРµРЅС‚>'
-    if text.lower().startswith('/\u0430\u0433\u0435\u043d\u0442'):
-        parts = text.split(maxsplit=2)
-        if len(parts) >= 3:
-            agent_name = parts[1].strip().lower()
-            task = parts[2].strip()
-            if not agent_name.startswith('st8-'):
-                agent_name = 'st8-' + agent_name
-            client_slug = get_client_slug(task)
-            client_memory = load_agent_memory(client_slug)
-            agent_short, result = call_agent(agent_name, task, history, client_memory=client_memory)
-            if result:
-                actions = execute_actions(result)
-                if client_slug:
-                    save_agent_memory(client_slug, agent_name, task, result)
-                full = f"[{agent_short}]\n{result}"
-                if actions:
-                    full += '\n\n' + '\n'.join(actions)
-                return full
-            return f"РђРіРµРЅС‚ '{agent_name}' РЅРµ РЅР°Р№РґРµРЅ."
-        return (
-            "Р¤РѕСЂРјР°С‚: /\u0430\u0433\u0435\u043d\u0442 <РёРјСЏ> <Р·Р°РґР°С‡Р°>\n"
-            "РђРіРµРЅС‚С‹: sales-strategist, kp-architect, horeca-consultant,\n"
-            "backend-architect, bot-developer, security-auditor,\n"
-            "qa-engineer, integration-engineer, cv-vision-engineer, ai-director"
-        )
-    if text.lower().startswith('/\u044e\u043b\u0435'):
-        parts = text.split(maxsplit=1)
-        msg = parts[1].strip() if len(parts) > 1 else ''
-        return tool_send_yulia(msg) if msg else 'РЈРєР°Р¶Рё: /\u044e\u043b\u0435 <СЃРѕРѕР±С‰РµРЅРёРµ>'
-    if text.lower().startswith('/\u0441\u0442\u0430\u0442\u0443\u0441'):
-        parts = text.split(maxsplit=3)
-        if len(parts) >= 3:
-            company, status = parts[1], parts[2]
-            comment = parts[3] if len(parts) > 3 else ''
-            return tool_save_lead_status(company, status, comment)
-        return 'Р¤РѕСЂРјР°С‚: /\u0441\u0442\u0430\u0442\u0443\u0441 <РљРѕРјРїР°РЅРёСЏ> <СЃС‚Р°С‚СѓСЃ> [РєРѕРјРјРµРЅС‚Р°СЂРёР№]'
-
-    if any(t in text.lower() for t in _CALL_TRIGGERS):
-        return cmd_call_prep(text)
-
-    # РђРІС‚РѕСЂРѕСѓС‚РёРЅРі Р°РіРµРЅС‚РѕРІ Рё С†РµРїРѕС‡РµРє
-    result = run_agent_or_chain(text, history)
-    if result:
-        return result
-
-    return generate_smart_response(text, history)
 
 
 async def extract_file_text(bot, message):
