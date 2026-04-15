@@ -908,6 +908,7 @@ def smart_route(func):
     return wrapper
 
 # ── end Smart Route ───────────────────────────────────────────────────────────
+process_with_agent = smart_route(process_with_agent)
 
 # ── end ST8ModelRouter ─────────────────────────────────────────────────────────
 
