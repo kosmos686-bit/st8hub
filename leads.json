@@ -1,5 +1,115 @@
 [
   {
+    "company_name": "АвтоМиг, транспортная компания",
+    "phone": "+73832869604",
+    "site": "http://www.avtomig-nsk.ru",
+    "city": "новосибирск",
+    "category": "Городские автогрузоперевозки",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "Ледокол, транспортная компания",
+    "phone": "+73833835566",
+    "site": "http://www.tkledokol.ru",
+    "city": "новосибирск",
+    "category": "Междугородные автогрузоперевозки",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "TOM YUM’ная, кафе",
+    "phone": "+79231403560",
+    "site": "",
+    "city": "новосибирск",
+    "category": "Кафе",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "I Dolci, кафе",
+    "phone": "+79137320462",
+    "site": "http://idolci.ru",
+    "city": "новосибирск",
+    "category": "Кафе",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "Птичка by Novikov",
+    "phone": "+73832636565",
+    "site": "http://ptichkansk.ru",
+    "city": "новосибирск",
+    "category": "Рестораны",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "Твиши, грузинский ресторан",
+    "phone": "+79628354646",
+    "site": "http://tvishi54.ru",
+    "city": "новосибирск",
+    "category": "Рестораны",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "ILAN, лаундж-бар",
+    "phone": "+79090285858",
+    "site": "info2gis.tilda.ws/proxy18?target=https://vk.com/ilanbar&back=https://2gis.ru/ekaterinburg/firm/70000001034142883&mode=0",
+    "city": "екатеринбург",
+    "category": "Кафе",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "Cam Ranh-Кам Рань, кафе традиционной вьетнамской кухни",
+    "phone": "+79226068888",
+    "site": "http://camranh.2gis.biz",
+    "city": "екатеринбург",
+    "category": "Кафе",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "Пашмир, ресторан",
+    "phone": "+78432779944",
+    "site": "http://www.pashmir.ru",
+    "city": "казань",
+    "category": "Рестораны",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
+    "company_name": "de Torino, бистро",
+    "phone": "+74951615591",
+    "site": "http://torinobistro.ru",
+    "city": "москва",
+    "category": "Рестораны",
+    "date": "2026-04-18",
+    "status": "новый",
+    "source": "2gis",
+    "created_at": "2026-04-18T07:00:43Z"
+  },
+  {
     "company_name": "Вэдмакс, компания по доставке грузов из Китая, поставке и оплате зарубеж",
     "phone": "+73833886630",
     "site": "http://vedmax.ru",
