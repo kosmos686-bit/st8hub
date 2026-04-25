@@ -149,6 +149,21 @@ select.inp option{background:#0E1525}
 
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#D4A017;color:#000;padding:10px 20px;border-radius:20px;font-size:12px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
+
+/* GLASSMORPHISM NAVBAR */
+.hdr.glassy{background:rgba(14,21,37,.88)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:rgba(212,160,23,.3)!important}
+
+/* SHIMMER ON GOLD BUTTONS */
+.btn-gold,.genbtn{position:relative;overflow:hidden}
+.btn-gold::after,.genbtn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:shimmerSlide 2.4s ease-in-out infinite}
+@keyframes shimmerSlide{0%{left:-75%}100%{left:130%}}
+
+/* CARD FADE-IN */
+@keyframes cardIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.card-anim{animation:cardIn .22s ease both}
+
+/* TAB TRANSITION */
+.tab.on{animation:fadeup .18s both}
 </style>
 </head>
 <body>
@@ -574,6 +589,7 @@ function renderLeadCards(){
     html += '</div>';
   }
   document.getElementById('leads-cards').innerHTML = html;
+  document.querySelectorAll('#leads-cards .card').forEach(function(el,i){el.style.animationDelay=(i*.03)+'s';el.classList.add('card-anim');});
 }
 function copyTouch(index){
   var lead = getFilteredLeads()[index];
@@ -721,6 +737,21 @@ function renderStats(){
     '<div class="sc"><div class="sc-l">Потенциал</div><div class="sc-v">'+fmt(tot)+'</div></div>'+
     '<div class="sc"><div class="sc-l">Переговоры</div><div class="sc-v">'+nego+'</div></div>'+
     '<div class="sc"><div class="sc-l">🔥 Горячие</div><div class="sc-v">'+hot+'</div></div>';
+  countUp();
+}
+
+function countUp(){
+  document.querySelectorAll('.sc-v').forEach(function(el){
+    var text = el.textContent.trim();
+    if(!/^\d+$/.test(text)) return;
+    var target = parseInt(text);
+    var t0 = performance.now();
+    (function step(now){
+      var p = Math.min((now-t0)/700,1);
+      el.textContent = Math.floor(p*p*target);
+      if(p<1) requestAnimationFrame(step); else el.textContent = target;
+    })(t0);
+  });
 }
 
 // ── FILTERS ──
@@ -753,9 +784,14 @@ function renderCards(){
       '</div>'+
       '<div class="card-bot"><span class="pot">'+fmt(c.potential)+'</span></div>'+
       '<div class="card-pkg">'+c.pkg+'</div>'+
+      '<div style="display:flex;gap:6px;margin-top:8px" onclick="event.stopPropagation()">'+
+        '<button class="btn-gold" style="padding:6px 10px;font-size:10px;flex:none" onclick="quickKP('+c.id+')">📄 КП</button>'+
+        '<button class="btn-out" style="padding:6px 10px;font-size:10px;flex:none" onclick="quickCall('+c.id+')">📞 Звонок</button>'+
+      '</div>'+
     '</div>';
   }
   document.getElementById("cards").innerHTML=h||'<div style="color:#6B7FA0;text-align:center;padding:30px;font-size:13px">Нет клиентов в этой категории</div>';
+  document.querySelectorAll('#cards .card').forEach(function(el,i){el.style.animationDelay=(i*.04)+'s';el.classList.add('card-anim');});
 }
 
 function selCard(id){ selId=(selId===id)?null:id; renderCards(); renderDet(); }
@@ -1210,6 +1246,34 @@ function openCallScript(index){
 }
 function closeCallScript(){
   document.getElementById('call-script-modal').style.display = 'none';
+}
+
+// ── GLASSMORPHISM SCROLL ──
+window.addEventListener('scroll',function(){
+  document.querySelector('.hdr').classList.toggle('glassy',window.scrollY>20);
+},{passive:true});
+
+// ── QUICK ACTIONS FROM CRM CARDS ──
+function quickKP(id){
+  var c=null;
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){c=CLIENTS[i];break;}
+  if(!c) return;
+  document.getElementById('kp-client').value=c.name;
+  document.getElementById('kp-contact').value=c.contact;
+  document.getElementById('kp-city').value=c.city;
+  document.getElementById('kp-type').value=c.type;
+  document.getElementById('kp-pain').value=(c.notes||'').substring(0,80);
+  switchTab('kpgen');
+  showToast('Заполнено из CRM: '+c.name);
+}
+function quickCall(id){
+  var c=null;
+  for(var i=0;i<CLIENTS.length;i++) if(CLIENTS[i].id===id){c=CLIENTS[i];break;}
+  if(!c) return;
+  document.getElementById('call-client').value=c.name;
+  document.getElementById('call-contact').value=c.contact;
+  switchTab('call');
+  showToast('Открыт звонок: '+c.name);
 }
 </script>
 
