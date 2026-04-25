@@ -25,4 +25,12 @@ if %errorlevel% equ 0 (
     start "ST8 Scheduler" .venv\Scripts\python.exe scheduler.py
 )
 
+wmic process where "name='python.exe'" get commandline 2>nul | findstr /I "hourly_monitor.py" > nul
+if %errorlevel% equ 0 (
+    echo hourly_monitor.py: already running, skipping.
+) else (
+    echo Starting Hourly Monitor...
+    start "ST8 Hourly Monitor" .venv\Scripts\python.exe hourly_monitor.py
+)
+
 echo Done.

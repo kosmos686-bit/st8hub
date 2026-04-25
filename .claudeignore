@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.tmp
+node_modules/
+.git/
+.vscode/
+*.min.js
+*.min.css
+jarvis_memory.json
+debug_login.png
+*.xlsx
+*.xls

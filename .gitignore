@@ -1,0 +1,91 @@
+# API ключи и секреты
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Виртуальные окружения
+.venv/
+venv_jarvis/
+venv/
+env/
+
+# Claude Code / GSD
+.claude/
+.planning/
+
+# Данные и память (не коммитить в git)
+st8-memory-bank/
+agent_memory/
+memo_db/
+
+# Логи и runtime-состояние
+*.log
+*.bak
+jarvis_memory.json
+jarvis_offset.json
+jarvis_session_log.json
+jarvis_stdout.log
+
+# Одноразовые патчи и тесты
+patch_*.py
+test_*.py
+fix_*.py
+debug*.py
+check_*.py
+diagnose_*.py
+send_test.py
+view_*.py
+wait_*.py
+save_*.py
+run_one_project.py
+jarvis_encoding_backup.py
+jarvis_fixed_test.py
+
+# Временные файлы
+backup_*/
+archive/
+kp/
+graphify-out/
+ab_results.md
+inbox_debug.html
+daily_digest_*.md
+weekly_report_*.md
+
+# Runtime данные
+data/
+orders/
+logs/
+leads/*.json
+
+# Obsidian
+.obsidian/
+
+# Next.js build
+st8-site/.next/
+st8-site/node_modules/
+
+# Embedded git repos (отдельные репозитории)
+agency-agents/
+demos/
+web-projects/
+st8-resto/
+desktop-pets/
+st8-workspacest8hub/
+
+# Node.js
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

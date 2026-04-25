@@ -1,0 +1,14 @@
+{
+  "id": "903039",
+  "title": "Сайт визитка артиста",
+  "budget": 10000,
+  "customer": "Jaratushi",
+  "created_at": "2026-04-19T09:57:49.431486",
+  "status": "in_progress",
+  "files": {
+    "html": "site/index.html",
+    "css": "site/style.css",
+    "js": "site/script.js",
+    "report": "REPORT.txt"
+  }
+}

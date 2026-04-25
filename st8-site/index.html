@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST8-AI | AI Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.prod.website-files.com/68e3c26f7edb22bc9e5314b2/css/tge-staging.webflow.shared.1da2e5c14.css">
+<link rel="stylesheet" href="https://titangate-equity.vercel.app/styles/main.css">
+<style>
+*{font-family:'Montserrat',sans-serif!important}
+:root{
+  --accent:#4A9EFF;--accent-dark:#1B4FFF;
+  --lightning-color:#4A9EFF;
+  --colour--light:#ffffff;
+  --colour--micro-black:#050A14;
+  --bg:#050A14;
+}
+html,body{background:#050A14;color:#fff;overflow-x:hidden;overflow-y:auto!important;height:auto!important;margin:0;width:100%}
+section,div[id]{display:block!important;position:relative!important}
+.gradient-text{background:linear-gradient(135deg,#4A9EFF,#1B4FFF)!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.highlight{color:#4A9EFF!important}
+a{text-decoration:none;color:inherit}
+
+/* LOADER */
+.loader{position:fixed;inset:0;z-index:9999;background:#050A14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.loader-inner{display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center}
+.loader-logo{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.loader-logo span{color:#4A9EFF}
+.loader-tagline{font-size:.6875rem;font-weight:700;letter-spacing:.3em;color:rgba(255,255,255,.3);text-transform:uppercase;opacity:0;font-family:monospace!important}
+.loader-counter{font-size:.875rem;font-family:monospace!important;color:#4A9EFF;letter-spacing:.1em}
+.loader-bar-wrap{width:min(240px,60vw);height:1px;background:rgba(74,158,255,.12);position:relative;overflow:hidden}
+.loader-bar-fill{height:100%;width:0;background:linear-gradient(90deg,#1B4FFF,#4A9EFF);transition:width .05s linear}
+.loader-dots{display:flex;gap:8px;margin-top:.5rem}
+.loader-dot{width:4px;height:4px;border-radius:50%;background:#4A9EFF;opacity:.15}
+
+/* NAV */
+.nav-wrapper{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;opacity:0;transition:background-color .3s ease}
+html.is-ready.fonts-loaded .nav-wrapper{opacity:1;transition:opacity .225s .8s ease-out}
+.main-logo{font-size:1.125rem;font-weight:900;letter-spacing:-.01em}
+.icon-button{font-size:.75rem;font-weight:700;color:#fff;background:rgba(74,158,255,.08);border:1px solid rgba(74,158,255,.25);padding:.5rem 1.25rem;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;cursor:pointer;display:inline-flex;align-items:center}
+.icon-button:hover{background:rgba(74,158,255,.18);border-color:#4A9EFF}
+
+/* HERO */
+.hero-section{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.full-video{position:absolute;inset:0;z-index:0}
+.full-video video{position:absolute;width:100%;height:100%;object-fit:cover}
+.gradient-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,10,20,.35),rgba(5,10,20,.75));z-index:1}
+.hero-container{position:relative;z-index:2;padding:2.5rem}
+.hero-flex{display:flex;flex-direction:column;gap:1.5rem;margin-bottom:2rem}
+.hero-subline .subheading{font-size:.6875rem;font-weight:700;letter-spacing:.25em;color:rgba(255,255,255,.35);text-transform:uppercase;opacity:0}
+html.is-ready.fonts-loaded .hero-subline .subheading{animation:subline-move-in 1.2s var(--ease-out-power2,cubic-bezier(.215,.61,.355,1)) both;animation-delay:.35s}
+.hero-title{font-size:clamp(3.5rem,9vw,8.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;margin-bottom:1rem}
+.nav-bar{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;opacity:0}
+html.is-ready.fonts-loaded .nav-bar{animation:nav-bar-move-in 1.2s var(--ease-out-power2,cubic-bezier(.215,.61,.355,1)) both;animation-delay:.55s}
+.nav-button{font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;transition:color .2s;cursor:pointer}
+.nav-button.is-btn:hover{color:#4A9EFF}
+.nav-button.is-non{opacity:.15;cursor:default}
+.heading-width{opacity:0}
+html.is-ready.fonts-loaded .heading-width{opacity:1;transition:opacity .225s .8s ease-out}
+.heading-6{font-size:clamp(1.25rem,2.5vw,2rem);font-weight:600;line-height:1.25}
+.heading-6.is-hero{color:rgba(255,255,255,.55)}
+
+/* SWAP */
+.swap-section{padding:5rem 2.5rem 3rem;overflow:hidden}
+.swap-pre{font-size:clamp(1.5rem,3.5vw,3rem);font-weight:900;color:rgba(255,255,255,.55)}
+.swap-list{transition:width .35s .05s cubic-bezier(.215,.61,.355,1);width:var(--width,14ch);will-change:width;display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom}
+.swap-list-item{display:block;font-size:clamp(1.5rem,3.5vw,3rem);font-weight:900;color:#4A9EFF}
+.swap-sub{font-size:clamp(.875rem,1.5vw,1.125rem);color:rgba(255,255,255,.35);margin-top:1.25rem;line-height:1.6;max-width:600px}
+
+/* DIVIDER */
+.divider{height:1px;width:100%;position:relative;overflow:hidden;background:rgba(74,158,255,.08)}
+.divider-line{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(74,158,255,.3),transparent);animation:marquee 48s linear infinite}
+
+/* INTRO/VISION */
+.intro-section{padding:8rem 2.5rem;position:relative;overflow:hidden}
+.intro-video-wrap{position:relative;width:100%;height:55vh;overflow:hidden;margin-bottom:4rem}
+.intro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem}
+@media(max-width:768px){.intro-grid{grid-template-columns:1fr}}
+
+/* PROTECTION */
+.protection-section{position:relative;overflow:hidden;min-height:70vh}
+.protection-grid{display:grid;grid-template-columns:1fr 1fr;min-height:70vh}
+@media(max-width:768px){.protection-grid{grid-template-columns:1fr}}
+.protection-left{padding:5rem 2.5rem;display:flex;flex-direction:column;justify-content:center}
+.protection-vid-container{position:relative;overflow:hidden;min-height:400px}
+
+/* INDUSTRY/PIONEERS */
+.industry-section{overflow:hidden;border-top:1px solid rgba(74,158,255,.06);border-bottom:1px solid rgba(74,158,255,.06);padding:1rem 0}
+.industry-row{overflow:hidden;padding:.875rem 0;border-bottom:1px solid rgba(74,158,255,.04)}
+.industry-row:last-child{border-bottom:none}
+.heading-3.is-industry{font-size:clamp(.875rem,1.5vw,1.125rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.18);white-space:nowrap;animation:marquee 22s linear infinite;display:inline-flex;align-items:center}
+.heading-3.is-industry.is-rm{animation-direction:reverse;animation-duration:28s}
+.industry-sep{color:rgba(74,158,255,.35);margin:0 1.5rem}
+.pioneers-section{padding:6rem 2.5rem;position:relative;overflow:hidden}
+.pioneers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3rem}
+@media(max-width:768px){.pioneers-grid{grid-template-columns:repeat(2,1fr)}}
+.pioneer-cell{padding:2rem;border:1px solid rgba(74,158,255,.1);transition:border-color .3s}
+.pioneer-cell:hover{border-color:rgba(74,158,255,.3)}
+.pioneer-num{font-size:.6rem;font-weight:700;letter-spacing:.2em;color:#4A9EFF;font-family:monospace!important;margin-bottom:.5rem}
+
+/* LOGO MARQUEE */
+.logo-section{overflow:hidden;padding:2.5rem 0;border-top:1px solid rgba(255,255,255,.04)}
+.marquee-advanced{display:flex;overflow:hidden}
+.marquee-advanced__scroll{display:flex;animation:marquee 35s linear infinite}
+.marquee-advanced__collection{display:flex;gap:3rem;align-items:center}
+.marquee-advanced__item-width{flex-shrink:0}
+.logo-cover{font-size:14px;font-weight:600;letter-spacing:2px;color:#fff;opacity:.5;white-space:nowrap}
+
+/* STATS */
+.stats-section{padding:8rem 2.5rem;position:relative}
+.stats-container{display:grid;grid-template-columns:1fr 1fr;max-width:900px;gap:3rem}
+@media(max-width:600px){.stats-container{grid-template-columns:1fr}}
+.stat-number-wrap{overflow:hidden}
+.stat-number{font-size:clamp(4.5rem,10vw,9rem);font-weight:900;letter-spacing:-.04em;line-height:1;display:flex;align-items:baseline}
+.stat-number-item{display:inline-block}
+.stat-number-accent{color:#4A9EFF}
+.stat-descriptor{font-size:.8125rem;color:rgba(255,255,255,.4);margin-top:.75rem;letter-spacing:.05em}
+.stats-tagline{font-size:clamp(1.125rem,2.5vw,1.875rem);font-weight:600;color:rgba(255,255,255,.6);max-width:640px;margin-top:4rem;line-height:1.35}
+.micro-text.is-width{font-size:.6rem;color:rgba(255,255,255,.18);letter-spacing:.1em;margin-top:.5rem;font-family:monospace!important}
+
+/* PROCESS */
+.process-section{padding:8rem 2.5rem}
+.steps-container{margin-top:5rem}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-left:1px solid rgba(74,158,255,.12)}
+@media(max-width:768px){.steps-grid{grid-template-columns:1fr 1fr}}
+.icon-column{border-top:1px solid rgba(74,158,255,.12);border-right:1px solid rgba(74,158,255,.12);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
+.icon-column:hover{background:rgba(74,158,255,.03)}
+.icon-column::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:#4A9EFF;transition:height .4s cubic-bezier(.215,.61,.355,1)}
+.icon-column:hover::before{height:100%}
+.step-number{font-size:.625rem;font-weight:700;letter-spacing:.2em;color:#4A9EFF;font-family:monospace!important;margin-bottom:1.25rem}
+.divider-line-short{height:1px;background:rgba(74,158,255,.12);margin:1rem 0}
+.step-title{font-size:1.25rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.step-desc{font-size:.8125rem;color:rgba(255,255,255,.5);line-height:1.65}
+
+/* BENEFITS */
+.benefits-section{position:relative;overflow:hidden;min-height:100vh}
+.benefits-bg-wrap{position:absolute;inset:0;z-index:0}
+.benefits-inner{position:relative;z-index:2;display:grid;grid-template-columns:180px 1fr;padding:6rem 2.5rem;min-height:100vh;gap:4rem}
+@media(max-width:768px){.benefits-inner{grid-template-columns:1fr}}
+.benefits-left{display:flex;flex-direction:column}
+.benefits-nav{display:flex;flex-direction:column;gap:1rem;opacity:0;transition:opacity .1s ease-out;margin-top:1.5rem}
+.benefits-section.is-inview .benefits-nav{opacity:1}
+.benefits-nav-btn{font-size:.625rem;font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.2);font-family:monospace!important;cursor:pointer;padding:.375rem .625rem;border:1px solid transparent;transition:all .2s}
+.benefits-nav-btn.is-active{color:#4A9EFF;border-color:rgba(74,158,255,.25)}
+.benefits-right{display:flex;flex-direction:column;justify-content:center;gap:2rem}
+.benefits-title-area{position:relative;min-height:120px}
+.benefits-item-title{font-size:clamp(1.75rem,4vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1.05;position:absolute;top:0;left:0;opacity:0;pointer-events:none}
+.benefits-item-title.is-active{opacity:1;pointer-events:auto}
+.benefits-boxes{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:768px){.benefits-boxes{grid-template-columns:1fr}}
+.benefits-box{border:1px solid rgba(74,158,255,.18);padding:1.75rem;position:relative;overflow:hidden;min-height:120px}
+.benefits-box-old{border-color:rgba(255,255,255,.06)}
+.benefits-box-tag{font-size:.5625rem;font-weight:700;letter-spacing:.25em;color:#4A9EFF;text-transform:uppercase;font-family:monospace!important;margin-bottom:.875rem}
+.benefits-box-old .benefits-box-tag{color:rgba(255,255,255,.3)}
+.benefits-box-text{font-size:1rem;font-weight:600;line-height:1.45}
+.benefits-box-old .benefits-box-text{color:rgba(255,255,255,.35)}
+.bfi{position:absolute;top:3.25rem;left:1.75rem;right:1.75rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.bfi.is-active{opacity:1;pointer-events:auto;position:relative;top:auto;left:auto;right:auto}
+
+/* MANIFESTO */
+.letter-section{position:relative;overflow:hidden;min-height:80vh}
+.letter-intro{padding:8rem 2.5rem 4rem;position:relative;z-index:2}
+.letter-container{padding:8rem 2.5rem 8rem;position:relative;z-index:2}
+.manifesto-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:8rem 2.5rem;position:relative;z-index:2}
+@media(max-width:768px){.manifesto-layout{grid-template-columns:1fr}}
+.typing-cursor{display:inline-block;width:.6em;height:1.1em;background:#4A9EFF;vertical-align:text-bottom;margin-left:2px;animation:opacity-blinking .65s step-start infinite}
+.manifesto-body{font-size:clamp(1rem,2vw,1.5rem);font-weight:300;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:2rem}
+.manifesto-body strong{color:rgba(255,255,255,.85);font-weight:700}
+
+/* FOOTER */
+.footer-section{position:relative;overflow:hidden}
+.letterform-bg{position:absolute;inset:0;z-index:0;display:flex;align-items:flex-end;justify-content:flex-end;opacity:.025;overflow:hidden;pointer-events:none}
+.footer-inner{position:relative;z-index:2;padding:7rem 2.5rem 3rem;border-top:1px solid rgba(74,158,255,.07)}
+.footer-headline{font-size:clamp(2.5rem,6vw,5.5rem);font-weight:900;letter-spacing:-.03em;line-height:.93;margin-bottom:3.5rem}
+.footer-cta{display:inline-flex;align-items:center;gap:.75rem;font-size:.8125rem;font-weight:700;color:#fff;background:rgba(74,158,255,.08);border:1px solid rgba(74,158,255,.3);padding:.875rem 2rem;letter-spacing:.12em;text-transform:uppercase;transition:all .25s;margin-bottom:5rem}
+.footer-cta:hover{background:rgba(74,158,255,.2);border-color:#4A9EFF}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(74,158,255,.07);flex-wrap:wrap;gap:1rem}
+.footer-brand{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:.1em}
+.footer-copy{font-size:.6875rem;color:rgba(255,255,255,.18);letter-spacing:.05em;font-family:monospace!important}
+
+/* KEYFRAMES */
+@keyframes marquee{0%{transform:translate(0)}to{transform:translate(calc(-50% - .0625rem))}}
+@keyframes opacity-blinking{50%{opacity:0}}
+
+/* SUBHEADING utility */
+.subheading{font-size:.6875rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.subheading.gradient-text{-webkit-text-fill-color:transparent!important}
+.body-large{font-size:1rem;line-height:1.65}
+.sec-label{font-size:.625rem;font-weight:700;letter-spacing:.3em;color:#4A9EFF;text-transform:uppercase;margin-bottom:1.25rem;font-family:monospace!important}
+.sec-heading{font-size:clamp(2rem,4vw,3.25rem);font-weight:900;letter-spacing:-.02em;line-height:1.05;max-width:480px}
+
+/* MARQUEE force-visible override */
+.marquee-advanced{display:flex!important;overflow:hidden!important}
+.marquee-advanced__scroll{display:flex!important;animation:marquee 35s linear infinite!important;gap:0!important}
+.marquee-advanced__collection{display:flex!important;gap:3rem!important;align-items:center!important}
+.logo-cover{opacity:.5!important;font-size:13px!important;font-weight:700!important;letter-spacing:2px!important;color:#fff!important;white-space:nowrap!important;display:block!important}
+
+/* split-word targets from main.css */
+[data-text-fade-in]:not(.is-inview) .split-word{animation:none}
+[data-hero-title] .split-word{opacity:0}
+[data-benefits-text-top]:not(.is-exit) .split-word{opacity:0}
+[data-number].is-inview [data-number-item]{animation:number-blink-in .36s cubic-bezier(.215,.61,.355,1) both;animation-delay:calc(var(--index)*36ms + .2s)}
+@keyframes number-blink-in{0%{color:#4A9EFF;opacity:0}20%{opacity:.25}35%{color:#4A9EFF}55%{opacity:.1}70%{color:#fff}85%{opacity:1}to{opacity:1;color:#fff}}
+[data-stats-left].is-inview .stat-number-wrap,[data-stats-right].is-inview .stat-number-wrap{animation:blink .26s cubic-bezier(.215,.61,.355,1) both;animation-delay:.175s}
+@keyframes blink{0%{opacity:1}20%{opacity:.3}35%{opacity:.85}55%{opacity:.2}70%{opacity:1}to{opacity:1}}
+[data-typing].is-inview [data-typing-blink]{animation:opacity-blinking .65s step-start infinite}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div data-loader="" class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo" data-loader-item="logo"><span>ST8</span>—AI</div>
+    <div class="loader-tagline" data-loader-item="tagline" id="ldr-tagline">ST8 | AI Automation</div>
+    <div class="loader-counter" data-loader-item="counter" id="ldr-counter">000</div>
+    <div class="loader-bar-wrap" data-loader-item="bar">
+      <div class="loader-bar-fill" id="ldr-fill"></div>
+    </div>
+    <div class="loader-dots" data-loader-item="dots">
+      <div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div>
+      <div class="loader-dot"></div><div class="loader-dot"></div>
+    </div>
+    <div style="font-size:.6rem;font-family:monospace;color:rgba(255,255,255,.15);letter-spacing:.2em;margin-top:.5rem">001 / Autonomous Systems</div>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<section data-load="" data-hero="" class="hero-section" id="hero">
+
+  <!-- Fixed Nav -->
+  <div class="nav-wrapper" id="nav-wrapper">
+    <div class="main-logo"><span class="gradient-text">ST8</span>—AI</div>
+    <div style="display:flex;gap:2rem;align-items:center">
+      <a href="#vision" class="nav-button is-btn" data-button="" data-load-nav-link="">Vision</a>
+      <span class="nav-button is-non">/</span>
+      <a href="#ooda" class="nav-button is-btn" data-button="" data-load-nav-link="">OODA</a>
+      <span class="nav-button is-non">/</span>
+      <a href="#pioneers" class="nav-button is-btn" data-button="" data-load-nav-link="">Industries</a>
+      <span class="nav-button is-non">/</span>
+      <a href="#manifesto" class="nav-button is-btn" data-button="" data-load-nav-link="">Manifesto</a>
+    </div>
+    <a href="https://t.me/Zzima686" target="_blank" class="icon-button is-desktop" data-button="">
+      <div data-button-text="">ST8 Gate ↗</div>
+    </a>
+  </div>
+
+  <!-- Hero Video -->
+  <div data-video="" data-load-video="" class="full-video w-embed">
+    <video playsinline loop muted autoplay>
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1125882576/rendition/1440p/file.mp4?loc=external&signature=a0067ca78212d9ae569da99e8676f4bac2702af80336b7cdf8cef7ce3ef04388" type="video/mp4">
+    </video>
+    <div class="gradient-overlay"></div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="hero-container">
+    <div class="hero-flex">
+      <div class="hero-subline">
+        <div data-load-subline="" class="subheading is-hero">Elite AI Automation</div>
+      </div>
+      <h1 data-hero-title="" class="hero-title">Autonomous<br>AI Systems</h1>
+      <div class="nav-bar">
+        <a href="https://t.me/Zzima686" target="_blank" class="icon-button is-mobile" data-button="" style="display:inline-flex">
+          <div data-button-text="">ST8 Gate ↗</div>
+        </a>
+      </div>
+    </div>
+    <div class="heading-width">
+      <h2 class="heading-6 is-hero">Только для тех,</h2>
+      <div class="heading-6 gradient-text">кто готов к реальному</div>
+      <div class="heading-6 gradient-text">результату.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SWAP TEXT -->
+<div class="swap-section">
+  <div style="display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap">
+    <span class="swap-pre">Мы</span>
+    <span class="swap-list" data-swap style="--width:16ch">
+      <span class="swap-list-item">автоматизируем</span>
+    </span>
+  </div>
+  <div class="swap-sub" data-text-fade-in>
+    бизнес который привык к старым методам.
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div data-inview="" class="divider"><div class="divider-line"></div></div>
+
+<!-- VISION / INTRO SECTION -->
+<section id="vision" class="intro-section">
+  <div class="intro-video-wrap">
+    <video playsinline loop muted autoplay style="position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1125885537/rendition/1440p/file.mp4?loc=external&signature=a5520ff66674eb10bf783202d865de09bb8ae399c074133d636c102b19173d59" type="video/mp4">
+    </video>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,10,20,.2),rgba(5,10,20,.6));z-index:1"></div>
+    <div style="position:absolute;bottom:2.5rem;left:2.5rem;z-index:2">
+      <div class="sec-label">// Vision</div>
+      <h2 class="sec-heading" data-text-fade-in>Автономные AI-системы<br>для бизнеса.</h2>
+    </div>
+  </div>
+  <div class="intro-grid">
+    <div>
+      <p data-text-fade-in style="font-size:1rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.5rem">
+        Через Claude AI, FastAPI и автономных агентов — каждый процесс прозрачен, измерим и работает без участия человека.
+      </p>
+      <p data-text-fade-in style="font-size:1rem;color:rgba(255,255,255,.55);line-height:1.7">
+        Мы не берём всех. Мы выбираем партнёров которым нужен реальный AI. Не интерес — реальная боль бизнеса.
+      </p>
+    </div>
+    <div>
+      <p data-text-fade-in style="font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:600;color:rgba(255,255,255,.85);line-height:1.4">
+        Результат измеримый. Всегда.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PROTECTION / OPPORTUNITIES -->
+<section id="opportunities" class="protection-section">
+  <div class="protection-grid">
+    <div class="protection-left">
+      <div class="sec-label">// Защита</div>
+      <h2 style="font-size:clamp(2rem,4vw,3.25rem);font-weight:900;line-height:1.05;margin-bottom:1.5rem" data-text-fade-in>
+        Скрытые возможности.<br><span class="gradient-text">Защита уровня enterprise.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,.5);max-width:420px;line-height:1.7" data-text-fade-in>
+        Большинство процессов созданы чтобы тормозить. Ручной труд, потери данных, человеческий фактор — это норма до внедрения AI.
+      </p>
+    </div>
+    <div class="protection-vid-container">
+      <div data-video="" class="full-video is-protection w-embed">
+        <video playsinline loop muted autoplay style="position:absolute;width:100%;height:100%;object-fit:cover">
+          <source src="https://player.vimeo.com/progressive_redirect/playback/1125885446/rendition/1080p/file.mp4?loc=external&signature=22238edd2077d8462a7c9f385882f85986c705f951e289986fec4a91b282fb17" type="video/mp4">
+        </video>
+      </div>
+      <div class="gradient-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY TEXT-MOVE -->
+<div class="industry-section" id="industries">
+  <div class="industry-row">
+    <div class="heading-3 is-industry" data-text-move-left="">
+      HoReCa<span class="industry-sep">·</span>Ритейл<span class="industry-sep">·</span>Производство<span class="industry-sep">·</span>Логистика<span class="industry-sep">·</span>HoReCa<span class="industry-sep">·</span>Ритейл<span class="industry-sep">·</span>Производство<span class="industry-sep">·</span>Логистика<span class="industry-sep">·</span>HoReCa<span class="industry-sep">·</span>Ритейл<span class="industry-sep">·</span>Производство<span class="industry-sep">·</span>Логистика<span class="industry-sep">·</span>
+    </div>
+  </div>
+  <div class="industry-row">
+    <div class="heading-3 is-industry is-rm" data-text-move-right="">
+      B2G<span class="industry-sep">·</span>Enterprise<span class="industry-sep">·</span>ОАЭ<span class="industry-sep">·</span>AIRI<span class="industry-sep">·</span>B2G<span class="industry-sep">·</span>Enterprise<span class="industry-sep">·</span>ОАЭ<span class="industry-sep">·</span>AIRI<span class="industry-sep">·</span>B2G<span class="industry-sep">·</span>Enterprise<span class="industry-sep">·</span>ОАЭ<span class="industry-sep">·</span>AIRI<span class="industry-sep">·</span>
+    </div>
+  </div>
+</div>
+
+<!-- PIONEERS / INDUSTRIES GRID -->
+<div id="pioneers" class="pioneers-section">
+  <video playsinline loop muted autoplay style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3;z-index:0">
+    <source src="https://player.vimeo.com/progressive_redirect/playback/1125882288/rendition/1440p/file.mp4?loc=external&signature=c600bbf2ed1a704161ac1e7271164262b54c67054f355b2f4cd0d6834d8c1356" type="video/mp4">
+  </video>
+  <img src="https://cdn.prod.website-files.com/68e3c26f7edb22bc9e5314b2/68e7e742b6fb64146d029e04_drone-static-render-01.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.1;z-index:0" alt="">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,10,20,.55),rgba(5,10,20,.88));z-index:1"></div>
+  <div style="position:relative;z-index:2">
+    <div class="sec-label">// Отрасли</div>
+    <h2 class="sec-heading" data-text-fade-in>AI-решения для ключевых отраслей</h2>
+    <p style="color:rgba(255,255,255,.4);margin-top:.75rem;margin-bottom:3rem" data-text-fade-in>Работаем там где автоматизация даёт максимальный эффект</p>
+    <div class="pioneers-grid">
+      <div class="pioneer-cell"><div class="pioneer-num">01</div><strong>HoReCa</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">02</div><strong>Ритейл</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">03</div><strong>Производство</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">04</div><strong>Логистика</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">05</div><strong>B2G</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">06</div><strong>Enterprise</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">07</div><strong>ОАЭ</strong></div>
+      <div class="pioneer-cell"><div class="pioneer-num">08</div><strong>AIRI</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO MARQUEE -->
+<section class="logo-section">
+  <div data-marquee-duplicate="2" data-marquee-direction="right" data-marquee-status="normal" class="marquee-advanced">
+    <div data-marquee-scroll-target="" class="marquee-advanced__scroll">
+      <div data-marquee-collection-target="" class="marquee-advanced__collection">
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Next.js</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Python</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Claude AI</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">FastAPI</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Telegram</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">PostgreSQL</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Docker</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Redis</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Three.js</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">GSAP</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Anthropic</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Webflow</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">LangChain</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">OpenAI</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Next.js</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Python</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Claude AI</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">FastAPI</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Telegram</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">PostgreSQL</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Docker</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Redis</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Three.js</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">GSAP</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">Anthropic</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">LangChain</div></div>
+        <div class="marquee-advanced__item-width"><div class="logo-cover">OpenAI</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="sec-label">// Access Granted</div>
+  <div data-stats="" class="stats-container">
+    <div data-stats-left="" class="stat-left">
+      <div class="stat-number-wrap">
+        <div class="stat-number" data-number="">
+          <span data-number-item="" class="stat-number-item" style="--index:0">9</span>
+          <span data-number-item="" class="stat-number-item" style="--index:1">4</span>
+          <span data-number-item="" class="stat-number-item stat-number-accent" style="--index:2">%</span>
+        </div>
+      </div>
+      <div class="stat-descriptor">точность AI-систем ST8</div>
+      <div class="micro-text is-width">Of our selected opportunities delivered positive returns over the last 12 months</div>
+    </div>
+    <div data-stats-right="" class="stat-right">
+      <div class="stat-number-wrap">
+        <div class="stat-number" data-number="">
+          <span data-number-item="" class="stat-number-item stat-number-accent" style="--index:0">+</span>
+          <span data-number-item="" class="stat-number-item" style="--index:1">4</span>
+          <span data-number-item="" class="stat-number-item" style="--index:2">7</span>
+        </div>
+      </div>
+      <div class="stat-descriptor">проектов внедрено</div>
+    </div>
+  </div>
+  <p class="stats-tagline" data-text-fade-in>
+    Где другие останавливаются — <span class="gradient-text">мы начинаем.</span>
+  </p>
+  <p style="color:rgba(255,255,255,.35);max-width:600px;margin-top:1rem;line-height:1.6;font-size:.9rem" data-text-fade-in>
+    Наши AI-системы работают там где стандартные подрядчики отступают. Мы не продаём — мы внедряем.
+  </p>
+</section>
+
+<!-- DIVIDER -->
+<div data-inview="" class="divider"><div class="divider-line"></div></div>
+
+<!-- PROCESS / OODA -->
+<section id="ooda" class="process-section">
+  <div class="sec-label">// Process</div>
+  <h2 class="sec-heading" data-text-fade-in>От анализа к результату. OODA.</h2>
+  <div class="steps-container">
+    <div class="steps-grid" data-number="">
+      <div class="icon-column">
+        <div class="step-number" data-number-item style="--index:0">01</div>
+        <div class="divider-line-short"></div>
+        <div class="step-title">OBSERVE</div>
+        <div class="step-desc">Сбор и анализ данных бизнеса</div>
+      </div>
+      <div class="icon-column">
+        <div class="step-number" data-number-item style="--index:1">02</div>
+        <div class="divider-line-short"></div>
+        <div class="step-title">ORIENT</div>
+        <div class="step-desc">Архитектура AI-решения под задачу</div>
+      </div>
+      <div class="icon-column">
+        <div class="step-number" data-number-item style="--index:2">03</div>
+        <div class="divider-line-short"></div>
+        <div class="step-title">DECIDE</div>
+        <div class="step-desc">Выбор и согласование стека технологий</div>
+      </div>
+      <div class="icon-column">
+        <div class="step-number" data-number-item style="--index:3">04</div>
+        <div class="divider-line-short"></div>
+        <div class="step-title">ACT</div>
+        <div class="step-desc">Внедрение и измеримый результат</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section data-benefits="" class="benefits-section is-inview">
+  <div class="benefits-bg-wrap">
+    <img src="https://cdn.prod.website-files.com/68e3c26f7edb22bc9e5314b2/68f0e5d3efd32e8bd78cd1d8_slider-bg-drone.jpg" style="width:100%;height:100%;object-fit:cover;opacity:.15" alt="">
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,10,20,.6),rgba(5,10,20,.9))"></div>
+  </div>
+  <div class="benefits-inner">
+    <div class="benefits-left">
+      <div class="sec-label">// Сравнение</div>
+      <div class="benefits-nav">
+        <button class="benefits-nav-btn is-active" data-bn="0">01</button>
+        <button class="benefits-nav-btn" data-bn="1">02</button>
+        <button class="benefits-nav-btn" data-bn="2">03</button>
+        <button class="benefits-nav-btn" data-bn="3">04</button>
+      </div>
+    </div>
+    <div class="benefits-right">
+      <div class="benefits-title-area">
+        <div class="benefits-item-title is-active" data-benefits-text-top data-bi="0">Результат vs Обещания</div>
+        <div class="benefits-item-title" data-benefits-text-top data-bi="1">Скорость vs Ожидание</div>
+        <div class="benefits-item-title" data-benefits-text-top data-bi="2">AI vs Excel</div>
+        <div class="benefits-item-title" data-benefits-text-top data-bi="3">Поддержка vs Пропажа</div>
+      </div>
+      <div class="benefits-boxes">
+        <div class="benefits-box">
+          <div class="benefits-box-tag">ST8-AI</div>
+          <div class="bfi is-active" data-bi="0"><div class="benefits-box-text">Фиксированный KPI в договоре. Не выполнили — возвращаем деньги.</div></div>
+          <div class="bfi" data-bi="1"><div class="benefits-box-text">Первый результат за 2-4 недели. Итерации каждую неделю.</div></div>
+          <div class="bfi" data-bi="2"><div class="benefits-box-text">Реальные нейросети Claude AI и автоматизация. Никаких переименованных скриптов.</div></div>
+          <div class="bfi" data-bi="3"><div class="benefits-box-text">На связи 24/7 после внедрения. Развиваем систему вместе с бизнесом.</div></div>
+        </div>
+        <div class="benefits-box benefits-box-old">
+          <div class="benefits-box-tag">Обычные подрядчики</div>
+          <div class="bfi is-active" data-bi="0"><div class="benefits-box-text">Красивые презентации без гарантий и ответственности.</div></div>
+          <div class="bfi" data-bi="1"><div class="benefits-box-text">Полгода разработки до первого показа результата.</div></div>
+          <div class="bfi" data-bi="2"><div class="benefits-box-text">Вам продают Excel в красивой обёртке.</div></div>
+          <div class="bfi" data-bi="3"><div class="benefits-box-text">Исчезают после получения оплаты. Поддержки нет.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto" class="letter-section">
+  <div data-video="" style="position:absolute;inset:0;z-index:0">
+    <video playsinline loop muted autoplay style="position:absolute;width:100%;height:100%;object-fit:cover;opacity:.45">
+      <source src="https://player.vimeo.com/progressive_redirect/playback/1125885665/rendition/1080p/file.mp4?loc=external&signature=91ed1c37b465ed963ab425e7997235d66b2aeaf48146a96806b383bb2e2f0c4a" type="video/mp4">
+    </video>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,10,20,.45),rgba(5,10,20,.88))"></div>
+  </div>
+  <div class="manifesto-layout">
+    <div data-typing="" class="letter-intro" style="padding:0;position:relative;z-index:2">
+      <div class="sec-label">// Манифест</div>
+      <div style="font-size:clamp(.875rem,1.5vw,1.1rem);font-weight:500;font-family:monospace!important;color:rgba(255,255,255,.55);line-height:1.75;min-height:5em;letter-spacing:.03em;margin-top:1rem">
+        <span id="typing-out"></span><span data-typing-blink="" class="typing-cursor">█</span>
+      </div>
+    </div>
+    <div class="letter-container" style="padding:0;position:relative;z-index:2">
+      <p class="manifesto-body" data-text-fade-in>
+        Мы тихо находим компании готовые к реальной трансформации. <strong>Каждый проект — намеренный выбор. Не массовый рынок — точечное партнёрство.</strong>
+      </p>
+      <p class="manifesto-body" data-text-fade-in>
+        Внутри ST8 доверие абсолютно. <strong>Каждый клиент — долгосрочный партнёр. Мы строим системы которые работают годами.</strong>
+      </p>
+      <p class="manifesto-body" data-text-fade-in>
+        <strong>Один партнёр с реальной болью важнее тысячи с интересом.</strong>
+      </p>
+      <p class="manifesto-body" data-text-fade-in>
+        ST8-AI — это не подрядчик. <strong>Это технологический партнёр который разделяет ответственность за результат.</strong>
+      </p>
+      <p class="manifesto-body" data-text-fade-in>
+        Это не агентство. <strong>Это команда которая строит автономные системы меняющие бизнес навсегда.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="footer-section">
+  <div class="letterform-bg">
+    <div style="font-size:30vw;font-weight:900;color:#4A9EFF;line-height:.8">ST8</div>
+  </div>
+  <div class="footer-inner">
+    <h2 class="footer-headline" data-text-fade-in>
+      Трансформация.<br><span class="gradient-text">Без компромиссов.</span>
+    </h2>
+    <p style="color:rgba(255,255,255,.4);max-width:540px;line-height:1.7;margin-bottom:3rem;font-size:.9rem" data-text-fade-in>
+      ST8-AI работает только с теми кто готов к реальным изменениям. Результат — не обещание. Это условие входа.
+    </p>
+    <p style="color:rgba(255,255,255,.25);max-width:480px;line-height:1.65;margin-bottom:4rem;font-size:.85rem" data-text-fade-in>
+      Остальные видят лишь результаты со стороны.
+    </p>
+    <a href="https://t.me/Zzima686" target="_blank" class="footer-cta" data-button="">
+      <div data-button-text="">ST8 Gate ↗</div>
+    </a>
+    <div class="footer-bottom">
+      <div class="footer-brand"><span class="gradient-text">ST8</span>—AI · st8-ai.ru</div>
+      <div class="footer-copy">©2026 ST8-AI · st8-ai.ru</div>
+      <a href="https://t.me/Zzima686" target="_blank" class="footer-copy" style="text-decoration:none">@Zzima686</a>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOR -->
+<div id="cursor" style="width:20px;height:20px;background:#4A9EFF;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .1s;opacity:.7;top:0;left:0;transform:translate(-50%,-50%)"></div>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* cursor */
+document.addEventListener('mousemove',e=>{
+  const c=document.getElementById('cursor');
+  c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';
+});
+
+/* split words — skip elements with HTML children to avoid breaking tags */
+function splitWords(el){
+  if(!el||el.dataset.split)return;
+  if(el.children.length>0)return;
+  el.dataset.split='1';
+  const html=el.innerHTML.trim().split(/\s+/).map((w,i)=>
+    `<span class="split-word" style="--word:${i+1};display:inline-block">${w}</span>`
+  ).join(' ');
+  el.innerHTML=html;
+}
+
+/* LOADER */
+(function(){
+  const counter=document.getElementById('ldr-counter');
+  const fill=document.getElementById('ldr-fill');
+  const tagline=document.getElementById('ldr-tagline');
+  const dots=document.querySelectorAll('.loader-dot');
+  const loader=document.getElementById('loader');
+  gsap.to(tagline,{opacity:1,duration:.3,delay:.3});
+  gsap.to(dots,{opacity:1,stagger:.1,duration:.15,delay:.2,repeat:3,yoyo:true});
+  const obj={v:0};
+  gsap.to(obj,{v:100,duration:1.9,ease:'power2.inOut',delay:.15,
+    onUpdate(){
+      const n=Math.floor(obj.v);
+      counter.textContent=String(n).padStart(3,'0');
+      fill.style.width=n+'%';
+    },
+    onComplete(){
+      gsap.to('.loader-logo',{color:'#4A9EFF',duration:.08,yoyo:true,repeat:3,
+        onComplete(){
+          gsap.to(loader,{opacity:0,duration:.55,delay:.25,
+            onComplete(){
+              loader.style.display='none';
+              document.documentElement.classList.add('is-ready','fonts-loaded');
+              ScrollTrigger.refresh();
+              afterLoad();
+            }
+          });
+        }
+      });
+    }
+  });
+})();
+
+/* fallback: force-hide loader after 3.5s if GSAP stalls */
+setTimeout(()=>{
+  const loader=document.getElementById('loader');
+  if(loader&&loader.style.display!=='none'){
+    loader.style.display='none';
+    document.documentElement.classList.add('is-ready','fonts-loaded');
+    ScrollTrigger.refresh();
+    afterLoad();
+  }
+},3500);
+
+function afterLoad(){
+  document.querySelectorAll('[data-hero-title]').forEach(splitWords);
+  document.querySelectorAll('[data-text-fade-in]').forEach(splitWords);
+  initSwap();
+  initScrollTriggers();
+  initBenefits();
+  initTyping();
+}
+
+/* SWAP */
+function initSwap(){
+  const el=document.querySelector('[data-swap]');
+  if(!el)return;
+  const words=['автоматизируем','масштабируем','трансформируем'];
+  let idx=0;
+  const item=el.querySelector('.swap-list-item');
+  const probe=Object.assign(document.createElement('span'),{
+    style:'position:absolute;visibility:hidden;white-space:nowrap;font-family:inherit;font-size:inherit;font-weight:inherit'
+  });
+  document.body.appendChild(probe);
+  function setWord(w){
+    probe.textContent=w;
+    const cs=getComputedStyle(el);
+    probe.style.fontSize=cs.fontSize;probe.style.fontWeight=cs.fontWeight;
+    el.style.setProperty('--width',probe.offsetWidth+'px');
+    item.textContent=w;
+  }
+  setWord(words[0]);
+  setInterval(()=>{
+    gsap.to(item,{opacity:0,y:-6,duration:.22,ease:'power2.in',
+      onComplete(){
+        idx=(idx+1)%words.length;setWord(words[idx]);
+        gsap.fromTo(item,{opacity:0,y:8},{opacity:1,y:0,duration:.3,ease:'power2.out'});
+      }
+    });
+  },2400);
+}
+
+/* SCROLL TRIGGERS */
+function initScrollTriggers(){
+  document.querySelectorAll('[data-text-fade-in]').forEach(el=>{
+    ScrollTrigger.create({trigger:el,start:'top 88%',
+      onEnter:()=>el.classList.add('is-inview')});
+  });
+  document.querySelectorAll('[data-stats-left],[data-stats-right]').forEach(el=>{
+    ScrollTrigger.create({trigger:el,start:'top 82%',
+      onEnter:()=>el.classList.add('is-inview')});
+  });
+  document.querySelectorAll('[data-number]').forEach(el=>{
+    ScrollTrigger.create({trigger:el,start:'top 82%',
+      onEnter:()=>el.classList.add('is-inview')});
+  });
+  ScrollTrigger.create({
+    start:'top -80',
+    onUpdate(self){
+      const nav=document.getElementById('nav-wrapper');
+      if(nav){
+        nav.style.backgroundColor=self.progress>0?'rgba(5,10,20,.92)':'';
+        nav.style.backdropFilter=self.progress>0?'blur(18px)':'';
+      }
+    }
+  });
+}
+
+/* BENEFITS */
+function initBenefits(){
+  const sec=document.querySelector('[data-benefits]');
+  if(!sec)return;
+  const titles=sec.querySelectorAll('[data-benefits-text-top]');
+  const topBfis=Array.from(sec.querySelectorAll('.bfi'));
+  const navBtns=sec.querySelectorAll('[data-bn]');
+  let current=0;
+
+  titles.forEach(splitWords);
+
+  function activate(idx){
+    if(idx===current&&sec.querySelector('.benefits-item-title.is-active'))return;
+    // titles
+    titles.forEach((t,i)=>{
+      if(i===current){t.classList.remove('is-active');t.classList.add('is-exit');setTimeout(()=>t.classList.remove('is-exit'),400);}
+      if(i===idx){t.classList.remove('is-exit');requestAnimationFrame(()=>t.classList.add('is-active'));}
+    });
+    // box texts
+    topBfis.forEach(b=>{
+      if(parseInt(b.dataset.bi)===current)b.classList.remove('is-active');
+      if(parseInt(b.dataset.bi)===idx)b.classList.add('is-active');
+    });
+    navBtns.forEach((b,i)=>b.classList.toggle('is-active',i===idx));
+    current=idx;
+  }
+
+  navBtns.forEach((b,i)=>b.addEventListener('click',()=>activate(i)));
+
+  ScrollTrigger.create({
+    trigger:sec,pin:true,scrub:.4,
+    start:'top top',end:'+=280%',
+    onUpdate(self){
+      const idx=Math.min(Math.floor(self.progress*4),3);
+      if(idx!==current)activate(idx);
+    }
+  });
+}
+
+/* TYPING */
+function initTyping(){
+  const sec=document.querySelector('[data-typing]');
+  const out=document.getElementById('typing-out');
+  if(!sec||!out)return;
+  const text='вход >>> в _ ST8 [∞] — не _ запрашивают [?] — его получают';
+  out.textContent='';
+  ScrollTrigger.create({
+    trigger:sec,start:'top 75%',
+    onEnter(){
+      sec.classList.add('is-inview');
+      let i=0;
+      (function type(){
+        if(i<text.length){out.textContent+=text[i++];setTimeout(type,42+Math.random()*28);}
+      })();
+    }
+  });
+}
+</script>
+</body>
+</html>

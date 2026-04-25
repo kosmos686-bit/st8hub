@@ -1,3 +1,19 @@
+﻿try:
+    from agents_jarvis_integration import handle_agents_command, is_agent_command
+except Exception as _e:
+    is_agent_command = lambda x: False
+    handle_agents_command = None
+
+is_auto_hunt_command = lambda x: False
+handle_auto_hunt_command = None
+
+try:
+    from max_agent import MaxAgent
+    from dima_agent import DimaAgent
+except:
+    MaxAgent = None
+    DimaAgent = None
+
 import asyncio
 import hashlib
 import json
@@ -375,19 +391,43 @@ ALL_AGENTS.update(load_external_agents())
 AGENT_ROUTER_PROMPT = """Ты роутер агентов ST8-AI. Определи какой агент нужен для ответа на сообщение.
 
 Доступные агенты:
-- sales-hunter: холодный лид, первый контакт, как написать/позвонить, квалификация, follow-up серия, прогрев до встречи
-- sales-closer: клиент говорит дорого/подумаю/не сейчас/есть другие — нужен скрипт закрытия прямо сейчас
+
+# ПРОДАЖИ — холодные
+- sales-hunter: холодный лид, первый контакт, как написать/позвонить, квалификация, follow-up серия
+- sales-outbound-strategist: ICP, сигналы для outreach, база для холодного обхода, найти клиентов в сегменте/регионе
+- sales-discovery-coach: как провести первый звонок/встречу, какие вопросы задать, выявление боли
+
+# ПРОДАЖИ — сделка
+- sales-closer: клиент говорит дорого/подумаю/не сейчас/есть другие — скрипт закрытия прямо сейчас
 - objection-handler: нужны варианты ответов на конкретное возражение (3 стиля)
+- deal-analyst: что происходит с этой сделкой, почему зависла, что делать дальше, OODA
+- sales-deal-strategist: план победы в сделке, MEDDPICC, конкурентное позиционирование
+- sales-account-strategist: развитие текущего клиента, upsell, удержание, QBR
+
+# ПРОДАЖИ — инструменты
 - kp-writer: написать готовое КП, питч, предложение для конкретного клиента
-- deal-analyst: что происходит с этой сделкой, почему зависла, что делать дальше
-- st8-kp-architect: как выстроить структуру КП, что включить, как убедить через документ
-- st8-sales-strategist: стратегия выхода на рынок/сегмент, построение воронки, outreach
-- st8-horeca-consultant: вопросы про рестораны, кафе, отели, iiko, R-Keeper, HoReCa-боли
-- st8-bot-developer: разработка ботов, Telegram API, код, интеграции, технические баги
-- st8-backend-architect: архитектура системы, API-дизайн, БД, масштабирование, деплой
-- st8-security-auditor: безопасность кода, утечки ключей, аудит, уязвимости
-- st8-ai-director: стратегия развития ST8-AI как продукта, roadmap, позиционирование, рынок
-- none: общий вопрос, личное, погода, что-то не про бизнес
+- st8-kp-architect: структура КП, воронка убеждения, что включить в документ
+- sales-proposal-strategist: стратегия под тендер/RFP, win-тема, executive summary
+- sales-pipeline-analyst: анализ пайплайна, скорость сделок, прогноз, где застряло
+
+# СТРАТЕГИЯ
+- st8-sales-strategist: стратегия продаж AI-решений, MEDDIC/Sandler/Challenger, от outreach до подписания
+- st8-ai-director: стратегия ST8-AI как продукта, roadmap, монетизация, партнёрства, рынок
+
+# ОТРАСЛЬ
+- st8-horeca-consultant: рестораны, кафе, отели, iiko, R-Keeper, фудкост, HoReCa-боли
+
+# КОД И РАЗРАБОТКА
+- st8-bot-developer: написать бот, скрипт, код на Python, Telegram API, интеграции, баги
+- st8-backend-architect: архитектура, API-дизайн, БД, масштабирование, деплой, Windows Server
+- engineering-rapid-prototyper: быстро сделать MVP, прототип, работающий пример за час
+- engineering-ai-engineer: ML-модели, AI-пайплайны, embeddings, fine-tuning, RAG
+- engineering-code-reviewer: проверь этот код, найди баги, code review, что не так
+
+# БЕЗОПАСНОСТЬ
+- st8-security-auditor: безопасность кода, утечки ключей, OWASP, уязвимости, права доступа
+
+- none: общий вопрос, личное, погода, питание, напоминания, что-то не про бизнес и не про код
 
 Ответь ТОЛЬКО именем агента без пояснений. Например: sales-closer"""
 
@@ -420,7 +460,25 @@ def route_to_agent(user_text, claude_client, model):
 _JARVIS_PROMPT_CACHE = {'prompt': None, 'hub_block': None, 'mtime': None}
 
 
-def _load_agent_memory_md():
+def _load_agent_memory_md(query=None):
+    """Семантическая загрузка памяти через mempalace или fallback на все файлы."""
+    # Семантический поиск если есть запрос
+    if query:
+        try:
+            import subprocess, json as _json
+            result = subprocess.run(
+                ['python', '-m', 'mempalace', 'search', query, '--limit', '5', '--json'],
+                capture_output=True, text=True, cwd=BASE_DIR
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                data = _json.loads(result.stdout)
+                parts = []
+                for item in data:
+                    parts.append('[memory]\n' + item.get('text', '')[:800])
+                if parts:
+                    return '\n\n'.join(parts)
+        except Exception:
+            pass
     """Читает все .md файлы из agent_memory/ и ключевые файлы из st8-memory-bank/."""
     parts = []
 
@@ -584,7 +642,7 @@ def _build_hub_data():
     else:
         leads_summary = 'Лидов нет'
 
-    context_md = _load_agent_memory_md()
+    context_md = _load_agent_memory_md(query=user_message if "user_message" in dir() else None)
     context_section = f"\n\n=== КОНТЕКСТ ST8-AI ===\n{context_md}" if context_md else ""
 
     hub_block = f"""=== ХАБ ЛИДОВ ST8-AI (всего: {total}) ===
@@ -606,7 +664,20 @@ def _build_hub_data():
 - Готовить ответы, КП, скрипты звонков
 - Анализировать статусы и рекомендовать следующие шаги
 
-Отвечай коротко, конкретно, по-деловому."""
+Отвечай коротко, конкретно, по-деловому.
+
+ФОРМАТ TELEGRAM — СТРОГО:
+- без Markdown: нет **, нет ##, нет ```, нет таблиц, нет ---
+- один эмодзи в начале строки, больше нигде
+- строчные буквы в заголовках
+- максимум 7-10 строк на ответ
+- без приветствий ("Привет!", "Погнали! 🚀") и прощаний
+
+## ПИТАНИЕ АЛЕКСЕЯ
+- Лимит: 1400 ккал/день — всё разрешено, главное вписаться в калории
+- Цель: минус 5-6 кг
+- Тренировки: пока нельзя (колено)
+- Meal_scheduler ведёт меню и учёт — не генерируй своё меню"""
 
     _JARVIS_PROMPT_CACHE['prompt'] = jarvis_prompt
     _JARVIS_PROMPT_CACHE['hub_block'] = hub_block
@@ -634,12 +705,26 @@ def process_with_agent(user_text, history, claude_client, model):
     if palace_hits:
         palace_block = "\n\n=== ПАМЯТЬ (mempalace) ===\n" + "\n---\n".join(palace_hits)
 
+    # Если упомянут клиент — читаем его .md из agent_memory/
+    client_md_block = ""
+    client_slug = get_client_slug(user_text)
+    if client_slug:
+        md_path = os.path.join(AGENT_MEMORY_DIR, f'{client_slug}.md')
+        if os.path.exists(md_path):
+            try:
+                client_md_block = f"\n\n=== КОНТЕКСТ КЛИЕНТА ({client_slug}) ===\n" + open(md_path, encoding='utf-8').read()[:1500]
+            except Exception:
+                pass
+
+    _now = now_moscow()
+    _date_line = f"\nСегодня: {_now.strftime('%A, %d %B %Y')}, {_now.strftime('%H:%M')} МСК.\n"
+
     if agent_name == "none":
-        system_prompt = jarvis_prompt + session_block + palace_block
+        system_prompt = jarvis_prompt + _date_line + session_block + palace_block + client_md_block
     else:
         agent_prompt = ALL_AGENTS.get(agent_name, "")
         base = f"{agent_prompt}\n\n---\n\n{hub_block}" if agent_prompt else jarvis_prompt
-        system_prompt = base + session_block + palace_block
+        system_prompt = base + _date_line + session_block + palace_block + client_md_block
 
     messages = []
     for h in history[-10:]:
@@ -941,7 +1026,22 @@ MEMORY_PATH = os.path.join(BASE_DIR, 'jarvis_memory.json')
 OFFSET_PATH = os.path.join(BASE_DIR, 'jarvis_offset.json')
 AGENT_MEMORY_DIR = os.path.join(BASE_DIR, 'agent_memory')
 MAX_MEMORY = 20
+
+
 POLL_INTERVAL = 3
+
+
+def _append_agent_memory(filename: str, event: str, details: str):
+    """Дописывает строку в agent_memory/<filename> в формате: дата | событие | детали"""
+    try:
+        os.makedirs(AGENT_MEMORY_DIR, exist_ok=True)
+        path = os.path.join(AGENT_MEMORY_DIR, filename)
+        ts = datetime.now().strftime('%Y-%m-%d %H:%M')
+        line = f"{ts} | {event} | {details}\n"
+        with open(path, 'a', encoding='utf-8') as f:
+            f.write(line)
+    except Exception as exc:
+        print(f"[agent_memory] ошибка записи {filename}: {exc}")
 
 # в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
 # AGENT ROUTER
@@ -1006,6 +1106,8 @@ CLIENT_SLUGS = {
     'лаки груп': 'lucky_group', 'панченко': 'lucky_group',
     'раппопорт': 'rapoport',
     'airi': 'airi', 'st8': 'st8_context', 'оселедец': 'airi', 'макаров': 'airi',
+    'большакова': 'bolshakova', 'юлия': 'bolshakova', 'путь лидера': 'bolshakova',
+    'unik': 'unik_food', 'уник': 'unik_food', 'антон': 'unik_food',
 }
 
 
@@ -1017,6 +1119,53 @@ def get_client_slug(text):
         if key in msg_lower:
             return slug
     return None
+
+
+def _auto_learn(user_text: str, claude_client) -> None:
+    """Extract facts from what Alexey writes and persist to agent_memory."""
+    try:
+        t = user_text.strip()
+        if not t or len(t) < 20 or t.startswith('/'):
+            return
+        _skip = ('завтрак ок', 'обед ок', 'ужин ок', 'нет ', 'замени ', 'переведи')
+        if any(t.lower().startswith(p) for p in _skip):
+            return
+
+        resp = claude_client.messages.create(
+            model=_HAIKU_MODEL,
+            max_tokens=250,
+            messages=[{"role": "user", "content": (
+                f"Из сообщения извлеки важные факты для долгосрочной памяти.\n"
+                f"Сообщение: {t}\n\n"
+                f'Ответь строго JSON: {{"facts": ["факт 1"], "client": "имя или null"}}\n'
+                f"facts — только конкретные данные (встречи, решения, цифры, планы). "
+                f"Пустой список если нечего. Не извлекай вопросы и общие фразы."
+            )}]
+        )
+        import json as _j
+        raw = resp.content[0].text.strip()
+        if '```' in raw:
+            raw = raw.split('```')[1].lstrip('json').strip()
+        data = _j.loads(raw)
+        facts = data.get("facts", [])
+        if not facts:
+            return
+
+        slug = get_client_slug(t)
+        if not slug and data.get("client"):
+            slug = str(data["client"]).lower().replace(' ', '_')[:20]
+        target = (
+            f"c:/st8-workspace/agent_memory/{slug}.md"
+            if slug else
+            "c:/st8-workspace/agent_memory/alexey_notes.md"
+        )
+        date_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+        with open(target, 'a', encoding='utf-8') as fh:
+            fh.write(f"\n## [auto] {date_str}\n")
+            for f in facts:
+                fh.write(f"- {f}\n")
+    except Exception:
+        pass
 
 
 def load_agent_memory(client_slug):
@@ -1103,25 +1252,38 @@ def save_agent_memory(client_slug, agent_name, user_msg, agent_response):
     memory = memory[-30:]
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(memory, f, ensure_ascii=False, indent=2)
+    # Sync to Obsidian
+    try:
+        import os as _os
+        obs_dir = r'C:\Users\user\Documents\Obsidian Vault\agent_memory'
+        _os.makedirs(obs_dir, exist_ok=True)
+        obs_path = _os.path.join(obs_dir, client_slug + '.md')
+        with open(obs_path, 'w', encoding='utf-8') as _f:
+            _f.write('# Memory: ' + client_slug + '\n\n')
+            for m in memory[-10:]:
+                _f.write('## ' + m['ts'] + '\n**Agent:** ' + m['agent'] + '\n**User:** ' + m['user'] + '\n**Response:** ' + m['response'] + '\n\n')
+    except Exception:
+        pass
 
 
 # в"Ђв"Ђв"Ђ Agent Tools в"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђ
 
 def tool_save_lead_status(company, status, comment=''):
-    """Р—Р°РїРёСЃС‹РІР°РµС‚ СЃС‚Р°С‚СѓСЃ Р»РёРґР° РІ leads_status.md"""
+    """Записывает статус лида в leads_status.md"""
     try:
         path = os.path.join(BASE_DIR, 'leads_status.md')
         date = datetime.now().strftime('%Y-%m-%d')
         line = f"| {date} | {company} | — | {status} | {comment} |\n"
         with open(path, 'a', encoding='utf-8') as f:
             f.write(line)
+        _append_agent_memory('leads_log.md', 'лид', f'{company} | {status} | {comment}')
         return f"вњ… РЎС‚Р°С‚СѓСЃ СЃРѕС…СЂР°РЅС'РЅ: {company} в†' {status}"
     except Exception as exc:
-        return f"вљ пёЏ РћС€РёР±РєР° СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃС‚Р°С‚СѓСЃР°: {exc}"
+        return f"⚠️ Ошибка сохранения статуса: {exc}"
 
 
 def tool_save_kp(company, content):
-    """РЎРѕС…СЂР°РЅСЏРµС‚ РљРџ РІ РїР°РїРєСѓ kp/"""
+    """Сохраняет КП в папку kp/"""
     try:
         kp_dir = os.path.join(BASE_DIR, 'kp')
         os.makedirs(kp_dir, exist_ok=True)
@@ -1137,17 +1299,15 @@ def tool_save_kp(company, content):
 
 
 def tool_send_yulia(message):
-    """РћС‚РїСЂР°РІР»СЏРµС‚ СЃРѕРѕР±С‰РµРЅРёРµ Р®Р»Рµ РІ Telegram"""
+    """Отправляет сообщение Юле в Telegram"""
     if not JARVIS_BOT_TOKEN:
         return "Bot ne nastroyen"
     try:
-        bot = Bot(token=JARVIS_BOT_TOKEN)
         full_msg = f"Jarvis -> Юля:\n\n{message}"
-        return f"Ошибка отправки Юле: {exc}"
         data = urllib.parse.urlencode({"chat_id": YULIA_CHAT_ID, "text": full_msg}).encode()
         req = urllib.request.Request(f"https://api.telegram.org/bot{JARVIS_BOT_TOKEN}/sendMessage", data=data)
         urllib.request.urlopen(req, timeout=10)
-        return "вњ… РЎРѕРѕР±С‰РµРЅРёРµ РѕС‚РїСЂР°РІР»РµРЅРѕ Р®Р»Рµ"
+        return "✅ Сообщение отправлено Юле"
     except Exception as exc:
         return f"Oshibka otpravki Yule: {exc}"
 
@@ -1161,11 +1321,11 @@ def tool_save_task(task):
             f.write(f"\n- [ ] [{date}] {task}")
         return f"вњ… Р—Р°РґР°С‡Р° РґРѕР±Р°РІР»РµРЅР° РІ activeContext"
     except Exception as exc:
-        return f"вљ пёЏ РћС€РёР±РєР° СЃРѕС…СЂР°РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё: {exc}"
+        return f"⚠️ Ошибка сохранения задачи: {exc}"
 
 
 def execute_actions(actions_text):
-    """РџР°СЂСЃРёС‚ Рё РІС‹РїРѕР»РЅСЏРµС‚ РґРµР№СЃС‚РІРёСЏ РёР· С‚РµРєСЃС‚Р° Р°РіРµРЅС‚Р°"""
+    """Парсит и выполняет действия из текста агента"""
     results = []
     # [РЎРўРђРўРЈРЎ: РљР°Р»РёРЅРєР° | РґРѕР¶РёРј | РѕС‚РїСЂР°РІР»РµРЅ РІР°СЂРёР°РЅС‚ 3]
     for m in re.finditer(r'\[РЎРўРђРўРЈРЎ:\s*([^|]+)\|([^|]+)\|?([^\]]*)\]', actions_text):
@@ -1277,7 +1437,7 @@ def call_agent(agent_name, user_message, history, client_memory=None, prefix='',
 
 
 def run_agent_or_chain(user_message, history):
-    """Р—Р°РїСѓСЃРєР°РµС‚ РѕРґРЅРѕРіРѕ Р°РіРµРЅС‚Р° РёР»Рё С†РµРїРѕС‡РєСѓ, РІРѕР·РІСЂР°С‰Р°РµС‚ С„РёРЅР°Р»СЊРЅС‹Р№ РѕС‚РІРµС‚"""
+    """Запускает одного агента или цепочку, возвращает финальный ответ"""
     client_slug = get_client_slug(user_message)
     client_memory = load_agent_memory(client_slug) if client_slug else []
 
@@ -1405,12 +1565,38 @@ def load_markdown_table(path):
         for line in f:
             if line.startswith('|') and '|' in line[1:]:
                 cols = [col.strip() for col in line.strip().split('|')[1:-1]]
-                if len(cols) >= 5 and cols[0] != 'Р"Р°С‚Р°':
+                if len(cols) >= 5 and cols[0] != 'Дата':
                     rows.append({
                         'date': cols[0], 'company': cols[1],
                         'lpr': cols[2], 'status': cols[3], 'comment': cols[4]
                     })
     return rows
+
+
+def format_reply(text: str) -> str:
+    """Убирает Markdown-мусор перед отправкой в Telegram."""
+    # Remove ``` code fences
+    text = re.sub(r'```[a-zA-Z]*\n?', '', text)
+    # Remove ## / ### headers
+    text = re.sub(r'^#{1,3}\s+', '', text, flags=re.MULTILINE)
+    # Remove **bold** and *italic* (keep content)
+    text = re.sub(r'\*{1,3}([^*\n]+)\*{1,3}', r'\1', text)
+    # Remove --- dividers
+    text = re.sub(r'^-{3,}$', '', text, flags=re.MULTILINE)
+    # Remove | table | rows
+    text = re.sub(r'^\|.*\|$', '', text, flags=re.MULTILINE)
+    # Lowercase ALL-CAPS Cyrillic words (2+ chars), skip ASCII abbreviations
+    text = re.sub(r'\b([А-ЯЁ]{2,})\b', lambda m: m.group(1).lower(), text)
+    # Remove [ ] and [x] checkboxes
+    text = re.sub(r'\[[ xXvV✓]\]', '', text)
+    # Collapse 3+ blank lines → 2
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+
+async def _tg_send(bot, chat_id: int, text: str):
+    """Единая точка отправки: format_reply → bot.send_message."""
+    await bot.send_message(chat_id=chat_id, text=format_reply(text))
 
 
 def send_jarvis_message(text):
@@ -1419,7 +1605,7 @@ def send_jarvis_message(text):
         return
     bot = Bot(token=JARVIS_BOT_TOKEN)
     try:
-        asyncio.run(bot.send_message(chat_id=JARVIS_CHAT_ID, text=text, parse_mode='Markdown'))
+        asyncio.run(_tg_send(bot, JARVIS_CHAT_ID, text))
     except TelegramError as exc:
         print(f'Jarvis failed to send message: {exc}')
     except Exception as exc:
@@ -1444,7 +1630,10 @@ def create_prompt(header, context, instruction):
     return (
         "Ты — личный секретарь директора ST8 AI. Тон: деловой, чёткий, как реальный помощник. Используй информацию из Memory Bank. Не пиши шаблонный текст."
         f" Сегодня: {today}. {header}\n\nКонтекст:\n{context}\n\nЗадача:\n{instruction}\n"
-        "Сформулируй одно сообщение для Telegram без отметок типа 'Пока' или 'Привет'."
+        "Сформулируй одно сообщение для Telegram. "
+        "СТРОГО: без Markdown (без **, без ##, без ```, без таблиц, без ---). "
+        "Один эмодзи в начале строки. Строчные буквы в заголовках. Максимум 7 строк. "
+        "Без приветствий и прощаний."
     )
 
 WEATHER_CODE_MAP = {
@@ -1484,8 +1673,8 @@ def get_moscow_weather():
         snow_codes = {71, 73, 75, 77}
         footwear = '\u0442\u0451\u043f\u043b\u0430\u044f \u043e\u0431\u0443\u0432\u044c' if (code in snow_codes or (temp is not None and temp < 0)) else '\u043e\u0431\u044b\u0447\u043d\u0430\u044f \u043e\u0431\u0443\u0432\u044c'
         return (
-            f"🌤 Погода в Москве: {temp}°C, {description}, ветер {wind} км/ч\n"
-            f"🧥 Одежда: {clothing}\n☂️ Зонт: {umbrella}\n👟 Обувь: {footwear}"
+            f"🌤 {temp}°C, {description}, ветер {wind} км/ч\n"
+            f"🧥 {clothing}\n☂️ зонт: {umbrella}\n👟 {footwear}"
         )
     except Exception as exc:
         print(f'[Jarvis] \u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u044f \u043f\u043e\u0433\u043e\u0434\u044b: {exc}')
@@ -1494,7 +1683,7 @@ def get_moscow_weather():
 def _leads_summary():
     leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json'))
     if not leads:
-        return 'Р›РёРґРѕРІ РЅРµС‚.'
+        return 'Лидов нет.'
     lines = []
     for lead in leads[:10]:
         name = lead.get('company_name', '—')
@@ -1528,13 +1717,13 @@ def _tavily_search(query):
             snippets.append(f"- {r.get('title', '')}: {r.get('content', '')[:300]}")
         return '\n'.join(snippets) if snippets else None
     except Exception as exc:
-        print(f'[Jarvis] РћС€РёР±РєР° Tavily: {exc}')
+        print(f'[Jarvis] Ошибка Tavily: {exc}')
         return None
 
 
 SEARCH_TRIGGER_WORDS = [
-    'С‡С‚Рѕ С‚Р°РєРѕРµ', 'РєС‚Рѕ С‚Р°РєРѕР№', 'СЂР°СЃСЃРєР°Р¶Рё', 'РЅР°Р№РґРё', 'СѓР·РЅР°Р№',
-    'РЅРѕРІРѕСЃС‚Рё', 'С‡С‚Рѕ РЅРѕРІРѕРіРѕ', 'РєРѕРЅС„РµСЂРµРЅС†РёСЏ', 'С„РѕСЂСѓРј', 'РІС‹СЃС‚Р°РІРєР°', 'Р°РєС‚СѓР°Р»СЊРЅРѕ',
+    'что такое', 'кто такой', 'расскажи', 'найди', 'узнай',
+    'новости', 'что нового', 'конференция', 'форум', 'выставка', 'актуально',
 ]
 
 
@@ -1581,7 +1770,7 @@ def generate_smart_response(user_message, history):
         _log_token_usage(response, CLAUDE_MODEL)
         return _text
     except Exception as exc:
-        return f"РћС€РёР±РєР° Claude: {exc}"
+        return f"Ошибка Claude: {exc}"
 
 
 # в"Ђв"Ђв"Ђ Scheduled tasks в"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђ
@@ -1592,28 +1781,29 @@ def make_good_morning():
 
     client_pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
     active_context  = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    leads_status    = load_markdown_table(os.path.join(BASE_DIR, 'leads_status.md'))
+    all_leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json')) or []
 
     today = now_moscow().date()
 
-    # P0 / P1 / P2 из leads_status.md
+    # P0 / P1 / P2 из leads.json (только активные)
+    _COLD   = {'новый', 'архив', 'холодный', ''}
+    _URGENT = ('договор', 'подпис', 'срочно', 'дедлайн', 'горячий')
     p0, p1, p2 = [], [], []
-    for row in leads_status:
-        company = (row.get('company') or '').strip()
-        if not company or company.startswith('-'):
+    for lead in all_leads:
+        status = (lead.get('status') or '').strip().lower()
+        if status in _COLD:
             continue
-        comment = (row.get('comment') or '').strip()
-        status  = (row.get('status')  or '').strip()
-        lpr     = (row.get('lpr')     or '—').strip()
+        company = (lead.get('company_name') or '').strip()
+        lpr     = (lead.get('lpr') or '—').strip()
+        comment = (lead.get('comment') or '').strip()
+        label   = comment or status
+        entry   = f"{company} ({lpr})" + (f" — {label}" if label else '')
         try:
-            days_ago = (today - datetime.strptime(row['date'], '%Y-%m-%d').date()).days
-        except Exception as _exc:
-            _live_log.exception("[make_good_morning] unhandled exception")
+            days_ago = (today - datetime.strptime(lead['date'], '%Y-%m-%d').date()).days
+        except Exception:
             days_ago = 0
-        label = comment or status
-        entry = f"{company} ({lpr})" + (f" — {label}" if label else '')
-        comm_low = comment.lower()
-        if 'договор' in comm_low or 'подпис' in comm_low or days_ago >= 3:
+        note_low = (comment + ' ' + status).lower()
+        if any(kw in note_low for kw in _URGENT):
             p0.append(entry)
         elif days_ago >= 1:
             p1.append(entry)
@@ -1634,16 +1824,16 @@ def make_good_morning():
     if weather_block:
         parts.append(weather_block)
 
-    parts.append(f'\n📅 ПЛАН ДНЯ — {date_str}\n')
+    parts.append(f'\n📅 план дня — {date_str}\n')
 
     if p0:
-        parts.append('🔴 P0 — СРОЧНО:')
+        parts.append('🔴 P0 — срочно:')
         parts.extend(f'• {x}' for x in p0[:5])
     if p1:
-        parts.append('\n🟡 P1 — ВАЖНО:')
+        parts.append('\n🟡 P1 — важно:')
         parts.extend(f'• {x}' for x in p1[:5])
     if p2:
-        parts.append('\n🟢 P2 — В РАБОТЕ:')
+        parts.append('\n🟢 P2 — в работе:')
         parts.extend(f'• {x}' for x in p2[:5])
 
     if not (p0 or p1 or p2):
@@ -1656,7 +1846,7 @@ def make_good_morning():
         )
         parts.append(generate_jarvis_text(prompt))
 
-    parts.append('\n📋 КЛИЕНТЫ:')
+    parts.append('\n📋 клиенты:')
     parts.extend(f'• {name}: {st}' for name, st in known_clients)
 
     send_jarvis_message('\n'.join(parts))
@@ -1665,7 +1855,7 @@ def make_call_reminder():
     active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
     pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
     prompt = create_prompt('РќР°РїРѕРјРёРЅР°РЅРёРµ Рѕ Р·РІРѕРЅРєР°С….', f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}",
-        'РљСЂР°С‚РєРѕРµ РЅР°РїРѕРјРёРЅР°РЅРёРµ Рѕ РєР»СЋС‡РµРІС‹С… Р·Р°РґР°С‡Р°С… Рё РІСЃС‚СЂРµС‡Р°С….')
+        'Краткое напоминание о ключевых задачах и встречах.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_motivation():
@@ -1678,17 +1868,18 @@ def make_lead_digest():
     leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json'))
     sample = '\n'.join([f"- {l.get('company_name')} ({l.get('segment', '?')})" for l in leads[:8]])
     prompt = create_prompt('Р"Р°Р№РґР¶РµСЃС‚ Р»РёРґРѕРІ.', f"Р›РёРґС‹:\n{sample}\nР'СЃРµРіРѕ: {len(leads)}",
-        'РљСЂР°С‚РєРёР№ РѕС‚С‡С\'С‚: С‡С‚Рѕ СЃС‚РѕРёС‚ РїСЂРѕРІРµСЂРёС‚СЊ СЃРµРіРѕРґРЅСЏ.')
+        'РљСЂР°С‚РєРёР№ РѕС‚С‡С\'т: что стоит проверить сегодня.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_lunch_tip():
-    prompt = create_prompt('Р\'СЂРµРјСЏ РѕР±РµРґР° 13:00.', '',
-        'РќР°РїРѕРјРЅРё РїРѕРѕР±РµРґР°С‚СЊ Рё РґР°Р№ РѕРґРёРЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ СЃРѕРІРµС‚ РЅР° РІС‚РѕСЂСѓСЋ РїРѕР»РѕРІРёРЅСѓ РґРЅСЏ. Р\'РµР· РІРѕРґС‹.')
+    prompt = create_prompt('Р\'ремя обеда 13:00.', '',
+        'РќР°РїРѕРјРЅРё РїРѕРѕР±РµРґР°С‚СЊ Рё РґР°Р№ РѕРґРёРЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ СЃРѕРІРµС‚ РЅР° РІС‚РѕСЂСѓСЋ РїРѕР»РѕРІРёРЅСѓ РґРЅСЏ. Р\'ез воды.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def _generate_followup_text(company_name, lpr):
-    prompt = (f"РќР°РїРёС€Рё РєРѕСЂРѕС‚РєРёР№ follow-up РґР»СЏ {company_name} ({lpr}). "
-              f"РџРµСЂРІРѕРµ РєР°СЃР°РЅРёРµ 3 РґРЅСЏ РЅР°Р·Р°Рґ. РўРѕРЅ: РґСЂСѓР¶РµР»СЋР±РЅС‹Р№, РѕРґРёРЅ РІРѕРїСЂРѕСЃ РІ РєРѕРЅС†Рµ. 2-3 РїСЂРµРґР»РѕР¶РµРЅРёСЏ.")
+    prompt = (f"Напиши короткий follow-up для {company_name} ({lpr}). "
+              f"Первое касание 3 дня назад. Тон: дружелюбный, один вопрос в конце. 2-3 предложения. "
+              f"Без markdown, без звёздочек, без заголовков.")
     try:
         response = claude_client.messages.create(
             model=CLAUDE_MODEL, max_tokens=150,
@@ -1698,7 +1889,7 @@ def _generate_followup_text(company_name, lpr):
         _log_token_usage(response, CLAUDE_MODEL)
         return _text
     except Exception as exc:
-        return f"(РѕС€РёР±РєР°: {exc})"
+        return f"(ошибка: {exc})"
 
 def make_no_response_reminder():
     status_rows = load_markdown_table(os.path.join(BASE_DIR, 'leads_status.md'))
@@ -1712,18 +1903,18 @@ def make_no_response_reminder():
         except Exception as _exc:
             _live_log.exception("[make_no_response_reminder] unhandled exception")
             continue
-        if row['status'] == 'РЅР°РїРёСЃР°Р»Рё' and (today - row_date).days >= 3:
+        if row['status'] == 'написали' and (today - row_date).days >= 3:
             old.append(row)
     if not old:
-        send_jarvis_message('РќРµС‚ РєР»РёРµРЅС‚РѕРІ Р±РµР· РѕС‚РІРµС‚Р° 3+ РґРЅРµР№.')
+        send_jarvis_message('Нет клиентов без ответа 3+ дней.')
         return
     messages = []
     for row in old[:5]:
         company, lpr = row['company'], row['lpr']
         phone = leads_by_name.get(company.lower(), {}).get('phone', '—')
         followup = _generate_followup_text(company, lpr)
-        messages.append(f"[{company}]\nTel: {phone}\nFollow-up:\n{followup}")
-    send_jarvis_message(f"вЏ° Follow-up РЅСѓР¶РµРЅ {len(old)} РєР»РёРµРЅС‚Р°Рј:\n\n" + '\n\n'.join(messages))
+        messages.append(f"📌 {company}\n📞 {phone}\n{followup}")
+    send_jarvis_message(f"⏰ перезвон нужен {len(old)} клиентам:\n\n" + '\n\n'.join(messages))
 
 def make_day_summary():
     active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
@@ -1731,7 +1922,7 @@ def make_day_summary():
     status_rows = load_markdown_table(os.path.join(BASE_DIR, 'leads_status.md'))
     summary_rows = '\n'.join([f"- {r['company']}: {r['status']}" for r in status_rows[:8]])
     context = f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}\n\nleads:\n{summary_rows}"
-    prompt = create_prompt('РС‚РѕРі РґРЅСЏ.', context, 'РљСЂР°С‚РєРѕРµ СЂРµР·СЋРјРµ РґРЅСЏ Рё С‡С‚Рѕ РїРµСЂРµРЅРµСЃС‚Рё РЅР° Р·Р°РІС‚СЂР°.')
+    prompt = create_prompt('Итог дня.', context, 'Краткое резюме дня и что перенести на завтра.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_weekly_report():
@@ -1740,20 +1931,49 @@ def make_weekly_report():
     leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json'))
     sample = '\n'.join([f"- {l.get('company_name')} ({l.get('segment', '?')})" for l in leads[:10]])
     context = f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}\n\nР›РёРґС‹:\n{sample}\nР'СЃРµРіРѕ: {len(leads)}"
-    prompt = create_prompt('РќРµРґРµР»СЊРЅС‹Р№ РѕС‚С‡С\'С‚.', context, 'Р"РµР»РѕРІРѕР№ РµР¶РµРЅРµРґРµР»СЊРЅС‹Р№ РѕС‚С‡С\'С‚ СЃ РІС‹РІРѕРґР°РјРё Рё СЂРµРєРѕРјРµРЅРґР°С†РёСЏРјРё.')
+    prompt = create_prompt('Недельный отчёт.', context, 'Р"РµР»РѕРІРѕР№ РµР¶РµРЅРµРґРµР»СЊРЅС‹Р№ РѕС‚С‡С\'т с выводами и рекомендациями.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_energy_boost():
     pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
-    prompt = create_prompt('Р­РЅРµСЂРіРёСЏ РІ 16:00.', pipeline,
-        'Р§С‚Рѕ РµС‰С\' СѓСЃРїРµС‚СЊ РґРѕ РєРѕРЅС†Р° РґРЅСЏ РёР· РїР°Р№РїР»Р°Р№РЅР°. РљРѕРЅРєСЂРµС‚РЅРѕ, 2-3 РґРµР№СЃС‚РІРёСЏ.')
+    prompt = create_prompt('Энергия в 16:00.', pipeline,
+        'Что ещё успеть до конца дня из пайплайна. Конкретно, 2-3 действия.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_evening_summary():
     active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    prompt = create_prompt('Р\'РµС‡РµСЂ 19:00.', active_context,
-        'Р§С‚Рѕ С…РѕСЂРѕС€РµРіРѕ СЃР»СѓС‡РёР»РѕСЃСЊ СЃРµРіРѕРґРЅСЏ, РѕРґРЅРѕ РїРѕР¶РµР»Р°РЅРёРµ РЅР° РІРµС‡РµСЂ. РўРµРїР»Рѕ, Р±РµР· РѕС„РёС†РёРѕР·Р°.')
+    prompt = create_prompt('Вечер 19:00.', active_context,
+        'Что хорошего случилось сегодня, одно пожелание на вечер. Тепло, без официоза.')
     send_jarvis_message(generate_jarvis_text(prompt))
+
+
+_ALIVE_TYPES = [
+    "интересный факт из бизнеса, психологии или науки — одна строка, неожиданно",
+    "короткая мысль про продажи или переговоры — что-то нестандартное",
+    "случайное наблюдение про жизнь предпринимателя — честно и без пафоса",
+    "странный но полезный лайфхак — коротко",
+    "вопрос для размышления — один, без ответа",
+    "цитата которую ты сам бы не нашёл — не банальная",
+]
+
+def make_alive_message():
+    import random
+    msg_type = random.choice(_ALIVE_TYPES)
+    claude_client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY', ''))
+    try:
+        resp = claude_client.messages.create(
+            model=_HAIKU_MODEL,
+            max_tokens=120,
+            messages=[{"role": "user", "content": (
+                f"Ты Джарвис — AI-ассистент Алексея. Напиши сообщение: {msg_type}.\n"
+                "Стиль: разговорный, живой, без Markdown, без эмодзи кроме одного в начале. "
+                "Максимум 2-3 строки. Не представляйся."
+            )}]
+        )
+        text = resp.content[0].text.strip()
+        send_jarvis_message(text)
+    except Exception:
+        pass
 
 
 # в"Ђв"Ђв"Ђ Commands в"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђ
@@ -1762,14 +1982,14 @@ def cmd_plan(history):
     client_pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
     active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
     prompt = create_prompt('РЎРѕСЃС‚Р°РІСЊ РїР»Р°РЅ РґРЅСЏ.', f"clientPipeline:\n{client_pipeline}\n\nactiveContext:\n{active_context}",
-        'РљРѕРјСѓ РїРѕР·РІРѕРЅРёС‚СЊ, РєРѕРјСѓ РЅР°РїРёСЃР°С‚СЊ, С‡С‚Рѕ РїСЂРёРѕСЂРёС‚РµС‚РЅРѕ СЃРµРіРѕРґРЅСЏ.')
+        'Кому позвонить, кому написать, что приоритетно сегодня.')
     return generate_jarvis_text(prompt)
 
 def cmd_leads(history):
     leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json'))
     lines = [f"{i}. {l.get('company_name', '?')} [{l.get('segment', '—')}]" for i, l in enumerate(leads[:10], 1)]
     context = f"Р›РёРґС‹ ({len(leads)} РІСЃРµРіРѕ):\n" + '\n'.join(lines)
-    prompt = create_prompt('Р"Р°Р№РґР¶РµСЃС‚ Р»РёРґРѕРІ.', context, 'РљСЂР°С‚РєРёР№ РѕР±Р·РѕСЂ: РЅР° РєР°РєРёС… СЃРѕСЃСЂРµРґРѕС‚РѕС‡РёС‚СЊСЃСЏ.')
+    prompt = create_prompt('Р"Р°Р№РґР¶РµСЃС‚ Р»РёРґРѕРІ.', context, 'Краткий обзор: на каких сосредоточиться.')
     return generate_jarvis_text(prompt)
 
 def cmd_hub():
@@ -1817,11 +2037,11 @@ def cmd_client(client_name, history):
     if found:
         lead = found[0]
         context = (f"РљР»РёРµРЅС‚: {lead.get('company_name')}\nРЎРµРіРјРµРЅС‚: {lead.get('segment')}\n"
-                   f"Р›РџР : {lead.get('lpr')}\nР'РѕР»СЊ: {lead.get('pain')}\n"
-                   f"РљРѕРЅС‚Р°РєС‚: {lead.get('telegram_social') or lead.get('email') or 'РЅРµ СѓРєР°Р·Р°РЅ'}\n\nPipeline:\n{pipeline[:800]}")
+                   f"Р›РџР : {lead.get('lpr')}\nР'оль: {lead.get('pain')}\n"
+                   f"РљРѕРЅС‚Р°РєС‚: {lead.get('telegram_social') or lead.get('email') or 'не указан'}\n\nPipeline:\n{pipeline[:800]}")
     else:
         context = f"РљР»РёРµРЅС‚ '{client_name}' РЅРµ РЅР°Р№РґРµРЅ.\n\nPipeline:\n{pipeline[:1000]}"
-    prompt = create_prompt(f'РРЅС„РѕСЂРјР°С†РёСЏ РїРѕ РєР»РёРµРЅС‚Сѓ: {client_name}', context, 'РЎРІРѕРґРєР°: С‡С‚Рѕ РёР·РІРµСЃС‚РЅРѕ, СЃС‚Р°С‚СѓСЃ, СЃР»РµРґСѓСЋС‰РёР№ С€Р°Рі.')
+    prompt = create_prompt(f'РРЅС„РѕСЂРјР°С†РёСЏ РїРѕ РєР»РёРµРЅС‚Сѓ: {client_name}', context, 'Сводка: что известно, статус, следующий шаг.')
     return generate_jarvis_text(prompt)
 
 def cmd_memory(client_name):
@@ -1838,7 +2058,7 @@ def cmd_memory(client_name):
     lines = [f"[{e['ts']}] [{e['agent']}] {e['response'][:200]}" for e in memory[-5:]]
     return f"рџ\"‹ РСЃС‚РѕСЂРёСЏ Р°РіРµРЅС‚РѕРІ — {client_name}:\n\n" + '\n\n'.join(lines)
 
-_CALL_TRIGGERS = ('Р·РІРѕРЅСЋ', 'Р·РІРѕРЅРѕРє', 'СЃРѕР·РІРѕРЅ')
+_CALL_TRIGGERS = ('звоню', 'звонок', 'созвон')
 
 def cmd_call_prep(user_message):
     leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json'))
@@ -1866,8 +2086,8 @@ def cmd_call_prep(user_message):
     prompt = (
         f"РџРѕРґРіРѕС‚РѕРІСЊ СЃРєСЂРёРїС‚ Р·РІРѕРЅРєР° РґР»СЏ ST8-AI. "
         f"РљРѕРјРїР°РЅРёСЏ: {company_name}, Р›РџР : {lpr}, СЃРµРіРјРµРЅС‚: {segment}, Р±РѕР»СЊ: {pain}. "
-        f"РРЅС„РѕСЂРјР°С†РёСЏ: {tavily_results or 'РЅРµС‚ РґР°РЅРЅС‹С…'}. "
-        f"РЎРєСЂРёРїС‚: РїСЂРёРІРµС‚СЃС‚РІРёРµ в†' Р±РѕР»СЊ в†' СЂРµС€РµРЅРёРµ в†' РІРѕРїСЂРѕСЃ в†' РІРѕР·СЂР°Р¶РµРЅРёСЏ 'РґРѕСЂРѕРіРѕ' Рё 'СѓР¶Рµ РµСЃС‚СЊ СЃРёСЃС‚РµРјР°'."
+        f"РРЅС„РѕСЂРјР°С†РёСЏ: {tavily_results or 'нет данных'}. "
+        f"РЎРєСЂРёРїС‚: РїСЂРёРІРµС‚СЃС‚РІРёРµ в†' Р±РѕР»СЊ в†' СЂРµС€РµРЅРёРµ в†' РІРѕРїСЂРѕСЃ в†' РІРѕР·СЂР°Р¶РµРЅРёСЏ 'дорого' Рё 'уже есть система'."
     )
     try:
         response = claude_client.messages.create(
@@ -1877,7 +2097,7 @@ def cmd_call_prep(user_message):
         script = response.content[0].text.strip()
         _log_token_usage(response, CLAUDE_MODEL)
     except Exception as exc:
-        script = f"РћС€РёР±РєР°: {exc}"
+        script = f"Ошибка: {exc}"
     return f"рџ\"ћ РЎРєСЂРёРїС‚ Р·РІРѕРЅРєР° — {company_name}\nР›РџР : {lpr} | {segment}\n\n{script}"
 
 
@@ -1990,19 +2210,58 @@ def smart_add_lead(user_text: str):
     if existing:
         _update_lead(lead_data['company_name'], lead_data)
         return (
-            f'✅ Обновил: *{lead_data["company_name"]}*\n'
+            f'✅ обновил: {lead_data["company_name"]}\n'
             f'📞 {lead_data.get("phone", "—")} | '
             f'👤 {lead_data.get("lpr", "—")} | '
             f'📊 {lead_data.get("status", "новый")}'
         )
     _save_lead_to_hub(lead_data)
-    msg = f'✅ Добавил в хаб: *{lead_data["company_name"]}*\n'
+    msg = f'✅ добавил в хаб: {lead_data["company_name"]}\n'
     if lead_data.get('lpr')     and lead_data['lpr']     != '—': msg += f'👤 {lead_data["lpr"]}\n'
     if lead_data.get('phone')   and lead_data['phone']   != '—': msg += f'📞 {lead_data["phone"]}\n'
     if lead_data.get('segment') and lead_data['segment'] != '—': msg += f'🏢 {lead_data["segment"]}\n'
     if lead_data.get('pain')    and lead_data['pain']    != '—': msg += f'💡 {lead_data["pain"]}\n'
     msg += f'\n📊 Всего в хабе: {_count_total_leads()} лидов'
     return msg
+
+
+# ─── HUB COMMAND HANDLERS ────────────────────────────────────────────────────
+
+def _is_hub_archive_command(text: str) -> bool:
+    low = text.lower()
+    return bool(re.search(r'(^|\s)(архив|архивируй|в\s+архив)\s+\S', low))
+
+def _is_hub_update_command(text: str) -> bool:
+    low = text.lower()
+    return bool(re.search(r'(обнови|измени\s+статус|поменяй\s+статус)\s+\S', low))
+
+def _handle_hub_update(text: str) -> str:
+    low = text.lower()
+    m = (
+        re.search(r'обнови\s+(.+?)\s+[-—]\s*(?:статус\s+)?(.+)', low) or
+        re.search(r'обнови\s+(.+?)\s+статус\s+(.+)', low) or
+        re.search(r'(?:измени|поменяй)\s+статус\s+(.+?)\s+на\s+(.+)', low)
+    )
+    if not m:
+        return "не понял команду. формат: обнови Компания — статус горячий"
+    company_raw = m.group(1).strip().rstrip('-— ')
+    new_status  = m.group(2).strip()
+    lead = _find_lead_by_company(company_raw)
+    if not lead:
+        return f"компания не найдена в хабе: {company_raw}"
+    _update_lead(company_raw, {"status": new_status, "comment": new_status})
+    return f"✅ обновил {lead['company_name']}\n📊 статус: {new_status}"
+
+def _handle_hub_archive(text: str) -> str:
+    m = re.search(r'(?:архив|архивируй|в\s+архив)\s+(.+)', text.lower())
+    if not m:
+        return "формат: архив Название компании"
+    company_raw = m.group(1).strip()
+    lead = _find_lead_by_company(company_raw)
+    if not lead:
+        return f"компания не найдена в хабе: {company_raw}"
+    _update_lead(company_raw, {"status": "архив"})
+    return f"📦 {lead['company_name']} — перемещено в архив"
 
 
 _WEATHER_PATTERNS = (
@@ -2013,6 +2272,96 @@ _WEATHER_PATTERNS = (
 def _is_weather_question(text: str) -> bool:
     low = text.lower()
     return any(p in low for p in _WEATHER_PATTERNS)
+
+
+# ─── MEAL HANDLERS ────────────────────────────────────────────────────────────
+
+_MEAL_CONFIRM_PHRASES = ("завтрак ок", "обед ок", "ужин ок")
+
+def _is_meal_confirm(text: str) -> bool:
+    low = text.strip().lower()
+    return any(p in low for p in _MEAL_CONFIRM_PHRASES)
+
+def _is_meal_substitute(text: str) -> bool:
+    low = text.strip().lower()
+    return (low.startswith("нет ") or low.endswith(" нет") or
+            low.startswith("замени ") or low.startswith("заменить "))
+
+def _find_meal_for_product(product: str) -> dict | None:
+    """Find which meal in today's confirmed plan contains the product."""
+    today = datetime.now().date().isoformat()
+    cpath = os.path.join(BASE_DIR, 'data', f'confirmed_menu_{today}.json')
+    if not os.path.exists(cpath):
+        return None
+    try:
+        confirmed = json.loads(open(cpath, encoding='utf-8').read())
+        p_low = product.lower()
+        root = p_low[:4] if len(p_low) >= 4 else p_low
+        for meal in confirmed.get('plan', {}).get('meals', []):
+            for item in meal.get('items', []):
+                if root in item.lower() or p_low in item.lower():
+                    return meal
+    except Exception:
+        pass
+    return None
+
+def _save_meal_substitution(product: str, substitute: str):
+    today = datetime.now().date().isoformat()
+    cpath = os.path.join(BASE_DIR, 'data', f'confirmed_menu_{today}.json')
+    if not os.path.exists(cpath):
+        return
+    try:
+        confirmed = json.loads(open(cpath, encoding='utf-8').read())
+        confirmed.setdefault('substitutions', {})[product] = substitute
+        open(cpath, 'w', encoding='utf-8').write(
+            json.dumps(confirmed, ensure_ascii=False, indent=2)
+        )
+    except Exception:
+        pass
+
+def _handle_meal_substitute(user_text: str, claude_client) -> str:
+    t = user_text.strip().lower()
+    if t.startswith("нет "):
+        product = t[4:].strip()
+    elif t.endswith(" нет"):
+        product = t[:-4].strip()
+    elif t.startswith("замени "):
+        product = t[7:].strip()
+    elif t.startswith("заменить "):
+        product = t[9:].strip()
+    else:
+        product = t
+
+    meal = _find_meal_for_product(product)
+    kcal    = meal["kcal"]    if meal else 0
+    protein = meal["protein"] if meal else 0
+    carbs   = meal["carbs"]   if meal else 0
+    fat     = meal["fat"]     if meal else 0
+    meal_name_map = {
+        "breakfast": "Завтрак", "snack1": "Перекус 1",
+        "lunch": "Обед", "snack2": "Перекус 2", "dinner": "Ужин",
+    }
+    meal_label = meal_name_map.get(meal["id"], "") if meal else ""
+
+    prompt = (
+        f"Замени {product} на доступное в России, "
+        f"сохрани КБЖУ: ккал {kcal}, белок {protein}g, "
+        f"углеводы {carbs}g, жиры {fat}g. "
+        f"Ответь только блюдом и граммовкой."
+    )
+    try:
+        msg = claude_client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=80,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        substitute = msg.content[0].text.strip()
+        _save_meal_substitution(product, substitute)
+        _log_token_usage(msg, "claude-haiku-4-5-20251001")
+        prefix = f"🔄 {meal_label} — " if meal_label else "🔄 "
+        return f"{prefix}замена {product}:\n{substitute}"
+    except Exception as e:
+        return f"⚠️ Не удалось подобрать замену: {e}"
 
 
 async def extract_file_text(bot, message):
@@ -2037,6 +2386,65 @@ async def extract_file_text(bot, message):
             return f"[Файл {fname} — не PDF и не docx, не могу прочитать]"
     finally:
         os.unlink(path)
+
+
+async def handle_photo_message(bot, msg) -> str:
+    """Фото → Claude Vision. Caption 'переведи' → OCR+перевод, иначе → описание."""
+    import tempfile, base64
+    photo = msg.photo[-1]
+    tg_file = await bot.get_file(photo.file_id)
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp:
+        await tg_file.download_to_drive(tmp.name)
+        path = tmp.name
+    try:
+        with open(path, "rb") as f:
+            img_b64 = base64.standard_b64encode(f.read()).decode("utf-8")
+    finally:
+        os.unlink(path)
+    caption = (msg.caption or "").strip().lower()
+    if "переведи" in caption:
+        prompt = "Найди весь текст на изображении и переведи на русский язык. Без markdown, без звёздочек."
+    else:
+        prompt = "Опиши что изображено на фото. Коротко и по-деловому. Без markdown. Максимум 5 строк."
+    response = claude_client.messages.create(
+        model=CLAUDE_MODEL,
+        max_tokens=800,
+        messages=[{"role": "user", "content": [
+            {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": img_b64}},
+            {"type": "text", "text": prompt},
+        ]}],
+    )
+    _log_token_usage(response, CLAUDE_MODEL)
+    return response.content[0].text.strip()
+
+
+def _translate_text(text: str) -> str:
+    """Кириллица → английский, иначе → русский."""
+    cyrillic = sum(1 for c in text if 'Ѐ' <= c <= 'ӿ')
+    if cyrillic > len(text) * 0.3:
+        prompt = f"Переведи на английский язык. Без markdown, без звёздочек.\n\n{text}"
+    else:
+        prompt = f"Переведи на русский язык. Без markdown, без звёздочек.\n\n{text}"
+    response = claude_client.messages.create(
+        model=CLAUDE_MODEL, max_tokens=1000,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    _log_token_usage(response, CLAUDE_MODEL)
+    return response.content[0].text.strip()
+
+
+def _translate_document(text: str, fname: str) -> str:
+    """Перевод документа на русский с сохранением структуры."""
+    prompt = (
+        f"Переведи на русский язык. Сохрани структуру документа. "
+        f"Без markdown, без звёздочек.\n\nДокумент ({fname}):\n\n{text[:12000]}"
+    )
+    response = claude_client.messages.create(
+        model=CLAUDE_MODEL, max_tokens=4000,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    _log_token_usage(response, CLAUDE_MODEL)
+    return response.content[0].text.strip()
 
 
 def _parse_token_stats() -> str:
@@ -2092,7 +2500,7 @@ def _parse_token_stats() -> str:
 
 async def poll_jarvis():
     if not JARVIS_BOT_TOKEN:
-        print('JARVIS_BOT_TOKEN РЅРµ Р·Р°РґР°РЅ — polling РѕС‚РєР»СЋС‡С\'РЅ')
+        print('JARVIS_BOT_TOKEN РЅРµ Р·Р°РґР°РЅ — polling РѕС‚РєР»СЋС‡С\'н')
         return
     bot = Bot(token=JARVIS_BOT_TOKEN)
     offset = load_offset()
@@ -2108,30 +2516,106 @@ async def poll_jarvis():
                     continue
                 if msg.chat.id != JARVIS_CHAT_ID:
                     continue
-                if msg.document:
+                if msg.photo:
+                    reply = await handle_photo_message(bot, msg)
+                    ts = datetime.now().isoformat(timespec='seconds')
+                    history = load_memory()
+                    history.append({"role": "user", "content": f"[фото] {(msg.caption or '').strip()}", "ts": ts})
+                    history.append({"role": "assistant", "content": reply, "ts": ts})
+                    save_memory(history)
+                    await _tg_send(bot, JARVIS_CHAT_ID, reply)
+                    continue
+                elif msg.document:
                     file_text = await extract_file_text(bot, msg)
-                    user_text = f'[Файл: {msg.document.file_name}]\n{file_text}' if file_text else '[Не удалось прочитать файл]'
+                    if file_text and not file_text.startswith('['):
+                        reply = _translate_document(file_text, msg.document.file_name or "документ")
+                        ts = datetime.now().isoformat(timespec='seconds')
+                        history = load_memory()
+                        history.append({"role": "user", "content": f"[документ: {msg.document.file_name}]", "ts": ts})
+                        history.append({"role": "assistant", "content": reply, "ts": ts})
+                        save_memory(history)
+                        await _tg_send(bot, JARVIS_CHAT_ID, reply)
+                        continue
+                    else:
+                        user_text = f'[Файл: {msg.document.file_name}]\n{file_text or "не удалось прочитать"}'
                 elif msg.text:
                     user_text = msg.text
                 else:
                     continue
                 history = load_memory()
                 # Погода — отвечаем напрямую, не отдаём в Claude
-                if user_text.strip().lower().startswith('/stats'):
+                if is_auto_hunt_command(user_text):
+                    reply = handle_auto_hunt_command(user_text)
+                elif is_agent_command(user_text):
+                    import asyncio as _aio
+                    reply = _aio.get_event_loop().run_until_complete(handle_agents_command(user_text))
+                elif user_text.strip().lower().startswith('/email'):
+                    # /email Название компании | email@example.com
+                    parts = user_text.strip()[7:].split('|')
+                    if len(parts) == 2:
+                        company = parts[0].strip()
+                        email = parts[1].strip()
+                        import subprocess
+                        result = subprocess.run(
+                            ['python', 'email_agent.py', company, email],
+                            capture_output=True, text=True, cwd=BASE_DIR
+                        )
+                        reply = f"📧 КП отправлено на {email} для {company}"
+                    else:
+                        reply = "Формат: /email Название компании | email@example.com"
+                elif user_text.strip().lower().startswith('/stats'):
                     reply = _parse_token_stats()
+                elif user_text.strip().lower().startswith('/вес'):
+                    parts = user_text.strip().split()
+                    if len(parts) >= 2:
+                        try:
+                            kg = float(parts[1].replace(',', '.'))
+                            _append_agent_memory('health.md', 'вес записан', f'{kg} кг')
+                            # CR-04: also save to weight_log.json for meal_scheduler weekly report
+                            _wf = os.path.join(BASE_DIR, 'data', 'weight_log.json')
+                            try:
+                                _wlog = json.loads(open(_wf, encoding='utf-8').read()) if os.path.exists(_wf) else {}
+                            except Exception:
+                                _wlog = {}
+                            _wlog[datetime.now().date().isoformat()] = kg
+                            os.makedirs(os.path.dirname(_wf), exist_ok=True)
+                            open(_wf, 'w', encoding='utf-8').write(json.dumps(_wlog, ensure_ascii=False, indent=2))
+                            reply = f"⚖️ Записал: {kg} кг"
+                        except ValueError:
+                            reply = "⚖️ Формат: /вес 82.5"
+                    else:
+                        reply = "⚖️ Формат: /вес 82.5"
+                elif _is_meal_confirm(user_text):
+                    from meal_scheduler import handle_meal_confirm
+                    result = handle_meal_confirm(user_text)
+                    reply = result if result else "👍 Записал"
+                elif _is_meal_substitute(user_text):
+                    reply = _handle_meal_substitute(user_text, claude_client)
                 elif _is_weather_question(user_text):
                     reply = get_moscow_weather()
+                elif user_text.strip().lower().startswith('переведи'):
+                    to_translate = user_text.strip()[8:].strip()
+                    reply = _translate_text(to_translate) if to_translate else "напиши: переведи [текст]"
+                elif _is_hub_archive_command(user_text):
+                    reply = _handle_hub_archive(user_text)
+                elif _is_hub_update_command(user_text):
+                    reply = _handle_hub_update(user_text)
+                elif is_add_lead_intent(user_text):
+                    result = smart_add_lead(user_text)
+                    reply = result if result else process_with_agent(user_text, history, claude_client, CLAUDE_MODEL)
                 else:
                     reply = process_with_agent(user_text, history, claude_client, CLAUDE_MODEL)
+                import threading as _thr
+                _thr.Thread(target=_auto_learn, args=(user_text, claude_client), daemon=True).start()
                 ts = datetime.now().isoformat(timespec='seconds')
                 history.append({"role": "user", "content": user_text, "ts": ts})
                 history.append({"role": "assistant", "content": reply, "ts": ts})
                 save_memory(history)
-                await bot.send_message(chat_id=JARVIS_CHAT_ID, text=reply, parse_mode='Markdown')
+                await _tg_send(bot, JARVIS_CHAT_ID, reply)
         except TelegramError as exc:
-            print(f'[Jarvis] РћС€РёР±РєР° Telegram: {exc}')
+            print(f'[Jarvis] Ошибка Telegram: {exc}')
         except Exception as exc:
-            print(f'[Jarvis] РќРµРѕР¶РёРґР°РЅРЅР°СЏ РѕС€РёР±РєР°: {exc}')
+            print(f'[Jarvis] Неожиданная ошибка: {exc}')
         await asyncio.sleep(POLL_INTERVAL)
 
 
@@ -2166,7 +2650,9 @@ def check_moscow_jarvis_tasks():
         ('11:00', None, make_motivation),
         ('12:00', None, make_lead_digest),
         ('13:00', None, make_lunch_tip),
+        ('14:30', None, make_alive_message),
         ('15:00', None, make_no_response_reminder),
+        ('20:30', None, make_alive_message),
         ('16:00', None, make_energy_boost),
         ('17:00', None, make_day_summary),
         ('17:30', 4, make_weekly_report),
@@ -2186,6 +2672,16 @@ def check_moscow_jarvis_tasks():
 
 
 if __name__ == '__main__':
+    import threading as _threading
+    def _scheduler_loop():
+        while True:
+            try:
+                check_moscow_jarvis_tasks()
+            except Exception as _e:
+                print(f'[sched] error: {_e}')
+            time.sleep(60)
+    _t = _threading.Thread(target=_scheduler_loop, daemon=True)
+    _t.start()
     asyncio.run(poll_jarvis())
 
 
@@ -2193,4 +2689,6 @@ def safe_claude_call_cascade(messages, system='', max_tokens=1000):
     """Public API unchanged. Internally uses ST8ModelRouter (Haiku→Sonnet cascade,
     LRU cache, prompt caching, cost logging)."""
     return _router.call(messages, system=system, max_tokens=max_tokens)
+
+
 
