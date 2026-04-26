@@ -1615,11 +1615,11 @@ def send_jarvis_message(text):
 def generate_jarvis_text(prompt):
     try:
         response = claude_client.messages.create(
-            model=CLAUDE_MODEL, max_tokens=400,
+            model=_HAIKU_MODEL, max_tokens=350,
             messages=[{"role": "user", "content": prompt}],
         )
         _text = response.content[0].text.strip()
-        _log_token_usage(response, CLAUDE_MODEL)
+        _log_token_usage(response, _HAIKU_MODEL)
         return _text
     except Exception as exc:
         return f"Jarvis generation failed: {exc}"
@@ -1893,16 +1893,16 @@ def make_good_morning():
     send_jarvis_message('\n'.join(parts))
 
 def make_call_reminder():
-    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
-    prompt = create_prompt('РќР°РїРѕРјРёРЅР°РЅРёРµ Рѕ Р·РІРѕРЅРєР°С….', f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}",
+    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))[:600]
+    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))[:400]
+    prompt = create_prompt('Напоминание о звонках.', f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}",
         'Краткое напоминание о ключевых задачах и встречах.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_motivation():
-    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    prompt = create_prompt('РљРѕСЂРѕС‚РєР°СЏ РјРѕС‚РёРІР°С†РёСЏ РІ 11:00.', active_context,
-        'РћРґРЅР° РєРѕРЅРєСЂРµС‚РЅР°СЏ С„СЂР°Р·Р° РјРѕС‚РёРІР°С†РёРё — РїСЂРѕ СЂРµР°Р»СЊРЅС‹С… РєР»РёРµРЅС‚РѕРІ РёР»Рё С†РµР»Рё ST8-AI.')
+    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))[:400]
+    prompt = create_prompt('Короткая мотивация в 11:00.', active_context,
+        'Одна конкретная фраза мотивации — про реальных клиентов или цели ST8-AI.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_lead_digest():
@@ -1923,11 +1923,11 @@ def _generate_followup_text(company_name, lpr):
               f"Без markdown, без звёздочек, без заголовков.")
     try:
         response = claude_client.messages.create(
-            model=CLAUDE_MODEL, max_tokens=150,
+            model=_HAIKU_MODEL, max_tokens=150,
             messages=[{"role": "user", "content": prompt}]
         )
         _text = response.content[0].text.strip()
-        _log_token_usage(response, CLAUDE_MODEL)
+        _log_token_usage(response, _HAIKU_MODEL)
         return _text
     except Exception as exc:
         return f"(ошибка: {exc})"
@@ -1958,31 +1958,31 @@ def make_no_response_reminder():
     send_jarvis_message(f"⏰ перезвон нужен {len(old)} клиентам:\n\n" + '\n\n'.join(messages))
 
 def make_day_summary():
-    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
+    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))[:600]
+    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))[:400]
     status_rows = load_markdown_table(os.path.join(BASE_DIR, 'leads_status.md'))
-    summary_rows = '\n'.join([f"- {r['company']}: {r['status']}" for r in status_rows[:8]])
+    summary_rows = '\n'.join([f"- {r['company']}: {r['status']}" for r in status_rows[:6]])
     context = f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}\n\nleads:\n{summary_rows}"
     prompt = create_prompt('Итог дня.', context, 'Краткое резюме дня и что перенести на завтра.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_weekly_report():
-    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
+    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))[:800]
+    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))[:500]
     leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json'))
     sample = '\n'.join([f"- {l.get('company_name')} ({l.get('segment', '?')})" for l in leads[:10]])
-    context = f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}\n\nР›РёРґС‹:\n{sample}\nР'СЃРµРіРѕ: {len(leads)}"
-    prompt = create_prompt('Недельный отчёт.', context, 'Р"РµР»РѕРІРѕР№ РµР¶РµРЅРµРґРµР»СЊРЅС‹Р№ РѕС‚С‡С\'т с выводами и рекомендациями.')
+    context = f"activeContext:\n{active_context}\n\nclientPipeline:\n{pipeline}\n\nЛиды:\n{sample}\nВсего: {len(leads)}"
+    prompt = create_prompt('Недельный отчёт.', context, 'Деловой еженедельный отчёт с выводами и рекомендациями.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_energy_boost():
-    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
+    pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))[:400]
     prompt = create_prompt('Энергия в 16:00.', pipeline,
         'Что ещё успеть до конца дня из пайплайна. Конкретно, 2-3 действия.')
     send_jarvis_message(generate_jarvis_text(prompt))
 
 def make_evening_summary():
-    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
+    active_context = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))[:400]
     prompt = create_prompt('Вечер 19:00.', active_context,
         'Что хорошего случилось сегодня, одно пожелание на вечер. Тепло, без официоза.')
     send_jarvis_message(generate_jarvis_text(prompt))
