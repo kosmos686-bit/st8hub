@@ -1776,78 +1776,119 @@ def generate_smart_response(user_message, history):
 # в"Ђв"Ђв"Ђ Scheduled tasks в"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђв"Ђ
 
 
+def _weekly_weight_summary():
+    wf = os.path.join(BASE_DIR, 'data', 'weight_log.json')
+    if not os.path.exists(wf):
+        return None
+    try:
+        wlog = json.loads(open(wf, encoding='utf-8').read())
+    except Exception:
+        return None
+    if not wlog:
+        return None
+    today = now_moscow().date()
+    week_data = []
+    for i in range(6, -1, -1):
+        d = (today - timedelta(days=i)).isoformat()
+        if d in wlog:
+            week_data.append((d, wlog[d]))
+    if not week_data:
+        return None
+    lines = ['⚖️ вес за неделю:']
+    for d, kg in week_data:
+        lines.append(f'• {d}: {kg} кг')
+    if len(week_data) >= 2:
+        delta = week_data[-1][1] - week_data[0][1]
+        sign = '+' if delta > 0 else ''
+        lines.append(f'динамика: {sign}{delta:.1f} кг')
+    return '\n'.join(lines)
+
+
 def make_good_morning():
     weather_block = get_moscow_weather()
+    now = now_moscow()
+    today = now.date()
+    weekday = now.weekday()  # 0=пн … 4=пт, 5=сб, 6=вс
+    date_str = now.strftime('%d.%m.%Y')
 
-    client_pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
-    active_context  = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
-    all_leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json')) or []
-
-    today = now_moscow().date()
-
-    # P0 / P1 / P2 из leads.json (только активные)
-    _COLD   = {'новый', 'архив', 'холодный', ''}
-    _URGENT = ('договор', 'подпис', 'срочно', 'дедлайн', 'горячий')
-    p0, p1, p2 = [], [], []
-    for lead in all_leads:
-        status = (lead.get('status') or '').strip().lower()
-        if status in _COLD:
-            continue
-        company = (lead.get('company_name') or '').strip()
-        lpr     = (lead.get('lpr') or '—').strip()
-        comment = (lead.get('comment') or '').strip()
-        label   = comment or status
-        entry   = f"{company} ({lpr})" + (f" — {label}" if label else '')
-        try:
-            days_ago = (today - datetime.strptime(lead['date'], '%Y-%m-%d').date()).days
-        except Exception:
-            days_ago = 0
-        note_low = (comment + ' ' + status).lower()
-        if any(kw in note_low for kw in _URGENT):
-            p0.append(entry)
-        elif days_ago >= 1:
-            p1.append(entry)
-        else:
-            p2.append(entry)
-
-    known_clients = [
-        ('AIRI',           'ждут договор / правки соглашения'),
-        ('Unik Food',      'тест amoCRM — Антон'),
-        ('Atelier Family', 'app v3, митап Марк/Ира'),
-        ('Большакова',   'договор 200к — ждём подписания'),
-        ('Лог. хаб',  '481 лид, топ: CDEK, Вэд партнер, Восточный путь'),
-    ]
-
-    date_str = now_moscow().strftime('%d.%m.%Y')
     parts = ['☀️ Доброе утро, Алексей!\n']
-
     if weather_block:
         parts.append(weather_block)
 
-    parts.append(f'\n📅 план дня — {date_str}\n')
+    if weekday < 5:
+        # ── будни: план по клиентам ──────────────────────────────────
+        parts.append(f'\n📅 план дня — {date_str}\n')
 
-    if p0:
-        parts.append('🔴 P0 — срочно:')
-        parts.extend(f'• {x}' for x in p0[:5])
-    if p1:
-        parts.append('\n🟡 P1 — важно:')
-        parts.extend(f'• {x}' for x in p1[:5])
-    if p2:
-        parts.append('\n🟢 P2 — в работе:')
-        parts.extend(f'• {x}' for x in p2[:5])
+        client_pipeline = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'clientPipeline.md'))
+        active_context  = read_file(os.path.join(BASE_DIR, 'st8-memory-bank', 'activeContext.md'))
+        all_leads = load_json(os.path.join(BASE_DIR, 'st8hub', 'leads.json')) or []
 
-    if not (p0 or p1 or p2):
-        context = f'clientPipeline:\n{client_pipeline}\n\nactiveContext:\n{active_context}'
-        prompt  = create_prompt(
-            'Доброе утро. Сформируй план дня.',
-            context,
-            'Топ-3 задачи на сегодня: кому позвонить/написать, '
-            'что закрыть. Без воды, только конкретика. 3-5 строк.',
-        )
-        parts.append(generate_jarvis_text(prompt))
+        _COLD   = {'новый', 'архив', 'холодный', ''}
+        _URGENT = ('договор', 'подпис', 'срочно', 'дедлайн', 'горячий')
+        p0, p1, p2 = [], [], []
+        for lead in all_leads:
+            status = (lead.get('status') or '').strip().lower()
+            if status in _COLD:
+                continue
+            company = (lead.get('company_name') or '').strip()
+            lpr     = (lead.get('lpr') or '—').strip()
+            comment = (lead.get('comment') or '').strip()
+            label   = comment or status
+            entry   = f"{company} ({lpr})" + (f" — {label}" if label else '')
+            try:
+                days_ago = (today - datetime.strptime(lead['date'], '%Y-%m-%d').date()).days
+            except Exception:
+                days_ago = 0
+            note_low = (comment + ' ' + status).lower()
+            if any(kw in note_low for kw in _URGENT):
+                p0.append(entry)
+            elif days_ago >= 1:
+                p1.append(entry)
+            else:
+                p2.append(entry)
 
-    parts.append('\n📋 клиенты:')
-    parts.extend(f'• {name}: {st}' for name, st in known_clients)
+        if p0:
+            parts.append('🔴 P0 — срочно:')
+            parts.extend(f'• {x}' for x in p0[:5])
+        if p1:
+            parts.append('\n🟡 P1 — важно:')
+            parts.extend(f'• {x}' for x in p1[:5])
+        if p2:
+            parts.append('\n🟢 P2 — в работе:')
+            parts.extend(f'• {x}' for x in p2[:5])
+
+        if not (p0 or p1 or p2):
+            context = f'clientPipeline:\n{client_pipeline}\n\nactiveContext:\n{active_context}'
+            prompt  = create_prompt(
+                'Доброе утро. Сформируй план дня.',
+                context,
+                'Топ-3 задачи на сегодня: кому позвонить/написать, '
+                'что закрыть. Без воды, только конкретика. 3-5 строк.',
+            )
+            parts.append(generate_jarvis_text(prompt))
+
+        known_clients = [
+            ('AIRI',           'ждут договор / правки соглашения'),
+            ('Unik Food',      'тест amoCRM — Антон'),
+            ('Atelier Family', 'app v3, митап Марк/Ира'),
+            ('Большакова',     'договор 200к — ждём подписания'),
+            ('Лог. хаб',       '481 лид, топ: CDEK, Вэд партнер, Восточный путь'),
+        ]
+        parts.append('\n📋 клиенты:')
+        parts.extend(f'• {name}: {st}' for name, st in known_clients)
+
+    else:
+        # ── выходные: отдых, без деловых задач ──────────────────────
+        day_name = 'суббота' if weekday == 5 else 'воскресенье'
+        parts.append(f'\n📅 {date_str} — {day_name}\n')
+        parts.append('🏠 выходной — деловые задачи не планируем.')
+        parts.append('Хороший день для личных дел, отдыха, саморазвития.')
+
+        # воскресенье: недельная сводка по весу
+        if weekday == 6:
+            weight_block = _weekly_weight_summary()
+            if weight_block:
+                parts.append(f'\n{weight_block}')
 
     send_jarvis_message('\n'.join(parts))
 
@@ -2287,6 +2328,117 @@ def _is_meal_substitute(text: str) -> bool:
     return (low.startswith("нет ") or low.endswith(" нет") or
             low.startswith("замени ") or low.startswith("заменить "))
 
+import re as _re
+_WEIGHT_RE = _re.compile(r'(?:^|мой\s+)?(?:вес|весит|вешу)\s+(\d{2,3}(?:[.,]\d{1,2})?)\s*(?:кг|kg)?', _re.IGNORECASE)
+
+def _parse_weight_from_text(text: str):
+    """Return float kg if text is a natural-language weight report, else None."""
+    m = _WEIGHT_RE.search(text.strip())
+    if m:
+        try:
+            return float(m.group(1).replace(',', '.'))
+        except ValueError:
+            pass
+    return None
+
+_DAILY_KCAL_LIMIT = 1900
+_FOOD_LOG_FILE = os.path.join(BASE_DIR, 'data', 'food_log.json')
+
+_FOOD_INTAKE_WORDS = ('съел', 'съела', 'поел', 'поела', 'выпил', 'выпила',
+                      'перекусил', 'перекусила', 'покушал', 'покушала',
+                      'скушал', 'скушала', 'позавтракал', 'пообедал', 'поужинал',
+                      'позавтракала', 'пообедала', 'поужинала')
+
+def _is_food_intake(text: str) -> bool:
+    low = text.lower()
+    return any(w in low for w in _FOOD_INTAKE_WORDS)
+
+def _estimate_kcal(food_text: str) -> tuple[int, str]:
+    """Return (kcal, food_name) via Haiku."""
+    try:
+        resp = claude_client.messages.create(
+            model=_HAIKU_MODEL,
+            max_tokens=80,
+            messages=[{"role": "user", "content": (
+                f"Оцени калорийность: «{food_text}»\n"
+                f"Ответь строго JSON: {{\"kcal\": 250, \"food\": \"краткое название\"}}\n"
+                f"kcal — целое число, без текста вокруг."
+            )}]
+        )
+        import json as _j
+        raw = resp.content[0].text.strip()
+        if '```' in raw:
+            raw = raw.split('```')[1].lstrip('json').strip()
+        data = _j.loads(raw)
+        return int(data['kcal']), str(data.get('food', food_text[:40]))
+    except Exception:
+        return 0, food_text[:40]
+
+def _get_today_food_log() -> list:
+    today = now_moscow().date().isoformat()
+    try:
+        log = json.loads(open(_FOOD_LOG_FILE, encoding='utf-8').read()) if os.path.exists(_FOOD_LOG_FILE) else {}
+    except Exception:
+        log = {}
+    return log.get(today, [])
+
+def _append_food_log(food: str, kcal: int):
+    today = now_moscow().date().isoformat()
+    try:
+        log = json.loads(open(_FOOD_LOG_FILE, encoding='utf-8').read()) if os.path.exists(_FOOD_LOG_FILE) else {}
+    except Exception:
+        log = {}
+    if today not in log:
+        log[today] = []
+    log[today].append({'food': food, 'kcal': kcal, 'ts': now_moscow().strftime('%H:%M')})
+    os.makedirs(os.path.dirname(_FOOD_LOG_FILE), exist_ok=True)
+    open(_FOOD_LOG_FILE, 'w', encoding='utf-8').write(json.dumps(log, ensure_ascii=False, indent=2))
+
+def _handle_food_intake(user_text: str) -> str:
+    kcal, food = _estimate_kcal(user_text)
+    if kcal > 0:
+        _append_food_log(food, kcal)
+    today_log = _get_today_food_log()
+    total = sum(e['kcal'] for e in today_log)
+    remaining = _DAILY_KCAL_LIMIT - total
+    lines = [f"🍽 {food} — ~{kcal} ккал", f"сегодня итого: {total} / {_DAILY_KCAL_LIMIT} ккал"]
+    if remaining < 0:
+        lines.append(f"⚠️ перебор на {abs(remaining)} ккал — полегче вечером.")
+    elif remaining < 200:
+        lines.append(f"⚡ осталось {remaining} ккал — почти лимит.")
+    else:
+        lines.append(f"✅ остаток: {remaining} ккал")
+    return '\n'.join(lines)
+
+
+def _save_weight_and_reply(kg: float) -> str:
+    """Save weight to weight_log.json and return a concise reply with delta."""
+    _wf = os.path.join(BASE_DIR, 'data', 'weight_log.json')
+    try:
+        _wlog = json.loads(open(_wf, encoding='utf-8').read()) if os.path.exists(_wf) else {}
+    except Exception:
+        _wlog = {}
+    today_key = now_moscow().date().isoformat()
+    prev_kg, prev_date = None, None
+    for d in sorted(_wlog.keys(), reverse=True):
+        if d != today_key:
+            prev_kg, prev_date = _wlog[d], d
+            break
+    _wlog[today_key] = kg
+    os.makedirs(os.path.dirname(_wf), exist_ok=True)
+    open(_wf, 'w', encoding='utf-8').write(json.dumps(_wlog, ensure_ascii=False, indent=2))
+    _append_agent_memory('health.md', 'вес записан', f'{kg} кг')
+    if prev_kg is not None:
+        delta = kg - prev_kg
+        sign = '+' if delta > 0 else ''
+        lines = [f"⚖️ {kg} кг записан.", f"предыдущий замер {prev_date}: {prev_kg} кг", f"динамика: {sign}{delta:.1f} кг"]
+        if delta < 0:
+            lines.append("💪 Молодец, продолжай в том же духе!")
+        elif delta > 0:
+            lines.append("Бывает. Держим курс.")
+        return '\n'.join(lines)
+    return f"⚖️ {kg} кг записан."
+
 def _find_meal_for_product(product: str) -> dict | None:
     """Find which meal in today's confirmed plan contains the product."""
     today = datetime.now().date().isoformat()
@@ -2566,21 +2718,11 @@ async def poll_jarvis():
                 elif user_text.strip().lower().startswith('/stats'):
                     reply = _parse_token_stats()
                 elif user_text.strip().lower().startswith('/вес'):
-                    parts = user_text.strip().split()
-                    if len(parts) >= 2:
+                    _wparts = user_text.strip().split()
+                    if len(_wparts) >= 2:
                         try:
-                            kg = float(parts[1].replace(',', '.'))
-                            _append_agent_memory('health.md', 'вес записан', f'{kg} кг')
-                            # CR-04: also save to weight_log.json for meal_scheduler weekly report
-                            _wf = os.path.join(BASE_DIR, 'data', 'weight_log.json')
-                            try:
-                                _wlog = json.loads(open(_wf, encoding='utf-8').read()) if os.path.exists(_wf) else {}
-                            except Exception:
-                                _wlog = {}
-                            _wlog[datetime.now().date().isoformat()] = kg
-                            os.makedirs(os.path.dirname(_wf), exist_ok=True)
-                            open(_wf, 'w', encoding='utf-8').write(json.dumps(_wlog, ensure_ascii=False, indent=2))
-                            reply = f"⚖️ Записал: {kg} кг"
+                            kg = float(_wparts[1].replace(',', '.'))
+                            reply = _save_weight_and_reply(kg)
                         except ValueError:
                             reply = "⚖️ Формат: /вес 82.5"
                     else:
@@ -2600,6 +2742,10 @@ async def poll_jarvis():
                     reply = _handle_hub_archive(user_text)
                 elif _is_hub_update_command(user_text):
                     reply = _handle_hub_update(user_text)
+                elif _is_food_intake(user_text):
+                    reply = _handle_food_intake(user_text)
+                elif (_nlw := _parse_weight_from_text(user_text)) is not None:
+                    reply = _save_weight_and_reply(_nlw)
                 elif is_add_lead_intent(user_text):
                     result = smart_add_lead(user_text)
                     reply = result if result else process_with_agent(user_text, history, claude_client, CLAUDE_MODEL)
@@ -2644,23 +2790,24 @@ def check_moscow_jarvis_tasks():
             except Exception as exc:
                 print(f"[Jarvis] reminder send failed: {exc}")
 
+    WD = (0,1,2,3,4)  # пн-пт
     tasks = [
         ('08:00', None, make_good_morning),
-        ('10:00', None, make_call_reminder),
+        ('10:00', WD,   make_call_reminder),
         ('11:00', None, make_motivation),
-        ('12:00', None, make_lead_digest),
+        ('12:00', WD,   make_lead_digest),
         ('13:00', None, make_lunch_tip),
         ('14:30', None, make_alive_message),
-        ('15:00', None, make_no_response_reminder),
+        ('15:00', WD,   make_no_response_reminder),
         ('20:30', None, make_alive_message),
         ('16:00', None, make_energy_boost),
         ('17:00', None, make_day_summary),
-        ('17:30', 4, make_weekly_report),
+        ('17:30', 4,    make_weekly_report),
         ('19:00', None, make_evening_summary),
     ]
     for schedule_time, day_filter, func in tasks:
         key = f"{schedule_time}:{day_filter}"
-        if current == schedule_time and (day_filter is None or day_filter == weekday):
+        if current == schedule_time and (day_filter is None or day_filter == weekday or (isinstance(day_filter, tuple) and weekday in day_filter)):
             last_run = LAST_JARVIS_RUN.get(key)
             if last_run == now.date():
                 continue
