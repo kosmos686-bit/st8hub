@@ -664,6 +664,10 @@ def _build_hub_data():
 - Готовить ответы, КП, скрипты звонков
 - Анализировать статусы и рекомендовать следующие шаги
 
+Система: Windows 11, C:\\st8-workspace, Python .venv.
+Запуск сервисов: subprocess.Popen(['python', r'C:\\st8-workspace\\script.py'])
+Только Windows команды — никаких systemctl, sudo, nohup, python3.
+
 Отвечай коротко, конкретно, по-деловому.
 
 ФОРМАТ TELEGRAM — СТРОГО:
@@ -1155,9 +1159,9 @@ def _auto_learn(user_text: str, claude_client) -> None:
         if not slug and data.get("client"):
             slug = str(data["client"]).lower().replace(' ', '_')[:20]
         target = (
-            f"c:/st8-workspace/agent_memory/{slug}.md"
+            os.path.join(AGENT_MEMORY_DIR, f'{slug}.md')
             if slug else
-            "c:/st8-workspace/agent_memory/alexey_notes.md"
+            os.path.join(AGENT_MEMORY_DIR, 'alexey_notes.md')
         )
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M")
         with open(target, 'a', encoding='utf-8') as fh:
