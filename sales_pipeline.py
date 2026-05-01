@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-TOKEN = "8797018278:AAGHwcZK5bvA2QuVG5Jx0FB__8hbqxpvip0"
+TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ALEX = 6152243830
 GIS_KEY = "3f3a2847-659a-4331-aef5-74d7928316f1"
 GMAIL = "kosmos686@gmail.com"

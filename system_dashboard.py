@@ -1,4 +1,5 @@
 ﻿import asyncio
+import os
 import schedule
 import time
 from datetime import datetime, timedelta
@@ -158,7 +159,7 @@ class Dashboard:
     
     def __init__(self):
         self.chat_id = 6152243830
-        self.token = "8563225303:AAFeloLEvknQi_P9cYfcuf01Ic7rBMQzj-Y"
+        self.token = os.getenv('BOT_TOKEN')
         self.logger = Logger()
         self.calculator = IncomeCalculator()
         self.deadline_tracker = DeadlineTracker()
