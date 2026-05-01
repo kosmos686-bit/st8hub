@@ -1,0 +1,29 @@
+{
+  "updated": "2026-05-01T19:06:55",
+  "services": {
+    "jarvis": {
+      "running": true,
+      "pid": 21524,
+      "mem_mb": 54,
+      "name": "Jarvis"
+    },
+    "meal": {
+      "running": true,
+      "pid": 28188,
+      "mem_mb": 0,
+      "name": "Meal Watchdog"
+    },
+    "errwatch": {
+      "running": true,
+      "pid": 10644,
+      "mem_mb": 3,
+      "name": "Error Watcher"
+    },
+    "n8n": {
+      "running": false,
+      "pid": null,
+      "mem_mb": 0,
+      "name": "n8n"
+    }
+  }
+}
