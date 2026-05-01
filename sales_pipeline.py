@@ -10,9 +10,9 @@ TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ALEX = 6152243830
 GIS_KEY = "3f3a2847-659a-4331-aef5-74d7928316f1"
 GMAIL = "kosmos686@gmail.com"
-GMAIL_PASSWORD = "repdi0-bucbEm-nytnuq"
+GMAIL_PASSWORD = os.getenv('GMAIL_PASSWORD')
 AGENTS_DIR = r"C:\Users\user\.claude\agents"
-TAVILY_KEY = "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"
+TAVILY_KEY = os.getenv('TAVILY_KEY')
 
 def find_contacts(company, city):
     """Ищет контакты компании через Tavily"""
