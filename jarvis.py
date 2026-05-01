@@ -2278,18 +2278,45 @@ _SVC_ALIASES = {
 
 
 def _cmd_system_status() -> str:
-    try:
-        from service_manager import get_all_status
-        st = get_all_status()
-        lines = ["📊 статус сервисов:\n"]
-        for key, s in st.items():
-            icon = "✅" if s['running'] else "🔴"
-            pid = f"PID {s['pid']}" if s.get('pid') else "—"
-            mem = f"  {s.get('mem_mb', 0)} MB" if s.get('running') else ""
-            lines.append(f"{icon} {s['name']}: {pid}{mem}")
-        return "\n".join(lines)
-    except Exception as e:
-        return f"❌ ошибка получения статуса: {e}"
+    import psutil, socket
+
+    def _py_running(script: str):
+        for p in psutil.process_iter(['pid', 'cmdline']):
+            try:
+                args = p.info['cmdline'] or []
+                if any(
+                    arg == script or arg.endswith('/' + script) or arg.endswith('\\' + script)
+                    for arg in args
+                ):
+                    return p.info['pid']
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+        return None
+
+    def _port_listening(port: int) -> bool:
+        try:
+            with socket.create_connection(('127.0.0.1', port), timeout=0.5):
+                return True
+        except OSError:
+            return False
+
+    checks = [
+        ('Jarvis bot',       _py_running('jarvis.py')),
+        ('Watchdog',         _py_running('jarvis_watchdog.py')),
+        ('Scheduler',        _py_running('scheduler.py') or _py_running('meal_scheduler.py')),
+        ('Dashboard daemon', _py_running('st8_status_daemon.py')),
+        ('n8n',              _port_listening(5678)),
+    ]
+
+    lines = ["🖥 ST8-AI СЕРВИСЫ\n"]
+    for name, result in checks:
+        if result is True or (result and result is not False):
+            pid_str = f" (PID {result})" if isinstance(result, int) else ""
+            lines.append(f"✅ {name} — работает{pid_str}")
+        else:
+            lines.append(f"🔴 {name} — остановлен")
+
+    return "\n".join(lines)
 
 
 def _is_service_control(text: str) -> bool:
