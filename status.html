@@ -33,6 +33,26 @@
       margin-top: 6px;
     }
 
+    .refresh-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #D4A017;
+      color: #0A0F1A;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s, transform 0.1s;
+      z-index: 100;
+    }
+    .refresh-btn:hover  { opacity: 0.85; }
+    .refresh-btn:active { transform: scale(0.96); }
+    .refresh-btn.spin   { opacity: 0.6; pointer-events: none; }
+
     .updated {
       text-align: center;
       font-size: 12px;
@@ -109,6 +129,8 @@
 </head>
 <body>
 
+  <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()">🔄 Обновить</button>
+
   <div class="header">
     <h1>ST8-AI</h1>
     <div class="subtitle">ПАНЕЛЬ МОНИТОРИНГА СЕРВИСОВ</div>
@@ -169,6 +191,16 @@
         `;
         grid.appendChild(card);
       }
+    }
+
+    function manualRefresh() {
+      const btn = document.getElementById('refreshBtn');
+      btn.classList.add('spin');
+      btn.textContent = '⏳ Загрузка...';
+      load().finally(() => {
+        btn.classList.remove('spin');
+        btn.textContent = '🔄 Обновить';
+      });
     }
 
     load();
