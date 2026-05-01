@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ST8-AI — Статус сервисов</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0A0F1A;
+      color: #C8D0E0;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      padding: 32px 16px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      color: #D4A017;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .header .subtitle {
+      font-size: 13px;
+      color: #556;
+      margin-top: 6px;
+    }
+
+    .updated {
+      text-align: center;
+      font-size: 12px;
+      color: #445;
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto 40px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1E2A3A;
+      border-radius: 12px;
+      padding: 24px 20px;
+      transition: border-color 0.3s;
+    }
+
+    .card.running { border-color: #1A4D2E; }
+    .card.stopped { border-color: #4D1A1A; }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.on  { background: #2ECC71; box-shadow: 0 0 6px #2ECC71; }
+    .dot.off { background: #E74C3C; }
+
+    .card-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #E0E8F0;
+    }
+
+    .card-status {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .card-status.on  { color: #2ECC71; }
+    .card-status.off { color: #E74C3C; }
+
+    .card-meta {
+      font-size: 12px;
+      color: #445;
+      margin-top: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #334;
+    }
+
+    .footer span { color: #D4A017; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .dot.on { animation: pulse 2.5s infinite; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>ST8-AI</h1>
+    <div class="subtitle">ПАНЕЛЬ МОНИТОРИНГА СЕРВИСОВ</div>
+  </div>
+
+  <div class="updated" id="updated">загрузка...</div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="footer">
+    автообновление каждые <span>30 сек</span>
+  </div>
+
+  <script>
+    const NAMES = {
+      jarvis:   'Jarvis',
+      meal:     'Meal Watchdog',
+      errwatch: 'Error Watcher',
+      n8n:      'n8n'
+    };
+
+    async function load() {
+      try {
+        const r = await fetch('status.json?t=' + Date.now());
+        const data = await r.json();
+        render(data);
+      } catch(e) {
+        document.getElementById('updated').textContent = 'ошибка загрузки status.json';
+      }
+    }
+
+    function render(data) {
+      const upd = new Date(data.updated);
+      document.getElementById('updated').textContent =
+        'обновлено: ' + upd.toLocaleString('ru-RU');
+
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+
+      const svcs = data.services || {};
+      for (const [key, st] of Object.entries(svcs)) {
+        const running = st.running;
+        const name = NAMES[key] || key;
+        const pid = st.pid ? `PID ${st.pid}` : '—';
+        const mem = st.mem_mb ? `${st.mem_mb} MB` : '';
+
+        const card = document.createElement('div');
+        card.className = 'card ' + (running ? 'running' : 'stopped');
+        card.innerHTML = `
+          <div class="card-top">
+            <div class="dot ${running ? 'on' : 'off'}"></div>
+            <div class="card-name">${name}</div>
+          </div>
+          <div class="card-status ${running ? 'on' : 'off'}">
+            ${running ? 'РАБОТАЕТ' : 'ОСТАНОВЛЕН'}
+          </div>
+          <div class="card-meta">${running ? pid + (mem ? '  ' + mem : '') : ''}</div>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    load();
+    setInterval(load, 30000);
+  </script>
+</body>
+</html>
