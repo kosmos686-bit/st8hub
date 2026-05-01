@@ -26,4 +26,7 @@ start "ST8 ErrWatch" /min .venv\Scripts\python.exe error_watcher.py
 :: Status daemon — пишет status.json, автоперезапуск сервисов, git push
 start "ST8 Dashboard" /min .venv\Scripts\python.exe st8_status_daemon.py
 
+:: Mama Bot — независимый сторожевой бот, алерт если Jarvis упал
+start "ST8 MamaBot" /min .venv\Scripts\python.exe mama_bot.py
+
 echo ST8-AI started at %DATE% %TIME%

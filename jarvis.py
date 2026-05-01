@@ -2303,7 +2303,8 @@ def _cmd_system_status() -> str:
     checks = [
         ('Jarvis bot',       _py_running('jarvis.py')),
         ('Watchdog',         _py_running('jarvis_watchdog.py')),
-        ('Scheduler',        _py_running('scheduler.py') or _py_running('meal_scheduler.py')),
+        ('Mama Bot',         _py_running('mama_bot.py')),
+        ('Scheduler',        _py_running('scheduler.py')),
         ('Dashboard daemon', _py_running('st8_status_daemon.py')),
         ('n8n',              _port_listening(5678)),
     ]
