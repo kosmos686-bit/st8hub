@@ -1,22 +1,22 @@
 {
-  "updated": "2026-05-01T19:23:43",
+  "updated": "2026-05-01T19:45:10",
   "services": {
     "jarvis": {
       "running": true,
       "pid": 21524,
-      "mem_mb": 53,
+      "mem_mb": 55,
       "name": "Jarvis"
     },
     "watchdog": {
       "running": true,
       "pid": 22152,
-      "mem_mb": 1,
+      "mem_mb": 0,
       "name": "Watchdog"
     },
     "mama": {
       "running": true,
       "pid": 15476,
-      "mem_mb": 20,
+      "mem_mb": 18,
       "name": "Mama Bot"
     },
     "meal": {
@@ -38,9 +38,9 @@
       "name": "Scheduler"
     },
     "dashboard": {
-      "running": false,
-      "pid": null,
-      "mem_mb": 0,
+      "running": true,
+      "pid": 31120,
+      "mem_mb": 26,
       "name": "Dashboard daemon"
     },
     "n8n": {
