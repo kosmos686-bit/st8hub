@@ -2266,6 +2266,74 @@ def smart_add_lead(user_text: str):
     return msg
 
 
+# ─── SYSTEM STATUS / SERVICE CONTROL ─────────────────────────────────────────
+
+_SVC_ALIASES = {
+    'jarvis': 'jarvis', 'бот': 'jarvis', 'джарвис': 'jarvis',
+    'meal': 'meal', 'питание': 'meal', 'еда': 'meal',
+    'n8n': 'n8n',
+    'errwatch': 'errwatch', 'watcher': 'errwatch', 'монитор': 'errwatch',
+    'dashboard': 'dashboard', 'дашборд': 'dashboard', 'статус демон': 'dashboard',
+}
+
+
+def _cmd_system_status() -> str:
+    try:
+        from service_manager import get_all_status
+        st = get_all_status()
+        lines = ["📊 статус сервисов:\n"]
+        for key, s in st.items():
+            icon = "✅" if s['running'] else "🔴"
+            pid = f"PID {s['pid']}" if s.get('pid') else "—"
+            mem = f"  {s.get('mem_mb', 0)} MB" if s.get('running') else ""
+            lines.append(f"{icon} {s['name']}: {pid}{mem}")
+        return "\n".join(lines)
+    except Exception as e:
+        return f"❌ ошибка получения статуса: {e}"
+
+
+def _is_service_control(text: str) -> bool:
+    t = text.strip().lower()
+    return any(t.startswith(p) for p in (
+        'включи ', 'запусти ', 'выключи ', 'останови ', 'перезапусти ',
+    ))
+
+
+def _handle_service_control(text: str) -> str:
+    t = text.strip().lower()
+    if t.startswith(('включи ', 'запусти ')):
+        action, rest = 'start', t.split(' ', 1)[1].strip()
+    elif t.startswith(('выключи ', 'останови ')):
+        action, rest = 'stop', t.split(' ', 1)[1].strip()
+    elif t.startswith('перезапусти '):
+        action, rest = 'restart', t.split(' ', 1)[1].strip()
+    else:
+        return "❓ не понял команду"
+
+    key = _SVC_ALIASES.get(rest)
+    if not key:
+        available = ', '.join(_SVC_ALIASES.keys())
+        return f"❓ сервис '{rest}' не найден.\nДоступные: {available}"
+
+    try:
+        from service_manager import start_service, stop_service
+    except ImportError:
+        return "❌ service_manager недоступен"
+
+    if action == 'start':
+        ok, msg = start_service(key)
+    elif action == 'stop':
+        ok, msg = stop_service(key)
+    else:
+        stop_service(key)
+        import time as _t; _t.sleep(2)
+        ok, msg = start_service(key)
+        msg = "перезапущен: " + msg
+
+    icon = "✅" if ok else "❌"
+    return f"{icon} {key}: {msg}"
+
+
 # ─── HUB COMMAND HANDLERS ────────────────────────────────────────────────────
 
 def _is_hub_archive_command(text: str) -> bool:
@@ -2715,6 +2783,10 @@ async def poll_jarvis():
                         reply = f"📧 КП отправлено на {email} для {company}"
                     else:
                         reply = "Формат: /email Название компании | email@example.com"
+                elif user_text.strip().lower() in ('/система', 'статус сервисов', 'статус системы'):
+                    reply = _cmd_system_status()
+                elif _is_service_control(user_text):
+                    reply = _handle_service_control(user_text)
                 elif user_text.strip().lower().startswith('/stats'):
                     reply = _parse_token_stats()
                 elif user_text.strip().lower().startswith('/вес'):

@@ -23,4 +23,7 @@ start "ST8 Meal" /min .venv\Scripts\python.exe meal_watchdog.py
 :: Error watcher — log monitoring, 0 API tokens
 start "ST8 ErrWatch" /min .venv\Scripts\python.exe error_watcher.py
 
+:: Status daemon — пишет status.json, автоперезапуск сервисов, git push
+start "ST8 Dashboard" /min .venv\Scripts\python.exe st8_status_daemon.py
+
 echo ST8-AI started at %DATE% %TIME%
