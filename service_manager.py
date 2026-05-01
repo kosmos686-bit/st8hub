@@ -16,11 +16,12 @@ JARVIS_CHAT_ID = 6152243830
 
 SERVICES = {
     'jarvis':    {'script': 'jarvis.py',           'name': 'Jarvis'},
+    'watchdog':  {'script': 'jarvis_watchdog.py',  'name': 'Watchdog'},
+    'mama':      {'script': 'mama_bot.py',          'name': 'Mama Bot'},
     'meal':      {'script': 'meal_watchdog.py',     'name': 'Meal Watchdog'},
     'errwatch':  {'script': 'error_watcher.py',     'name': 'Error Watcher'},
-    'dashboard': {'script': 'st8_status_daemon.py', 'name': 'Dashboard daemon'},
     'scheduler': {'script': 'scheduler.py',         'name': 'Scheduler'},
-    'mama':      {'script': 'mama_bot.py',          'name': 'Mama Bot'},
+    'dashboard': {'script': 'st8_status_daemon.py', 'name': 'Dashboard daemon'},
     'n8n':       {'n8n': True,                      'name': 'n8n'},
 }
 
