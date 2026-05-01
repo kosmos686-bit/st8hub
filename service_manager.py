@@ -15,10 +15,13 @@ JARVIS_BOT_TOKEN = os.getenv('JARVIS_BOT_TOKEN')
 JARVIS_CHAT_ID = 6152243830
 
 SERVICES = {
-    'jarvis':   {'script': 'jarvis.py',        'name': 'Jarvis'},
-    'meal':     {'script': 'meal_watchdog.py',  'name': 'Meal Watchdog'},
-    'errwatch': {'script': 'error_watcher.py',  'name': 'Error Watcher'},
-    'n8n':      {'n8n': True,                   'name': 'n8n'},
+    'jarvis':    {'script': 'jarvis.py',           'name': 'Jarvis'},
+    'meal':      {'script': 'meal_watchdog.py',     'name': 'Meal Watchdog'},
+    'errwatch':  {'script': 'error_watcher.py',     'name': 'Error Watcher'},
+    'dashboard': {'script': 'st8_status_daemon.py', 'name': 'Dashboard daemon'},
+    'scheduler': {'script': 'scheduler.py',         'name': 'Scheduler'},
+    'mama':      {'script': 'mama_bot.py',          'name': 'Mama Bot'},
+    'n8n':       {'n8n': True,                      'name': 'n8n'},
 }
 
 

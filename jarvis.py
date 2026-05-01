@@ -2272,8 +2272,10 @@ _SVC_ALIASES = {
     'jarvis': 'jarvis', 'бот': 'jarvis', 'джарвис': 'jarvis',
     'meal': 'meal', 'питание': 'meal', 'еда': 'meal',
     'n8n': 'n8n',
-    'errwatch': 'errwatch', 'watcher': 'errwatch', 'монитор': 'errwatch',
-    'dashboard': 'dashboard', 'дашборд': 'dashboard', 'статус демон': 'dashboard',
+    'errwatch': 'errwatch', 'watcher': 'errwatch', 'монитор ошибок': 'errwatch',
+    'dashboard': 'dashboard', 'дашборд': 'dashboard', 'dashboard daemon': 'dashboard', 'статус демон': 'dashboard',
+    'scheduler': 'scheduler', 'планировщик': 'scheduler',
+    'mama': 'mama', 'mama bot': 'mama', 'мама бот': 'mama', 'мама': 'mama',
 }
 
 
