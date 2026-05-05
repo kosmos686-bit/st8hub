@@ -23,6 +23,7 @@ SERVICES = {
     'scheduler': {'script': 'scheduler.py',         'name': 'Scheduler'},
     'dashboard': {'script': 'st8_status_daemon.py', 'name': 'Dashboard daemon'},
     'n8n':       {'n8n': True,                      'name': 'n8n'},
+    'autopilot': {'uvicorn': True,                  'name': 'Autopilot'},
 }
 
 
@@ -48,6 +49,17 @@ def get_service_status(key):
                     if 'n8n' in ' '.join(p.info['cmdline'] or []):
                         mem = p.info['memory_info'].rss // (1024 * 1024) if p.info['memory_info'] else 0
                         return {'running': True, 'pid': p.pid, 'mem_mb': mem}
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+        return {'running': False, 'pid': None, 'mem_mb': 0}
+
+    if svc.get('uvicorn'):
+        for p in _python_procs():
+            try:
+                cmd = ' '.join(p.info['cmdline'] or [])
+                if 'uvicorn' in cmd and 'main:app' in cmd:
+                    mem = p.info['memory_info'].rss // (1024 * 1024) if p.info['memory_info'] else 0
+                    return {'running': True, 'pid': p.pid, 'mem_mb': mem}
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 pass
         return {'running': False, 'pid': None, 'mem_mb': 0}
