@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST8-AI · Universal Sales Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060A10;
+  --bg2: #0C1218;
+  --bg3: #111820;
+  --bg4: #161E28;
+  --gold: #D4A017;
+  --gold2: #F0C840;
+  --gold3: rgba(212,160,23,0.12);
+  --text: #E8EDF5;
+  --muted: #5A6878;
+  --muted2: #8A9AAC;
+  --green: #27C96A;
+  --amber: #F0A020;
+  --red: #E84040;
+  --blue: #3A9EE8;
+  --purple: #8B6FE8;
+  --teal: #20C4B0;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Syne', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 13px; display: flex; flex-direction: column; }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: linear-gradient(rgba(212,160,23,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(212,160,23,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none; z-index: 0;
+}
+
+/* HEADER */
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 52px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6,10,16,0.95);
+  backdrop-filter: blur(12px);
+  position: relative; z-index: 100; flex-shrink: 0;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-mark {
+  width: 30px; height: 30px; border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--gold);
+}
+.logo-text { font-size: 14px; font-weight: 700; letter-spacing: 0.1em; }
+.logo-badge {
+  font-size: 9px; font-family: var(--mono); color: var(--gold);
+  border: 1px solid var(--gold); padding: 2px 6px; letter-spacing: 0.08em;
+}
+.header-center { display: flex; gap: 2px; }
+.nav-btn {
+  padding: 6px 14px; font-size: 12px; font-family: var(--sans);
+  background: transparent; border: none; color: var(--muted2);
+  cursor: pointer; border-radius: 4px; transition: all 0.15s; letter-spacing: 0.03em;
+}
+.nav-btn.active, .nav-btn:hover { color: var(--text); background: var(--bg3); }
+.nav-btn.active { color: var(--gold); }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.live { display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10px; color: var(--green); }
+.live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.market-flags { display: flex; gap: 6px; }
+.flag { font-size: 11px; padding: 3px 8px; border-radius: 3px; font-family: var(--mono); background: var(--bg3); border: 1px solid var(--border2); color: var(--muted2); }
+.flag.active { border-color: var(--gold); color: var(--gold2); }
+
+/* MAIN LAYOUT */
+.app { display: flex; flex: 1; overflow: hidden; position: relative; z-index: 1; }
+
+/* LEFT PANEL - LEAD INPUT */
+.panel-left {
+  width: 320px; flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  background: var(--bg2);
+}
+.panel-title {
+  padding: 14px 16px 10px;
+  font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Lead form */
+.lead-form { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.form-row { margin-bottom: 10px; }
+.form-label { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; display: block; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--text); font-family: var(--sans); font-size: 12px;
+  padding: 7px 10px; border-radius: 4px; outline: none; transition: border 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+.form-select { appearance: none; }
+.form-textarea { resize: none; height: 60px; line-height: 1.5; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.market-toggle { display: flex; gap: 6px; margin-bottom: 12px; }
+.market-btn {
+  flex: 1; padding: 6px; font-size: 11px; font-family: var(--mono);
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--muted2); cursor: pointer; border-radius: 3px; transition: all 0.15s;
+  text-align: center;
+}
+.market-btn.active { border-color: var(--gold); color: var(--gold2); background: var(--gold3); }
+
+.submit-btn {
+  width: 100%; padding: 10px; font-size: 13px; font-weight: 700;
+  font-family: var(--sans); letter-spacing: 0.05em;
+  background: var(--gold); color: #000; border: none; border-radius: 4px;
+  cursor: pointer; transition: all 0.15s;
+}
+.submit-btn:hover { background: var(--gold2); }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { background: var(--muted); cursor: not-allowed; }
+
+/* Active leads list */
+.leads-list { flex: 1; overflow-y: auto; }
+.lead-item {
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background 0.12s;
+  display: flex; align-items: center; gap: 10px;
+}
+.lead-item:hover { background: var(--bg3); }
+.lead-item.active { background: var(--bg3); border-left: 2px solid var(--gold); }
+.lead-avatar {
+  width: 32px; height: 32px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.lead-info { flex: 1; min-width: 0; }
+.lead-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lead-meta { font-size: 10px; color: var(--muted2); margin-top: 2px; }
+.lead-score {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  width: 30px; text-align: right; flex-shrink: 0;
+}
+
+/* CENTER - PIPELINE */
+.panel-center { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* Pipeline stages */
+.pipeline-bar {
+  display: flex; border-bottom: 1px solid var(--border);
+  background: var(--bg2); flex-shrink: 0;
+}
+.stage {
+  flex: 1; padding: 10px 12px; text-align: center;
+  border-right: 1px solid var(--border); cursor: pointer;
+  transition: background 0.15s; position: relative;
+}
+.stage:last-child { border-right: none; }
+.stage:hover { background: var(--bg3); }
+.stage.active { background: var(--bg3); }
+.stage.active::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+}
+.stage-name { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.stage-count { font-family: var(--mono); font-size: 18px; font-weight: 600; color: var(--gold2); margin-top: 2px; }
+
+/* Agent activity feed */
+.activity-feed { flex: 1; overflow-y: auto; padding: 0; }
+.activity-feed::-webkit-scrollbar { width: 3px; }
+.activity-feed::-webkit-scrollbar-thumb { background: var(--border2); }
+
+.agent-event {
+  padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,0.03);
+  display: grid; grid-template-columns: 140px 80px 1fr;
+  gap: 0; align-items: start;
+  animation: slideIn 0.3s ease;
+}
+@keyframes slideIn { from { opacity:0; transform: translateX(-8px); } to { opacity:1; transform:none; } }
+.agent-event:hover { background: rgba(255,255,255,0.02); }
+
+.ev-agent { display: flex; align-items: center; gap: 6px; }
+.agent-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.agent-label { font-size: 11px; font-family: var(--mono); color: var(--muted2); }
+.ev-status { }
+.ev-status span {
+  font-size: 9px; font-family: var(--mono); padding: 2px 6px; border-radius: 2px;
+  letter-spacing: 0.04em;
+}
+.s-thinking { background: rgba(139,111,232,0.15); color: var(--purple); }
+.s-ok { background: rgba(39,201,106,0.12); color: var(--green); }
+.s-warn { background: rgba(240,160,32,0.15); color: var(--amber); }
+.s-fire { background: rgba(212,160,23,0.15); color: var(--gold2); }
+.ev-msg { font-size: 12px; color: var(--text); line-height: 1.5; }
+.ev-msg .hi { color: var(--gold2); }
+.ev-msg .dim { color: var(--muted); }
+
+/* Council debate block */
+.council-block {
+  margin: 12px 20px; background: var(--bg3);
+  border: 1px solid rgba(212,160,23,0.2); border-radius: 6px;
+  overflow: hidden;
+}
+.council-header {
+  padding: 8px 14px; background: rgba(212,160,23,0.08);
+  border-bottom: 1px solid rgba(212,160,23,0.15);
+  font-size: 11px; font-family: var(--mono); color: var(--gold);
+  display: flex; align-items: center; gap: 8px;
+}
+.council-spinning {
+  width: 10px; height: 10px; border: 1.5px solid var(--gold);
+  border-top-color: transparent; border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.council-body { padding: 10px 14px; }
+.debate-row {
+  display: flex; gap: 8px; margin-bottom: 6px; font-size: 11px;
+}
+.debate-agent { color: var(--muted); font-family: var(--mono); width: 110px; flex-shrink: 0; }
+.debate-say { color: var(--text); line-height: 1.5; }
+.verdict-box {
+  margin-top: 10px; padding: 10px; background: rgba(39,201,106,0.06);
+  border: 1px solid rgba(39,201,106,0.2); border-radius: 4px;
+}
+.verdict-title { font-size: 10px; color: var(--green); font-family: var(--mono); letter-spacing: 0.06em; margin-bottom: 6px; }
+.verdict-line { font-size: 12px; color: var(--text); margin-bottom: 4px; line-height: 1.5; }
+.verdict-line strong { color: var(--gold2); }
+.conf-bar { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.conf-track { flex: 1; height: 4px; background: var(--bg); border-radius: 2px; overflow: hidden; }
+.conf-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 1s ease; }
+.conf-label { font-family: var(--mono); font-size: 11px; color: var(--green); }
+
+/* RIGHT PANEL - DETAILS */
+.panel-right {
+  width: 300px; flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  background: var(--bg2); overflow-y: auto;
+}
+.detail-section { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.detail-title { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+
+.score-ring { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.ring-wrap { position: relative; width: 56px; height: 56px; flex-shrink: 0; }
+.ring-wrap svg { transform: rotate(-90deg); }
+.ring-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 14px; font-weight: 600; }
+.score-details { flex: 1; }
+.score-name { font-size: 13px; font-weight: 600; }
+.score-company { font-size: 11px; color: var(--muted2); margin-top: 2px; }
+.score-market { font-size: 10px; margin-top: 4px; }
+
+.detail-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 11px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-key { color: var(--muted2); }
+.detail-val { font-family: var(--mono); color: var(--text); }
+.detail-val.good { color: var(--green); }
+.detail-val.warn { color: var(--amber); }
+.detail-val.hot { color: var(--gold2); }
+
+/* Action buttons */
+.actions { padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; }
+.action-btn {
+  width: 100%; padding: 8px 12px; font-size: 11px; font-family: var(--sans);
+  font-weight: 600; letter-spacing: 0.04em;
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--text); cursor: pointer; border-radius: 4px;
+  transition: all 0.15s; text-align: left;
+  display: flex; align-items: center; gap: 8px;
+}
+.action-btn:hover { border-color: var(--gold); color: var(--gold2); }
+.action-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* Funnel mini */
+.funnel-wrap { }
+.funnel-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.funnel-label { font-size: 10px; color: var(--muted2); width: 72px; flex-shrink: 0; }
+.funnel-bar-bg { flex: 1; height: 5px; background: var(--bg); border-radius: 2px; overflow: hidden; }
+.funnel-bar-fill { height: 100%; border-radius: 2px; }
+.funnel-num { font-family: var(--mono); font-size: 10px; color: var(--muted2); width: 22px; text-align: right; }
+
+/* bottom status */
+.status-bar {
+  height: 26px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 20px; padding: 0 20px;
+  background: var(--bg2); flex-shrink: 0; position: relative; z-index: 10;
+}
+.status-item { display: flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.status-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+/* Notification toast */
+.toast {
+  position: fixed; bottom: 40px; right: 20px;
+  background: var(--bg3); border: 1px solid var(--gold);
+  padding: 10px 16px; border-radius: 6px;
+  font-size: 12px; color: var(--gold2);
+  font-family: var(--mono);
+  transform: translateX(120%); transition: transform 0.3s ease;
+  z-index: 999;
+}
+.toast.show { transform: none; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-mark">ST8</div>
+    <div class="logo-text">ST8-AI</div>
+    <div class="logo-badge">SALES ENGINE</div>
+  </div>
+  <div class="header-center">
+    <button class="nav-btn active" onclick="setNav(this,'pipeline')">Pipeline</button>
+    <button class="nav-btn" onclick="setNav(this,'agents')">Agents</button>
+    <button class="nav-btn" onclick="setNav(this,'analytics')">Analytics</button>
+    <button class="nav-btn" onclick="setNav(this,'uae')">UAE ✦</button>
+  </div>
+  <div class="header-right">
+    <div class="market-flags">
+      <div class="flag active" id="flag-ru">🇷🇺 RU</div>
+      <div class="flag active" id="flag-uae">🇦🇪 UAE</div>
+    </div>
+    <div class="live"><div class="live-dot"></div>LIVE</div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--muted2)" id="clock">--:--</div>
+  </div>
+</header>
+
+<!-- APP -->
+<div class="app">
+
+  <!-- LEFT: LEAD INPUT + LIST -->
+  <div class="panel-left">
+    <div class="panel-title">Новый лид</div>
+
+    <div class="lead-form">
+      <div class="market-toggle">
+        <button class="market-btn active" onclick="setMarket('ru',this)">🇷🇺 Россия</button>
+        <button class="market-btn" onclick="setMarket('uae',this)">🇦🇪 UAE / ОАЭ</button>
+        <button class="market-btn" onclick="setMarket('global',this)">🌍 Global</button>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Компания / Contact</label>
+        <input class="form-input" id="f-company" placeholder="White Rabbit Family" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">ЛПР / Decision maker</label>
+        <input class="form-input" id="f-contact" placeholder="Борис Зарьков / Ahmed Al Mansoori" />
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Ниша / Industry</label>
+          <select class="form-select" id="f-industry">
+            <option>HoReCa</option>
+            <option>Retail / Ритейл</option>
+            <option>Manufacturing</option>
+            <option>Construction / Стройка</option>
+            <option>Logistics</option>
+            <option>Real Estate</option>
+            <option>E-commerce</option>
+            <option>Другое</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Размер / Scale</label>
+          <select class="form-select" id="f-scale">
+            <option>1-3 точки</option>
+            <option>4-10 точек</option>
+            <option>10+ / Сеть</option>
+            <option>Enterprise</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Боль / Pain point</label>
+        <textarea class="form-textarea" id="f-pain" placeholder="Что не работает? Какая задача?"></textarea>
+      </div>
+      <button class="submit-btn" id="submitBtn" onclick="submitLead()">⚡ ЗАПУСТИТЬ АГЕНТОВ</button>
+    </div>
+
+    <div class="panel-title" style="margin-top:0">Активные лиды</div>
+    <div class="leads-list" id="leadsList"></div>
+  </div>
+
+  <!-- CENTER: PIPELINE + AGENT FEED -->
+  <div class="panel-center">
+    <div class="pipeline-bar">
+      <div class="stage active" onclick="setStage(this,0)">
+        <div class="stage-name">Квалификация</div>
+        <div class="stage-count" id="sc0">3</div>
+      </div>
+      <div class="stage" onclick="setStage(this,1)">
+        <div class="stage-name">Анализ</div>
+        <div class="stage-count" id="sc1">2</div>
+      </div>
+      <div class="stage" onclick="setStage(this,2)">
+        <div class="stage-name">КП / Pitch</div>
+        <div class="stage-count" id="sc2">4</div>
+      </div>
+      <div class="stage" onclick="setStage(this,3)">
+        <div class="stage-name">Переговоры</div>
+        <div class="stage-count" id="sc3">2</div>
+      </div>
+      <div class="stage" onclick="setStage(this,4)">
+        <div class="stage-name">Закрытие</div>
+        <div class="stage-count" id="sc4">1</div>
+      </div>
+      <div class="stage" onclick="setStage(this,5)">
+        <div class="stage-name">✓ Выиграно</div>
+        <div class="stage-count" id="sc5" style="color:var(--green)">8</div>
+      </div>
+    </div>
+
+    <div class="activity-feed" id="activityFeed"></div>
+  </div>
+
+  <!-- RIGHT: LEAD DETAIL -->
+  <div class="panel-right">
+    <div class="detail-section">
+      <div class="detail-title">Текущий лид</div>
+      <div class="score-ring">
+        <div class="ring-wrap">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="5"/>
+            <circle id="scoreArc" cx="28" cy="28" r="22" fill="none" stroke="var(--gold)" stroke-width="5"
+              stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="55" style="transition:stroke-dashoffset 1s ease"/>
+          </svg>
+          <div class="ring-num" id="scoreNum" style="color:var(--gold2)">82</div>
+        </div>
+        <div class="score-details">
+          <div class="score-name" id="dName">White Rabbit</div>
+          <div class="score-company" id="dCompany">Борис Зарьков · 8 рест.</div>
+          <div class="score-market" id="dMarket" style="color:var(--gold)">🇷🇺 HoReCa · Москва</div>
+        </div>
+      </div>
+      <div class="detail-row"><span class="detail-key">BANT Score</span><span class="detail-val hot">82 / 100</span></div>
+      <div class="detail-row" id="dr-budget"><span class="detail-key">Budget signal</span><span class="detail-val warn">не озвучен</span></div>
+      <div class="detail-row" id="dr-authority"><span class="detail-key">Authority</span><span class="detail-val good">ЛПР ✓</span></div>
+      <div class="detail-row" id="dr-need"><span class="detail-key">Need</span><span class="detail-val good">сильная ✓</span></div>
+      <div class="detail-row" id="dr-timeline"><span class="detail-key">Timeline</span><span class="detail-val warn">Q3 2026</span></div>
+      <div class="detail-row" id="dr-stage"><span class="detail-key">Stage</span><span class="detail-val hot">Переговоры</span></div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-title">Рекомендации агентов</div>
+      <div id="recommendations">
+        <div class="detail-row"><span class="detail-key">Тактика</span><span class="detail-val" style="font-size:10px;text-align:right">Стоп-продажа → слушать</span></div>
+        <div class="detail-row"><span class="detail-key">Оффер</span><span class="detail-val" style="font-size:10px;text-align:right">Пилот 2 рест. 45д</span></div>
+        <div class="detail-row"><span class="detail-key">Кейс</span><span class="detail-val" style="font-size:10px;text-align:right">Unik Food + цифры</span></div>
+        <div class="detail-row"><span class="detail-key">Психотип ЛПР</span><span class="detail-val" style="font-size:10px;text-align:right">Драйвер / Экспрессив</span></div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-title">Pipeline воронка</div>
+      <div class="funnel-wrap">
+        <div class="funnel-row"><div class="funnel-label">Найдено</div><div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;background:var(--muted)"></div></div><div class="funnel-num">47</div></div>
+        <div class="funnel-row"><div class="funnel-label">ICP pass</div><div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:66%;background:var(--blue)"></div></div><div class="funnel-num">31</div></div>
+        <div class="funnel-row"><div class="funnel-label">КП sent</div><div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:36%;background:var(--purple)"></div></div><div class="funnel-num">17</div></div>
+        <div class="funnel-row"><div class="funnel-label">Ответили</div><div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:13%;background:var(--amber)"></div></div><div class="funnel-num">6</div></div>
+        <div class="funnel-row"><div class="funnel-label">Закрыто</div><div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:6%;background:var(--green)"></div></div><div class="funnel-num">3</div></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="detail-title">Действия</div>
+      <button class="action-btn" onclick="runAction('council')"><div class="action-dot" style="background:var(--gold)"></div>Запустить Council debate</button>
+      <button class="action-btn" onclick="runAction('kp')"><div class="action-dot" style="background:var(--blue)"></div>Сгенерировать КП</button>
+      <button class="action-btn" onclick="runAction('followup')"><div class="action-dot" style="background:var(--purple)"></div>Запланировать follow-up</button>
+      <button class="action-btn" onclick="runAction('objection')"><div class="action-dot" style="background:var(--amber)"></div>Отработать возражение</button>
+      <button class="action-btn" onclick="runAction('uae')"><div class="action-dot" style="background:var(--teal)"></div>UAE pitch deck</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-item"><div class="status-dot" style="background:var(--green)"></div>scheduler · running</div>
+  <div class="status-item"><div class="status-dot" style="background:var(--green)"></div>jarvis · running</div>
+  <div class="status-item"><div class="status-dot" style="background:var(--gold)"></div>sales_closer · ready</div>
+  <div class="status-item"><div class="status-dot" style="background:var(--gold)"></div>marketing_agent · ready</div>
+  <div class="status-item"><div class="status-dot" style="background:var(--purple)"></div>council · standby</div>
+  <div class="status-item" style="margin-left:auto"><div class="status-dot" style="background:var(--green)"></div>UAE module · active</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// DATA
+const LEADS_DEMO = [
+  {id:1,name:'White Rabbit',company:'Борис Зарьков',industry:'HoReCa',scale:'8 рест.',market:'ru',score:82,stage:3,color:'#D4A017'},
+  {id:2,name:'G42 Group',company:'Ahmed Al Rashidi',industry:'Real Estate',scale:'Enterprise',market:'uae',score:91,stage:2,color:'#20C4B0'},
+  {id:3,name:'Lucky Group',company:'Богдан Панченко',industry:'HoReCa',scale:'4-10',market:'ru',score:74,stage:1,color:'#8B6FE8'},
+  {id:4,name:'ADNOC',company:'Khalid Al Mansoori',industry:'Construction',scale:'Enterprise',market:'uae',score:88,stage:2,color:'#3A9EE8'},
+  {id:5,name:'Раппопорт',company:'Рестораны',industry:'HoReCa',scale:'10+',market:'ru',score:69,stage:0,color:'#E84040'},
+  {id:6,name:'Welcome Group',company:'Ижевск',industry:'HoReCa',scale:'4-10',market:'ru',score:61,stage:0,color:'#F0A020'},
+];
+
+let currentMarket = 'ru';
+let activeLeadId = 1;
+let eventQueue = [];
+let isProcessing = false;
+
+// CLOCK
+setInterval(() => {
+  const n = new Date();
+  document.getElementById('clock').textContent =
+    n.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}, 1000);
+
+// RENDER LEADS
+function renderLeads() {
+  const list = document.getElementById('leadsList');
+  list.innerHTML = LEADS_DEMO.map(l => `
+    <div class="lead-item ${l.id===activeLeadId?'active':''}" onclick="selectLead(${l.id})">
+      <div class="lead-avatar" style="background:${l.color}22;color:${l.color}">
+        ${l.name.substring(0,2).toUpperCase()}
+      </div>
+      <div class="lead-info">
+        <div class="lead-name">${l.name}</div>
+        <div class="lead-meta">${l.market==='uae'?'🇦🇪':'🇷🇺'} ${l.industry} · ${l.scale}</div>
+      </div>
+      <div class="lead-score" style="color:${l.score>80?'#27C96A':l.score>65?'#F0A020':'#E84040'}">${l.score}</div>
+    </div>
+  `).join('');
+}
+
+function selectLead(id) {
+  activeLeadId = id;
+  const l = LEADS_DEMO.find(x=>x.id===id);
+  renderLeads();
+  updateDetail(l);
+}
+
+function updateDetail(l) {
+  document.getElementById('dName').textContent = l.name;
+  document.getElementById('dCompany').textContent = l.company + ' · ' + l.scale;
+  document.getElementById('dMarket').textContent = (l.market==='uae'?'🇦🇪 UAE':'🇷🇺 RU') + ' · ' + l.industry;
+  document.getElementById('scoreNum').textContent = l.score;
+  const offset = 138.2 * (1 - l.score/100);
+  document.getElementById('scoreArc').style.strokeDashoffset = offset;
+  document.getElementById('scoreArc').style.stroke = l.score>80?'var(--green)':l.score>65?'var(--amber)':'var(--red)';
+  document.getElementById('scoreNum').style.color = l.score>80?'var(--green)':l.score>65?'var(--amber)':'var(--red)';
+}
+
+// MARKET TOGGLE
+function setMarket(m, btn) {
+  currentMarket = m;
+  document.querySelectorAll('.market-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(m==='uae') {
+    document.getElementById('f-contact').placeholder = 'Ahmed Al Mansoori';
+    document.getElementById('f-pain').placeholder = 'Business challenge? What needs to be automated?';
+  } else {
+    document.getElementById('f-contact').placeholder = 'Борис Зарьков';
+    document.getElementById('f-pain').placeholder = 'Что не работает? Какая задача?';
+  }
+}
+
+// SUBMIT LEAD
+function submitLead() {
+  const company = document.getElementById('f-company').value || 'Новый клиент';
+  const contact = document.getElementById('f-contact').value || 'ЛПР';
+  const industry = document.getElementById('f-industry').value;
+  const scale = document.getElementById('f-scale').value;
+  const pain = document.getElementById('f-pain').value || 'Не указана';
+
+  const score = Math.floor(55 + Math.random()*35);
+  const newLead = {
+    id: Date.now(), name: company.split(' ')[0],
+    company: contact, industry, scale, market: currentMarket, score, stage: 0,
+    color: ['#D4A017','#20C4B0','#8B6FE8','#3A9EE8','#27C96A'][Math.floor(Math.random()*5)]
+  };
+  LEADS_DEMO.unshift(newLead);
+  activeLeadId = newLead.id;
+  renderLeads();
+  updateDetail(newLead);
+
+  showToast('⚡ Лид принят — агенты запущены');
+  runAgentPipeline(company, contact, industry, scale, pain, currentMarket, score);
+
+  document.getElementById('f-company').value = '';
+  document.getElementById('f-contact').value = '';
+  document.getElementById('f-pain').value = '';
+}
+
+// AGENT PIPELINE SIMULATION
+function runAgentPipeline(company, contact, industry, scale, pain, market, score) {
+  const feed = document.getElementById('activityFeed');
+  const isUAE = market === 'uae';
+
+  const events = [
+    {agent:'lead_scorer', color:'#8B6FE8', status:'thinking', msg:`Квалификация лида: <span class="hi">${company}</span> · ${industry} · ${scale}`},
+    {agent:'lead_scorer', color:'#8B6FE8', status:'ok', msg:`BANT score: <span class="hi">${score}/100</span> · ICP match: ${score>70?'✓ PASS':'⚠ LOW'}`},
+    {agent:'marketing_agent', color:'#3A9EE8', status:'thinking', msg:`Анализ сегмента: <span class="hi">${industry}</span> · рынок: ${isUAE?'UAE':'РФ'}`},
+    {agent:'marketing_agent', color:'#3A9EE8', status:'ok', msg:`Позиционирование: "${isUAE?'ST8-AI — your competitive advantage in '+industry:'ST8-AI — конкурентное преимущество в '+industry}"`},
+    {agent:'psychologist', color:'#F0A020', status:'thinking', msg:`Анализ профиля ЛПР: <span class="hi">${contact}</span>`},
+    {agent:'psychologist', color:'#F0A020', status:'ok', msg:`Психотип: <span class="hi">Драйвер</span> · мотив: статус + результат · страх: публичная ошибка`},
+    {agent:'competitor_analyst', color:'#20C4B0', status:'thinking', msg:`Конкурентный анализ: ${industry} ${isUAE?'UAE market':'рынок РФ'}`},
+    {agent:'competitor_analyst', color:'#20C4B0', status:'ok', msg:`Прямых конкурентов: <span class="hi">0</span> · позиция: уникальная · преимущество: интеграции + локализация`},
+    {agent:'council', color:'#D4A017', status:'fire', msg:`COUNCIL запущен · 8 агентов · задача: стратегия для <span class="hi">${company}</span>`},
+    {agent:'sales_closer', color:'#27C96A', status:'thinking', msg:`Формирование тактики · возражения · техника закрытия`},
+    {agent:'kp_generator', color:'#8B6FE8', status:'thinking', msg:`Генерация КП · пакет: ${score>80?'Бизнес':'Базовый'} · ${isUAE?'EN версия':'RU версия'}`},
+    {agent:'kp_generator', color:'#8B6FE8', status:'ok', msg:`КП готово · <span class="hi">${score>80?'Бизнес пакет':'Базовый пакет'}</span> · персонализировано под ${industry}`},
+    {agent:'sales_closer', color:'#27C96A', status:'ok', msg:`Тактика: ${score>75?'Direct close → пилот 45 дней':'Discovery call → SPIN questions'}`},
+    {agent:'follow_up', color:'#F0A020', status:'ok', msg:`Follow-up запланирован: <span class="dim">+3 дня</span> · канал: ${isUAE?'WhatsApp/Email':'Telegram'}`},
+    {agent:'mempalace', color:'#5A6878', status:'ok', msg:`Записано в память · <span class="hi">${company}</span> · ${new Date().toLocaleDateString('ru-RU')}`},
+  ];
+
+  if (isUAE) {
+    events.splice(8, 0, {agent:'uae_module', color:'#20C4B0', status:'fire', msg:`UAE context loaded · ${industry} · G42/ADNOC/Vision 2031 alignment check`});
+  }
+
+  // Show council block mid-pipeline
+  let councilShown = false;
+  events.forEach((ev, i) => {
+    setTimeout(() => {
+      addEvent(ev);
+      if (ev.agent === 'council' && !councilShown) {
+        councilShown = true;
+        setTimeout(() => showCouncilBlock(company, contact, industry, score, isUAE), 500);
+      }
+    }, i * 900);
+  });
+}
+
+function addEvent(ev) {
+  const feed = document.getElementById('activityFeed');
+  const div = document.createElement('div');
+  div.className = 'agent-event';
+  const smap = {thinking:'s-thinking',ok:'s-ok',warn:'s-warn',fire:'s-fire'};
+  const slabel = {thinking:'THINKING',ok:'DONE',warn:'WARN',fire:'ACTIVE'};
+  div.innerHTML = `
+    <div class="ev-agent">
+      <div class="agent-dot" style="background:${ev.color}"></div>
+      <div class="agent-label">${ev.agent}</div>
+    </div>
+    <div class="ev-status"><span class="${smap[ev.status]}">${slabel[ev.status]}</span></div>
+    <div class="ev-msg">${ev.msg}</div>
+  `;
+  feed.prepend(div);
+}
+
+function showCouncilBlock(company, contact, industry, score, isUAE) {
+  const feed = document.getElementById('activityFeed');
+  const div = document.createElement('div');
+  div.className = 'council-block';
+  div.innerHTML = `
+    <div class="council-header">
+      <div class="council-spinning"></div>
+      SALES & MARKETING COUNCIL · ${company}
+    </div>
+    <div class="council-body">
+      <div class="debate-row"><div class="debate-agent">💼 sales_closer</div><div class="debate-say">Score ${score} — ${score>75?'горячий. Предлагаем пилот напрямую':'нужен discovery. Сначала боль.'}</div></div>
+      <div class="debate-row"><div class="debate-agent">📣 marketing</div><div class="debate-say">${industry} ${isUAE?'в UAE — акцент на Vision 2031 и ROI в AED':'— кейс Polyana Group убедит быстрее таблиц'}</div></div>
+      <div class="debate-row"><div class="debate-agent">🧠 psychologist</div><div class="debate-say">ЛПР — Драйвер. Нужна история успеха, не спеки. Страх: публичная ошибка.</div></div>
+      <div class="debate-row"><div class="debate-agent">💰 pricing</div><div class="debate-say">${score>80?'Полная цена. Скидка обесценит. Пилот как отдельный SKU.':'Предложить entry-offer. Снизить барьер входа.'}</div></div>
+      <div class="debate-row"><div class="debate-agent">⚠️ risk</div><div class="debate-say">Проверить: есть ли внутренний чемпион? Без него пилот под угрозой.</div></div>
+      <div class="verdict-box">
+        <div class="verdict-title">▸ ВЕРДИКТ СОВЕТА</div>
+        <div class="verdict-line"><strong>Тактика:</strong> ${score>75?'Звонок сегодня → стоп-продажа → слушать барьер':'Discovery call → SPIN → боль → оффер'}</div>
+        <div class="verdict-line"><strong>Оффер:</strong> ${score>80?'Пилот 2 точки · 45 дней · фикс. сумма':'Базовый пакет · ROI-расчёт · кейс отрасли'}</div>
+        <div class="verdict-line"><strong>Следующий шаг:</strong> ${isUAE?'EN pitch deck + встреча в офисе UAE':'Голосовой звонок ' + new Date().toLocaleDateString('ru-RU')}</div>
+        <div class="conf-bar">
+          <div class="conf-track"><div class="conf-fill" style="width:0%" id="confFill"></div></div>
+          <div class="conf-label" id="confLabel">0%</div>
+        </div>
+      </div>
+    </div>
+  `;
+  feed.prepend(div);
+  setTimeout(() => {
+    const target = score > 75 ? 85 : 71;
+    document.getElementById('confFill').style.width = target + '%';
+    document.getElementById('confLabel').textContent = '🟢 ' + target + '%';
+  }, 300);
+}
+
+// ACTIONS
+function runAction(type) {
+  const msgs = {
+    council: '⚡ Council debate запущен...',
+    kp: '📄 КП генерируется...',
+    followup: '📅 Follow-up запланирован',
+    objection: '🛡 Анализ возражений...',
+    uae: '🇦🇪 UAE pitch deck запущен...'
+  };
+  showToast(msgs[type] || 'Запущено...');
+
+  if (type === 'uae') {
+    addEvent({agent:'uae_module', color:'#20C4B0', status:'fire', msg:`UAE pitch · G42 / ADNOC / строительный сектор · Vision 2031 alignment · EN presentation`});
+    setTimeout(()=>addEvent({agent:'marketing_agent', color:'#3A9EE8', status:'ok', msg:`Pitch deck готов · <span class="hi">EN</span> · ключевые триггеры: ROI, local presence, no risks`}), 1200);
+  }
+  if (type === 'council') {
+    const l = LEADS_DEMO.find(x=>x.id===activeLeadId);
+    if (l) showCouncilBlock(l.name, l.company, l.industry, l.score, l.market==='uae');
+  }
+}
+
+function setNav(btn, view) {
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if (view === 'uae') {
+    showToast('🇦🇪 UAE module: G42, ADNOC, строительство, рестораны — все сегменты активны');
+    addEvent({agent:'uae_module', color:'#20C4B0', status:'fire', msg:`UAE market activated · target sectors: Construction, HoReCa, Real Estate, Tech · key contacts: G42, ADNOC, Emaar`});
+  }
+}
+
+function setStage(el, idx) {
+  document.querySelectorAll('.stage').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// AUTO EVENTS
+function autoEvent() {
+  const pool = [
+    {agent:'scheduler', color:'#5A6878', status:'ok', msg:`Heartbeat · все агенты активны · MemPalace: <span class="hi">763 блока</span>`},
+    {agent:'marketing_agent', color:'#3A9EE8', status:'ok', msg:`Новый контент готов: кейс HoReCa · Telegram-пост · охват +340`},
+    {agent:'sales_closer', color:'#27C96A', status:'ok', msg:`Follow-up отправлен: Lucky Group · ответ ожидается <span class="dim">+3 дня</span>`},
+    {agent:'uae_module', color:'#20C4B0', status:'thinking', msg:`Анализ UAE рынка · строительный сектор · 3 новых лида квалифицированы`},
+    {agent:'lead_scorer', color:'#8B6FE8', status:'ok', msg:`ICP pass: <span class="hi">5 лидов</span> · Казань · avg score 74`},
+  ];
+  const ev = pool[Math.floor(Math.random()*pool.length)];
+  addEvent(ev);
+}
+
+// INIT
+renderLeads();
+updateDetail(LEADS_DEMO[0]);
+
+// seed initial events
+[
+  {agent:'system', color:'#5A6878', status:'ok', msg:`ST8-AI Sales Engine запущен · агентов: <span class="hi">10</span> · рынки: RU + UAE`},
+  {agent:'scheduler', color:'#5A6878', status:'ok', msg:`Лидов в pipeline: <span class="hi">47</span> · ICP pass: 31 · активных сделок: 12`},
+  {agent:'uae_module', color:'#20C4B0', status:'fire', msg:`🇦🇪 UAE module активен · целевые сектора: Construction, HoReCa, Real Estate`},
+  {agent:'sales_closer', color:'#27C96A', status:'ok', msg:`White Rabbit Family · вердикт: пилот 2 рест. · confidence <span class="hi">82%</span>`},
+  {agent:'marketing_agent', color:'#3A9EE8', status:'ok', msg:`Cold outreach UAE · 3 письма · сегмент: строительство · EN шаблон`},
+].forEach((ev,i) => setTimeout(()=>addEvent(ev), i*400));
+
+setInterval(autoEvent, 6000);
+</script>
+</body>
+</html>
