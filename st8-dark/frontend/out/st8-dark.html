@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST8 Dark Intelligence</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--accent:#D4A017;--bg:#0A0F1A;--surface:#111827;--border:#1E2A3A;--text:#E2E8F0;--muted:#475569}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif}
+body{background:var(--bg);color:var(--text);min-height:100vh}
+h1{color:var(--accent);font-weight:800;margin-bottom:1rem}
+.card{background:rgba(17,24,39,.8);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:1rem}
+a{color:var(--accent);text-decoration:none}
+.overlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999}
+.overlay input{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;color:var(--text);font-size:.9rem;width:280px;outline:none}
+</style>
+</head>
+<body>
+<div class="overlay" id="auth"><input type="password" placeholder="Введите API ключ" onkeydown="if(event.key==='Enter'){checkKey()}"></div>
+<div id="app" style="display:none;padding:2rem;max-width:1200px;margin:0 auto">
+<h1>ST8 Dark Intelligence</h1>
+<p style="color:var(--muted);margin-bottom:2rem">AI-операционная платформа для dark store сетей</p>
+<div class="card">
+<h2 style="color:var(--accent);margin-bottom:.5rem">Дашборд</h2>
+<p>Заказы, сборка, AI-рекомендации</p>
+<a href="#" onclick="alert('Настройте API ключ в настройках')">Открыть дашборд</a>
+</div>
+<div class="card">
+<h2 style="color:var(--accent);margin-bottom:.5rem">Онлайн-версия</h2>
+<a href="https://parade-nvidia-show-very.trycloudflare.com">https://parade-nvidia-show-very.trycloudflare.com</a>
+</div>
+</div>
+<script>
+function checkKey(){const v=document.querySelector('#auth input').value;if(v && v.startsWith('sk-ant-')){localStorage.setItem('st8_api_key',v);document.getElementById('auth').remove();document.getElementById('app').style.display='block'}else{alert('Неверный API ключ')}}
+if(localStorage.getItem('st8_api_key'))document.getElementById('auth').remove();document.getElementById('app').style.display='block';
+</script>
+</body>
+</html>
