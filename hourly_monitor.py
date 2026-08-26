@@ -1,11 +1,11 @@
 ﻿import asyncio
 import sys
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
 import schedule
 import time
 import os
 import threading
-
-sys.stdout.reconfigure(encoding='utf-8')
 from datetime import datetime
 from playwright.async_api import async_playwright
 import requests

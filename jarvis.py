@@ -1023,9 +1023,28 @@ process_with_agent = smart_route(process_with_agent)
 # ── end ST8ModelRouter ─────────────────────────────────────────────────────────
 
 MOSCOW_TZ = pytz.timezone('Europe/Moscow')
-LAST_JARVIS_RUN = {}
 
 BASE_DIR = os.path.dirname(__file__)
+
+_LAST_RUN_PATH = os.path.join(BASE_DIR, 'data', 'last_run.json')
+
+def _load_last_run():
+    try:
+        with open(_LAST_RUN_PATH, encoding='utf-8') as f:
+            raw = json.load(f)
+        from datetime import date
+        return {k: date.fromisoformat(v) for k, v in raw.items()}
+    except Exception:
+        return {}
+
+def _save_last_run(d):
+    try:
+        with open(_LAST_RUN_PATH, 'w', encoding='utf-8') as f:
+            json.dump({k: v.isoformat() for k, v in d.items()}, f)
+    except Exception:
+        pass
+
+LAST_JARVIS_RUN = _load_last_run()
 MEMORY_PATH = os.path.join(BASE_DIR, 'jarvis_memory.json')
 OFFSET_PATH = os.path.join(BASE_DIR, 'jarvis_offset.json')
 AGENT_MEMORY_DIR = os.path.join(BASE_DIR, 'agent_memory')
@@ -1632,6 +1651,9 @@ def generate_jarvis_text(prompt):
 def create_prompt(header, context, instruction):
     today = now_moscow().strftime('%d %B %Y')
     return (
+        "ВАЖНО: Система Windows 11. Рабочая папка C:\\st8-workspace. "
+        "Никогда не использовать: systemctl, sudo, nohup, ps aux, journalctl, python3. "
+        "Всегда использовать: python, subprocess.Popen с Windows путями, tasklist.\n"
         "Ты — личный секретарь директора ST8 AI. Тон: деловой, чёткий, как реальный помощник. Используй информацию из Memory Bank. Не пиши шаблонный текст."
         f" Сегодня: {today}. {header}\n\nКонтекст:\n{context}\n\nЗадача:\n{instruction}\n"
         "Сформулируй одно сообщение для Telegram. "
@@ -1878,8 +1900,16 @@ def make_good_morning():
             ('Большакова',     'договор 200к — ждём подписания'),
             ('Лог. хаб',       '481 лид, топ: CDEK, Вэд партнер, Восточный путь'),
         ]
+        stopped = load_json(os.path.join(BASE_DIR, 'data', 'stopped_clients.json')) or {}
         parts.append('\n📋 клиенты:')
-        parts.extend(f'• {name}: {st}' for name, st in known_clients)
+        for name, st in known_clients:
+            key_low = name.lower()
+            if any(key_low in k.lower() for k in stopped):
+                parts.append(f'• {name}: ⏸ на стопе')
+            else:
+                parts.append(f'• {name}: {st}')
+        if stopped:
+            parts.append('\n⏸ на стопе: ' + ', '.join(stopped.keys()))
 
     else:
         # ── выходные: отдых, без деловых задач ──────────────────────
@@ -2354,6 +2384,18 @@ def _handle_service_control(text: str) -> str:
     except ImportError:
         return "❌ service_manager недоступен"
 
+    if action == 'start' and key == 'dashboard':
+        import subprocess as _sp
+        try:
+            proc = _sp.Popen(
+                ['python', r'C:\st8-workspace\st8_status_daemon.py'],
+                creationflags=_sp.CREATE_NEW_CONSOLE,
+                cwd=r'C:\st8-workspace'
+            )
+            return f"✅ Dashboard daemon запущен (PID {proc.pid})"
+        except Exception as e:
+            return f"❌ Dashboard daemon: {e}"
+
     if action == 'start':
         ok, msg = start_service(key)
     elif action == 'stop':
@@ -2798,6 +2840,7 @@ async def poll_jarvis():
                     continue
                 history = load_memory()
                 # Погода — отвечаем напрямую, не отдаём в Claude
+                _live_log.info('INPUT: %r | is_service_control: %s', user_text, _is_service_control(user_text))
                 if is_auto_hunt_command(user_text):
                     reply = handle_auto_hunt_command(user_text)
                 elif is_agent_command(user_text):
@@ -2817,6 +2860,37 @@ async def poll_jarvis():
                         reply = f"📧 КП отправлено на {email} для {company}"
                     else:
                         reply = "Формат: /email Название компании | email@example.com"
+                elif user_text.strip().lower().startswith('/стоп') or user_text.strip().lower().startswith('на стоп'):
+                    parts_ = user_text.strip().split(None, 1)
+                    client_name = parts_[1].strip() if len(parts_) > 1 else ''
+                    if client_name:
+                        _sc = load_json(os.path.join(BASE_DIR, 'data', 'stopped_clients.json')) or {}
+                        _sc[client_name] = now_moscow().strftime('%Y-%m-%d')
+                        with open(os.path.join(BASE_DIR, 'data', 'stopped_clients.json'), 'w', encoding='utf-8') as _f:
+                            json.dump(_sc, _f, ensure_ascii=False, indent=2)
+                        reply = f'⏸ {client_name} добавлен в стоп-лист. Всего на стопе: {len(_sc)}'
+                    else:
+                        reply = 'Формат: /стоп Название клиента'
+                elif user_text.strip().lower().startswith('/возобновить') or user_text.strip().lower().startswith('снять стоп'):
+                    parts_ = user_text.strip().split(None, 1)
+                    client_name = parts_[1].strip() if len(parts_) > 1 else ''
+                    if client_name:
+                        _sc = load_json(os.path.join(BASE_DIR, 'data', 'stopped_clients.json')) or {}
+                        removed = [k for k in list(_sc.keys()) if client_name.lower() in k.lower()]
+                        for k in removed:
+                            del _sc[k]
+                        with open(os.path.join(BASE_DIR, 'data', 'stopped_clients.json'), 'w', encoding='utf-8') as _f:
+                            json.dump(_sc, _f, ensure_ascii=False, indent=2)
+                        reply = f'✅ {client_name} снят со стопа' if removed else f'Клиент не найден в стоп-листе'
+                    else:
+                        reply = 'Формат: /возобновить Название клиента'
+                elif user_text.strip().lower() in ('/стоплист', 'стоп лист', 'кто на стопе'):
+                    _sc = load_json(os.path.join(BASE_DIR, 'data', 'stopped_clients.json')) or {}
+                    if _sc:
+                        lines = [f'⏸ {k} (с {v})' for k, v in _sc.items()]
+                        reply = 'На стопе:\n' + '\n'.join(lines)
+                    else:
+                        reply = 'Стоп-лист пуст'
                 elif user_text.strip().lower() in ('/система', 'статус сервисов', 'статус системы'):
                     reply = _cmd_system_status()
                 elif _is_service_control(user_text):
@@ -2913,13 +2987,20 @@ def check_moscow_jarvis_tasks():
     ]
     for schedule_time, day_filter, func in tasks:
         key = f"{schedule_time}:{day_filter}"
-        if current == schedule_time and (day_filter is None or day_filter == weekday or (isinstance(day_filter, tuple) and weekday in day_filter)):
+        # Grace window: trigger if within 20 min after scheduled time (handles restarts)
+        sched_h, sched_m = map(int, schedule_time.split(':'))
+        sched_minutes = sched_h * 60 + sched_m
+        cur_minutes = now.hour * 60 + now.minute
+        in_window = sched_minutes <= cur_minutes <= sched_minutes + 20
+        day_ok = (day_filter is None or day_filter == weekday or (isinstance(day_filter, tuple) and weekday in day_filter))
+        if in_window and day_ok:
             last_run = LAST_JARVIS_RUN.get(key)
             if last_run == now.date():
                 continue
             try:
                 func()
                 LAST_JARVIS_RUN[key] = now.date()
+                _save_last_run(LAST_JARVIS_RUN)
             except Exception as exc:
                 send_jarvis_message(f"Jarvis failed {schedule_time}: {exc}")
 

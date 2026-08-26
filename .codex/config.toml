@@ -1,0 +1,20 @@
+[mcp_servers.21st]
+url = "https://21st.dev/api/mcp"
+
+[mcp_servers.21st.http_headers]
+x-api-key = "21st_sk_43ad36fb6518448d9adb8c8b7f029eb22b1171d5abef6382c44848e2940f97ea"
+
+[mcp_servers.mempalace]
+command = "python"
+args = [
+    "-m",
+    "mempalace.mcp_server",
+]
+
+[mcp_servers.obsidian-files]
+command = "npx"
+args = [
+    "-y",
+    "@modelcontextprotocol/server-filesystem",
+    'C:\Users\user\Documents\Obsidian Vault',
+]

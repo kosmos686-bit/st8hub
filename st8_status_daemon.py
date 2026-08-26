@@ -29,7 +29,11 @@ def git_push_status():
             cwd=str(BASE_DIR), capture_output=True, text=True, timeout=30
         )
         if 'nothing to commit' not in (r.stdout + r.stderr):
-            subprocess.run(['git', 'push'], cwd=str(BASE_DIR), capture_output=True, timeout=60)
+            result = subprocess.run(['git', 'push'], cwd=str(BASE_DIR), capture_output=True, text=True, timeout=60)
+            print(f"Git push result: {result.stdout} {result.stderr}")
+            log_error(f"[Dashboard] git push: {result.stdout.strip()} {result.stderr.strip()}")
+        else:
+            print("Git push skipped: nothing to commit")
     except Exception as e:
         log_error(f"[Dashboard] git push failed: {e}")
 

@@ -25,6 +25,9 @@ ERROR_KEYWORDS = ('ERROR', 'Traceback', 'Exception', 'CRITICAL', 'Uncaught')
 LOG_PATTERNS = [
     os.path.join(BASE_DIR, 'logs', '*.log'),
     os.path.join(BASE_DIR, 'jarvis_watchdog.log'),
+    os.path.join(BASE_DIR, 'jarvis_live.log'),
+    os.path.join(BASE_DIR, 'jarvis_live_err.log'),
+    os.path.join(BASE_DIR, 'jarvis_stdout.log'),
 ]
 
 

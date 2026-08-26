@@ -6,7 +6,7 @@ from telegram import Bot
 load_dotenv()
 
 # Bot token and chat IDs
-BOT_TOKEN = os.getenv('BOT_TOKEN', '8350702558:AAGCG8lcabW97NA-DBR1gmvo8oB0pJdf8Ms')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHAT_IDS = ['6152243830', '5438530925']
 
 async def send_lead_card(company_name, lpr, phone, email, telegram_social, site, segment, telegram_touch, max_touch, chat_ids=None):
