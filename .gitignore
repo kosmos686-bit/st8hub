@@ -98,3 +98,7 @@ node_modules/
 Thumbs.db
 .claude/settings.local.json
 .claude/settings.json
+
+*.png
+
+.playwright-mcp/
