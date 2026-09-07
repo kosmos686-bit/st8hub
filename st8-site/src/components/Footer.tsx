@@ -25,7 +25,7 @@ export function Footer() {
             ST8<span className="text-gold">-AI</span>
           </div>
           <p className="mb-5 leading-relaxed text-foreground/50">
-            Кастомные AI-решения для бизнеса. 47 проектов, 0 провалов. Гарантия
+            Кастомные AI-решения для бизнеса. 4 внедрённых кейса. Гарантия
             результата по договору.
           </p>
           <div className="flex gap-3">

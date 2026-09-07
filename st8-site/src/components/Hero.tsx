@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ChevronDown, Star, TrendingUp } from "lucide-react";
+import { ChevronDown, Shield, Star, TrendingUp } from "lucide-react";
 import { HeroParticles } from "./hero-particles";
 import { Preloader } from "./preloader";
 
@@ -87,7 +87,11 @@ export function Hero({
               </span>
               <span className="flex items-center gap-1.5 text-xs text-foreground/70 sm:text-sm">
                 <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
-                Окупаемость <span className="font-semibold text-gold">2-3 мес</span>
+                Окупаемость <span className="font-semibold text-gold">от 3 месяцев</span>
+              </span>
+              <span className="flex items-center gap-1.5 text-xs text-foreground/70 sm:text-sm">
+                <Shield className="h-4 w-4 sm:h-5 sm:w-5" />
+                Гарантия результата по договору
               </span>
             </motion.div>
           )}

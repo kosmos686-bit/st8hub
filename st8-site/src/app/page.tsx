@@ -12,7 +12,7 @@ import { LeadForm } from "@/components/lead-form";
 export const metadata: Metadata = {
   title: "ST8-AI — AI-автоматизация для бизнеса",
   description:
-    "ST8-AI внедряет AI-автоматизацию в ресторанах, производстве, ритейле и логистике. 47 проектов, 0 провалов. Окупаемость 2-3 месяца. Гарантия KPI по договору.",
+    "ST8-AI внедряет AI-автоматизацию в ресторанах, производстве, ритейле и логистике. 4 внедрённых кейса. Окупаемость от 3 месяцев. Гарантия KPI по договору.",
 };
 
 function SectionHeader({
@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="how" className="bg-[#0a0a0a] px-6 py-24 md:py-40">
+      <section id="how" className="bg-[#0a0a0a] px-6 py-24">
         <SectionHeader
           label="Процесс"
           title={
@@ -115,7 +115,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="partners" className="bg-background px-6 py-24 md:py-40">
+      <section id="partners" className="bg-background px-6 py-24">
         <SectionHeader
           label="Партнёры"
           title={
