@@ -1,23 +1,57 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
+import { MotionConfig } from "motion/react";
 import "./globals.css";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { CookieBanner } from "@/components/cookie-banner";
 
-const montserrat = Montserrat({
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin", "cyrillic"],
-  variable: "--font-montserrat",
-  display: "swap",
 });
 
+const siteUrl = "https://st8-ai.ru";
+
 export const metadata: Metadata = {
-  title: "ST8-AI — Интеллектуальные продажи",
-  description: "AI-решения для B2B продаж в России. Автоматизируем лидогенерацию, квалификацию и закрытие сделок.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "ST8-AI — AI-автоматизация для бизнеса",
+    template: "%s | ST8-AI",
+  },
+  description:
+    "ST8-AI внедряет AI-автоматизацию для HoReCa, производства, ритейла, логистики и офисов: от чат-ботов до полной интеграции с вашими системами.",
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    siteName: "ST8-AI",
+    url: siteUrl,
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ru">
-      <body className={`${montserrat.variable} font-montserrat antialiased`}>
-        {children}
+    <html lang="ru" className={`dark ${inter.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "ST8-AI",
+              url: siteUrl,
+              description:
+                "AI-автоматизация для бизнеса: HoReCa, производство, ритейл, логистика, офисы.",
+            }),
+          }}
+        />
+        <MotionConfig reducedMotion="user">
+          <Header />
+          <main className="flex-1 pt-16 sm:pt-[72px]">{children}</main>
+          <Footer />
+          <CookieBanner />
+        </MotionConfig>
       </body>
     </html>
   );
