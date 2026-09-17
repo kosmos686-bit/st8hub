@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST8 AI — Политика обработки персональных данных</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --gold:#d4af37; --gold-light:#f0d78c; --black:#000000; --dark:#0a0a0a; --dark-card:#111111; --gray-400:#9ca3af; --gray-500:#6b7280; --gray-600:#4b5563; }
+  body { font-family:'Inter',sans-serif; background:var(--black); color:#fff; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  a { color: var(--gold); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+  .top { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; flex-wrap:wrap; gap:12px; }
+  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; }
+  .logo-icon { width:32px; height:32px; border:1.5px solid var(--gold); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; color:var(--gold); }
+  .logo-text { font-size:17px; font-weight:600; }
+  .logo-text span { color:var(--gold); font-weight:300; }
+  .lang-switch { display:flex; gap:4px; background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.15); border-radius:20px; padding:4px; }
+  .lang-btn { padding:6px 12px; border-radius:16px; font-size:12px; font-weight:600; color:rgba(255,255,255,0.5); background:none; border:none; cursor:pointer; text-transform:uppercase; }
+  .lang-btn.active { background:var(--gold); color:#000; }
+  h1 { font-size:28px; font-weight:400; letter-spacing:-0.02em; margin-bottom:8px; }
+  h1 .highlight { color:var(--gold); font-weight:300; }
+  .updated { font-size:13px; color:var(--gray-500); margin-bottom:32px; }
+  h2 { font-size:18px; font-weight:600; margin:32px 0 12px; color:var(--gold); }
+  p, li { font-size:14px; color:var(--gray-400); margin-bottom:12px; }
+  ul, ol { padding-left:20px; margin-bottom:12px; }
+  .card { background:var(--dark-card); border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:20px 24px; margin:16px 0; }
+  .note { font-size:12px; color:var(--gray-500); border-left:2px solid var(--gold); padding-left:12px; margin:16px 0; }
+  .placeholder { color:var(--gold-light); background:rgba(212,175,55,0.08); padding:1px 6px; border-radius:4px; }
+  .back-link { display:inline-flex; align-items:center; gap:6px; color:var(--gray-400); text-decoration:none; font-size:14px; margin-top:40px; }
+  .back-link:hover { color:var(--gold); }
+  span[data-lang] { display:none; }
+  h1[data-lang], h2[data-lang], p[data-lang], li[data-lang] { display:none; }
+  html[lang="ru"] [data-lang="ru"] { display:revert; }
+  html[lang="en"] [data-lang="en"] { display:revert; }
+  html[lang="ru"] span[data-lang="ru"] { display:inline; }
+  html[lang="en"] span[data-lang="en"] { display:inline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a href="/" class="logo">
+      <div class="logo-icon">ST8</div>
+      <div class="logo-text">ST8<span>AI</span></div>
+    </a>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <h1 data-lang="ru">Политика обработки <span class="highlight">персональных данных</span></h1>
+  <h1 data-lang="en">Personal Data <span class="highlight">Processing Policy</span></h1>
+  <p class="updated" data-lang="ru">Действует с <span class="placeholder">[дата публикации]</span>. Версия для сайта st8-ai.ru.</p>
+  <p class="updated" data-lang="en">Effective from <span class="placeholder">[publication date]</span>. Version for st8-ai.ru.</p>
+
+  <div class="note" data-lang="ru">
+    Черновик подготовлен как основа для юридической проверки. Реквизиты оператора в разделе 1 взяты из реального договора (ИНН/ОГРНИП), кроме точности публикуемого адреса — см. пометку там же. Перед публикацией и запуском активного приёма заявок через сайт документ должен быть согласован с юристом — особенно разделы 5 (срок хранения), 6 (трансграничная передача через мессенджеры) и 8 (особые категории данных).
+  </div>
+  <div class="note" data-lang="en">
+    This draft is a starting point for legal review, not a final legal document. Operator details in section 1 come from a real contract (Tax ID / Registration No.), except for how precisely to publish the address — see the note there. Have a lawyer confirm it before actively collecting requests through the site — especially sections 5 (retention period), 6 (cross-border transfer via messengers) and 8 (special categories of data).
+  </div>
+
+  <h2 data-lang="ru">1. Оператор персональных данных</h2>
+  <h2 data-lang="en">1. Data controller</h2>
+  <p data-lang="ru">Обработку персональных данных, полученных через сайт st8-ai.ru, осуществляет: Индивидуальный предприниматель Попова Юлия Дмитриевна, ИНН 662607100653, ОГРНИП 326965800048074, Свердловская обл., г. Полевской <span class="placeholder">[уточнить: публиковать ли точный адрес регистрации целиком или ограничиться городом]</span> (далее — «Оператор»).</p>
+  <p data-lang="en">Personal data submitted through st8-ai.ru is processed by: Sole Proprietor Yulia Dmitrievna Popova, Tax ID 662607100653, Registration No. 326965800048074, Sverdlovsk region, Polevskoy <span class="placeholder">[confirm whether to publish the full registered address or keep it at city level]</span> (the "Operator").</p>
+
+  <h2 data-lang="ru">2. Какие данные обрабатываются</h2>
+  <h2 data-lang="en">2. What data is processed</h2>
+  <p data-lang="ru">При обращении через сайт (переход в Telegram/WhatsApp, заполнение формы) Оператор может получать: имя, номер телефона, сведения, которые пользователь сообщает добровольно в переписке (например, название компании, отрасль, описание задачи).</p>
+  <p data-lang="en">When you contact us through the site (Telegram/WhatsApp, a form), the Operator may receive: your name, phone number, and information you voluntarily share in the conversation (e.g. company name, industry, task description).</p>
+
+  <h2 data-lang="ru">3. Цели обработки</h2>
+  <h2 data-lang="en">3. Purpose of processing</h2>
+  <ul>
+    <li data-lang="ru">обработка заявки и связь с пользователем;</li>
+    <li data-lang="en">handling your request and contacting you;</li>
+    <li data-lang="ru">подготовка коммерческого предложения и заключение договора;</li>
+    <li data-lang="en">preparing a commercial proposal and entering into a contract;</li>
+    <li data-lang="ru">исполнение обязательств по заключённому договору, если он заключён.</li>
+    <li data-lang="en">performing obligations under a signed contract, if one is concluded.</li>
+  </ul>
+  <p data-lang="ru">Данные не используются для целей, не указанных выше, без отдельного согласия.</p>
+  <p data-lang="en">Data is not used for purposes beyond those listed above without separate consent.</p>
+
+  <h2 data-lang="ru">4. Правовое основание обработки</h2>
+  <h2 data-lang="en">4. Legal basis</h2>
+  <p data-lang="ru">Согласие субъекта персональных данных (ст. 6 152-ФЗ «О персональных данных»), выражаемое действием — отправкой сообщения/заявки через сайт или мессенджер. Для случаев, когда стороны заключают договор, — также ст. 6 152-ФЗ в части обработки, необходимой для исполнения договора.</p>
+  <p data-lang="en">The data subject's consent (Art. 6 of Federal Law No. 152-FZ "On Personal Data"), expressed by the act of sending a message or request via the site or a messenger. Where a contract is concluded, processing necessary to perform that contract is an additional basis.</p>
+
+  <h2 data-lang="ru">5. Срок хранения</h2>
+  <h2 data-lang="en">5. Retention period</h2>
+  <p data-lang="ru"><span class="placeholder">[уточнить срок — например: до момента достижения целей обработки либо до отзыва согласия, но не дольше X лет с последнего обращения]</span>.</p>
+  <p data-lang="en"><span class="placeholder">[specify retention period — e.g. until the purpose is achieved or consent is withdrawn, no longer than X years since the last contact]</span>.</p>
+
+  <h2 data-lang="ru">6. Передача данных третьим лицам</h2>
+  <h2 data-lang="en">6. Disclosure to third parties</h2>
+  <p data-lang="ru">Данные не передаются третьим лицам без согласия пользователя, за исключением случаев, предусмотренных законом. Обращаем внимание: переписка через Telegram и WhatsApp технически проходит через инфраструктуру этих мессенджеров, зарегистрированных за пределами РФ, — это может квалифицироваться как трансграничная передача персональных данных. <span class="placeholder">[раздел требует проверки юристом на соответствие требованиям 152-ФЗ о трансграничной передаче]</span>.</p>
+  <p data-lang="en">Data is not shared with third parties without your consent, except as required by law. Note: conversations via Telegram and WhatsApp technically pass through those messengers' infrastructure, based outside Russia — this may constitute a cross-border transfer of personal data. <span class="placeholder">[this section needs legal review for compliance with 152-FZ cross-border transfer rules]</span>.</p>
+
+  <h2 data-lang="ru">7. Права субъекта персональных данных</h2>
+  <h2 data-lang="en">7. Your rights</h2>
+  <p data-lang="ru">Вы вправе запросить у Оператора информацию об обработке своих данных, потребовать их уточнения, блокирования или уничтожения, а также отозвать согласие на обработку. Для этого напишите на <a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a>.</p>
+  <p data-lang="en">You may request information about how your data is processed, ask for correction, blocking or deletion, and withdraw your consent at any time. Contact <a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a>.</p>
+
+  <h2 data-lang="ru">8. Особые категории персональных данных</h2>
+  <h2 data-lang="en">8. Special categories of personal data</h2>
+  <div class="card">
+    <p data-lang="ru">Если в рамках использования продуктов ST8 AI (например, AI-ассистент для бронирования) обрабатываются сведения об аллергиях, состоянии здоровья или иные данные специальной категории по ст. 10 152-ФЗ — для них требуется отдельное, явное согласие субъекта данных и повышенные меры защиты. <span class="placeholder">[внутренний продуктовый процесс должен обеспечивать сбор такого согласия отдельно от общего согласия на сайте — уточнить с юристом до масштабирования этой функции]</span>.</p>
+    <p data-lang="en">If ST8 AI products (e.g. the booking assistant) process allergy, health, or other special-category data under Art. 10 of 152-FZ, that requires separate explicit consent from the data subject and enhanced protection measures. <span class="placeholder">[the product flow must capture that consent separately from the general site consent — confirm with a lawyer before scaling this feature]</span>.</p>
+  </div>
+
+  <h2 data-lang="ru">9. Меры защиты</h2>
+  <h2 data-lang="en">9. Security measures</h2>
+  <p data-lang="ru">Оператор применяет организационные и технические меры для защиты персональных данных от неправомерного доступа, изменения, раскрытия или уничтожения. <span class="placeholder">[перечислить конкретные меры при подготовке финальной версии]</span>.</p>
+  <p data-lang="en">The Operator applies organizational and technical measures to protect personal data from unauthorized access, alteration, disclosure or destruction. <span class="placeholder">[list specific measures in the final version]</span>.</p>
+
+  <h2 data-lang="ru">10. Изменение политики</h2>
+  <h2 data-lang="en">10. Changes to this policy</h2>
+  <p data-lang="ru">Оператор вправе изменять настоящую политику. Актуальная версия всегда доступна по адресу st8-ai.ru/legal.html.</p>
+  <p data-lang="en">The Operator may update this policy. The current version is always available at st8-ai.ru/legal.html.</p>
+
+  <h2 data-lang="ru">11. Для международных рынков</h2>
+  <h2 data-lang="en">11. For international markets</h2>
+  <p data-lang="ru">Для клиентов в ОАЭ обработка данных дополнительно учитывает требования PDPL UAE; для клиентов в Турции — требования KVKK. <span class="placeholder">[оба раздела — заглушки, требуют проработки с местным юристом перед активными продажами на этих рынках]</span>.</p>
+  <p data-lang="en">For clients in the UAE, data processing additionally accounts for PDPL UAE requirements; for clients in Turkey — KVKK requirements. <span class="placeholder">[both are placeholders and need local legal review before active sales in those markets]</span>.</p>
+
+  <h2 data-lang="ru">Контакты</h2>
+  <h2 data-lang="en">Contact</h2>
+  <p data-lang="ru">По вопросам обработки персональных данных: <a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a></p>
+  <p data-lang="en">For questions about personal data processing: <a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a></p>
+
+  <a href="/" class="back-link"><span data-lang="ru">← На главную</span><span data-lang="en">← Back to home</span></a>
+</div>
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btnRu').classList.toggle('active', lang === 'ru');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    localStorage.setItem('st8-lang', lang);
+  }
+  setLang(localStorage.getItem('st8-lang') || 'ru');
+</script>
+</body>
+</html>

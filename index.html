@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,7 +8,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- TODO: заменить на актуальный домен и og:image (1200x630) перед публикацией -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ST8 AI — Автоматизация бизнеса нейросетями">
+  <meta property="og:description" content="ST8 AI внедряет ИИ в ресторанах, на производстве, в ритейле и логистике. 47 проектов, 0 провалов. Окупаемость 2-3 месяца. Гарантия KPI по договору.">
+  <meta property="og:url" content="https://st8-ai.ru">
+  <meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ST8 AI — Автоматизация бизнеса нейросетями">
+  <meta name="twitter:description" content="47 проектов, 0 провалов. Окупаемость 2-3 месяца. Гарантия KPI по договору.">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -109,7 +117,7 @@
     .hamburger-icon .icon-menu, .hamburger-icon .icon-x { transition: all 0.5s ease-out; }
     .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
     .hamburger-icon:not(.open) .icon-x { opacity: 0; transform: scale(0.5); }
-    
+
     /* LANGUAGE SWITCHER */
     .lang-switch {
       display: flex; align-items: center; gap: 4px;
@@ -132,9 +140,11 @@
     html[lang="en"] span[data-lang="en"] { display: inline; }
 
     /* For block-level translated elements (headings, paragraphs, strong in lists) */
-    h4[data-lang], p[data-lang], strong[data-lang] { display: none; }
+    h4[data-lang], p[data-lang], strong[data-lang], a[data-lang] { display: none; }
     html[lang="ru"] strong[data-lang="ru"] { display: inline; }
     html[lang="en"] strong[data-lang="en"] { display: inline; }
+    html[lang="ru"] a[data-lang="ru"] { display: inline; }
+    html[lang="en"] a[data-lang="en"] { display: inline; }
     html[lang="ru"] h4[data-lang="ru"] { display: block; }
     html[lang="en"] h4[data-lang="en"] { display: block; }
     html[lang="ru"] p[data-lang="ru"] { display: block; }
@@ -456,7 +466,7 @@
       10% { opacity: 1; } 90% { opacity: 1; }
       100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
     }
-  
+
 @media (max-width:768px){
   .blur-overlay{
     backdrop-filter:none !important;
@@ -703,10 +713,10 @@
     @media(min-width:640px){ .solution-stats { gap: 12px; padding: 16px; margin: 20px 0; } }
     .solution-stat { text-align: center; }
     .solution-stat-val {
-      font-size: 18px; font-weight: 300; color: var(--gold); letter-spacing: -0.02em;
+      display: block; font-size: 18px; font-weight: 300; color: var(--gold); letter-spacing: -0.02em;
     }
     @media(min-width:640px){ .solution-stat-val { font-size: 22px; } }
-    .solution-stat-label { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+    .solution-stat-label { display: block; font-size: 10px; color: var(--gray-500); margin-top: 4px; }
     @media(min-width:640px){ .solution-stat-label { font-size: 11px; } }
     .solution-cta-btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -730,6 +740,9 @@
     .project-card:hover .project-cta-btn { color: var(--gold-light); gap: 10px; }
     .project-cta-btn i { transition: transform 0.3s ease; }
     .project-card:hover .project-cta-btn i { transform: translateX(3px); }
+    .legal-note { font-size: 11px; color: var(--gray-600); line-height: 1.6; max-width: 1200px; margin: 16px auto 0; padding: 0 16px; text-align: center; }
+    .footer-bottom a.legal-link { color: var(--gray-500); text-decoration: underline; }
+    .footer-bottom a.legal-link:hover { color: var(--gold); }
     @media (max-width:768px){
   .blur-overlay{
     backdrop-filter:none !important;
@@ -741,8 +754,6 @@
   }
 }
   </style>
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
 <!-- Background Video -->
@@ -769,16 +780,14 @@
         <a href="#contact" class="nav-link animate-blur-fade-up" style="animation-delay:300ms"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
       </div>
       <div class="nav-actions">
+        <button class="lang-switch liquid-glass animate-blur-fade-up" id="marketBtn" style="animation-delay:280ms;padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
+          <i data-lucide="globe" style="width:14px;height:14px;color:var(--gold)"></i>
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600;margin-left:6px"><span data-lang="ru">Россия</span><span data-lang="en">International</span></span>
+        </button>
         <div class="lang-switch animate-blur-fade-up" style="animation-delay:300ms">
           <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
           <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
         </div>
-        <button class="btn-search liquid-glass animate-blur-fade-up" style="animation-delay:350ms">
-          <i data-lucide="search" style="width:18px;height:18px"></i><span data-lang="ru">Поиск</span><span data-lang="en">Search</span>
-        </button>
-        <button class="btn-user liquid-glass animate-blur-fade-up" style="animation-delay:400ms">
-          <i data-lucide="user" style="width:18px;height:18px"></i>
-        </button>
         <button class="btn-hamburger liquid-glass animate-blur-fade-up" id="hamburger" style="animation-delay:350ms" onclick="toggleMenu()">
           <div class="hamburger-icon" id="hamburgerIcon">
             <i data-lucide="menu" class="icon-menu" style="width:20px;height:20px;position:absolute"></i>
@@ -802,6 +811,20 @@
       </div>
     </div>
 
+    <!-- MARKET SELECTOR MODAL -->
+    <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+      <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
+        <div class="section-label" style="text-align:center"><span data-lang="ru">Выберите рынок</span><span data-lang="en">Choose Your Market</span></div>
+        <h3 class="section-title" style="font-size:22px;text-align:center;margin-bottom:24px"><span data-lang="ru">Где вы работаете?</span><span data-lang="en">Where Are You Based?</span></h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="ru">Россия</span><span data-lang="en">Russia</span></button>
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="ru">ОАЭ</span><span data-lang="en">UAE</span></button>
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="ru">Турция</span><span data-lang="en">Turkey</span></button>
+        </div>
+        <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="ru">Можно изменить в любой момент вверху страницы</span><span data-lang="en">You can change this anytime at the top of the page</span></p>
+      </div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-inner">
         <div class="hero-left">
@@ -811,15 +834,14 @@
             <div class="stat-item"><i data-lucide="trending-up"></i><span><span data-lang="ru">Окупаемость <span class="stat-value">2-3 мес</span></span><span data-lang="en">ROI <span class="stat-value">2-3 months</span></span></span></div>
           </div>
           <h1 class="hero-title animate-blur-fade-up" style="animation-delay:400ms"><span data-lang="ru">Автоматизация бизнеса<br><span class="highlight">нейросетями</span></span><span data-lang="en">Business Automation<br><span class="highlight">with Neural Networks</span></span></h1>
-          <p class="hero-desc animate-blur-fade-up" style="animation-delay:500ms"><span data-lang="ru">Живой AI-консьерж, предиктивные закупки и computer vision — всё работает как единый организм. Без остановки бизнеса, с гарантией результата по договору.</span><span data-lang="en">Live AI concierge, predictive purchasing and computer vision — everything works as a single organism. Without stopping the business, with a guaranteed result by contract.</span></p>
+          <p class="hero-desc animate-blur-fade-up" style="animation-delay:500ms"><span data-lang="ru">Цифровой администратор, предиктивные закупки и computer vision — всё работает как единый организм. Без остановки бизнеса, с гарантией результата по договору.</span><span data-lang="en">Digital host, predictive purchasing and computer vision — everything works as a single organism. Without stopping the business, with a guaranteed result by contract.</span></p>
           <div class="hero-ctas">
             <a href="#roi" class="btn-primary animate-blur-fade-up" style="animation-delay:600ms"><i data-lucide="play" style="width:18px;height:18px;fill:currentColor"></i><span data-lang="ru">Рассчитать экономию</span><span data-lang="en">Calculate Savings</span></a>
             <a href="#solutions" class="btn-secondary liquid-glass animate-blur-fade-up" style="animation-delay:700ms"><span data-lang="ru">Узнать больше</span><span data-lang="en">Learn More</span></a>
           </div>
         </div>
         <div class="hero-right">
-          <button class="btn-nav liquid-glass animate-blur-fade-up" style="animation-delay:800ms" onclick="alert('Previous case coming soon')"><i data-lucide="chevron-left" style="width:18px;height:18px"></i><span class="hidden sm:inline"><span data-lang="ru">Назад</span><span data-lang="en">Back</span></span></button>
-          <button class="btn-nav liquid-glass animate-blur-fade-up" style="animation-delay:900ms" onclick="alert('Next case coming soon')"><span class="hidden sm:inline"><span data-lang="ru">Вперёд</span><span data-lang="en">Next</span></span><i data-lucide="chevron-right" style="width:18px;height:18px"></i></button>
+          <a href="#solutions" class="btn-nav liquid-glass animate-blur-fade-up" style="animation-delay:800ms"><span data-lang="ru">Все решения</span><span data-lang="en">All Solutions</span><i data-lucide="chevron-right" style="width:18px;height:18px"></i></a>
         </div>
       </div>
     </div>
@@ -828,8 +850,19 @@
       <div class="trust-inner animate-blur-fade-up" style="animation-delay:1000ms">
         <span class="trust-label" data-lang="ru">Интеграции</span><span class="trust-label" data-lang="en">Integrations</span>
         <div class="trust-logos">
-          <span class="trust-logo">iiko</span><span class="trust-logo">R-Keeper</span><span class="trust-logo">Remarket</span>
-          <span class="trust-logo">1С</span><span class="trust-logo">Telegram</span><span class="trust-logo">Mango Office</span>
+          <span class="trust-logo" data-lang="ru">iiko</span><span class="trust-logo" data-lang="ru">R-Keeper</span><span class="trust-logo" data-lang="ru">Remarket</span>
+          <span class="trust-logo" data-lang="ru">1С</span><span class="trust-logo" data-lang="ru">Telegram</span><span class="trust-logo" data-lang="ru">Mango Office</span>
+          <!-- International (EN) integrations mirror the names already used in the Solutions accordion below -->
+          <span class="trust-logo" data-lang="en">Foodics</span><span class="trust-logo" data-lang="en">SAP</span><span class="trust-logo" data-lang="en">Shopify</span>
+          <span class="trust-logo" data-lang="en">Salesforce</span><span class="trust-logo" data-lang="en">WhatsApp</span><span class="trust-logo" data-lang="en">Microsoft 365</span>
+        </div>
+      </div>
+      <div class="trust-inner animate-blur-fade-up" style="animation-delay:1050ms">
+        <span class="trust-label" data-lang="ru">Партнёры</span><span class="trust-label" data-lang="en">Partners</span>
+        <div class="trust-logos">
+          <a href="https://airi.net" target="_blank" rel="noopener noreferrer" class="trust-logo" style="text-decoration:none">AIRI</a><span class="trust-logo" data-lang="ru">ОДИСпро <!-- TODO: добавить ссылку, когда будет подтверждён официальный сайт --></span>
+          <!-- TODO: реальные партнёры под ОАЭ/Турцию пока не подтверждены — не выдумываем, честно показываем "скоро" -->
+          <span class="trust-logo" data-lang="en" style="opacity:0.5">Local partners — coming soon</span>
         </div>
       </div>
     </div>
@@ -841,7 +874,7 @@
     <div class="section-header reveal">
       <div class="section-label"><span data-lang="ru">Калькулятор</span><span data-lang="en">Calculator</span></div>
       <h2 class="section-title"><span data-lang="ru">Сколько вы <span style="color:var(--gold)">сэкономите</span> за год?</span><span data-lang="en">How Much Will You <span style="color:var(--gold)">Save</span> Per Year?</span></h2>
-      <p class="section-desc"><span data-lang="ru">Ползунки ниже рассчитывают реальную экономию на основе данных 47 внедрённых проектов</span><span data-lang="en">Sliders below calculate real savings based on 47 implemented projects</span></p>
+      <p class="section-desc"><span data-lang="ru">Ползунки ниже рассчитывают ориентировочную экономию на основе усреднённых данных наших проектов</span><span data-lang="en">Sliders below calculate estimated savings based on averaged data from our projects</span></p>
     </div>
     <div class="roi-calculator reveal">
       <div class="roi-grid">
@@ -862,9 +895,9 @@
         <div>
           <div class="roi-results">
             <div class="roi-result-value" id="roiTotal">2 340 000 <span data-lang="ru">руб.</span><span data-lang="en">EUR</span></div>
-            <div class="roi-result-label"><span data-lang="ru">экономия за 12 месяцев</span><span data-lang="en">savings per 12 months</span></div>
+            <div class="roi-result-label"><span data-lang="ru">ориентировочная экономия за 12 месяцев*</span><span data-lang="en">estimated savings per 12 months*</span></div>
             <a href="#contact" class="btn-primary" style="width:100%;justify-content:center"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Получить персональное КП</span><span data-lang="en">Get Personal Quote</span></a>
-            <div class="roi-result-note"><span data-lang="ru">Включает: снижение no-show 35%, экономия на закупках 22%, рост среднего чека 17%, сокращение списаний 32%</span><span data-lang="en">Includes: 35% no-show reduction, 22% procurement savings, 17% check growth, 32% write-off reduction</span></div>
+            <div class="roi-result-note"><span data-lang="ru">* Расчёт носит ориентировочный характер и основан на усреднённых показателях наших проектов (снижение no-show, экономия на закупках, рост среднего чека, сокращение списаний). Точные цифры фиксируются в договоре после аудита.</span><span data-lang="en">* This is an estimate based on averaged results across our projects (no-show reduction, procurement savings, check growth, write-off reduction). Exact figures are set in the contract after the audit.</span></div>
           </div>
         </div>
       </div>
@@ -884,15 +917,15 @@
         <div class="solution-card-main">
           <div class="solution-icon"><i data-lucide="utensils" style="width:24px;height:24px"></i></div>
           <h3 class="solution-title">HoReCa</h3>
-          <p class="solution-desc"><span data-lang="ru">AI-консьерж 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</span><span data-lang="en">AI concierge 24/7, predictive purchasing, inventory management, menu personalization, kitchen computer vision</span></p>
-          <span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="ru">Списания -35%</span><span data-lang="en">Write-offs -35%</span></span>
+          <p class="solution-desc"><span data-lang="ru">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</span><span data-lang="en">Digital host 24/7, predictive purchasing, inventory management, menu personalization, kitchen computer vision</span></p>
+          <span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="ru">Списания -35%*</span><span data-lang="en">Write-offs -35%*</span></span>
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
         <div class="solution-detail">
           <div class="solution-detail-inner">
             <h4 data-lang="ru">Что входит в решение</h4><h4 data-lang="en">What's Included</h4>
             <ul>
-              <li><strong>AI-консьерж 24/7</strong> — <span data-lang="ru">принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии, дни рождения</span><span data-lang="en">accepts reservations, answers in messengers, remembers guest preferences, allergies, birthdays</span></li>
+              <li><strong data-lang="ru">Цифровой администратор 24/7</strong><strong data-lang="en">Digital Host 24/7</strong> — <span data-lang="ru">принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии, дни рождения</span><span data-lang="en">accepts reservations, answers in messengers, remembers guest preferences, allergies, birthdays</span></li>
               <li><strong data-lang="ru">Предиктивные закупки</strong><strong data-lang="en">Predictive Purchasing</strong> — <span data-lang="ru">прогнозирует спрос на 7 дней вперёд, снижает списания на 35%</span><span data-lang="en">forecasts demand 7 days ahead, reduces write-offs by 35%</span></li>
               <li><strong data-lang="ru">Управление остатками</strong><strong data-lang="en">Inventory Management</strong> — <span data-lang="ru">контроль сроков годности, автоматические уведомления, FIFO</span><span data-lang="en">shelf life control, automatic alerts, FIFO</span></li>
               <li><strong data-lang="ru">Персонализация меню</strong><strong data-lang="en">Menu Personalization</strong> — <span data-lang="ru">рекомендации блюд на основе истории заказов гостя</span><span data-lang="en">dish recommendations based on guest order history</span></li>
@@ -900,13 +933,13 @@
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
             <p><span data-lang="ru">Интеграция с iiko / R-Keeper за 3 дня. AI обучается на ваших данных — меню, продажи, брони. Через неделю система предсказывает спрос точнее менеджера с 10-летним стажем.</span><span data-lang="en">Integration with Foodics / iiko in 3 days. AI trains on your data — menu, sales, reservations. Within a week, the system predicts demand more accurately than a manager with 10 years of experience.</span></p>
-            <h4 data-lang="ru">Результаты клиентов</h4><h4 data-lang="en">Client Results</h4>
+            <h4 data-lang="ru">Результаты клиентов*</h4><h4 data-lang="en">Client Results*</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">-35%</span><span class="solution-stat-label" data-lang="ru">Списания</span><span class="solution-stat-label" data-lang="en">Write-offs</span></div>
               <div class="solution-stat"><span class="solution-stat-val">+17%</span><span class="solution-stat-label" data-lang="ru">Средний чек</span><span class="solution-stat-label" data-lang="en">Avg check</span></div>
               <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label">No-show</span></div>
             </div>
-            <a href="https://t.me/Zzima686" target="_blank" class="solution-cta-btn" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
           </div>
         </div>
       </div>
@@ -917,7 +950,7 @@
           <div class="solution-icon"><i data-lucide="factory" style="width:24px;height:24px"></i></div>
           <h3 class="solution-title"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></h3>
           <p class="solution-desc"><span data-lang="ru">Компьютерное зрение для контроля качества, предиктивное обслуживание оборудования, оптимизация линий</span><span data-lang="en">Computer vision for quality control, predictive equipment maintenance, line optimization</span></p>
-          <span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="ru">Точность 99.7%</span><span data-lang="en">Accuracy 99.7%</span></span>
+          <span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="ru">Точность 99.7%*</span><span data-lang="en">Accuracy 99.7%*</span></span>
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
         <div class="solution-detail">
@@ -932,13 +965,13 @@
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
             <p><span data-lang="ru">Устанавливаем камеры на линию, интегрируем с MES/ERP. AI обучается на образцах брака и дефектов. Система работает on-premise — данные не покидают территорию завода.</span><span data-lang="en">We install cameras on the line, integrate with MES/ERP. AI trains on defect samples. The system runs on-premise — data never leaves the factory.</span></p>
-            <h4 data-lang="ru">Результаты клиентов</h4><h4 data-lang="en">Client Results</h4>
+            <h4 data-lang="ru">Результаты клиентов*</h4><h4 data-lang="en">Client Results*</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">99.7%</span><span class="solution-stat-label" data-lang="ru">Точность</span><span class="solution-stat-label" data-lang="en">Accuracy</span></div>
               <div class="solution-stat"><span class="solution-stat-val">-25%</span><span class="solution-stat-label" data-lang="ru">Простои</span><span class="solution-stat-label" data-lang="en">Downtime</span></div>
               <div class="solution-stat"><span class="solution-stat-val">-60%</span><span class="solution-stat-label" data-lang="ru">Брак</span><span class="solution-stat-label" data-lang="en">Defects</span></div>
             </div>
-            <a href="https://t.me/Zzima686" target="_blank" class="solution-cta-btn" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
           </div>
         </div>
       </div>
@@ -949,7 +982,7 @@
           <div class="solution-icon"><i data-lucide="shopping-cart" style="width:24px;height:24px"></i></div>
           <h3 class="solution-title"><span data-lang="ru">Ритейл и E-commerce</span><span data-lang="en">Retail & E-commerce</span></h3>
           <p class="solution-desc"><span data-lang="ru">Прогнозирование спроса, автозакупки, перераспределение товара, персонализация, интеграция с маркетплейсами</span><span data-lang="en">Demand forecasting, auto-purchasing, stock redistribution, personalization, marketplace integration</span></p>
-          <span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="ru">Прогноз 94%</span><span data-lang="en">Forecast 94%</span></span>
+          <span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="ru">Прогноз 94%*</span><span data-lang="en">Forecast 94%*</span></span>
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
         <div class="solution-detail">
@@ -964,13 +997,13 @@
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
             <p><span data-lang="ru">Подключаемся к вашей учётной системе за 1 день. AI анализирует историю продаж, остатки, поставки. Через 2 недели система предсказывает спрос точнее Excel с макросами.</span><span data-lang="en">We connect to your accounting system in 1 day. AI analyzes sales history, stock, deliveries. Within 2 weeks, the system forecasts demand more accurately than Excel macros.</span></p>
-            <h4 data-lang="ru">Результаты клиентов</h4><h4 data-lang="en">Client Results</h4>
+            <h4 data-lang="ru">Результаты клиентов*</h4><h4 data-lang="en">Client Results*</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">94%</span><span class="solution-stat-label" data-lang="ru">Точность</span><span class="solution-stat-label" data-lang="en">Accuracy</span></div>
               <div class="solution-stat"><span class="solution-stat-val">-30%</span><span class="solution-stat-label" data-lang="ru">Недостача</span><span class="solution-stat-label" data-lang="en">Stockouts</span></div>
               <div class="solution-stat"><span class="solution-stat-val">+22%</span><span class="solution-stat-label" data-lang="ru">Оборот</span><span class="solution-stat-label" data-lang="en">Turnover</span></div>
             </div>
-            <a href="https://t.me/Zzima686" target="_blank" class="solution-cta-btn" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
           </div>
         </div>
       </div>
@@ -981,7 +1014,7 @@
           <div class="solution-icon"><i data-lucide="truck" style="width:24px;height:24px"></i></div>
           <h3 class="solution-title"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></h3>
           <p class="solution-desc"><span data-lang="ru">Оптимизация маршрутов, computer vision для проверки комплектации, прогноз загруженности складов</span><span data-lang="en">Route optimization, computer vision for order verification, warehouse load forecasting</span></p>
-          <span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="ru">Топливо -25%</span><span data-lang="en">Fuel -25%</span></span>
+          <span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="ru">Топливо -25%*</span><span data-lang="en">Fuel -25%*</span></span>
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
         <div class="solution-detail">
@@ -996,13 +1029,13 @@
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
             <p><span data-lang="ru">Интеграция с WMS/TMS за 2-3 дня. AI строит маршруты с учётом 50+ параметров. Система адаптируется к изменениям в реальном времени — авария на МКАДе = маршрут перестроен за 30 секунд.</span><span data-lang="en">WMS/TMS integration in 2-3 days. AI builds routes considering 50+ parameters. The system adapts to changes in real time — accident on the highway = route rebuilt in 30 seconds.</span></p>
-            <h4 data-lang="ru">Результаты клиентов</h4><h4 data-lang="en">Client Results</h4>
+            <h4 data-lang="ru">Результаты клиентов*</h4><h4 data-lang="en">Client Results*</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">-25%</span><span class="solution-stat-label" data-lang="ru">Топливо</span><span class="solution-stat-label" data-lang="en">Fuel</span></div>
               <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label" data-lang="ru">Ошибки</span><span class="solution-stat-label" data-lang="en">Errors</span></div>
               <div class="solution-stat"><span class="solution-stat-val">+18%</span><span class="solution-stat-label" data-lang="ru">Грузооборот</span><span class="solution-stat-label" data-lang="en">Cargo turnover</span></div>
             </div>
-            <a href="https://t.me/Zzima686" target="_blank" class="solution-cta-btn" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
           </div>
         </div>
       </div>
@@ -1013,7 +1046,7 @@
           <div class="solution-icon"><i data-lucide="building-2" style="width:24px;height:24px"></i></div>
           <h3 class="solution-title"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices & PM</span></h3>
           <p class="solution-desc"><span data-lang="ru">Автоматизация документооборота, AI-ассистенты, распознавание сканов, маршрутизация задач, аналитика</span><span data-lang="en">Document workflow automation, AI assistants, scan recognition, task routing, analytics</span></p>
-          <span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее</span><span data-lang="en">5x faster</span></span>
+          <span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее*</span><span data-lang="en">5x faster*</span></span>
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
         <div class="solution-detail">
@@ -1028,13 +1061,13 @@
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
             <p><span data-lang="ru">Подключаемся к вашей CRM/ECM за 1 день. AI обучается на ваших документах и процессах. Секретарь перестаёт отвечать на одни и те же вопросы 20 раз в день.</span><span data-lang="en">We connect to your CRM/ECM in 1 day. AI trains on your documents and processes. The secretary stops answering the same questions 20 times a day.</span></p>
-            <h4 data-lang="ru">Результаты клиентов</h4><h4 data-lang="en">Client Results</h4>
+            <h4 data-lang="ru">Результаты клиентов*</h4><h4 data-lang="en">Client Results*</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">5x</span><span class="solution-stat-label" data-lang="ru">Быстрее</span><span class="solution-stat-label" data-lang="en">Faster</span></div>
               <div class="solution-stat"><span class="solution-stat-val">-70%</span><span class="solution-stat-label" data-lang="ru">Рутина</span><span class="solution-stat-label" data-lang="en">Routine</span></div>
               <div class="solution-stat"><span class="solution-stat-val">+35%</span><span class="solution-stat-label" data-lang="ru">Эффективность</span><span class="solution-stat-label" data-lang="en">Efficiency</span></div>
             </div>
-            <a href="https://t.me/Zzima686" target="_blank" class="solution-cta-btn" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
           </div>
         </div>
       </div>
@@ -1044,7 +1077,7 @@
         <div class="solution-card-main">
           <div class="solution-icon"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
           <h3 class="solution-title"><span data-lang="ru">Кастомная разработка</span><span data-lang="en">Custom Development</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Любая задача: от голосового консьержа до полной автоматизации цепочки поставок. Обучаем на ваших данных</span><span data-lang="en">Any task: from voice concierge to full supply chain automation. We train on your data</span></p>
+          <p class="solution-desc"><span data-lang="ru">Любая задача: от голосового цифрового администратора до полной автоматизации цепочки поставок. Обучаем на ваших данных</span><span data-lang="en">Any task: from a voice-based digital host to full supply chain automation. We train on your data</span></p>
           <span class="solution-metric"><i data-lucide="check-circle" style="width:14px;height:14px"></i><span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span></span>
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
@@ -1059,14 +1092,14 @@
               <li><strong data-lang="ru">Интеграция систем</strong><strong data-lang="en">System Integration</strong> — <span data-lang="ru">связываем то, что не хотит работать вместе</span><span data-lang="en">we connect what doesn't want to work together</span></li>
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
-            <p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. Гарантия KPI прописана в договоре — не достигли = возвращаем деньги.</span><span data-lang="en">You describe the task — we audit and propose a solution in 2-3 days. Development from 2 weeks. KPI guarantee is in the contract — not achieved = money back.</span></p>
+            <p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. Условия по гарантии KPI фиксируются в договоре по каждому проекту индивидуально.</span><span data-lang="en">You describe the task — we audit and propose a solution in 2-3 days. Development from 2 weeks. KPI guarantee terms are fixed in the contract individually for each project.</span></p>
             <h4 data-lang="ru">Почему ST8 AI</h4><h4 data-lang="en">Why ST8 AI</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">47</span><span class="solution-stat-label" data-lang="ru">Проектов</span><span class="solution-stat-label" data-lang="en">Projects</span></div>
               <div class="solution-stat"><span class="solution-stat-val">0</span><span class="solution-stat-label" data-lang="ru">Провалов</span><span class="solution-stat-label" data-lang="en">Failures</span></div>
               <div class="solution-stat"><span class="solution-stat-val">2-3</span><span class="solution-stat-label" data-lang="ru">Мес окупаемость</span><span class="solution-stat-label" data-lang="en">Months ROI</span></div>
             </div>
-            <a href="https://t.me/Zzima686" target="_blank" class="solution-cta-btn" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
           </div>
         </div>
       </div>
@@ -1083,10 +1116,10 @@
         <div class="pricing-name"><span data-lang="ru">Базовый</span><span data-lang="en">Basic</span></div>
         <div class="pricing-subtitle"><span data-lang="ru">1-3 точки</span><span data-lang="en">1-3 locations</span></div>
         <div class="pricing-price"><span data-lang="ru">65 000 <span>руб.</span></span><span data-lang="en">650 <span>EUR</span></span></div>
-        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span><span data-lang="en">one-time + support (AED available)</span></div>
+        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span><span data-lang="en">one-time + support</span></div>
         <ul class="pricing-features">
-          <li><i data-lucide="check"></i><span data-lang="ru">AI-консьерж для бронирования</span><span data-lang="en">AI concierge for reservations</span></li>
-          <li><i data-lucide="check"></i>Telegram + WhatsApp</li>
+          <li><i data-lucide="check"></i><span data-lang="ru">Цифровой администратор бронирования</span><span data-lang="en">Digital booking host</span></li>
+          <li><i data-lucide="check"></i><span data-lang="ru">Telegram + Мессенджер Макс</span><span data-lang="en">Telegram + WhatsApp</span></li>
           <li><i data-lucide="check"></i><span data-lang="ru">Интеграция iiko / R-Keeper</span><span data-lang="en">Integration Foodics / iiko</span></li>
           <li><i data-lucide="check"></i><span data-lang="ru">Базовая CRM и напоминания</span><span data-lang="en">Basic CRM & reminders</span></li>
           <li><i data-lucide="check"></i><span data-lang="ru">Настройка за 3 дня</span><span data-lang="en">Setup in 3 days</span></li>
@@ -1099,7 +1132,7 @@
         <div class="pricing-name"><span data-lang="ru">Бизнес</span><span data-lang="en">Business</span></div>
         <div class="pricing-subtitle"><span data-lang="ru">4-10 точек</span><span data-lang="en">4-10 locations</span></div>
         <div class="pricing-price"><span data-lang="ru">165 000 <span>руб.</span></span><span data-lang="en">1 650 <span>EUR</span></span></div>
-        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span><span data-lang="en">one-time + support (AED available)</span></div>
+        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span><span data-lang="en">one-time + support</span></div>
         <ul class="pricing-features">
           <li><i data-lucide="check"></i><span data-lang="ru">Всё из Базового</span><span data-lang="en">Everything from Basic</span></li>
           <li><i data-lucide="check"></i><span data-lang="ru">Интеграция Remarket</span><span data-lang="en">Remarket Integration</span></li>
@@ -1114,7 +1147,7 @@
         <div class="pricing-name"><span data-lang="ru">Сеть</span><span data-lang="en">Enterprise</span></div>
         <div class="pricing-subtitle"><span data-lang="ru">10+ точек</span><span data-lang="en">10+ locations</span></div>
         <div class="pricing-price"><span data-lang="ru">385 000 <span>руб.</span></span><span data-lang="en">3 850 <span>EUR</span></span></div>
-        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span><span data-lang="en">one-time + support (AED available)</span></div>
+        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span><span data-lang="en">one-time + support</span></div>
         <ul class="pricing-features">
           <li><i data-lucide="check"></i><span data-lang="ru">Всё из Бизнес</span><span data-lang="en">Everything from Business</span></li>
           <li><i data-lucide="check"></i><span data-lang="ru">Единая система управления сетью</span><span data-lang="en">Unified chain management</span></li>
@@ -1159,7 +1192,7 @@
     </div>
   </section>
 
-  
+
   <!-- PROJECTS / DEMOS -->
   <section class="section-projects" id="projects">
     <div class="section-header reveal">
@@ -1169,7 +1202,7 @@
     </div>
     <div class="projects-grid">
       <!-- Azbuka -->
-      <a href="https://kosmos686-bit.github.io/st8-dark/kitchen/" target="_blank" class="project-card reveal" rel="noopener">
+      <a href="https://kosmos686-bit.github.io/st8-dark/kitchen/" target="_blank" rel="noopener noreferrer" class="project-card reveal">
         <div class="project-preview">
           <div class="project-client-badge">
             <span class="client-dot"></span>
@@ -1199,11 +1232,11 @@
             <div class="client-logo azbuka">АВ</div>
             <div class="client-info">
               <div class="client-name"><span data-lang="ru">Азбука Вкуса</span><span data-lang="en">Azbuka Vkusa</span> <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
-              <div class="client-type"><span data-lang="ru">Сеть dark kitchen · Москва</span><span data-lang="en">Dark kitchen chain · Dubai</span></div>
+              <div class="client-type"><span data-lang="ru">Сеть dark kitchen · Москва</span><span data-lang="en">Dark kitchen chain · Moscow, Russia</span></div>
             </div>
           </div>
           <h3 class="project-title">ST8 Dark Intelligence</h3>
-          <p class="project-desc"><span data-lang="ru">AI-планирование производства. Прогнозирует пиковые часы, оптимизирует батч-приготовление. Точность 94%. Интеграция с iiko и складом.</span><span data-lang="en">AI production planning. Predicts peak hours, optimizes batch cooking. 94% accuracy. Integration with Foodics and warehouse.</span></p>
+          <p class="project-desc"><span data-lang="ru">AI-планирование производства. Прогнозирует пиковые часы, оптимизирует батч-приготовление. Точность 94%. Интеграция с iiko и складом.</span><span data-lang="en">AI production planning. Predicts peak hours, optimizes batch cooking. 94% accuracy. Integration with Foodics and warehouse. <em>Case from Russia — we adapt the same solution for your market.</em></span></p>
           <div class="project-tags">
             <span class="project-tag" data-lang="ru">Прогноз спроса</span><span class="project-tag" data-lang="en">Demand Forecast</span>
             <span class="project-tag" data-lang="ru">Оптимизация цеха</span><span class="project-tag" data-lang="en">Kitchen Optimization</span>
@@ -1216,7 +1249,7 @@
       </a>
 
       <!-- Level Group -->
-      <a href="https://kosmos686-bit.github.io/st8-stroy/" target="_blank" class="project-card reveal" rel="noopener">
+      <a href="https://kosmos686-bit.github.io/st8-stroy/" target="_blank" rel="noopener noreferrer" class="project-card reveal">
         <div class="project-preview">
           <div class="project-client-badge">
             <span class="client-dot"></span>
@@ -1242,11 +1275,11 @@
             <div class="client-logo level">LG</div>
             <div class="client-info">
               <div class="client-name">Level Group <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
-              <div class="client-type"><span data-lang="ru">Девелопер · Москва</span><span data-lang="en">Developer · Dubai</span></div>
+              <div class="client-type"><span data-lang="ru">Девелопер · Москва</span><span data-lang="en">Developer · Moscow, Russia</span></div>
             </div>
           </div>
           <h3 class="project-title">ST8 BUILD — AI Master</h3>
-          <p class="project-desc"><span data-lang="ru">AI-прораб для крупного девелопера. Автоматизация смет, проверка по ГОСТ, контроль сроков стройки, прогноз рисков и перерасхода.</span><span data-lang="en">AI foreman for a major developer. Estimate automation, standard compliance checks, construction timeline control, risk and overrun forecasting.</span></p>
+          <p class="project-desc"><span data-lang="ru">AI-прораб для крупного девелопера. Автоматизация смет, проверка по ГОСТ, контроль сроков стройки, прогноз рисков и перерасхода.</span><span data-lang="en">AI foreman for a major developer. Estimate automation, standard compliance checks, construction timeline control, risk and overrun forecasting. <em>Case from Russia — we adapt the same solution for your market.</em></span></p>
           <div class="project-tags">
             <span class="project-tag" data-lang="ru">Сметы</span><span class="project-tag" data-lang="en">Estimates</span>
             <span class="project-tag" data-lang="ru">ГОСТ</span><span class="project-tag" data-lang="en">Standards</span>
@@ -1259,7 +1292,7 @@
       </a>
 
       <!-- Unik Food -->
-      <a href="https://kosmos686-bit.github.io/st8-resto/unikfood.html" target="_blank" class="project-card reveal" rel="noopener">
+      <a href="https://kosmos686-bit.github.io/st8-resto/unikfood.html" target="_blank" rel="noopener noreferrer" class="project-card reveal">
         <div class="project-preview">
           <div class="project-client-badge">
             <span class="client-dot"></span>
@@ -1285,11 +1318,11 @@
             <div class="client-logo unik">UF</div>
             <div class="client-info">
               <div class="client-name">Unik Food <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
-              <div class="client-type"><span data-lang="ru">Dark Kitchen · Екатеринбург</span><span data-lang="en">Dark Kitchen · Dubai</span></div>
+              <div class="client-type"><span data-lang="ru">Dark Kitchen · Екатеринбург</span><span data-lang="en">Dark Kitchen · Yekaterinburg, Russia</span></div>
             </div>
           </div>
           <h3 class="project-title">CHEFF AI</h3>
-          <p class="project-desc"><span data-lang="ru">AI-технолог для dark kitchen. Расчет КБЖУ, генерация ТТК, контроль HACCP, заказ поставщикам, анализ себестоимости. Интеграция iiko + 1С.</span><span data-lang="en">AI technologist for dark kitchen. Nutrition calculation, tech card generation, HACCP control, supplier ordering, cost analysis. Integration with Foodics + SAP.</span></p>
+          <p class="project-desc"><span data-lang="ru">AI-технолог для dark kitchen. Расчет КБЖУ, генерация ТТК, контроль HACCP, заказ поставщикам, анализ себестоимости. Интеграция iiko + 1С.</span><span data-lang="en">AI technologist for dark kitchen. Nutrition calculation, tech card generation, HACCP control, supplier ordering, cost analysis. Integration with Foodics + SAP. <em>Case from Russia — we adapt the same solution for your market.</em></span></p>
           <div class="project-tags">
             <span class="project-tag" data-lang="ru">ТТК</span><span class="project-tag" data-lang="en">Tech Cards</span>
             <span class="project-tag">HACCP</span>
@@ -1300,6 +1333,101 @@
           </div>
         </div>
       </a>
+
+      <!-- Future markets placeholder -->
+      <div class="project-card reveal" style="align-items:center;justify-content:center;text-align:center;padding:32px 24px">
+        <div style="width:48px;height:48px;border-radius:50%;border:1px dashed rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;margin:24px auto 16px;color:var(--gold)"><i data-lucide="rocket" style="width:20px;height:20px"></i></div>
+        <h3 class="project-title"><span data-lang="ru">Скоро: пилот в ОАЭ и Турции</span><span data-lang="en">Coming Soon: UAE & Turkey Pilot</span></h3>
+        <p class="project-desc"><span data-lang="ru">Тот же трек-рекорд (47 проектов, 0 провалов), который мы отработали в России, разворачиваем на новых рынках. Станьте одним из первых клиентов.</span><span data-lang="en">The same track record (47 projects, 0 failures) proven in Russia — now rolling out to new markets. Become one of our first clients there.</span></p>
+        <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" style="margin:8px auto 0"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Стать первым</span><span data-lang="en">Be the First</span></span></a>
+      </div>
+    </div>
+    <p class="legal-note reveal"><span data-lang="ru">* Названия и логотипы клиентов используются с их согласия. Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span><span data-lang="en">* Client names and logos are used with their consent. Results shown are project-specific and are not a guarantee of identical results for another business.</span></p>
+  </section>
+
+  <!-- RISK REDUCTION FOR NEW MARKETS -->
+  <section class="section-how">
+    <div class="section-header reveal">
+      <div class="section-label"><span data-lang="ru">Гарантии</span><span data-lang="en">Guarantees</span></div>
+      <h2 class="section-title"><span data-lang="ru">Новый рынок — <span style="color:var(--gold)">не риск</span></span><span data-lang="en">New Market — <span style="color:var(--gold)">Not a Risk</span></span></h2>
+      <p class="section-desc"><span data-lang="ru">Условия из наших реальных договоров — не маркетинг</span><span data-lang="en">Terms from our real contracts — not marketing copy</span></p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal">
+        <div class="how-number"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
+        <h3 class="how-title"><span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span></h3>
+        <p class="how-desc"><span data-lang="ru">Целевые показатели фиксируются в договоре. Условия возврата — по договору, если показатели не достигнуты</span><span data-lang="en">Target metrics are fixed in the contract. Refund terms apply per the contract if targets aren't met</span></p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-number"><i data-lucide="flask-conical" style="width:20px;height:20px"></i></div>
+        <h3 class="how-title"><span data-lang="ru">Пилот на 1 точке</span><span data-lang="en">Pilot on 1 Location</span></h3>
+        <p class="how-desc"><span data-lang="ru">Полное внедрение только после успешного пилота, не наоборот</span><span data-lang="en">Full rollout only after a successful pilot, never the other way around</span></p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-number"><i data-lucide="door-open" style="width:20px;height:20px"></i></div>
+        <h3 class="how-title"><span data-lang="ru">Выход без штрафа</span><span data-lang="en">Exit Without Penalty</span></h3>
+        <p class="how-desc"><span data-lang="ru">30 дней на выход из проекта без штрафных санкций</span><span data-lang="en">30 days to exit the project with no penalty</span></p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-number"><i data-lucide="lock" style="width:20px;height:20px"></i></div>
+        <h3 class="how-title"><span data-lang="ru">Эксклюзив на город</span><span data-lang="en">City Exclusivity</span></h3>
+        <p class="how-desc"><span data-lang="ru">Мы не работаем с вашими прямыми конкурентами в одном городе</span><span data-lang="en">We don't work with your direct competitors in the same city</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-solutions" id="faq">
+    <div class="section-header reveal">
+      <div class="section-label"><span data-lang="ru">Вопросы</span><span data-lang="en">FAQ</span></div>
+      <h2 class="section-title"><span data-lang="ru">Частые <span style="color:var(--gold)">вопросы</span></span><span data-lang="en">Frequently Asked <span style="color:var(--gold)">Questions</span></span></h2>
+    </div>
+    <div class="solutions-grid" style="grid-template-columns:1fr;max-width:800px">
+      <div class="solution-card reveal" onclick="toggleSolution(this)">
+        <div class="solution-card-main">
+          <h3 class="solution-title"><span data-lang="ru">Что если у нас нет данных для обучения модели?</span><span data-lang="en">What if we don't have data to train the model?</span></h3>
+          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
+        </div>
+        <div class="solution-detail"><div class="solution-detail-inner">
+          <p><span data-lang="ru">Начинаем с того, что уже есть в вашей учётной системе (кассы, CRM, склад) — этого обычно достаточно для первой рабочей версии. Модель дообучается по мере накопления данных в процессе пилота.</span><span data-lang="en">We start with whatever your accounting system already has (POS, CRM, warehouse) — usually enough for a first working version. The model keeps improving as data accumulates during the pilot.</span></p>
+        </div></div>
+      </div>
+      <div class="solution-card reveal" onclick="toggleSolution(this)">
+        <div class="solution-card-main">
+          <h3 class="solution-title"><span data-lang="ru">Что будет с нашими данными?</span><span data-lang="en">What happens to our data?</span></h3>
+          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
+        </div>
+        <div class="solution-detail"><div class="solution-detail-inner">
+          <p><span data-lang="ru">Данные остаются вашими и не передаются третьим лицам. Для производственных задач возможен on-premise режим — данные вообще не покидают вашу территорию.</span><span data-lang="en">Your data remains yours and is never shared with third parties. For manufacturing use cases, on-premise deployment is available — data never leaves your premises.</span></p>
+        </div></div>
+      </div>
+      <div class="solution-card reveal" onclick="toggleSolution(this)">
+        <div class="solution-card-main">
+          <h3 class="solution-title"><span data-lang="ru">Что если решение не окупится?</span><span data-lang="en">What if it doesn't pay off?</span></h3>
+          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
+        </div>
+        <div class="solution-detail"><div class="solution-detail-inner">
+          <p><span data-lang="ru">Целевые KPI фиксируются в договоре до начала работ. Если не достигаем — предусмотрен возврат средств, это не обещание, а пункт контракта.</span><span data-lang="en">Target KPIs are fixed in the contract before work begins. If we don't hit them, a refund is contractually guaranteed — not just a promise.</span></p>
+        </div></div>
+      </div>
+      <div class="solution-card reveal" onclick="toggleSolution(this)">
+        <div class="solution-card-main">
+          <h3 class="solution-title"><span data-lang="ru">Сколько занимает внедрение?</span><span data-lang="en">How long does implementation take?</span></h3>
+          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
+        </div>
+        <div class="solution-detail"><div class="solution-detail-inner">
+          <p><span data-lang="ru">Аудит — 1-2 дня, настройка и интеграция — от 3 дней до 2-3 недель в зависимости от масштаба, пилот на одной точке перед полным запуском.</span><span data-lang="en">Audit — 1-2 days, setup and integration — from 3 days to 2-3 weeks depending on scale, pilot at one location before full rollout.</span></p>
+        </div></div>
+      </div>
+      <div class="solution-card reveal" onclick="toggleSolution(this)">
+        <div class="solution-card-main">
+          <h3 class="solution-title"><span data-lang="ru">Что входит в поддержку?</span><span data-lang="en">What's included in support?</span></h3>
+          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
+        </div>
+        <div class="solution-detail"><div class="solution-detail-inner">
+          <p><span data-lang="ru">Поддержка 24/7, дообучение модели на новых данных, доработки по мере роста бизнеса. Условия зависят от тарифа.</span><span data-lang="en">24/7 support, ongoing model retraining on new data, refinements as your business grows. Terms depend on your plan.</span></p>
+        </div></div>
+      </div>
     </div>
   </section>
 <!-- FOOTER -->
@@ -1309,7 +1437,8 @@
         <a href="#" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
         <p><span data-lang="ru">Кастомные AI-решения для бизнеса. 47 проектов, 0 провалов. Гарантия результата по договору.</span><span data-lang="en">Custom AI solutions for business. 47 projects, 0 failures. Guaranteed results by contract.</span></p>
         <div style="display:flex;gap:12px">
-          <a href="https://t.me/Zzima686" target="_blank" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="send" style="width:18px;height:18px"></i></a>
+          <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="send" style="width:18px;height:18px"></i></a>
+          <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="message-circle" style="width:18px;height:18px"></i></a>
           <a href="tel:+79856905252" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="phone" style="width:18px;height:18px"></i></a>
           <a href="mailto:info@st8-ai.ru" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="mail" style="width:18px;height:18px"></i></a>
         </div>
@@ -1336,18 +1465,42 @@
       <div>
         <h4 class="footer-heading"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></h4>
         <div class="footer-contact">
-          <p><strong>Alexey Gagarin</strong><br>CEO & Co-founder</p>
-          <p style="margin-top:8px"><a href="tel:+79856905252">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank">@Zzima686</a></p>
-          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><a href="tel:+79826210101">+7 982 621-01-01</a></p>
+          <p><strong>Alexey Gagarin</strong><br>CEO & Co-founder<br><span style="font-size:12px" data-lang="ru">15+ лет в B2B-продажах</span><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
+          <p style="margin-top:8px"><a href="tel:+79856905252">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="ru">Разработка AI-систем</span><span style="font-size:12px" data-lang="en">AI Systems Development</span><br><a href="tel:+79826210101">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
+      <!-- TODO(Алексей): вписать реальные реквизиты — ИП или ООО, точное наименование, ИНН, ОГРН/ОГРНИП, юр. адрес.
+           Без этого блока цены в разделе "Тарифы" юридически выглядят как неоформленная оферта, а не публичная оферта конкретного юрлица. -->
+      <p id="legalRequisites" style="font-size:11px;color:var(--gray-600)"><span data-lang="ru">ИП Попова Ю.Д. · ИНН 662607100653 · ОГРНИП 326965800048074 · Свердловская обл., г. Полевской <!-- TODO: подтвердить, публиковать ли точный адрес (квартиру) или оставить на уровне города --></span><span data-lang="en">Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074 · Sverdlovsk region, Polevskoy</span></p>
       <p>ST8 AI. <span data-lang="ru">Все права защищены.</span><span data-lang="en">All rights reserved.</span></p>
-      <p><span data-lang="ru">152-ФЗ | Гарантия KPI | Поддержка 24/7</span><span data-lang="en">PDPL UAE | KPI Guarantee | 24/7 Support</span></p>
+      <p id="legalLine"><a href="#" class="legal-link" onclick="openLegalModal();return false;"><span data-lang="ru">152-ФЗ</span><span data-lang="en">Privacy Notice</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span></p>
     </div>
   </footer>
+
+  <!-- LEGAL / PRIVACY MODAL -->
+  <div id="legalModal" style="display:none;position:fixed;inset:0;z-index:110;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:640px;width:100%;max-height:80vh;overflow-y:auto">
+      <h3 class="section-title" style="font-size:20px;margin-bottom:16px" id="legalModalTitle"><span data-lang="ru">Обработка персональных данных</span><span data-lang="en">Personal Data Notice</span></h3>
+      <div id="legalModalBody" style="font-size:14px;color:var(--gray-400);line-height:1.7">
+        <!-- TODO(Алексей/юрист): краткое уведомление ниже — сокращённая версия. Полный текст живёт в /legal.html;
+             сверить оба текста с юристом перед запуском активного приёма заявок через сайт (особенно раздел про особую категорию ПДн — см. примечание в /legal.html). -->
+        <p data-lang="ru">Оставляя заявку через мессенджер (Telegram / WhatsApp), вы соглашаетесь на обработку указанных вами персональных данных (имя, номер телефона) оператором ST8 AI в целях обработки заявки и связи с вами, в соответствии с 152-ФЗ «О персональных данных». Данные не передаются третьим лицам без вашего согласия и не используются в иных целях.</p>
+        <p data-lang="en">By submitting a request via messenger (Telegram / WhatsApp), you consent to the processing of the personal data you provide (name, phone number) by ST8 AI for the purpose of handling your request and contacting you. Data is not shared with third parties without your consent.</p>
+        <p style="margin-top:12px"><a href="/legal.html" style="color:var(--gold)"><span data-lang="ru">Читать полную политику обработки персональных данных →</span><span data-lang="en">Read the full privacy policy →</span></a></p>
+      </div>
+      <button class="pricing-btn pricing-btn-secondary" style="margin-top:20px" onclick="closeLegalModal()"><span data-lang="ru">Закрыть</span><span data-lang="en">Close</span></button>
+    </div>
+  </div>
 <script>
+    // Курс для отображения в EUR — тот же коэффициент (~100:1), что используется в разделе "Тарифы",
+    // чтобы цифры на сайте были согласованы между собой. TODO: заменить на актуальный курс ЦБ при необходимости.
+    // ВАЖНО: объявлена в самом начале script — calculateROI() вызывается уже при загрузке (через setLang),
+    // а const с TDZ (temporal dead zone) кидает ReferenceError, если объявлена ниже места первого вызова.
+    const EUR_RATE = 100;
+
     // Language switcher
     function setLang(lang) {
       document.documentElement.lang = lang;
@@ -1366,7 +1519,80 @@
     calculateROI();
 
     // Initialize Lucide icons
-    lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    function openLegalModal() {
+      document.getElementById('legalModal').style.display = 'flex';
+    }
+    function closeLegalModal() {
+      document.getElementById('legalModal').style.display = 'none';
+    }
+
+    // Market selector — Russia / UAE / Turkey
+    // NOTE (TODO for content team): AE and TR currently share the EN copy on the page.
+    // Real localized channels/legal lines still need to be filled in below once available:
+    //  - AE contact channel: TODO (Telegram @Zzima686 used as fallback — confirm WhatsApp Business number for UAE)
+    //  - TR contact channel: TODO (Telegram @Zzima686 used as fallback — confirm WhatsApp Business number for Turkey)
+    //  - TR legal line: TODO (KVKK reference — needs legal review)
+    var MARKET_LABELS = {
+      ru: { ru: 'Россия', en: 'Russia' },
+      ae: { ru: 'ОАЭ', en: 'UAE' },
+      tr: { ru: 'Турция', en: 'Turkey' }
+    };
+    var MARKET_LEGAL = {
+      ru: '<a href="#" class="legal-link" onclick="openLegalModal();return false;"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="#" class="legal-link" onclick="openLegalModal();return false;"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="#" class="legal-link" onclick="openLegalModal();return false;"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> <!-- TODO: подтвердить у юристов --> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+    };
+    function openMarketModal() {
+      document.getElementById('marketModal').style.display = 'flex';
+    }
+    function closeMarketModal() {
+      document.getElementById('marketModal').style.display = 'none';
+    }
+    // Contact channel per market. WhatsApp Business is tied to Alexey's existing number (sales lead).
+    // TODO: replace with dedicated AE/TR WhatsApp Business numbers once set up — currently reusing the RU number as fallback.
+    var CONTACT_CHANNEL = {
+      ru: { url: 'https://t.me/Zzima686', icon: 'send' },
+      ae: { url: 'https://wa.me/79856905252', icon: 'message-circle' },
+      tr: { url: 'https://wa.me/79856905252', icon: 'message-circle' }
+    };
+    function updateContactLinks(market) {
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      document.querySelectorAll('.contact-link').forEach(function(el) {
+        el.setAttribute('href', channel.url);
+        var icon = el.querySelector('i[data-lucide]');
+        if (icon) icon.setAttribute('data-lucide', channel.icon);
+      });
+      document.querySelectorAll('.contact-link-label').forEach(function(el) {
+        if (market === 'ru') {
+          el.innerHTML = '<span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span>';
+        } else {
+          el.innerHTML = '<span data-lang="ru">Написать в WhatsApp</span><span data-lang="en">Message on WhatsApp</span>';
+        }
+      });
+    }
+    function setMarket(market) {
+      localStorage.setItem('st8-market', market);
+      window.currentMarket = market;
+      var labelEl = document.getElementById('marketBtnLabel');
+      if (labelEl) {
+        labelEl.innerHTML = '<span data-lang="ru">' + MARKET_LABELS[market].ru + '</span><span data-lang="en">' + MARKET_LABELS[market].en + '</span>';
+      }
+      var legalEl = document.getElementById('legalLine');
+      if (legalEl) legalEl.innerHTML = MARKET_LEGAL[market];
+      // RU market defaults to Russian copy; AE/TR use the international (EN) copy for now
+      setLang(market === 'ru' ? 'ru' : 'en');
+      updateContactLinks(market);
+      closeMarketModal();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    var savedMarket = localStorage.getItem('st8-market');
+    if (savedMarket) {
+      setMarket(savedMarket);
+    }
+    // Modal no longer auto-opens on first visit — hero (incl. video) stays fully visible.
+    // Market selector is available only via the button in the navbar (openMarketModal()).
 
     // Mobile menu toggle
     function toggleMenu() {
@@ -1379,12 +1605,19 @@
     // ROI Calculator
     function calculateROI() {
       const points = parseInt(document.getElementById('points').value);
-      const check = parseInt(document.getElementById('check').value);
+      const check = parseInt(document.getElementById('check').value); // всегда хранится в рублях — единственный источник истины
       const guests = parseInt(document.getElementById('guests').value);
       const isEn = document.documentElement.lang === 'en';
 
       document.getElementById('pointsValue').textContent = points;
-      document.getElementById('checkValue').textContent = check.toLocaleString(isEn ? 'en-US' : 'ru-RU');
+      // ФИКС: раньше при EN чек показывался в "сырых" рублях, хотя подпись рядом говорила "EUR" —
+      // цифра на слайдере не совпадала по масштабу с итоговой суммой экономии (та уже делилась на EUR_RATE).
+      // Теперь оба места используют один и тот же коэффициент конвертации.
+      if (isEn) {
+        document.getElementById('checkValue').textContent = Math.round(check / EUR_RATE).toLocaleString('en-US');
+      } else {
+        document.getElementById('checkValue').textContent = check.toLocaleString('ru-RU');
+      }
       document.getElementById('guestsValue').textContent = guests;
 
       const dailyRevenue = points * guests * check;
@@ -1397,10 +1630,31 @@
 
       const totalEl = document.getElementById('roiTotal');
       if (isEn) {
-        totalEl.innerHTML = total.toLocaleString('en-US') + ' <span data-lang="ru">руб.</span><span data-lang="en">EUR</span>';
+        const totalEur = Math.round(total / EUR_RATE);
+        totalEl.innerHTML = totalEur.toLocaleString('en-US') + ' <span data-lang="ru">руб.</span><span data-lang="en">EUR</span>';
       } else {
         totalEl.innerHTML = total.toLocaleString('ru-RU') + ' <span data-lang="ru">руб.</span><span data-lang="en">EUR</span>';
       }
+
+      // Консоль для отладки калькулятора — открой DevTools (F12) → Console на сайте, чтобы видеть эти значения вживую
+      console.log('[ST8 ROI Calculator]', {
+        lang: isEn ? 'en' : 'ru',
+        points: points,
+        checkRub: check,
+        checkDisplayed: isEn ? Math.round(check / EUR_RATE) : check,
+        guests: guests,
+        dailyRevenueRub: dailyRevenue,
+        monthlyRevenueRub: monthlyRevenue,
+        breakdownRub: {
+          noShowSavings: Math.round(noShowSavings),
+          procurementSavings: Math.round(procurementSavings),
+          checkGrowth: Math.round(checkGrowth),
+          writeOffSavings: Math.round(writeOffSavings)
+        },
+        totalRub: total,
+        totalDisplayed: isEn ? Math.round(total / EUR_RATE) : total,
+        eurRate: EUR_RATE
+      });
     }
 
     // Intersection Observer for reveal animations
@@ -1429,24 +1683,6 @@
     }
     createParticles();
 
-    // Lead form placeholder
-    function openLeadForm(plan) {
-      alert('Форма заявки для тарифа: ' + plan + '\n\nВ реальном проекте здесь откроется модальное окно с формой или редирект в Telegram/CRM');
-    }
-
-    // Solution detail placeholder
-    function showSolutionDetail(type) {
-      const names = {
-        horeca: 'HoReCa — рестораны, кафе, бары',
-        production: 'Производство — заводы и фабрики',
-        retail: 'Ритейл и E-commerce',
-        logistics: 'Логистика и склады',
-        office: 'Офисы и управляющие компании',
-        custom: 'Кастомная разработка'
-      };
-      alert('Подробнее о направлении: ' + names[type] + '\n\nВ реальном проекте здесь откроется модальное окно с детальным описанием, кейсами и CTA');
-    }
-
     // Solution accordion toggle
     function toggleSolution(card) {
       const isActive = card.classList.contains('active');
@@ -1469,11 +1705,15 @@
       }
     }
 
-    // Lead form - redirect to Telegram
+    // Lead form - redirect to Telegram (RU) or WhatsApp Business (AE/TR)
     function openLeadForm(plan) {
       var names = { basic: 'Базовый', business: 'Бизнес', enterprise: 'Сеть' };
-      var msg = 'Здравствуйте! Хочу запустить пилот — тариф ' + (names[plan] || plan);
-      window.open('https://t.me/Zzima686?text=' + encodeURIComponent(msg), '_blank');
+      var market = localStorage.getItem('st8-market') || 'ru';
+      var marketNote = market !== 'ru' ? ' (рынок: ' + MARKET_LABELS[market].ru + ')' : '';
+      var msg = 'Здравствуйте! Хочу запустить пилот — тариф ' + (names[plan] || plan) + marketNote;
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      var url = market === 'ru' ? ('https://t.me/Zzima686?text=' + encodeURIComponent(msg)) : (channel.url + '?text=' + encodeURIComponent(msg));
+      window.open(url, '_blank');
     }
 
     // Solution detail placeholder
