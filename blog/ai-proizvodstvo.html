@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Внедрение AI в производство: computer vision, предиктивное обслуживание, контроль качества | ST8 AI</title>
+  <meta name="description" content="Внедрение AI в производство: computer vision для контроля качества, предиктивное обслуживание оборудования, оптимизация линий. Точность 99.7%, простои -25%.">
+  <link rel="canonical" href="https://st8-ai.ru/blog/ai-proizvodstvo.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Implementing AI in Manufacturing: Computer Vision, Predictive Maintenance, Quality Control | ST8 AI">
+  <meta property="og:description" content="Implementing AI in manufacturing: computer vision for quality control, predictive equipment maintenance, line optimization. 99.7% accuracy, downtime -25%.">
+  <meta property="og:url" content="https://st8-ai.ru/blog/ai-proizvodstvo.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Implementing AI in Manufacturing: Computer Vision, Predictive Maintenance, Quality Control | ST8 AI">
+  <meta name="twitter:description" content="Implementing AI in manufacturing: computer vision for quality control, predictive equipment maintenance, line optimization. 99.7% accuracy, downtime -25%.">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js"></script>
+  <style>
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-switch {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px; padding: 4px;
+    }
+    .lang-btn {
+      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .lang-btn.active { background: var(--gold); color: #000; box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+    .lang-btn:hover:not(.active) { color: #fff; }
+
+    span[data-lang], h1[data-lang], h2[data-lang], h3[data-lang], p[data-lang], li[data-lang], strong[data-lang], a[data-lang], div[data-lang] { display: none; }
+    html[lang="ru"] [data-lang="ru"] { display: revert; }
+    html[lang="en"] [data-lang="en"] { display: revert; }
+
+    @media(max-width:1023px){ .nav-links { display: none; } }
+    .btn-hamburger {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; background: none; border: none; cursor: pointer;
+    }
+    @media(min-width:1024px){ .btn-hamburger { display: none; } }
+    .hamburger-icon { position: relative; width: 20px; height: 20px; }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { position: absolute; top: 0; left: 0; transition: all 0.3s ease; }
+    .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
+    .hamburger-icon:not(.open) .icon-x { opacity: 0; transform: scale(0.5); }
+
+    .mobile-menu {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 40;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 16px; transform: translateY(-16px); opacity: 0;
+      pointer-events: none; transition: all 0.4s ease-out;
+    }
+    .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-link { display: block; padding: 12px 16px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; border-radius: 8px; }
+    .mobile-menu-link:hover, .mobile-menu-link.active { background: rgba(255,255,255,0.05); color: var(--gold); }
+    .mobile-menu-actions { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: center; }
+
+    #marketModal .pricing-btn {
+      width: 100%; display: flex; align-items: center; justify-content: flex-start;
+      gap: 8px; padding: 14px 18px; border-radius: 9999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: #fff;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    #marketModal .pricing-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .roi-result-note { font-size: 12px; color: var(--gray-500); margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">ST8</div>
+        <div class="logo-text">ST8<span>AI</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#solutions" class="nav-link"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+        <a href="../cases/" class="nav-link"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a>
+        <a href="../blog/" class="nav-link active"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a>
+        <a href="../about.html" class="nav-link"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+        <a href="../index.html#pricing" class="nav-link"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+        <a href="../index.html#contact" class="nav-link"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-switch liquid-glass" id="marketBtn" style="padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600"><span data-lang="ru">Россия</span><span data-lang="en">International</span></span>
+        </button>
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-hamburger liquid-glass" id="hamburger" onclick="toggleMenu()">
+          <div class="hamburger-icon" id="hamburgerIcon">
+            <i data-lucide="menu" class="icon-menu" style="width:20px;height:20px"></i>
+            <i data-lucide="x" class="icon-x" style="width:20px;height:20px"></i>
+          </div>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html#solutions" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+      <a href="../cases/" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a>
+      <a href="../blog/" class="mobile-menu-link active" onclick="toggleMenu()"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a>
+      <a href="../about.html" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+      <a href="../index.html#pricing" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+      <a href="../index.html#contact" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      <div class="mobile-menu-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnRuMobile" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEnMobile" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARKET SELECTOR MODAL -->
+  <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
+      <div class="section-label" style="text-align:center"><span data-lang="ru">Выберите рынок</span><span data-lang="en">Choose Your Market</span></div>
+      <h3 style="font-size:22px;text-align:center;margin-bottom:24px;font-weight:400"><span data-lang="ru">Где вы работаете?</span><span data-lang="en">Where Are You Based?</span></h3>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="pricing-btn" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="ru">Россия</span><span data-lang="en">Russia</span></button>
+        <button class="pricing-btn" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="ru">ОАЭ</span><span data-lang="en">UAE</span></button>
+        <button class="pricing-btn" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="ru">Турция</span><span data-lang="en">Turkey</span></button>
+      </div>
+      <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="ru">Можно изменить в любой момент вверху страницы</span><span data-lang="en">You can change this anytime at the top of the page</span></p>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero-strip">
+      <div class="container">
+        <p class="breadcrumb"><a href="../index.html"><span data-lang="ru">Главная</span><span data-lang="en">Home</span></a> / <a href="../blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></p>
+        <div class="section-label"><span data-lang="ru">Блог ST8 AI</span><span data-lang="en">ST8 AI Blog</span></div>
+        <h1 class="page-title"><span data-lang="ru">Внедрение AI в производство</span><span data-lang="en">Implementing AI in Manufacturing</span></h1>
+        <p class="page-desc"><span data-lang="ru">Как искусственный интеллект контролирует качество, предсказывает поломки оборудования и снижает простои линий — без остановки текущих процессов.</span><span data-lang="en">How artificial intelligence controls quality, predicts equipment failures, and reduces line downtime — without stopping current processes.</span></p>
+      </div>
+    </section>
+    <article class="article-body">
+      <p><span data-lang="ru">На производстве цена ошибки выше, чем почти в любой другой отрасли: пропущенный дефект — это возврат партии, незамеченный износ подшипника — это внеплановая остановка линии на сутки, а неоптимальная загрузка мощностей — это упущенная выручка каждый день. Искусственный интеллект здесь применяется не как эксперимент, а как способ убрать самые дорогие виды простоев и брака.</span><span data-lang="en">In manufacturing, the cost of a mistake is higher than in almost any other industry: a missed defect means a batch return, unnoticed bearing wear means an unplanned line stoppage for a full day, and suboptimal capacity utilization means lost revenue every single day. Artificial intelligence here isn't an experiment — it's a way to eliminate the most expensive kinds of downtime and defects.</span></p>
+
+<h2><span data-lang="ru">Зачем производству искусственный интеллект</span><span data-lang="en">Why Manufacturing Needs Artificial Intelligence</span></h2>
+<p><span data-lang="ru">Традиционный контроль качества и обслуживание оборудования опираются на выборочные проверки и плановые регламенты — то есть реагируют постфактум или «на всякий случай», с избыточными затратами. AI-система работает иначе: она анализирует поток данных с камер и датчиков непрерывно и реагирует на отклонения раньше, чем они становятся браком или поломкой. В <a href="../proizvodstvo.html">решении ST8 AI для производства</a> это реализовано через четыре связанных модуля: computer vision, предиктивное обслуживание, оптимизация линий и аналитика OEE.</span><span data-lang="en">Traditional quality control and equipment maintenance rely on spot checks and scheduled regulations — reacting after the fact or "just in case," with excess costs. An AI system works differently: it continuously analyzes the stream of data from cameras and sensors and responds to deviations before they turn into defects or breakdowns. In the <a href="../proizvodstvo.html">ST8 AI solution for manufacturing</a>, this is implemented through four connected modules: computer vision, predictive maintenance, line optimization, and OEE analytics.</span></p>
+
+<h2><span data-lang="ru">Computer vision для контроля качества</span><span data-lang="en">Computer Vision for Quality Control</span></h2>
+<p><span data-lang="ru">Камеры на линии, подключённые к нейросети, обнаруживают дефекты за 50 миллисекунд — быстрее, чем успевает моргнуть человек — с точностью <strong>99.7%</strong>. Система не устаёт к концу смены и не пропускает дефекты из-за невнимательности, что особенно критично на высокоскоростных линиях, где визуальный контроль человеком физически не успевает за темпом производства.</span><span data-lang="en">Cameras on the line, connected to the neural network, detect defects in 50 milliseconds — faster than a human blink — with <strong>99.7% accuracy</strong>. The system doesn't get tired by the end of a shift and doesn't miss defects due to lapses in attention, which is especially critical on high-speed lines where human visual inspection physically can't keep up with production pace.</span></p>
+
+<h2><span data-lang="ru">Предиктивное обслуживание оборудования</span><span data-lang="en">Predictive Equipment Maintenance</span></h2>
+<p><span data-lang="ru">Вместо ремонта по факту поломки или по жёсткому регламенту «раз в квартал», AI анализирует вибрацию, температуру и другие параметры оборудования и прогнозирует отказ за 72 часа до того, как он произойдёт. Это позволяет планировать техобслуживание в удобное окно, а не останавливать линию посреди смены.</span><span data-lang="en">Instead of repairing equipment after it fails, or on a rigid "once a quarter" schedule, AI analyzes vibration, temperature, and other equipment parameters and predicts a failure 72 hours before it happens. This lets you schedule maintenance during a convenient window instead of stopping the line mid-shift.</span></p>
+
+<h2><span data-lang="ru">Оптимизация линий и контроль по ГОСТ</span><span data-lang="en">Line Optimization and GOST Compliance</span></h2>
+<p><span data-lang="ru">AI балансирует нагрузку между станциями линии, выявляя узкие места, которые тормозят весь поток, и снижает простои в среднем на 25%. Параллельно система автоматически проверяет продукцию на соответствие ГОСТ и внутренним стандартам качества — без дополнительной ручной проверки на каждом этапе.</span><span data-lang="en">AI balances the load across the line's stations, identifying bottlenecks that slow down the entire flow, and reduces downtime by an average of 25%. In parallel, the system automatically checks products for compliance with GOST and internal quality standards — without extra manual inspection at every stage.</span></p>
+
+<h2><span data-lang="ru">Аналитика OEE в реальном времени</span><span data-lang="en">Real-Time OEE Analytics</span></h2>
+<p><span data-lang="ru">Overall Equipment Effectiveness — ключевая метрика эффективности оборудования — считается вручную раз в смену или в день на большинстве производств. AI-система показывает OEE в реальном времени, так что руководство видит проблему в моменте, а не постфактум в отчёте за прошлую неделю.</span><span data-lang="en">Overall Equipment Effectiveness — a key equipment performance metric — is calculated manually once per shift or once a day at most plants. An AI system shows OEE in real time, so management sees a problem as it happens, not after the fact in last week's report.</span></p>
+
+<h2><span data-lang="ru">Данные не покидают завод</span><span data-lang="en">Data Never Leaves the Plant</span></h2>
+<p><span data-lang="ru">Для производственных задач система разворачивается on-premise — то есть работает на серверах внутри предприятия. Это снимает вопрос передачи чувствительных производственных данных за периметр завода и упрощает согласование с службой безопасности.</span><span data-lang="en">For manufacturing use cases, the system is deployed on-premise — meaning it runs on servers inside the plant. This removes any concern about sensitive production data leaving the factory perimeter and simplifies approval with the security department.</span></p>
+
+<h2><span data-lang="ru">Результаты внедрения</span><span data-lang="en">Results</span></h2>
+<div class="stat-row">
+  <div class="stat-item"><span class="stat-val">99.7%</span><span class="stat-label" data-lang="ru">Точность контроля качества</span><span class="stat-label" data-lang="en">Quality control accuracy</span></div>
+  <div class="stat-item"><span class="stat-val">-25%</span><span class="stat-label" data-lang="ru">Простои</span><span class="stat-label" data-lang="en">Downtime</span></div>
+  <div class="stat-item"><span class="stat-val">-60%</span><span class="stat-label" data-lang="ru">Брак</span><span class="stat-label" data-lang="en">Defects</span></div>
+</div>
+<p><span data-lang="ru">Похожий по масштабу и сложности проект — <a href="../cases/level-group.html">ST8 BUILD — AI Master для Level Group</a>: AI-прораб автоматизирует сметы, проверяет соответствие ГОСТ и заранее прогнозирует риски срыва сроков и перерасхода бюджета на стройплощадке — та же логика раннего предупреждения, что и в производственном контроле качества.</span><span data-lang="en">A project of similar scale and complexity is <a href="../cases/level-group.html">ST8 BUILD — AI Master for Level Group</a>: an AI site manager that automates cost estimates, checks GOST compliance, and forecasts the risk of schedule slippage and budget overruns on the construction site in advance — the same early-warning logic as in manufacturing quality control.</span></p>
+
+<h2><span data-lang="ru">С чего начать</span><span data-lang="en">Where to Start</span></h2>
+<p><span data-lang="ru">Внедрение начинается с установки камер на линию и интеграции с MES/ERP-системой предприятия. AI обучается на образцах брака и дефектов, которые уже есть на производстве — размеченный датасет с нуля собирать не нужно. Как и в других направлениях, ST8 AI предлагает пилот на одном участке или одной линии перед полным развёртыванием, с гарантией KPI, зафиксированной в договоре.</span><span data-lang="en">Rollout starts with installing cameras on the line and integrating with the plant's MES/ERP system. AI trains on defect and reject samples that already exist at the plant — there's no need to build a labeled dataset from scratch. As with other industries, ST8 AI offers a pilot on one section or one line before full deployment, with a KPI guarantee fixed in the contract.</span></p>
+<p><span data-lang="ru">Если производство — не единственное направление вашего бизнеса, посмотрите общий обзор в статье <a href="biznes-ii-start.html">«Автоматизация бизнеса ИИ: с чего начать»</a>.</span><span data-lang="en">If manufacturing isn't the only side of your business, check out the general overview in the article <a href="biznes-ii-start.html">"Automating Your Business with AI: Where to Start"</a>.</span></p>
+      <h3><span data-lang="ru">Смотрите также</span><span data-lang="en">See Also</span></h3>
+<ul>
+<li><a href="../cases/level-group.html"><span data-lang="ru">Кейс: ST8 BUILD — AI Master для Level Group</span><span data-lang="en">Case: ST8 BUILD — AI Master for Level Group</span></a></li>
+<li><a href="../cases/"><span data-lang="ru">Все кейсы ST8 AI</span><span data-lang="en">All ST8 AI Cases</span></a></li>
+<li><a href="../index.html#pricing"><span data-lang="ru">Тарифы на внедрение AI</span><span data-lang="en">AI Implementation Pricing</span></a></li>
+</ul>
+      <div class="cta-box">
+        <h3><span data-lang="ru">Готовы обсудить автоматизацию для своего бизнеса?</span><span data-lang="en">Ready to Discuss Automation for Your Business?</span></h3>
+        <p><span data-lang="ru">Расскажем, что конкретно можно внедрить у вас, и посчитаем окупаемость.</span><span data-lang="en">We'll explain exactly what can be implemented for you and calculate the payback.</span></p>
+        <a href="../index.html#lead-form" class="cta-btn"><span data-lang="ru">Оставить заявку →</span><span data-lang="en">Submit a Request →</span></a>
+      </div>
+    </article>
+  </main>
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+        <p><span data-lang="ru">Кастомные AI-решения для бизнеса. 47 проектов, 0 провалов. Гарантия результата по договору.</span><span data-lang="en">Custom AI solutions for business. 47 projects, 0 failures. Results guaranteed by contract.</span></p>
+        <div style="display:flex;gap:12px">
+          <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✈</a>
+          <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">☎</a>
+          <a href="mailto:kosmos686@gmail.com" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✉</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></h4>
+        <ul class="footer-links">
+          <li><a href="../horeca.html">HoReCa</a></li>
+          <li><a href="../proizvodstvo.html"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="../retail.html"><span data-lang="ru">Ритейл</span><span data-lang="en">Retail</span></a></li>
+          <li><a href="../logistika.html"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></a></li>
+          <li><a href="../ofisy.html"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices &amp; PM</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Компания</span><span data-lang="en">Company</span></h4>
+        <ul class="footer-links">
+          <li><a href="../about.html"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+          <li><a href="../cases/"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a></li>
+          <li><a href="../blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></li>
+          <li><a href="#"><span data-lang="ru">Карьера</span><span data-lang="en">Careers</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></h4>
+        <div class="footer-contact">
+          <p><strong>Alexey Gagarin</strong><br>CEO &amp; Co-founder<br><span style="font-size:12px" data-lang="ru">15+ лет в B2B-продажах</span><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
+          <p style="margin-top:8px"><a href="tel:+79856905252" target="_blank" rel="noopener noreferrer">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="ru">Разработка AI-систем</span><span style="font-size:12px" data-lang="en">AI Systems Development</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
+      <p style="font-size:11px;color:var(--gray-600)"><span data-lang="ru">ИП Попова Ю.Д. · ИНН 662607100653 · ОГРНИП 326965800048074 · Свердловская обл., г. Полевской</span><span data-lang="en">Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074 · Sverdlovsk region, Polevskoy</span></p>
+      <p>ST8 AI. <span data-lang="ru">Все права защищены.</span><span data-lang="en">All rights reserved.</span></p>
+      <p id="legalLine"><a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">Privacy Notice</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span></p>
+    </div>
+  </footer>
+
+  <script>
+    var PAGE_META = {
+      ru: { title: "Внедрение AI в производство: computer vision, предиктивное обслуживание, контроль качества | ST8 AI", desc: "Внедрение AI в производство: computer vision для контроля качества, предиктивное обслуживание оборудования, оптимизация линий. Точность 99.7%, простои -25%." },
+      en: { title: "Implementing AI in Manufacturing: Computer Vision, Predictive Maintenance, Quality Control | ST8 AI", desc: "Implementing AI in manufacturing: computer vision for quality control, predictive equipment maintenance, line optimization. 99.7% accuracy, downtime -25%." }
+    };
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active',
+          (lang === 'ru' && (btn.id === 'btnRu' || btn.id === 'btnRuMobile')) ||
+          (lang === 'en' && (btn.id === 'btnEn' || btn.id === 'btnEnMobile'))
+        );
+      });
+      localStorage.setItem('st8-lang', lang);
+      if (PAGE_META[lang]) {
+        document.title = PAGE_META[lang].title;
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', PAGE_META[lang].desc);
+      }
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    var savedLang = localStorage.getItem('st8-lang') || 'ru';
+    setLang(savedLang);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    var MARKET_LABELS = {
+      ru: { ru: 'Россия', en: 'Russia' },
+      ae: { ru: 'ОАЭ', en: 'UAE' },
+      tr: { ru: 'Турция', en: 'Turkey' }
+    };
+    var MARKET_LEGAL = {
+      ru: '<a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="../legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="../legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+    };
+    function openMarketModal() { document.getElementById('marketModal').style.display = 'flex'; }
+    function closeMarketModal() { document.getElementById('marketModal').style.display = 'none'; }
+    var CONTACT_CHANNEL = {
+      ru: { url: 'https://t.me/Zzima686' },
+      ae: { url: 'https://wa.me/79856905252' },
+      tr: { url: 'https://wa.me/79856905252' }
+    };
+    function updateContactLinks(market) {
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      document.querySelectorAll('.contact-link').forEach(function(el) {
+        el.setAttribute('href', channel.url);
+      });
+    }
+    function setMarket(market) {
+      localStorage.setItem('st8-market', market);
+      var labelEl = document.getElementById('marketBtnLabel');
+      if (labelEl) {
+        labelEl.innerHTML = '<span data-lang="ru">' + MARKET_LABELS[market].ru + '</span><span data-lang="en">' + MARKET_LABELS[market].en + '</span>';
+      }
+      var legalEl = document.getElementById('legalLine');
+      if (legalEl) legalEl.innerHTML = MARKET_LEGAL[market];
+      setLang(market === 'ru' ? 'ru' : 'en');
+      updateContactLinks(market);
+      closeMarketModal();
+    }
+    var savedMarket = localStorage.getItem('st8-market');
+    if (savedMarket) { setMarket(savedMarket); }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.getElementById('hamburgerIcon').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

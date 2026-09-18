@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Автоматизация ресторана нейросетями: как ИИ снижает списания и увеличивает чек | ST8 AI</title>
+  <meta name="description" content="Автоматизация ресторана нейросетями: цифровой администратор 24/7, предиктивные закупки, computer vision на кухне. Списания -35%, средний чек +17%.">
+  <link rel="canonical" href="https://st8-ai.ru/blog/restoran-neyroseti.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Automating a Restaurant with Neural Networks: How AI Cuts Waste and Grows the Average Check | ST8 AI">
+  <meta property="og:description" content="Automating a restaurant with neural networks: 24/7 digital host, predictive purchasing, kitchen computer vision. Write-offs -35%, average check +17%.">
+  <meta property="og:url" content="https://st8-ai.ru/blog/restoran-neyroseti.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Automating a Restaurant with Neural Networks: How AI Cuts Waste and Grows the Average Check | ST8 AI">
+  <meta name="twitter:description" content="Automating a restaurant with neural networks: 24/7 digital host, predictive purchasing, kitchen computer vision. Write-offs -35%, average check +17%.">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js"></script>
+  <style>
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-switch {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px; padding: 4px;
+    }
+    .lang-btn {
+      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .lang-btn.active { background: var(--gold); color: #000; box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+    .lang-btn:hover:not(.active) { color: #fff; }
+
+    span[data-lang], h1[data-lang], h2[data-lang], h3[data-lang], p[data-lang], li[data-lang], strong[data-lang], a[data-lang], div[data-lang] { display: none; }
+    html[lang="ru"] [data-lang="ru"] { display: revert; }
+    html[lang="en"] [data-lang="en"] { display: revert; }
+
+    @media(max-width:1023px){ .nav-links { display: none; } }
+    .btn-hamburger {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; background: none; border: none; cursor: pointer;
+    }
+    @media(min-width:1024px){ .btn-hamburger { display: none; } }
+    .hamburger-icon { position: relative; width: 20px; height: 20px; }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { position: absolute; top: 0; left: 0; transition: all 0.3s ease; }
+    .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
+    .hamburger-icon:not(.open) .icon-x { opacity: 0; transform: scale(0.5); }
+
+    .mobile-menu {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 40;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 16px; transform: translateY(-16px); opacity: 0;
+      pointer-events: none; transition: all 0.4s ease-out;
+    }
+    .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-link { display: block; padding: 12px 16px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; border-radius: 8px; }
+    .mobile-menu-link:hover, .mobile-menu-link.active { background: rgba(255,255,255,0.05); color: var(--gold); }
+    .mobile-menu-actions { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: center; }
+
+    #marketModal .pricing-btn {
+      width: 100%; display: flex; align-items: center; justify-content: flex-start;
+      gap: 8px; padding: 14px 18px; border-radius: 9999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: #fff;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    #marketModal .pricing-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .roi-result-note { font-size: 12px; color: var(--gray-500); margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">ST8</div>
+        <div class="logo-text">ST8<span>AI</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#solutions" class="nav-link"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+        <a href="../cases/" class="nav-link"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a>
+        <a href="../blog/" class="nav-link active"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a>
+        <a href="../about.html" class="nav-link"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+        <a href="../index.html#pricing" class="nav-link"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+        <a href="../index.html#contact" class="nav-link"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-switch liquid-glass" id="marketBtn" style="padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600"><span data-lang="ru">Россия</span><span data-lang="en">International</span></span>
+        </button>
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-hamburger liquid-glass" id="hamburger" onclick="toggleMenu()">
+          <div class="hamburger-icon" id="hamburgerIcon">
+            <i data-lucide="menu" class="icon-menu" style="width:20px;height:20px"></i>
+            <i data-lucide="x" class="icon-x" style="width:20px;height:20px"></i>
+          </div>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html#solutions" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+      <a href="../cases/" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a>
+      <a href="../blog/" class="mobile-menu-link active" onclick="toggleMenu()"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a>
+      <a href="../about.html" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+      <a href="../index.html#pricing" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+      <a href="../index.html#contact" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      <div class="mobile-menu-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnRuMobile" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEnMobile" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARKET SELECTOR MODAL -->
+  <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
+      <div class="section-label" style="text-align:center"><span data-lang="ru">Выберите рынок</span><span data-lang="en">Choose Your Market</span></div>
+      <h3 style="font-size:22px;text-align:center;margin-bottom:24px;font-weight:400"><span data-lang="ru">Где вы работаете?</span><span data-lang="en">Where Are You Based?</span></h3>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="pricing-btn" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="ru">Россия</span><span data-lang="en">Russia</span></button>
+        <button class="pricing-btn" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="ru">ОАЭ</span><span data-lang="en">UAE</span></button>
+        <button class="pricing-btn" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="ru">Турция</span><span data-lang="en">Turkey</span></button>
+      </div>
+      <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="ru">Можно изменить в любой момент вверху страницы</span><span data-lang="en">You can change this anytime at the top of the page</span></p>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero-strip">
+      <div class="container">
+        <p class="breadcrumb"><a href="../index.html"><span data-lang="ru">Главная</span><span data-lang="en">Home</span></a> / <a href="../blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></p>
+        <div class="section-label"><span data-lang="ru">Блог ST8 AI</span><span data-lang="en">ST8 AI Blog</span></div>
+        <h1 class="page-title"><span data-lang="ru">Автоматизация ресторана нейросетями</span><span data-lang="en">Automating a Restaurant with Neural Networks</span></h1>
+        <p class="page-desc"><span data-lang="ru">Как искусственный интеллект берёт на себя бронирование, закупки и контроль кухни — и что это даёт ресторану в цифрах.</span><span data-lang="en">How artificial intelligence takes over reservations, purchasing, and kitchen control — and what this delivers for a restaurant in numbers.</span></p>
+      </div>
+    </section>
+    <article class="article-body">
+      <p><span data-lang="ru">Ресторан — это ежедневная борьба с непредсказуемостью: сегодня очередь на бронь, завтра половина зала пустая, а на кухне то не хватает продуктов, то они списываются просроченными. Долгое время единственным ответом на эту непредсказуемость был опыт управляющего и его интуиция. Сейчас эту роль всё чаще берёт на себя искусственный интеллект — и делает это точнее, потому что видит данные, а не догадывается.</span><span data-lang="en">Running a restaurant means a daily fight against unpredictability: today there's a queue for reservations, tomorrow half the room is empty, and in the kitchen you're either short on ingredients or writing off expired ones. For a long time, the only answer to this unpredictability was a manager's experience and intuition. Now artificial intelligence is increasingly taking over that role — and doing it more accurately, because it sees the data instead of guessing.</span></p>
+
+<h2><span data-lang="ru">Что значит «автоматизация ресторана нейросетями»</span><span data-lang="en">What "Automating a Restaurant with Neural Networks" Means</span></h2>
+<p><span data-lang="ru">Речь не о роботе-официанте и не о чат-боте, который просто отвечает шаблонными фразами. Автоматизация ресторана нейросетями — это связка из нескольких AI-модулей, которые работают с реальными данными заведения: кассовыми чеками, бронями, остатками на складе, историей заказов гостей. Модель обучается на этих данных и начинает предсказывать спрос, подсказывать закупки и контролировать процессы на кухне точнее, чем это можно сделать вручную.</span><span data-lang="en">This isn't about a robot waiter or a chatbot that just replies with canned phrases. Automating a restaurant with neural networks means a set of connected AI modules that work with the venue's real data: POS receipts, reservations, warehouse stock, and guest order history. The model trains on this data and starts predicting demand, suggesting purchases, and monitoring kitchen processes more accurately than can be done by hand.</span></p>
+<p><span data-lang="ru">В <a href="../horeca.html">решении ST8 AI для HoReCa</a> это реализовано как набор из пяти связанных модулей: цифровой администратор, предиктивные закупки, управление остатками, персонализация меню и computer vision на кухне.</span><span data-lang="en">In the <a href="../horeca.html">ST8 AI solution for HoReCa</a>, this is implemented as a set of five connected modules: digital host, predictive purchasing, inventory management, menu personalization, and kitchen computer vision.</span></p>
+
+<h2><span data-lang="ru">Цифровой администратор 24/7</span><span data-lang="en">Digital Host 24/7</span></h2>
+<p><span data-lang="ru">Первое, с чем сталкивается гость — это бронирование и переписка в мессенджерах. Цифровой администратор принимает брони, отвечает на вопросы в Telegram и WhatsApp в любое время суток, и — что важнее — помнит предпочтения постоянных гостей: аллергии, любимый столик, день рождения. Для ресторана это означает меньше упущенных броней в нерабочее время администратора и более персональный сервис без найма дополнительного человека на ресепшн.</span><span data-lang="en">The first thing a guest encounters is booking and messaging. The digital host accepts reservations and answers questions on Telegram and WhatsApp around the clock, and — more importantly — remembers regular guests' preferences: allergies, favorite table, birthday. For the restaurant, this means fewer missed bookings outside the host's working hours and more personal service without hiring an extra person for the front desk.</span></p>
+
+<h2><span data-lang="ru">Предиктивные закупки: как ИИ снижает списания</span><span data-lang="en">Predictive Purchasing: How AI Cuts Waste</span></h2>
+<p><span data-lang="ru">Самая дорогая ошибка ресторана — закупить продуктов больше, чем удастся продать. Предиктивные закупки прогнозируют спрос на 7 дней вперёд, учитывая день недели, сезонность и динамику последних заказов, и подсказывают, сколько именно продукта нужно закупить. По направлению HoReCa у клиентов ST8 AI это в среднем даёт <strong>снижение списаний на 35%</strong> — деньги, которые раньше буквально выбрасывались, остаются в кассе.</span><span data-lang="en">The most expensive mistake a restaurant can make is buying more ingredients than it can sell. Predictive purchasing forecasts demand 7 days ahead, factoring in the day of the week, seasonality, and recent order trends, and tells you exactly how much of each ingredient to buy. Across ST8 AI's HoReCa clients, this delivers an average <strong>35% reduction in write-offs</strong> — money that used to be literally thrown away now stays in the register.</span></p>
+
+<h2><span data-lang="ru">Управление остатками и персонализация меню</span><span data-lang="en">Inventory Management and Menu Personalization</span></h2>
+<p><span data-lang="ru">Параллельно с закупками система следит за сроками годности уже закупленных продуктов и работает по принципу FIFO, автоматически уведомляя персонал о том, что нужно использовать в первую очередь. А на основе истории заказов гостя AI подсказывает официанту или самому гостю в приложении, какие блюда ему стоит предложить — это увеличивает средний чек без давления «навязчивых продаж».</span><span data-lang="en">Alongside purchasing, the system tracks the shelf life of ingredients already in stock and works on a FIFO basis, automatically alerting staff to what needs to be used first. And based on a guest's order history, AI suggests to the waiter — or to the guest directly in the app — which dishes to offer, increasing the average check without any pushy upselling.</span></p>
+
+<h2><span data-lang="ru">Computer vision на кухне</span><span data-lang="en">Computer Vision in the Kitchen</span></h2>
+<p><span data-lang="ru">На кухне нейросеть выполняет роль дополнительного контролёра: следит за соблюдением порционности, чистотой рабочих зон и стандартами приготовления в реальном времени через камеры. Это особенно важно для сетевых заведений, где нужно поддерживать одинаковое качество на всех точках, а шеф физически не может стоять у каждой станции одновременно.</span><span data-lang="en">In the kitchen, the neural network acts as an extra supervisor: it monitors portion control, cleanliness of work areas, and cooking standards in real time via cameras. This is especially valuable for restaurant chains, where quality needs to stay consistent across every location, and no chef can physically stand at every station at once.</span></p>
+
+<h2><span data-lang="ru">Результаты внедрения</span><span data-lang="en">Results</span></h2>
+<p><span data-lang="ru">По данным клиентов ST8 AI в направлении HoReCa, комплексное внедрение перечисленных модулей даёт:</span><span data-lang="en">According to ST8 AI's HoReCa clients, a full rollout of these modules delivers:</span></p>
+<div class="stat-row">
+  <div class="stat-item"><span class="stat-val">-35%</span><span class="stat-label" data-lang="ru">Списания</span><span class="stat-label" data-lang="en">Write-offs</span></div>
+  <div class="stat-item"><span class="stat-val">+17%</span><span class="stat-label" data-lang="ru">Средний чек</span><span class="stat-label" data-lang="en">Avg check</span></div>
+  <div class="stat-item"><span class="stat-val">-40%</span><span class="stat-label">No-show</span></div>
+</div>
+<p><span data-lang="ru">Живой пример такого внедрения — кейс <a href="../cases/azbuka-vkusa.html">ST8 Dark Intelligence для «Азбуки Вкуса»</a>, где AI-планирование производства прогнозирует пиковые часы и оптимизирует батч-приготовление, и кейс <a href="../cases/unikfood.html">CHEFF AI для Unik Food</a>, где нейросеть взяла на себя расчёт КБЖУ, ТТК и контроль HACCP.</span><span data-lang="en">A live example of this kind of rollout is the <a href="../cases/azbuka-vkusa.html">ST8 Dark Intelligence case for Azbuka Vkusa</a>, where AI production planning forecasts peak hours and optimizes batch cooking, and the <a href="../cases/unikfood.html">CHEFF AI case for Unik Food</a>, where the neural network took over nutritional calculations, process specs, and HACCP compliance monitoring.</span></p>
+
+<h2><span data-lang="ru">С чего начать</span><span data-lang="en">Where to Start</span></h2>
+<p><span data-lang="ru">Внедрение начинается с интеграции с вашей кассовой системой — iiko или R-Keeper — которая занимает около 3 дней. Дальше AI обучается на реальных данных заведения: меню, продажи, брони. Уже через неделю система предсказывает спрос точнее, чем менеджер с многолетним стажем. Пилот запускается на одной точке — полноценное развёртывание на всю сеть происходит только после того, как результат подтверждён на практике.</span><span data-lang="en">Rollout starts with integrating your POS system — iiko or R-Keeper — which takes about 3 days. AI then trains on the venue's real data: menu, sales, reservations. Within a week, the system predicts demand more accurately than a manager with years of experience. The pilot launches at a single location — full deployment across the whole chain happens only after the result is confirmed in practice.</span></p>
+<p><span data-lang="ru">Если вы только присматриваетесь к автоматизации бизнеса в целом, а не только ресторана — посмотрите статью <a href="biznes-ii-start.html">«Автоматизация бизнеса ИИ: с чего начать»</a>.</span><span data-lang="en">If you're just exploring business automation in general, not only for restaurants, check out the article <a href="biznes-ii-start.html">"Automating Your Business with AI: Where to Start"</a>.</span></p>
+      <h3><span data-lang="ru">Смотрите также</span><span data-lang="en">See Also</span></h3>
+<ul>
+<li><a href="../cases/azbuka-vkusa.html"><span data-lang="ru">Кейс: ST8 Dark Intelligence для «Азбуки Вкуса»</span><span data-lang="en">Case: ST8 Dark Intelligence for Azbuka Vkusa</span></a></li>
+<li><a href="../cases/unikfood.html"><span data-lang="ru">Кейс: CHEFF AI для Unik Food</span><span data-lang="en">Case: CHEFF AI for Unik Food</span></a></li>
+<li><a href="../index.html#pricing"><span data-lang="ru">Тарифы на внедрение AI для ресторанов</span><span data-lang="en">Pricing for AI Implementation in Restaurants</span></a></li>
+</ul>
+      <div class="cta-box">
+        <h3><span data-lang="ru">Готовы обсудить автоматизацию для своего бизнеса?</span><span data-lang="en">Ready to Discuss Automation for Your Business?</span></h3>
+        <p><span data-lang="ru">Расскажем, что конкретно можно внедрить у вас, и посчитаем окупаемость.</span><span data-lang="en">We'll explain exactly what can be implemented for you and calculate the payback.</span></p>
+        <a href="../index.html#lead-form" class="cta-btn"><span data-lang="ru">Оставить заявку →</span><span data-lang="en">Submit a Request →</span></a>
+      </div>
+    </article>
+  </main>
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+        <p><span data-lang="ru">Кастомные AI-решения для бизнеса. 47 проектов, 0 провалов. Гарантия результата по договору.</span><span data-lang="en">Custom AI solutions for business. 47 projects, 0 failures. Results guaranteed by contract.</span></p>
+        <div style="display:flex;gap:12px">
+          <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✈</a>
+          <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">☎</a>
+          <a href="mailto:kosmos686@gmail.com" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✉</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></h4>
+        <ul class="footer-links">
+          <li><a href="../horeca.html">HoReCa</a></li>
+          <li><a href="../proizvodstvo.html"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="../retail.html"><span data-lang="ru">Ритейл</span><span data-lang="en">Retail</span></a></li>
+          <li><a href="../logistika.html"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></a></li>
+          <li><a href="../ofisy.html"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices &amp; PM</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Компания</span><span data-lang="en">Company</span></h4>
+        <ul class="footer-links">
+          <li><a href="../about.html"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+          <li><a href="../cases/"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a></li>
+          <li><a href="../blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></li>
+          <li><a href="#"><span data-lang="ru">Карьера</span><span data-lang="en">Careers</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></h4>
+        <div class="footer-contact">
+          <p><strong>Alexey Gagarin</strong><br>CEO &amp; Co-founder<br><span style="font-size:12px" data-lang="ru">15+ лет в B2B-продажах</span><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
+          <p style="margin-top:8px"><a href="tel:+79856905252" target="_blank" rel="noopener noreferrer">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="ru">Разработка AI-систем</span><span style="font-size:12px" data-lang="en">AI Systems Development</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
+      <p style="font-size:11px;color:var(--gray-600)"><span data-lang="ru">ИП Попова Ю.Д. · ИНН 662607100653 · ОГРНИП 326965800048074 · Свердловская обл., г. Полевской</span><span data-lang="en">Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074 · Sverdlovsk region, Polevskoy</span></p>
+      <p>ST8 AI. <span data-lang="ru">Все права защищены.</span><span data-lang="en">All rights reserved.</span></p>
+      <p id="legalLine"><a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">Privacy Notice</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span></p>
+    </div>
+  </footer>
+
+  <script>
+    var PAGE_META = {
+      ru: { title: "Автоматизация ресторана нейросетями: как ИИ снижает списания и увеличивает чек | ST8 AI", desc: "Автоматизация ресторана нейросетями: цифровой администратор 24/7, предиктивные закупки, computer vision на кухне. Списания -35%, средний чек +17%." },
+      en: { title: "Automating a Restaurant with Neural Networks: How AI Cuts Waste and Grows the Average Check | ST8 AI", desc: "Automating a restaurant with neural networks: 24/7 digital host, predictive purchasing, kitchen computer vision. Write-offs -35%, average check +17%." }
+    };
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active',
+          (lang === 'ru' && (btn.id === 'btnRu' || btn.id === 'btnRuMobile')) ||
+          (lang === 'en' && (btn.id === 'btnEn' || btn.id === 'btnEnMobile'))
+        );
+      });
+      localStorage.setItem('st8-lang', lang);
+      if (PAGE_META[lang]) {
+        document.title = PAGE_META[lang].title;
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', PAGE_META[lang].desc);
+      }
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    var savedLang = localStorage.getItem('st8-lang') || 'ru';
+    setLang(savedLang);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    var MARKET_LABELS = {
+      ru: { ru: 'Россия', en: 'Russia' },
+      ae: { ru: 'ОАЭ', en: 'UAE' },
+      tr: { ru: 'Турция', en: 'Turkey' }
+    };
+    var MARKET_LEGAL = {
+      ru: '<a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="../legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="../legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+    };
+    function openMarketModal() { document.getElementById('marketModal').style.display = 'flex'; }
+    function closeMarketModal() { document.getElementById('marketModal').style.display = 'none'; }
+    var CONTACT_CHANNEL = {
+      ru: { url: 'https://t.me/Zzima686' },
+      ae: { url: 'https://wa.me/79856905252' },
+      tr: { url: 'https://wa.me/79856905252' }
+    };
+    function updateContactLinks(market) {
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      document.querySelectorAll('.contact-link').forEach(function(el) {
+        el.setAttribute('href', channel.url);
+      });
+    }
+    function setMarket(market) {
+      localStorage.setItem('st8-market', market);
+      var labelEl = document.getElementById('marketBtnLabel');
+      if (labelEl) {
+        labelEl.innerHTML = '<span data-lang="ru">' + MARKET_LABELS[market].ru + '</span><span data-lang="en">' + MARKET_LABELS[market].en + '</span>';
+      }
+      var legalEl = document.getElementById('legalLine');
+      if (legalEl) legalEl.innerHTML = MARKET_LEGAL[market];
+      setLang(market === 'ru' ? 'ru' : 'en');
+      updateContactLinks(market);
+      closeMarketModal();
+    }
+    var savedMarket = localStorage.getItem('st8-market');
+    if (savedMarket) { setMarket(savedMarket); }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.getElementById('hamburgerIcon').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Автоматизация бизнеса ИИ: с чего начать | ST8 AI</title>
+  <meta name="description" content="Автоматизация бизнеса с помощью искусственного интеллекта: с чего начать, как выбрать направление, сколько это стоит и как снизить риски пилота.">
+  <link rel="canonical" href="https://st8-ai.ru/blog/biznes-ii-start.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Automating Your Business with AI: Where to Start | ST8 AI">
+  <meta property="og:description" content="Automating your business with artificial intelligence: where to start, how to choose a direction, how much it costs, and how to reduce pilot risk.">
+  <meta property="og:url" content="https://st8-ai.ru/blog/biznes-ii-start.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Automating Your Business with AI: Where to Start | ST8 AI">
+  <meta name="twitter:description" content="Automating your business with artificial intelligence: where to start, how to choose a direction, how much it costs, and how to reduce pilot risk.">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js"></script>
+  <style>
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .lang-switch {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px; padding: 4px;
+    }
+    .lang-btn {
+      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .lang-btn.active { background: var(--gold); color: #000; box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+    .lang-btn:hover:not(.active) { color: #fff; }
+
+    span[data-lang], h1[data-lang], h2[data-lang], h3[data-lang], p[data-lang], li[data-lang], strong[data-lang], a[data-lang], div[data-lang] { display: none; }
+    html[lang="ru"] [data-lang="ru"] { display: revert; }
+    html[lang="en"] [data-lang="en"] { display: revert; }
+
+    @media(max-width:1023px){ .nav-links { display: none; } }
+    .btn-hamburger {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; background: none; border: none; cursor: pointer;
+    }
+    @media(min-width:1024px){ .btn-hamburger { display: none; } }
+    .hamburger-icon { position: relative; width: 20px; height: 20px; }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { position: absolute; top: 0; left: 0; transition: all 0.3s ease; }
+    .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
+    .hamburger-icon:not(.open) .icon-x { opacity: 0; transform: scale(0.5); }
+
+    .mobile-menu {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 40;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 16px; transform: translateY(-16px); opacity: 0;
+      pointer-events: none; transition: all 0.4s ease-out;
+    }
+    .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-link { display: block; padding: 12px 16px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; border-radius: 8px; }
+    .mobile-menu-link:hover, .mobile-menu-link.active { background: rgba(255,255,255,0.05); color: var(--gold); }
+    .mobile-menu-actions { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: center; }
+
+    #marketModal .pricing-btn {
+      width: 100%; display: flex; align-items: center; justify-content: flex-start;
+      gap: 8px; padding: 14px 18px; border-radius: 9999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: #fff;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    #marketModal .pricing-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .roi-result-note { font-size: 12px; color: var(--gray-500); margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">ST8</div>
+        <div class="logo-text">ST8<span>AI</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html#solutions" class="nav-link"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+        <a href="../cases/" class="nav-link"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a>
+        <a href="../blog/" class="nav-link active"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a>
+        <a href="../about.html" class="nav-link"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+        <a href="../index.html#pricing" class="nav-link"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+        <a href="../index.html#contact" class="nav-link"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-switch liquid-glass" id="marketBtn" style="padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600"><span data-lang="ru">Россия</span><span data-lang="en">International</span></span>
+        </button>
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-hamburger liquid-glass" id="hamburger" onclick="toggleMenu()">
+          <div class="hamburger-icon" id="hamburgerIcon">
+            <i data-lucide="menu" class="icon-menu" style="width:20px;height:20px"></i>
+            <i data-lucide="x" class="icon-x" style="width:20px;height:20px"></i>
+          </div>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="../index.html#solutions" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+      <a href="../cases/" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a>
+      <a href="../blog/" class="mobile-menu-link active" onclick="toggleMenu()"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a>
+      <a href="../about.html" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+      <a href="../index.html#pricing" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+      <a href="../index.html#contact" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      <div class="mobile-menu-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnRuMobile" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEnMobile" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARKET SELECTOR MODAL -->
+  <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
+      <div class="section-label" style="text-align:center"><span data-lang="ru">Выберите рынок</span><span data-lang="en">Choose Your Market</span></div>
+      <h3 style="font-size:22px;text-align:center;margin-bottom:24px;font-weight:400"><span data-lang="ru">Где вы работаете?</span><span data-lang="en">Where Are You Based?</span></h3>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="pricing-btn" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="ru">Россия</span><span data-lang="en">Russia</span></button>
+        <button class="pricing-btn" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="ru">ОАЭ</span><span data-lang="en">UAE</span></button>
+        <button class="pricing-btn" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="ru">Турция</span><span data-lang="en">Turkey</span></button>
+      </div>
+      <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="ru">Можно изменить в любой момент вверху страницы</span><span data-lang="en">You can change this anytime at the top of the page</span></p>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero-strip">
+      <div class="container">
+        <p class="breadcrumb"><a href="../index.html"><span data-lang="ru">Главная</span><span data-lang="en">Home</span></a> / <a href="../blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></p>
+        <div class="section-label"><span data-lang="ru">Блог ST8 AI</span><span data-lang="en">ST8 AI Blog</span></div>
+        <h1 class="page-title"><span data-lang="ru">Автоматизация бизнеса ИИ: с чего начать</span><span data-lang="en">Automating Your Business with AI: Where to Start</span></h1>
+        <p class="page-desc"><span data-lang="ru">Пошаговый ориентир для тех, кто рассматривает внедрение искусственного интеллекта в бизнес, но не знает, с какого направления начать.</span><span data-lang="en">A step-by-step guide for those considering AI implementation in their business but unsure which direction to start with.</span></p>
+      </div>
+    </section>
+    <article class="article-body">
+      <p><span data-lang="ru">Когда руководитель бизнеса решает разобраться с автоматизацией на базе ИИ, он обычно сталкивается с одной и той же проблемой: слишком много обещаний и слишком мало конкретики. «Искусственный интеллект увеличит прибыль» — фраза, которая ничего не говорит о том, что конкретно изменится в понедельник утром. Ниже — практический план, с чего действительно стоит начинать.</span><span data-lang="en">When a business owner decides to look into AI-based automation, they usually run into the same problem: too many promises and too little specifics. "Artificial intelligence will increase profit" is a phrase that says nothing about what will actually change on Monday morning. Below is a practical plan for where to genuinely start.</span></p>
+
+<h2><span data-lang="ru">Шаг 1. Определите направление, а не технологию</span><span data-lang="en">Step 1. Choose a Direction, Not a Technology</span></h2>
+<p><span data-lang="ru">Не стоит начинать с вопроса «какую нейросеть внедрить» — начните с вопроса «какой процесс отнимает больше всего денег или времени». У ST8 AI решения сгруппированы именно по бизнес-задачам, а не по технологиям:</span><span data-lang="en">Don't start with the question "which neural network should we implement" — start with "which process costs us the most money or time." At ST8 AI, solutions are grouped by business task, not by technology:</span></p>
+<ul>
+<li><span data-lang="ru"><strong>HoReCa</strong> — цифровой администратор, предиктивные закупки, управление остатками, computer vision на кухне (подробнее в статье <a href="restoran-neyroseti.html">«Автоматизация ресторана нейросетями»</a>).</span><span data-lang="en"><strong>HoReCa</strong> — digital host, predictive purchasing, inventory management, kitchen computer vision (more in the article <a href="restoran-neyroseti.html">"Automating a Restaurant with Neural Networks"</a>).</span></li>
+<li><span data-lang="ru"><strong>Производство</strong> — компьютерное зрение для контроля качества, предиктивное обслуживание оборудования (подробнее в статье <a href="ai-proizvodstvo.html">«Внедрение AI в производство»</a>).</span><span data-lang="en"><strong>Manufacturing</strong> — computer vision for quality control, predictive equipment maintenance (more in the article <a href="ai-proizvodstvo.html">"Implementing AI in Manufacturing"</a>).</span></li>
+<li><span data-lang="ru"><strong>Ритейл и e-commerce</strong> — прогнозирование спроса, автозакупки, персонализация рекомендаций.</span><span data-lang="en"><strong>Retail &amp; e-commerce</strong> — demand forecasting, automated purchasing, personalized recommendations.</span></li>
+<li><span data-lang="ru"><strong>Логистика</strong> — оптимизация маршрутов, контроль комплектации, прогноз загруженности складов.</span><span data-lang="en"><strong>Logistics</strong> — route optimization, order verification, warehouse load forecasting.</span></li>
+<li><span data-lang="ru"><strong>Офисы и управляющие компании</strong> — распознавание документов, маршрутизация заявок, автоматическая аналитика.</span><span data-lang="en"><strong>Offices &amp; property management</strong> — document recognition, request routing, automated analytics.</span></li>
+</ul>
+<p><span data-lang="ru">Полный список — в разделе <a href="../index.html#solutions">«Решения» на главной странице</a>.</span><span data-lang="en">See the full list in the <a href="../index.html#solutions">"Solutions" section on the homepage</a>.</span></p>
+
+<h2><span data-lang="ru">Шаг 2. Оцените, есть ли у вас данные</span><span data-lang="en">Step 2. Assess Whether You Have Data</span></h2>
+<p><span data-lang="ru">Частое опасение — «у нас нет данных для обучения модели». На практике для старта обычно достаточно того, что уже есть в вашей учётной системе: кассовые чеки, CRM, складской учёт. Модель дообучается по мере накопления данных прямо в процессе пилота, а не требует идеального датасета на входе.</span><span data-lang="en">A common worry is "we don't have data to train the model." In practice, what's already in your accounting system is usually enough to get started: POS receipts, CRM, inventory records. The model keeps learning as data accumulates during the pilot itself — it doesn't require a perfect dataset upfront.</span></p>
+
+<h2><span data-lang="ru">Шаг 3. Начните с пилота на одной точке</span><span data-lang="en">Step 3. Start with a Pilot at One Location</span></h2>
+<p><span data-lang="ru">Правильный порядок внедрения — сначала пилот на одном ресторане, одной линии или одном складе, и только потом — тиражирование на всю сеть. Это снижает риск: если что-то работает не так, как ожидалось, вы теряете время и бюджет одного пилота, а не всей сети сразу.</span><span data-lang="en">The right rollout order is: first a pilot at one restaurant, one line, or one warehouse, and only then scaling to the whole network. This reduces risk — if something doesn't work as expected, you lose the time and budget of one pilot, not the entire network at once.</span></p>
+
+<h2><span data-lang="ru">Шаг 4. Зафиксируйте KPI и условия выхода в договоре</span><span data-lang="en">Step 4. Fix KPIs and Exit Terms in the Contract</span></h2>
+<p><span data-lang="ru">Автоматизация — это инвестиция, и как у любой инвестиции у неё должны быть измеримые условия успеха, зафиксированные заранее, а не «как получится». В работе с ST8 AI это выглядит так:</span><span data-lang="en">Automation is an investment, and like any investment, it needs measurable success criteria fixed in advance — not "let's see how it goes." Working with ST8 AI, this looks like:</span></p>
+<ul>
+<li><strong><span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI guarantee</span></strong> — <span data-lang="ru">целевые показатели фиксируются в договоре до начала работ.</span><span data-lang="en">target metrics are fixed in the contract before work begins.</span></li>
+<li><strong><span data-lang="ru">Пилот на 1 точке</span><span data-lang="en">Pilot at 1 location</span></strong> — <span data-lang="ru">полное внедрение только после подтверждённого результата.</span><span data-lang="en">full rollout only after a confirmed result.</span></li>
+<li><strong><span data-lang="ru">Выход без штрафа</span><span data-lang="en">Exit without penalty</span></strong> — <span data-lang="ru">30 дней на выход из проекта без штрафных санкций.</span><span data-lang="en">30 days to exit the project with no penalties.</span></li>
+<li><strong><span data-lang="ru">Эксклюзив на город</span><span data-lang="en">City exclusivity</span></strong> — <span data-lang="ru">ST8 AI не работает с вашими прямыми конкурентами в одном городе.</span><span data-lang="en">ST8 AI doesn't work with your direct competitors in the same city.</span></li>
+</ul>
+
+<h2><span data-lang="ru">Шаг 5. Посчитайте примерную стоимость</span><span data-lang="en">Step 5. Estimate the Approximate Cost</span></h2>
+<p><span data-lang="ru">Ориентировочные тарифы ST8 AI устроены по масштабу бизнеса: от 65 000 руб. для 1-3 точек, от 165 000 руб. для 4-10 точек, от 385 000 руб. для сети от 10 точек и выше — с более точным расчётом ROI по вашим цифрам в <a href="../index.html#roi">калькуляторе на главной странице</a>. Точную стоимость и сроки для вашего случая можно обсудить напрямую, отталкиваясь от масштаба и выбранного направления.</span><span data-lang="en">ST8 AI's indicative pricing scales with business size: from ₽65,000 for 1-3 locations, from ₽165,000 for 4-10 locations, from ₽385,000 for a network of 10+ locations — with a more precise ROI calculation based on your numbers in the <a href="../index.html#roi">calculator on the homepage</a>. Exact cost and timelines for your case can be discussed directly, based on scale and the chosen direction.</span></p>
+
+<h2><span data-lang="ru">Шаг 6. Посмотрите на реальные кейсы, а не только на обещания</span><span data-lang="en">Step 6. Look at Real Cases, Not Just Promises</span></h2>
+<p><span data-lang="ru">Прежде чем принимать решение, полезно увидеть, как выглядит внедрение на практике — не в презентации, а в работающем проекте. Например:</span><span data-lang="en">Before making a decision, it helps to see what implementation actually looks like in practice — not in a presentation, but in a working project. For example:</span></p>
+<ul>
+<li><span data-lang="ru"><a href="../cases/azbuka-vkusa.html">ST8 Dark Intelligence</a> — AI-планирование производства для сети dark kitchen «Азбука Вкуса».</span><span data-lang="en"><a href="../cases/azbuka-vkusa.html">ST8 Dark Intelligence</a> — AI production planning for the dark kitchen chain Azbuka Vkusa.</span></li>
+<li><span data-lang="ru"><a href="../cases/level-group.html">ST8 BUILD — AI Master</a> — автоматизация смет и контроль сроков для девелопера Level Group.</span><span data-lang="en"><a href="../cases/level-group.html">ST8 BUILD — AI Master</a> — automated cost estimates and schedule control for developer Level Group.</span></li>
+<li><span data-lang="ru"><a href="../cases/unikfood.html">CHEFF AI</a> — AI-технолог для dark kitchen Unik Food: КБЖУ, ТТК, HACCP.</span><span data-lang="en"><a href="../cases/unikfood.html">CHEFF AI</a> — an AI process engineer for the dark kitchen Unik Food: nutrition facts, process specs, HACCP.</span></li>
+</ul>
+<p><span data-lang="ru">Полный список — на странице <a href="../cases/">«Кейсы»</a>.</span><span data-lang="en">See the full list on the <a href="../cases/">"Cases" page</a>.</span></p>
+
+<h2><span data-lang="ru">Итог</span><span data-lang="en">Bottom Line</span></h2>
+<p><span data-lang="ru">Автоматизация бизнеса с помощью ИИ работает лучше всего не как разовый проект «внедрить нейросеть», а как последовательный процесс: выбрать самое дорогое узкое место → запустить пилот на одной точке с зафиксированными KPI → расширить на весь бизнес после подтверждённого результата. Именно так устроены все 47 проектов ST8 AI — 0 из них не были доведены до результата.</span><span data-lang="en">Automating a business with AI works best not as a one-off "implement a neural network" project, but as a sequential process: identify the most expensive bottleneck → launch a pilot at one location with fixed KPIs → scale across the whole business after the result is confirmed. That's exactly how all 47 of ST8 AI's projects were structured — 0 of them failed to reach a result.</span></p>
+      <h3><span data-lang="ru">Смотрите также</span><span data-lang="en">See Also</span></h3>
+<ul>
+<li><a href="restoran-neyroseti.html"><span data-lang="ru">Автоматизация ресторана нейросетями</span><span data-lang="en">Automating a Restaurant with Neural Networks</span></a></li>
+<li><a href="ai-proizvodstvo.html"><span data-lang="ru">Внедрение AI в производство</span><span data-lang="en">Implementing AI in Manufacturing</span></a></li>
+<li><a href="../cases/"><span data-lang="ru">Все кейсы ST8 AI</span><span data-lang="en">All ST8 AI Cases</span></a></li>
+</ul>
+      <div class="cta-box">
+        <h3><span data-lang="ru">Готовы обсудить автоматизацию для своего бизнеса?</span><span data-lang="en">Ready to Discuss Automation for Your Business?</span></h3>
+        <p><span data-lang="ru">Расскажем, что конкретно можно внедрить у вас, и посчитаем окупаемость.</span><span data-lang="en">We'll explain exactly what can be implemented for you and calculate the payback.</span></p>
+        <a href="../index.html#lead-form" class="cta-btn"><span data-lang="ru">Оставить заявку →</span><span data-lang="en">Submit a Request →</span></a>
+      </div>
+    </article>
+  </main>
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+        <p><span data-lang="ru">Кастомные AI-решения для бизнеса. 47 проектов, 0 провалов. Гарантия результата по договору.</span><span data-lang="en">Custom AI solutions for business. 47 projects, 0 failures. Results guaranteed by contract.</span></p>
+        <div style="display:flex;gap:12px">
+          <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✈</a>
+          <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">☎</a>
+          <a href="mailto:kosmos686@gmail.com" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✉</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></h4>
+        <ul class="footer-links">
+          <li><a href="../horeca.html">HoReCa</a></li>
+          <li><a href="../proizvodstvo.html"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="../retail.html"><span data-lang="ru">Ритейл</span><span data-lang="en">Retail</span></a></li>
+          <li><a href="../logistika.html"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></a></li>
+          <li><a href="../ofisy.html"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices &amp; PM</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Компания</span><span data-lang="en">Company</span></h4>
+        <ul class="footer-links">
+          <li><a href="../about.html"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+          <li><a href="../cases/"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a></li>
+          <li><a href="../blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></li>
+          <li><a href="#"><span data-lang="ru">Карьера</span><span data-lang="en">Careers</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></h4>
+        <div class="footer-contact">
+          <p><strong>Alexey Gagarin</strong><br>CEO &amp; Co-founder<br><span style="font-size:12px" data-lang="ru">15+ лет в B2B-продажах</span><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
+          <p style="margin-top:8px"><a href="tel:+79856905252" target="_blank" rel="noopener noreferrer">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="ru">Разработка AI-систем</span><span style="font-size:12px" data-lang="en">AI Systems Development</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
+      <p style="font-size:11px;color:var(--gray-600)"><span data-lang="ru">ИП Попова Ю.Д. · ИНН 662607100653 · ОГРНИП 326965800048074 · Свердловская обл., г. Полевской</span><span data-lang="en">Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074 · Sverdlovsk region, Polevskoy</span></p>
+      <p>ST8 AI. <span data-lang="ru">Все права защищены.</span><span data-lang="en">All rights reserved.</span></p>
+      <p id="legalLine"><a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">Privacy Notice</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span></p>
+    </div>
+  </footer>
+
+  <script>
+    var PAGE_META = {
+      ru: { title: "Автоматизация бизнеса ИИ: с чего начать | ST8 AI", desc: "Автоматизация бизнеса с помощью искусственного интеллекта: с чего начать, как выбрать направление, сколько это стоит и как снизить риски пилота." },
+      en: { title: "Automating Your Business with AI: Where to Start | ST8 AI", desc: "Automating your business with artificial intelligence: where to start, how to choose a direction, how much it costs, and how to reduce pilot risk." }
+    };
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active',
+          (lang === 'ru' && (btn.id === 'btnRu' || btn.id === 'btnRuMobile')) ||
+          (lang === 'en' && (btn.id === 'btnEn' || btn.id === 'btnEnMobile'))
+        );
+      });
+      localStorage.setItem('st8-lang', lang);
+      if (PAGE_META[lang]) {
+        document.title = PAGE_META[lang].title;
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', PAGE_META[lang].desc);
+      }
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    var savedLang = localStorage.getItem('st8-lang') || 'ru';
+    setLang(savedLang);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    var MARKET_LABELS = {
+      ru: { ru: 'Россия', en: 'Russia' },
+      ae: { ru: 'ОАЭ', en: 'UAE' },
+      tr: { ru: 'Турция', en: 'Turkey' }
+    };
+    var MARKET_LEGAL = {
+      ru: '<a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="../legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="../legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+    };
+    function openMarketModal() { document.getElementById('marketModal').style.display = 'flex'; }
+    function closeMarketModal() { document.getElementById('marketModal').style.display = 'none'; }
+    var CONTACT_CHANNEL = {
+      ru: { url: 'https://t.me/Zzima686' },
+      ae: { url: 'https://wa.me/79856905252' },
+      tr: { url: 'https://wa.me/79856905252' }
+    };
+    function updateContactLinks(market) {
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      document.querySelectorAll('.contact-link').forEach(function(el) {
+        el.setAttribute('href', channel.url);
+      });
+    }
+    function setMarket(market) {
+      localStorage.setItem('st8-market', market);
+      var labelEl = document.getElementById('marketBtnLabel');
+      if (labelEl) {
+        labelEl.innerHTML = '<span data-lang="ru">' + MARKET_LABELS[market].ru + '</span><span data-lang="en">' + MARKET_LABELS[market].en + '</span>';
+      }
+      var legalEl = document.getElementById('legalLine');
+      if (legalEl) legalEl.innerHTML = MARKET_LEGAL[market];
+      setLang(market === 'ru' ? 'ru' : 'en');
+      updateContactLinks(market);
+      closeMarketModal();
+    }
+    var savedMarket = localStorage.getItem('st8-market');
+    if (savedMarket) { setMarket(savedMarket); }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.getElementById('hamburgerIcon').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
