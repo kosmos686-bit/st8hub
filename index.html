@@ -791,7 +791,7 @@
     .solution-card:hover .solution-toggle { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.2); color: var(--gold); }
     .solution-card.active .solution-toggle { transform: rotate(180deg); background: rgba(212,175,55,0.15); border-color: var(--gold); color: var(--gold); }
     .solution-detail {
-      max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, padding 0.4s ease;
+      max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
       opacity: 0; padding-top: 0;
     }
     .solution-card.active .solution-detail { opacity: 1; padding-top: 20px; }
@@ -1874,24 +1874,39 @@
     createParticles();
 
     // Solution accordion toggle
+    var solutionResizeObservers = new WeakMap();
+    function closeSolutionCard(c) {
+      c.classList.remove('active');
+      c.querySelector('.solution-detail').style.maxHeight = null;
+      var obs = solutionResizeObservers.get(c);
+      if (obs) { obs.disconnect(); solutionResizeObservers.delete(c); }
+    }
     function toggleSolution(card) {
       const isActive = card.classList.contains('active');
       document.querySelectorAll('.solution-card.active').forEach(function(c) {
-        if (c !== card) {
-          c.classList.remove('active');
-          c.querySelector('.solution-detail').style.maxHeight = null;
-        }
+        if (c !== card) closeSolutionCard(c);
       });
       if (isActive) {
-        card.classList.remove('active');
-        card.querySelector('.solution-detail').style.maxHeight = null;
+        closeSolutionCard(card);
       } else {
         card.classList.add('active');
         var detail = card.querySelector('.solution-detail');
+        var inner = card.querySelector('.solution-detail-inner');
         detail.style.maxHeight = detail.scrollHeight + 'px';
-        setTimeout(function() {
-          if (typeof lucide !== 'undefined') lucide.createIcons();
-        }, 50);
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        // Content height can still change after this point (web font swap,
+        // language switch, window resize) — keep max-height in sync while open.
+        if (typeof ResizeObserver !== 'undefined') {
+          var obs = new ResizeObserver(function() {
+            detail.style.maxHeight = detail.scrollHeight + 'px';
+          });
+          obs.observe(inner);
+          solutionResizeObservers.set(card, obs);
+        } else {
+          setTimeout(function() {
+            detail.style.maxHeight = detail.scrollHeight + 'px';
+          }, 50);
+        }
       }
     }
 
