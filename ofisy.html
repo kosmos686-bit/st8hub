@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI для офисов и управляющих компаний — автоматизация документооборота | ST8 AI</title>
+  <meta name="description" content="Внедряем ИИ в офисах и УК: AI-ассистент для сотрудников, распознавание документов за 2 секунды, маршрутизация задач в 5 раз быстрее. Интеграция с Битрикс24, amoCRM. KPI фиксируем до старта проекта.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI for Offices & Property Management — Document Workflow Automation | ST8 AI">
+  <meta property="og:description" content="AI assistant for staff, document recognition in 2 seconds, task routing 5x faster.">
+  <meta property="og:url" content="https://st8-ai.ru/ofisy.html">
+  <meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI for Offices & Property Management — Document Workflow Automation | ST8 AI">
+  <meta name="twitter:description" content="AI assistant for staff, document recognition in 2 seconds, task routing 5x faster.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://st8-ai.ru/#organization",
+        "name": "ST8 AI",
+        "url": "https://st8-ai.ru",
+        "logo": "https://st8-ai.ru/og-image.jpg",
+        "description": "ST8 AI внедряет искусственный интеллект в ресторанах, на производстве, в ритейле и логистике. 47 проектов, 0 провалов. Окупаемость 2-3 месяца.",
+        "email": "kosmos686@gmail.com",
+        "telephone": "+7-985-690-52-52",
+        "sameAs": ["https://t.me/Zzima686", "https://wa.me/79856905252"],
+        "founder": [
+          {"@type": "Person", "name": "Алексей Гагарин", "jobTitle": "CEO & Co-founder"},
+          {"@type": "Person", "name": "Юлия Попова", "jobTitle": "Co-founder"}
+        ],
+        "areaServed": ["RU", "AE", "TR"]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://st8-ai.ru/ofisy.html#service",
+        "name": "AI-автоматизация для офисов и управляющих компаний",
+        "provider": { "@id": "https://st8-ai.ru/#organization" },
+        "areaServed": ["RU", "AE", "TR"],
+        "description": "AI-ассистент для сотрудников, распознавание документов за 2 секунды, маршрутизация задач в 5 раз быстрее.",
+        "serviceType": ["AI Assistant", "Document Recognition", "Task Routing"]
+      }
+    ]
+  }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #d4af37; --gold-light: #f0d78c; --gold-dark: #a08020;
+      --black: #000000; --dark: #0a0a0a; --dark-card: #111111;
+      --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563;
+    }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--black); color: #fff;
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    @keyframes blurFadeUp {
+      from { opacity: 0; filter: blur(20px); transform: translateY(40px); }
+      to { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+    .animate-blur-fade-up { opacity: 0; animation: blurFadeUp 1s ease-out forwards; }
+    .liquid-glass {
+      background: rgba(255,255,255,0.01); background-blend-mode: luminosity;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      border: none; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+      position: relative; overflow: hidden; cursor: pointer; transition: all 0.3s ease;
+    }
+    .liquid-glass:hover {
+      background: rgba(255,255,255,0.05);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), 0 0 20px rgba(212,175,55,0.1);
+    }
+    .liquid-glass::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+    .navbar {
+      position: relative; z-index: 50; display: flex;
+      justify-content: space-between; align-items: center; padding: 16px 16px;
+    }
+    @media(min-width:640px){ .navbar { padding: 16px 24px; } }
+    @media(min-width:768px){ .navbar { padding: 24px 48px; } }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+    .logo-icon {
+      width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: var(--gold); letter-spacing: -0.02em;
+    }
+    .logo-text { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
+    .logo-text span { color: var(--gold); font-weight: 300; }
+    .nav-links { display: none; }
+    @media(min-width:1024px){ .nav-links { display: flex; align-items: center; gap: 32px; } }
+    .nav-link {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 400;
+      transition: color 0.3s ease; position: relative;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link.active { color: var(--gold); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-hamburger {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; background: none; border: none; cursor: pointer;
+    }
+    @media(min-width:1024px){ .btn-hamburger { display: none; } }
+    .hamburger-icon { transition: all 0.5s ease-out; }
+    .hamburger-icon.open { transform: rotate(180deg); }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { transition: all 0.5s ease-out; }
+    .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
+    .hamburger-icon:not(.open) .icon-x { opacity: 0; transform: scale(0.5); }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switch {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px; padding: 4px;
+    }
+    .lang-btn {
+      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .lang-btn.active { background: var(--gold); color: #000; box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+    .lang-btn:hover:not(.active) { color: #fff; }
+    span[data-lang] { display: none; }
+    html[lang="ru"] span[data-lang="ru"] { display: inline; }
+    html[lang="en"] span[data-lang="en"] { display: inline; }
+    h4[data-lang], p[data-lang], strong[data-lang], a[data-lang] { display: none; }
+    html[lang="ru"] strong[data-lang="ru"] { display: inline; }
+    html[lang="en"] strong[data-lang="en"] { display: inline; }
+    html[lang="ru"] a[data-lang="ru"] { display: inline; }
+    html[lang="en"] a[data-lang="en"] { display: inline; }
+    html[lang="ru"] h4[data-lang="ru"] { display: block; }
+    html[lang="en"] h4[data-lang="en"] { display: block; }
+    html[lang="ru"] p[data-lang="ru"] { display: block; }
+    html[lang="en"] p[data-lang="en"] { display: block; }
+
+    .mobile-menu {
+      position: absolute; top: 72px; left: 0; right: 0; z-index: 40;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+      padding: 16px; transform: translateY(-16px); opacity: 0;
+      pointer-events: none; transition: all 0.5s ease-out;
+    }
+    .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-link {
+      display: block; padding: 12px 16px; color: rgba(255,255,255,0.8);
+      text-decoration: none; font-size: 15px; border-radius: 8px;
+      transition: all 0.3s ease; opacity: 0; transform: translateX(-20px);
+    }
+    .mobile-menu.open .mobile-menu-link { opacity: 1; transform: translateX(0); }
+    .mobile-menu-link:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .mobile-menu-actions {
+      display: none; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08); gap: 12px;
+    }
+    @media(max-width:639px){ .mobile-menu-actions { display: flex; } }
+
+    .pricing-btn {
+      width: 100%; display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 14px; border-radius: 9999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease;
+    }
+    .pricing-btn-primary { background: #fff; color: #000; }
+    .pricing-btn-primary:hover { background: var(--gold); }
+    .pricing-btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .pricing-btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .roi-result-note { font-size: 12px; color: var(--gray-500); margin-top: 12px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #000; font-size: 15px; font-weight: 600;
+      padding: 12px 28px; border-radius: 9999px; text-decoration: none;
+      border: none; cursor: pointer; transition: all 0.3s ease;
+    }
+    .btn-primary:hover { background: var(--gold); color: #000; transform: translateY(-2px); box-shadow: 0 10px 40px rgba(212,175,55,0.3); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: #fff; font-size: 15px; font-weight: 500;
+      padding: 12px 28px; border-radius: 9999px; text-decoration: none; border: none;
+    }
+
+    .page-wrap { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+    @media(min-width:640px){ .page-wrap { padding: 0 24px; } }
+    @media(min-width:768px){ .page-wrap { padding: 0 48px; } }
+
+    .page-hero { padding: 56px 0 40px; }
+    @media(min-width:768px){ .page-hero { padding: 88px 0 56px; } }
+    .section-label {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--gold); font-weight: 600; margin-bottom: 16px;
+    }
+    .breadcrumb { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--gray-500); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .hero-title {
+      font-size: 32px; font-weight: 400; letter-spacing: -0.04em;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    @media(min-width:640px){ .hero-title { font-size: 44px; margin-bottom: 20px; } }
+    @media(min-width:768px){ .hero-title { font-size: 52px; } }
+    .hero-title .highlight { color: var(--gold); font-weight: 300; }
+    .hero-desc {
+      font-size: 16px; color: var(--gray-400); line-height: 1.6;
+      margin-bottom: 24px; max-width: 640px;
+    }
+    @media(min-width:640px){ .hero-desc { font-size: 18px; } }
+    .solution-metric {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
+      font-weight: 600; color: var(--gold); background: rgba(212,175,55,0.08);
+      padding: 6px 12px; border-radius: 20px;
+    }
+
+    .industry-content {
+      background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px; padding: 28px 24px; margin-bottom: 24px;
+    }
+    @media(min-width:640px){ .industry-content { padding: 40px; } }
+    .solution-detail-inner h4 {
+      font-size: 13px; font-weight: 600; color: var(--gold); margin: 16px 0 10px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    @media(min-width:640px){ .solution-detail-inner h4 { font-size: 14px; margin: 24px 0 12px; } }
+    .solution-detail-inner h4:first-child { margin-top: 0; }
+    .solution-detail-inner ul { list-style: none; padding: 0; margin: 0 0 12px; }
+    .solution-detail-inner ul li {
+      font-size: 14px; color: var(--gray-400); line-height: 1.7;
+      padding-left: 18px; position: relative; margin-bottom: 8px;
+    }
+    @media(min-width:640px){ .solution-detail-inner ul li { font-size: 15px; margin-bottom: 10px; } }
+    .solution-detail-inner ul li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+    }
+    .solution-detail-inner ul li strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .solution-detail-inner p { font-size: 14px; color: var(--gray-400); line-height: 1.7; margin-bottom: 12px; }
+    @media(min-width:640px){ .solution-detail-inner p { font-size: 15px; } }
+    .solution-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      margin: 16px 0; padding: 16px; background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.08); border-radius: 12px;
+    }
+    @media(min-width:640px){ .solution-stats { gap: 12px; padding: 20px; margin: 20px 0; } }
+    .solution-stat { text-align: center; }
+    .solution-stat-val { display: block; font-size: 20px; font-weight: 300; color: var(--gold); letter-spacing: -0.02em; }
+    @media(min-width:640px){ .solution-stat-val { font-size: 26px; } }
+    .solution-stat-label { display: block; font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+    @media(min-width:640px){ .solution-stat-label { font-size: 12px; } }
+    .solution-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #000; font-size: 14px; font-weight: 600;
+      padding: 12px 24px; border-radius: 9999px; text-decoration: none;
+      margin-top: 8px; transition: all 0.3s ease; border: none; cursor: pointer;
+    }
+    .solution-cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.3); }
+    .legal-note { font-size: 11px; color: var(--gray-600); line-height: 1.6; margin-top: 12px; }
+
+    .related-heading { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-500); margin: 40px 0 16px; }
+    .related-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 48px; }
+    @media(min-width:640px){ .related-grid { grid-template-columns: repeat(2, 1fr); } }
+    .related-card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 18px 20px; transition: all 0.3s ease;
+    }
+    .related-card:hover { border-color: rgba(212,175,55,0.25); transform: translateY(-2px); }
+    .related-card .related-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .related-card .related-metric { font-size: 12px; color: var(--gold); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* FOOTER — identical structure/classes to index.html's footer */
+    .footer { position: relative; z-index: 10; background: var(--black); border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 16px 32px; margin-top: 40px; }
+    @media(min-width:640px){ .footer { padding: 64px 24px 32px; } }
+    @media(min-width:768px){ .footer { padding: 80px 48px 32px; } }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 48px; }
+    @media(min-width:768px){ .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; } }
+    .footer-brand { max-width: 320px; }
+    .footer-brand .logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: var(--gray-400); line-height: 1.6; margin-bottom: 20px; }
+    .footer-heading { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-500); margin-bottom: 20px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-contact { font-size: 14px; color: var(--gray-400); line-height: 1.8; }
+    .footer-contact a { color: var(--gray-400); text-decoration: none; transition: color 0.3s ease; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+    @media(min-width:640px){ .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
+    .footer-bottom p { font-size: 12px; color: var(--gray-600); }
+    .footer-bottom a.legal-link { color: var(--gray-500); text-decoration: underline; }
+    .footer-bottom a.legal-link:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+    <nav class="navbar">
+      <a href="/" class="logo animate-blur-fade-up" style="animation-delay:0ms">
+        <div class="logo-icon">ST8</div>
+        <div class="logo-text">ST8<span>AI</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="/#solutions" class="nav-link active animate-blur-fade-up" style="animation-delay:100ms"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+        <a href="/#pricing" class="nav-link animate-blur-fade-up" style="animation-delay:150ms"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+        <a href="/#roi" class="nav-link animate-blur-fade-up" style="animation-delay:200ms"><span data-lang="ru">Калькулятор</span><span data-lang="en">Calculator</span></a>
+        <a href="/#how" class="nav-link animate-blur-fade-up" style="animation-delay:250ms"><span data-lang="ru">Как работает</span><span data-lang="en">How It Works</span></a>
+        <a href="/#contact" class="nav-link animate-blur-fade-up" style="animation-delay:300ms"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-switch liquid-glass animate-blur-fade-up" id="marketBtn" style="animation-delay:280ms;padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
+          <i data-lucide="globe" style="width:14px;height:14px;color:var(--gold)"></i>
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600;margin-left:6px"><span data-lang="ru">Россия</span><span data-lang="en">International</span></span>
+        </button>
+        <div class="lang-switch animate-blur-fade-up" style="animation-delay:300ms">
+          <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-hamburger liquid-glass animate-blur-fade-up" id="hamburger" style="animation-delay:350ms" onclick="toggleMenu()">
+          <div class="hamburger-icon" id="hamburgerIcon">
+            <i data-lucide="menu" class="icon-menu" style="width:20px;height:20px;position:absolute"></i>
+            <i data-lucide="x" class="icon-x" style="width:20px;height:20px;position:absolute"></i>
+          </div>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/#solutions" class="mobile-menu-link" style="transition-delay:50ms" onclick="toggleMenu()"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a>
+      <a href="/#pricing" class="mobile-menu-link" style="transition-delay:100ms" onclick="toggleMenu()"><span data-lang="ru">Тарифы</span><span data-lang="en">Pricing</span></a>
+      <a href="/#roi" class="mobile-menu-link" style="transition-delay:150ms" onclick="toggleMenu()"><span data-lang="ru">Калькулятор ROI</span><span data-lang="en">ROI Calculator</span></a>
+      <a href="/#how" class="mobile-menu-link" style="transition-delay:200ms" onclick="toggleMenu()"><span data-lang="ru">Как работает</span><span data-lang="en">How It Works</span></a>
+      <a href="/#contact" class="mobile-menu-link" style="transition-delay:250ms" onclick="toggleMenu()"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></a>
+      <div class="mobile-menu-actions">
+        <div class="lang-switch" style="flex:1;justify-content:center">
+          <button class="lang-btn active" id="btnRuMobile" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEnMobile" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKET SELECTOR MODAL -->
+    <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+      <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
+        <div class="section-label" style="text-align:center"><span data-lang="ru">Выберите рынок</span><span data-lang="en">Choose Your Market</span></div>
+        <h3 style="font-size:22px;text-align:center;margin-bottom:24px;font-weight:400"><span data-lang="ru">Где вы работаете?</span><span data-lang="en">Where Are You Based?</span></h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="ru">Россия</span><span data-lang="en">Russia</span></button>
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="ru">ОАЭ</span><span data-lang="en">UAE</span></button>
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="ru">Турция</span><span data-lang="en">Turkey</span></button>
+        </div>
+        <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="ru">Можно изменить в любой момент вверху страницы</span><span data-lang="en">You can change this anytime at the top of the page</span></p>
+      </div>
+    </div>
+
+  <div class="page-wrap page-hero">
+    <div class="breadcrumb reveal"><a href="/">ST8 AI</a> / <a href="/#solutions"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></a> / <span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices & PM</span></div>
+    <div class="section-label reveal"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices & PM</span></div>
+    <h1 class="hero-title reveal"><span data-lang="ru">AI-автоматизация для офисов и управляющих компаний</span><span data-lang="en">AI Automation for Offices & Property Management</span></h1>
+    <p class="hero-desc reveal"><span data-lang="ru">Автоматизация документооборота, AI-ассистенты, распознавание сканов, маршрутизация задач, аналитика.</span><span data-lang="en">Document workflow automation, AI assistants, scan recognition, task routing, analytics.</span></p>
+    <span class="solution-metric reveal"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее*</span><span data-lang="en">5x faster*</span></span>
+  </div>
+
+  <div class="page-wrap">
+    <div class="industry-content reveal">
+      <div class="solution-detail-inner">
+        <h4 data-lang="ru">Что входит в решение</h4><h4 data-lang="en">What's Included</h4>
+        <ul>
+              <li><span data-lang="ru">AI-ассистент — отвечает на вопросы сотрудников, ищет документы, ставит задачи</span><span data-lang="en">AI assistant — answers employee questions, finds documents, creates tasks</span></li>
+              <li><strong data-lang="ru">Распознавание документов</strong><strong data-lang="en">Document Recognition</strong> — <span data-lang="ru">сканы, PDF, фото → структурированные данные за 2 сек</span><span data-lang="en">scans, PDF, photos → structured data in 2 seconds</span></li>
+              <li><strong data-lang="ru">Маршрутизация задач</strong><strong data-lang="en">Task Routing</strong> — <span data-lang="ru">AI распределяет заявки между исполнителями по загрузке</span><span data-lang="en">AI distributes requests among performers based on workload</span></li>
+              <li><strong data-lang="ru">Аналитика</strong><strong data-lang="en">Analytics</strong> — <span data-lang="ru">дашборды, прогнозы, автоматические отчёты для руководства</span><span data-lang="en">dashboards, forecasts, automated reports for management</span></li>
+              <li><strong data-lang="ru">Интеграция</strong><strong data-lang="en">Integration</strong> — <span data-lang="ru">Битрикс24, amoCRM, 1С, SAP, Google Workspace</span><span data-lang="en">Salesforce, HubSpot, SAP, Microsoft 365, Google Workspace</span></li>
+        </ul>
+        <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
+        <p><span data-lang="ru">Подключаемся к вашей CRM/ECM за 1 день. AI обучается на ваших документах и процессах. Секретарь перестаёт отвечать на одни и те же вопросы 20 раз в день.</span><span data-lang="en">We connect to your CRM/ECM in 1 day. AI trains on your documents and processes. The secretary stops answering the same questions 20 times a day.</span></p>
+        <h4 data-lang="ru">Результаты клиентов*</h4><h4 data-lang="en">Client Results*</h4>
+        <div class="solution-stats">
+              <div class="solution-stat"><span class="solution-stat-val">5x</span><span class="solution-stat-label" data-lang="ru">Быстрее</span><span class="solution-stat-label" data-lang="en">Faster</span></div>
+              <div class="solution-stat"><span class="solution-stat-val">-70%</span><span class="solution-stat-label" data-lang="ru">Рутина</span><span class="solution-stat-label" data-lang="en">Routine</span></div>
+              <div class="solution-stat"><span class="solution-stat-val">+35%</span><span class="solution-stat-label" data-lang="ru">Эффективность</span><span class="solution-stat-label" data-lang="en">Efficiency</span></div>
+        </div>
+        <p class="legal-note"><span data-lang="ru">* Усреднённые показатели по проектам направления Офисы и УК, не гарантия одинакового результата для другого бизнеса.</span><span data-lang="en">* Averaged results across Offices & PM projects — not a guarantee of identical results for another business.</span></p>
+        <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
+      </div>
+    </div>
+
+    <h2 class="related-heading reveal"><span data-lang="ru">Смотрите также</span><span data-lang="en">See Also</span></h2>
+    <div class="related-grid">
+        <a href="/horeca.html" class="related-card reveal"><div class="related-name"><span data-lang="ru">HoReCa</span><span data-lang="en">HoReCa</span></div><div class="related-metric"><span data-lang="ru">Списания -35%*</span><span data-lang="en">Write-offs -35%*</span></div></a>
+        <a href="/proizvodstvo.html" class="related-card reveal"><div class="related-name"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></div><div class="related-metric"><span data-lang="ru">Точность 99.7%*</span><span data-lang="en">Accuracy 99.7%*</span></div></a>
+        <a href="/retail.html" class="related-card reveal"><div class="related-name"><span data-lang="ru">Ритейл и E-commerce</span><span data-lang="en">Retail & E-commerce</span></div><div class="related-metric"><span data-lang="ru">Прогноз 94%*</span><span data-lang="en">Forecast 94%*</span></div></a>
+        <a href="/logistika.html" class="related-card reveal"><div class="related-name"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></div><div class="related-metric"><span data-lang="ru">Топливо -25%*</span><span data-lang="en">Fuel -25%*</span></div></a>
+    </div>
+  </div>
+
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+        <p><span data-lang="ru">Кастомные AI-решения для бизнеса. 47 проектов, 0 провалов. Измеримый результат по договору.</span><span data-lang="en">Custom AI solutions for business. 47 projects, 0 failures. Measurable results by contract.</span></p>
+        <div style="display:flex;gap:12px">
+          <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="send" style="width:18px;height:18px"></i></a>
+          <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="message-circle" style="width:18px;height:18px"></i></a>
+          <a href="tel:+79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="phone" style="width:18px;height:18px"></i></a>
+          <a href="mailto:kosmos686@gmail.com" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="mail" style="width:18px;height:18px"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></h4>
+        <ul class="footer-links">
+          <li><a href="/horeca.html">HoReCa</a></li>
+          <li><a href="/proizvodstvo.html"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="/retail.html"><span data-lang="ru">Ритейл</span><span data-lang="en">Retail</span></a></li>
+          <li><a href="/logistika.html"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></a></li>
+          <li><a href="/ofisy.html"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices & PM</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Компания</span><span data-lang="en">Company</span></h4>
+        <ul class="footer-links">
+          <li><a href="/about.html"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+          <li><a href="/cases/"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a></li>
+          <li><a href="/blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></li>
+          <li><a href="/#"><span data-lang="ru">Карьера</span><span data-lang="en">Careers</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="ru">Контакты</span><span data-lang="en">Contacts</span></h4>
+        <div class="footer-contact">
+          <p><strong>Alexey Gagarin</strong><br>CEO & Co-founder<br><span style="font-size:12px" data-lang="ru">15+ лет в B2B-продажах</span><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
+          <p style="margin-top:8px"><a href="tel:+79856905252" target="_blank" rel="noopener noreferrer">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="ru">Разработка AI-систем</span><span style="font-size:12px" data-lang="en">AI Systems Development</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
+      <p id="legalRequisites" style="font-size:11px;color:var(--gray-600)"><span data-lang="ru">ИП Попова Ю.Д. · ИНН 662607100653 · ОГРНИП 326965800048074 · Свердловская обл., г. Полевской</span><span data-lang="en">Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074 · Sverdlovsk region, Polevskoy</span></p>
+      <p>ST8 AI. <span data-lang="ru">Все права защищены.</span><span data-lang="en">All rights reserved.</span></p>
+      <p id="legalLine"><a href="/legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">Privacy Notice</span></a> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span></p>
+    </div>
+  </footer>
+
+<script>
+    var PAGE_META = {
+      ru: { title: "AI для офисов и управляющих компаний — автоматизация документооборота | ST8 AI", desc: "Внедряем ИИ в офисах и УК: AI-ассистент для сотрудников, распознавание документов за 2 секунды, маршрутизация задач в 5 раз быстрее. Интеграция с Битрикс24, amoCRM. KPI фиксируем до старта проекта." },
+      en: { title: "AI for Offices & Property Management — Document Workflow Automation | ST8 AI", desc: "We bring AI to offices and PM companies: AI assistant for staff, document recognition in 2 seconds, task routing 5x faster. Integration with Salesforce, HubSpot, Microsoft 365. KPIs fixed before project start." }
+    };
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active',
+          (lang === 'ru' && (btn.id === 'btnRu' || btn.id === 'btnRuMobile')) ||
+          (lang === 'en' && (btn.id === 'btnEn' || btn.id === 'btnEnMobile'))
+        );
+      });
+      localStorage.setItem('st8-lang', lang);
+      if (PAGE_META[lang]) {
+        document.title = PAGE_META[lang].title;
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', PAGE_META[lang].desc);
+      }
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    var savedLang = localStorage.getItem('st8-lang') || 'ru';
+    setLang(savedLang);
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    var MARKET_LABELS = {
+      ru: { ru: 'Россия', en: 'Russia' },
+      ae: { ru: 'ОАЭ', en: 'UAE' },
+      tr: { ru: 'Турция', en: 'Turkey' }
+    };
+    var MARKET_LEGAL = {
+      ru: '<a href="/legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="/legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="/legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+    };
+    function openMarketModal() { document.getElementById('marketModal').style.display = 'flex'; }
+    function closeMarketModal() { document.getElementById('marketModal').style.display = 'none'; }
+    var CONTACT_CHANNEL = {
+      ru: { url: 'https://t.me/Zzima686', icon: 'send' },
+      ae: { url: 'https://wa.me/79856905252', icon: 'message-circle' },
+      tr: { url: 'https://wa.me/79856905252', icon: 'message-circle' }
+    };
+    function updateContactLinks(market) {
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      document.querySelectorAll('.contact-link').forEach(function(el) {
+        el.setAttribute('href', channel.url);
+        var icon = el.querySelector('i[data-lucide]');
+        if (icon) icon.setAttribute('data-lucide', channel.icon);
+      });
+      document.querySelectorAll('.contact-link-label').forEach(function(el) {
+        if (market === 'ru') {
+          el.innerHTML = '<span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span>';
+        } else {
+          el.innerHTML = '<span data-lang="ru">Написать в WhatsApp</span><span data-lang="en">Message on WhatsApp</span>';
+        }
+      });
+    }
+    function setMarket(market) {
+      localStorage.setItem('st8-market', market);
+      window.currentMarket = market;
+      var labelEl = document.getElementById('marketBtnLabel');
+      if (labelEl) {
+        labelEl.innerHTML = '<span data-lang="ru">' + MARKET_LABELS[market].ru + '</span><span data-lang="en">' + MARKET_LABELS[market].en + '</span>';
+      }
+      var legalEl = document.getElementById('legalLine');
+      if (legalEl) legalEl.innerHTML = MARKET_LEGAL[market];
+      setLang(market === 'ru' ? 'ru' : 'en');
+      updateContactLinks(market);
+      closeMarketModal();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    var savedMarket = localStorage.getItem('st8-market');
+    if (savedMarket) { setMarket(savedMarket); }
+
+    function toggleMenu() {
+      var menu = document.getElementById('mobileMenu');
+      var icon = document.getElementById('hamburgerIcon');
+      menu.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+    function openLegalModal() { window.location.href = '/legal.html'; }
+</script>
+</body>
+</html>
