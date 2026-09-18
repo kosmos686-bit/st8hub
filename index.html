@@ -105,7 +105,7 @@
             "name": "Что если решение не окупится?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Целевые KPI фиксируются в договоре до начала работ. Если не достигаем — предусмотрен возврат средств, это пункт контракта."
+              "text": "Целевые KPI фиксируются в договоре до начала работ. После внедрения мы прозрачно показываем фактический эффект на данных клиента."
             }
           },
           {
@@ -838,6 +838,13 @@
     }
     @media(min-width:640px){ .solution-cta-btn { font-size: 14px; padding: 12px 24px; margin-bottom: 0; } }
     .solution-cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.3); }
+    .solution-more-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--gray-400); font-size: 13px; font-weight: 500;
+      text-decoration: none; margin-top: 8px; margin-left: 12px; transition: color 0.3s ease;
+    }
+    @media(min-width:640px){ .solution-more-link { font-size: 14px; } }
+    .solution-more-link:hover { color: var(--gold); }
 
     /* Project CTA button */
     .project-card { text-decoration: none; color: inherit; }
@@ -946,7 +953,7 @@
             <div class="stat-item"><i data-lucide="trending-up"></i><span><span data-lang="ru">Окупаемость <span class="stat-value">2-3 мес</span></span><span data-lang="en">ROI <span class="stat-value">2-3 months</span></span></span></div>
           </div>
           <h1 class="hero-title animate-blur-fade-up" style="animation-delay:400ms"><span data-lang="ru">Автоматизация бизнеса<br><span class="highlight">нейросетями</span></span><span data-lang="en">Business Automation<br><span class="highlight">with Neural Networks</span></span></h1>
-          <p class="hero-desc animate-blur-fade-up" style="animation-delay:500ms"><span data-lang="ru">Цифровой администратор, предиктивные закупки и computer vision — всё работает как единый организм. Без остановки бизнеса, с гарантией результата по договору.</span><span data-lang="en">Digital host, predictive purchasing and computer vision — everything works as a single organism. Without stopping the business, with a guaranteed result by contract.</span></p>
+          <p class="hero-desc animate-blur-fade-up" style="animation-delay:500ms"><span data-lang="ru">Цифровой администратор, предиктивные закупки и computer vision — всё работает как единый организм. Без остановки бизнеса, с измеримым результатом пилота.</span><span data-lang="en">Digital host, predictive purchasing and computer vision — everything works as a single organism. Without stopping the business, with a guaranteed result by contract.</span></p>
           <div class="hero-ctas">
             <a href="#roi" class="btn-primary animate-blur-fade-up" style="animation-delay:600ms"><i data-lucide="play" style="width:18px;height:18px;fill:currentColor"></i><span data-lang="ru">Рассчитать экономию</span><span data-lang="en">Calculate Savings</span></a>
             <a href="#solutions" class="btn-secondary liquid-glass animate-blur-fade-up" style="animation-delay:700ms"><span data-lang="ru">Узнать больше</span><span data-lang="en">Learn More</span></a>
@@ -1008,8 +1015,8 @@
           <div class="roi-results">
             <div class="roi-result-value" id="roiTotal">2 340 000 <span data-lang="ru">руб.</span><span data-lang="en">EUR</span></div>
             <div class="roi-result-label"><span data-lang="ru">ориентировочная экономия за 12 месяцев*</span><span data-lang="en">estimated savings per 12 months*</span></div>
-            <a href="#contact" class="btn-primary" style="width:100%;justify-content:center"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Получить персональное КП</span><span data-lang="en">Get Personal Quote</span></a>
-            <div class="roi-result-note"><span data-lang="ru">* Расчёт носит ориентировочный характер и основан на усреднённых показателях наших проектов (снижение no-show, экономия на закупках, рост среднего чека, сокращение списаний). Точные цифры фиксируются в договоре после аудита.</span><span data-lang="en">* This is an estimate based on averaged results across our projects (no-show reduction, procurement savings, check growth, write-off reduction). Exact figures are set in the contract after the audit.</span></div>
+            <button type="button" onclick="openLeadForm('roi')" class="btn-primary" style="width:100%;justify-content:center"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Получить персональное КП</span><span data-lang="en">Get Personal Quote</span></button>
+            <div class="roi-result-note"><span data-lang="ru">* Расчёт носит ориентировочный характер и основан на усреднённых показателях наших проектов (снижение no-show, экономия на закупках, рост среднего чека, сокращение списаний). Целевые показатели и методика их оценки согласовываются после аудита.</span><span data-lang="en">* This is an estimate based on averaged results across our projects (no-show reduction, procurement savings, check growth, write-off reduction). Exact figures are set in the contract after the audit.</span></div>
           </div>
         </div>
       </div>
@@ -1052,6 +1059,7 @@
               <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label">No-show</span></div>
             </div>
             <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
+            <a href="/horeca.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><span data-lang="en">Read Full Page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
           </div>
         </div>
       </div>
@@ -1084,6 +1092,7 @@
               <div class="solution-stat"><span class="solution-stat-val">-60%</span><span class="solution-stat-label" data-lang="ru">Брак</span><span class="solution-stat-label" data-lang="en">Defects</span></div>
             </div>
             <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
+            <a href="/proizvodstvo.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><span data-lang="en">Read Full Page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
           </div>
         </div>
       </div>
@@ -1116,6 +1125,7 @@
               <div class="solution-stat"><span class="solution-stat-val">+22%</span><span class="solution-stat-label" data-lang="ru">Оборот</span><span class="solution-stat-label" data-lang="en">Turnover</span></div>
             </div>
             <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
+            <a href="/retail.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><span data-lang="en">Read Full Page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
           </div>
         </div>
       </div>
@@ -1148,6 +1158,7 @@
               <div class="solution-stat"><span class="solution-stat-val">+18%</span><span class="solution-stat-label" data-lang="ru">Грузооборот</span><span class="solution-stat-label" data-lang="en">Cargo turnover</span></div>
             </div>
             <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
+            <a href="/logistika.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><span data-lang="en">Read Full Page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
           </div>
         </div>
       </div>
@@ -1180,6 +1191,7 @@
               <div class="solution-stat"><span class="solution-stat-val">+35%</span><span class="solution-stat-label" data-lang="ru">Эффективность</span><span class="solution-stat-label" data-lang="en">Efficiency</span></div>
             </div>
             <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></span></a>
+            <a href="/ofisy.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><span data-lang="en">Read Full Page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
           </div>
         </div>
       </div>
@@ -1204,7 +1216,7 @@
               <li><strong data-lang="ru">Интеграция систем</strong><strong data-lang="en">System Integration</strong> — <span data-lang="ru">связываем то, что не хотит работать вместе</span><span data-lang="en">we connect what doesn't want to work together</span></li>
             </ul>
             <h4 data-lang="ru">Как это работает</h4><h4 data-lang="en">How It Works</h4>
-            <p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. Условия по гарантии KPI фиксируются в договоре по каждому проекту индивидуально.</span><span data-lang="en">You describe the task — we audit and propose a solution in 2-3 days. Development from 2 weeks. KPI guarantee terms are fixed in the contract individually for each project.</span></p>
+            <p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. До запуска фиксируем исходные показатели и KPI проекта. После внедрения оцениваем фактический эффект на данных клиента.</span><span data-lang="en">You describe the task — we audit and propose a solution in 2-3 days. Development from 2 weeks. KPI guarantee terms are fixed in the contract individually for each project.</span></p>
             <h4 data-lang="ru">Почему ST8 AI</h4><h4 data-lang="en">Why ST8 AI</h4>
             <div class="solution-stats">
               <div class="solution-stat"><span class="solution-stat-val">47</span><span class="solution-stat-label" data-lang="ru">Проектов</span><span class="solution-stat-label" data-lang="en">Projects</span></div>
@@ -1327,7 +1339,7 @@
             </div>
             <div class="kitchen-ai-msg">
               <i data-lucide="sparkles" style="width:14px;height:14px"></i>
-              <span data-lang="ru">AI: приготовить 4 порции батчем — экономия 18 мин</span><span data-lang="en">AI: batch 4 portions — save 18 min</span>
+              <span data-lang="ru">AI: приготовить порции батчем — экономия времени</span><span data-lang="en">AI: batch portions — save time</span>
             </div>
             <div class="kitchen-station">
               <span class="station-label" data-lang="ru">Холодный цех</span><span class="station-label" data-lang="en">Cold Kitchen</span>
@@ -1335,7 +1347,7 @@
             </div>
             <div class="kitchen-ai-msg">
               <i data-lucide="sparkles" style="width:14px;height:14px"></i>
-              <span data-lang="ru">AI: подготовить 6 поке к пику 13:00–14:00</span><span data-lang="en">AI: prep 6 poke for peak 13:00–14:00</span>
+              <span data-lang="ru">AI: подготовить блюда к пиковой нагрузке</span><span data-lang="en">AI: prep dishes for peak load</span>
             </div>
           </div>
         </div>
@@ -1348,7 +1360,7 @@
             </div>
           </div>
           <h3 class="project-title">ST8 Dark Intelligence</h3>
-          <p class="project-desc"><span data-lang="ru">AI-планирование производства. Прогнозирует пиковые часы, оптимизирует батч-приготовление. Точность 94%. Интеграция с iiko и складом.</span><span data-lang="en">AI production planning. Predicts peak hours, optimizes batch cooking. 94% accuracy. Integration with Foodics and warehouse. <em>Case from Russia — we adapt the same solution for your market.</em></span></p>
+          <p class="project-desc"><span data-lang="ru">AI-планирование производства. Прогнозирует пиковые часы, оптимизирует батч-приготовление. Интеграция с iiko и складом.</span><span data-lang="en">AI production planning. Predicts peak hours, optimizes batch cooking. Integration with Foodics and warehouse. <em>Case from Russia — we adapt the same solution for your market.</em></span></p>
           <div class="project-tags">
             <span class="project-tag" data-lang="ru">Прогноз спроса</span><span class="project-tag" data-lang="en">Demand Forecast</span>
             <span class="project-tag" data-lang="ru">Оптимизация цеха</span><span class="project-tag" data-lang="en">Kitchen Optimization</span>
@@ -1467,8 +1479,8 @@
     <div class="how-grid">
       <div class="how-step reveal">
         <div class="how-number"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
-        <h3 class="how-title"><span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span></h3>
-        <p class="how-desc"><span data-lang="ru">Целевые показатели фиксируются в договоре. Условия возврата — по договору, если показатели не достигнуты</span><span data-lang="en">Target metrics are fixed in the contract. Refund terms apply per the contract if targets aren't met</span></p>
+        <h3 class="how-title"><span data-lang="ru">KPI пилота фиксируем до запуска</span><span data-lang="en">KPI Guarantee</span></h3>
+        <p class="how-desc"><span data-lang="ru">Целевые показатели фиксируются в договоре до старта проекта</span><span data-lang="en">Target metrics are fixed in the contract before the project starts</span></p>
       </div>
       <div class="how-step reveal">
         <div class="how-number"><i data-lucide="flask-conical" style="width:20px;height:20px"></i></div>
@@ -1519,7 +1531,7 @@
           <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
         </div>
         <div class="solution-detail"><div class="solution-detail-inner">
-          <p><span data-lang="ru">Целевые KPI фиксируются в договоре до начала работ. Если не достигаем — предусмотрен возврат средств, это не обещание, а пункт контракта.</span><span data-lang="en">Target KPIs are fixed in the contract before work begins. If we don't hit them, a refund is contractually guaranteed — not just a promise.</span></p>
+          <p><span data-lang="ru">Целевые KPI фиксируются в договоре до начала работ. После внедрения мы прозрачно показываем фактический эффект на данных клиента.</span><span data-lang="en">Target KPIs are fixed in the contract before work begins. After rollout we show the actual effect transparently, based on the client's own data.</span></p>
         </div></div>
       </div>
       <div class="solution-card reveal" onclick="toggleSolution(this)">
@@ -1558,19 +1570,19 @@
       <div>
         <h4 class="footer-heading"><span data-lang="ru">Решения</span><span data-lang="en">Solutions</span></h4>
         <ul class="footer-links">
-          <li><a href="#solutions">HoReCa</a></li>
-          <li><a href="#solutions"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></a></li>
-          <li><a href="#solutions"><span data-lang="ru">Ритейл</span><span data-lang="en">Retail</span></a></li>
-          <li><a href="#solutions"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></a></li>
-          <li><a href="#solutions"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices & PM</span></a></li>
+          <li><a href="/horeca.html">HoReCa</a></li>
+          <li><a href="/proizvodstvo.html"><span data-lang="ru">Производство</span><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="/retail.html"><span data-lang="ru">Ритейл</span><span data-lang="en">Retail</span></a></li>
+          <li><a href="/logistika.html"><span data-lang="ru">Логистика</span><span data-lang="en">Logistics</span></a></li>
+          <li><a href="/ofisy.html"><span data-lang="ru">Офисы и УК</span><span data-lang="en">Offices & PM</span></a></li>
         </ul>
       </div>
       <div>
         <h4 class="footer-heading"><span data-lang="ru">Компания</span><span data-lang="en">Company</span></h4>
         <ul class="footer-links">
-          <li><a href="#"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
-          <li><a href="#"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a></li>
-          <li><a href="#"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></li>
+          <li><a href="/about.html"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+          <li><a href="/cases/"><span data-lang="ru">Кейсы</span><span data-lang="en">Cases</span></a></li>
+          <li><a href="/blog/"><span data-lang="ru">Блог</span><span data-lang="en">Blog</span></a></li>
           <li><a href="#"><span data-lang="ru">Карьера</span><span data-lang="en">Careers</span></a></li>
         </ul>
       </div>
@@ -1606,12 +1618,77 @@
       <button class="pricing-btn pricing-btn-secondary" style="margin-top:20px" onclick="closeLegalModal()"><span data-lang="ru">Закрыть</span><span data-lang="en">Close</span></button>
     </div>
   </div>
+
+  <!-- LEAD FORM MODAL -->
+  <div id="leadFormModal" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
+      <div id="leadFormStep1">
+        <h3 class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="ru">Получить персональное КП</span><span data-lang="en">Get a Personal Quote</span></h3>
+        <p style="font-size:14px;color:var(--gray-400);margin-bottom:24px"><span data-lang="ru">Заполните форму — мы подготовим предложение и свяжемся с вами</span><span data-lang="en">Fill out the form — we'll prepare a proposal and reach out</span></p>
+        <form id="leadForm" onsubmit="submitLeadForm(event)">
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadName"><span data-lang="ru">Имя *</span><span data-lang="en">Name *</span></label>
+            <input type="text" id="leadName" name="name" required style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px">
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadPhone"><span data-lang="ru">Телефон *</span><span data-lang="en">Phone *</span></label>
+            <input type="tel" id="leadPhone" name="phone" required style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px">
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadCompany"><span data-lang="ru">Компания</span><span data-lang="en">Company</span></label>
+            <input type="text" id="leadCompany" name="company" style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px">
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadMessage"><span data-lang="ru">Сообщение</span><span data-lang="en">Message</span></label>
+            <textarea id="leadMessage" name="message" rows="4" style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px;resize:vertical"></textarea>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;cursor:pointer">
+            <input type="checkbox" id="leadConsent" required onchange="document.getElementById('leadSubmitBtn').disabled = !this.checked" style="margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--gold)">
+            <span style="font-size:12px;color:var(--gray-400);line-height:1.5">
+              <span data-lang="ru">Оставляя заявку, вы соглашаетесь на обработку указанных вами персональных данных (имя, номер телефона) оператором ST8 AI в целях обработки заявки и связи с вами, в соответствии с 152-ФЗ «О персональных данных». Данные не передаются третьим лицам без вашего согласия и не используются в иных целях.</span>
+              <span data-lang="en">By submitting this request, you consent to the processing of the personal data you provide (name, phone number) by ST8 AI for the purpose of handling your request and contacting you, in accordance with Russian Federal Law 152-FZ. Data is not shared with third parties without your consent.</span>
+            </span>
+          </label>
+          <input type="hidden" name="subject" value="Новая заявка с сайта st8-ai.ru">
+          <input type="hidden" name="from_name" value="ST8 AI Website">
+          <!-- Web3Forms: получатель заявок задаётся при регистрации ключа на web3forms.com — укажи там email kosmos686@gmail.com.
+               Если Web3Forms поддерживает переопределение получателя прямо полем формы — раскомментируй строку ниже. -->
+          <!-- <input type="hidden" name="email" value="kosmos686@gmail.com"> -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="submit" id="leadSubmitBtn" disabled class="pricing-btn pricing-btn-primary" style="flex:1;min-width:160px">
+              <span data-lang="ru">Отправить заявку</span><span data-lang="en">Send Request</span>
+            </button>
+            <button type="button" class="pricing-btn pricing-btn-secondary" style="flex:0 0 auto;width:auto;padding:14px 20px" onclick="closeLeadForm()"><span data-lang="ru">Отмена</span><span data-lang="en">Cancel</span></button>
+          </div>
+        </form>
+      </div>
+      <div id="leadFormSuccess" style="display:none;text-align:center;padding:20px 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--gold)"><i data-lucide="check" style="width:28px;height:28px"></i></div>
+        <h3 class="section-title" style="font-size:20px;margin-bottom:12px"><span data-lang="ru">Спасибо!</span><span data-lang="en">Thank you!</span></h3>
+        <p style="font-size:15px;color:var(--gray-400);line-height:1.6"><span data-lang="ru">Мы подготовим для вас персональное КП и свяжемся в течение рабочего дня.</span><span data-lang="en">We'll prepare a personal proposal for you and reach out within one business day.</span></p>
+        <button class="pricing-btn pricing-btn-secondary" style="margin-top:24px" onclick="closeLeadForm()"><span data-lang="ru">Закрыть</span><span data-lang="en">Close</span></button>
+      </div>
+      <div id="leadFormError" style="display:none;text-align:center;padding:20px 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#f87171"><i data-lucide="alert-triangle" style="width:28px;height:28px"></i></div>
+        <h3 class="section-title" style="font-size:20px;margin-bottom:12px"><span data-lang="ru">Не получилось отправить</span><span data-lang="en">Couldn't send the request</span></h3>
+        <p style="font-size:15px;color:var(--gray-400);line-height:1.6;margin-bottom:20px"><span data-lang="ru">Похоже, проблема с соединением. Напишите нам напрямую в Telegram — ответим быстро.</span><span data-lang="en">Looks like a connection issue. Message us directly on Telegram — we'll reply quickly.</span></p>
+        <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:inline-flex"><span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span></a>
+      </div>
+    </div>
+  </div>
 <script>
     // Курс для отображения в EUR — тот же коэффициент (~100:1), что используется в разделе "Тарифы",
     // чтобы цифры на сайте были согласованы между собой. TODO: заменить на актуальный курс ЦБ при необходимости.
     // ВАЖНО: объявлена в самом начале script — calculateROI() вызывается уже при загрузке (через setLang),
     // а const с TDZ (temporal dead zone) кидает ReferenceError, если объявлена ниже места первого вызова.
     const EUR_RATE = 100;
+
+    // Web3Forms — ключ доступа (форма "ST8 AI сайт" на web3forms.com, получатель kosmos686@gmail.com).
+    const WEB3FORMS_KEY = "97c53ebb-40b7-4389-ad3c-09d8fc6f6fdc";
+
+    // Последние значения калькулятора ROI — читаются формой заявки при открытии с контекстом 'roi'.
+    // Объявлена здесь же (а не внутри calculateROI), чтобы не наступить на тот же TDZ-баг, что был с EUR_RATE.
+    var __roiState = { points: 5, check: 1500, guests: 80, total: 0 };
 
     // Language switcher
     function setLang(lang) {
@@ -1739,6 +1816,7 @@
       const checkGrowth = monthlyRevenue * 0.17 * 12;
       const writeOffSavings = monthlyRevenue * 0.03 * 12;
       const total = Math.round(noShowSavings + procurementSavings + checkGrowth + writeOffSavings);
+      __roiState = { points: points, check: check, guests: guests, total: total };
 
       const totalEl = document.getElementById('roiTotal');
       if (isEn) {
@@ -1817,15 +1895,82 @@
       }
     }
 
-    // Lead form - redirect to Telegram (RU) or WhatsApp Business (AE/TR)
-    function openLeadForm(plan) {
-      var names = { basic: 'Базовый', business: 'Бизнес', enterprise: 'Сеть' };
-      var market = localStorage.getItem('st8-market') || 'ru';
-      var marketNote = market !== 'ru' ? ' (рынок: ' + MARKET_LABELS[market].ru + ')' : '';
-      var msg = 'Здравствуйте! Хочу запустить пилот — тариф ' + (names[plan] || plan) + marketNote;
-      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
-      var url = market === 'ru' ? ('https://t.me/Zzima686?text=' + encodeURIComponent(msg)) : (channel.url + '?text=' + encodeURIComponent(msg));
-      window.open(url, '_blank');
+    // Lead form modal — opens the popup form (Web3Forms), optionally prefilling the message.
+    // context: 'roi' prefills the message with the ROI calculator's current numbers;
+    // a plan key ('basic' | 'business' | 'enterprise') prefills which tariff the visitor is interested in;
+    // no argument opens a blank form.
+    function openLeadForm(context) {
+      var modal = document.getElementById('leadFormModal');
+      var form = document.getElementById('leadForm');
+      form.reset();
+      document.getElementById('leadFormStep1').style.display = 'block';
+      document.getElementById('leadFormSuccess').style.display = 'none';
+      document.getElementById('leadFormError').style.display = 'none';
+      document.getElementById('leadSubmitBtn').disabled = true;
+
+      var isEn = document.documentElement.lang === 'en';
+      var msg = '';
+      if (context === 'roi') {
+        if (isEn) {
+          msg = 'ROI calculator data:\n' +
+                'Locations: ' + __roiState.points + '\n' +
+                'Average check: ' + Math.round(__roiState.check / EUR_RATE).toLocaleString('en-US') + ' EUR\n' +
+                'Guests/day per location: ' + __roiState.guests + '\n' +
+                'Estimated annual savings: ' + Math.round(__roiState.total / EUR_RATE).toLocaleString('en-US') + ' EUR';
+        } else {
+          msg = 'Данные из калькулятора ROI:\n' +
+                'Точек: ' + __roiState.points + '\n' +
+                'Средний чек: ' + __roiState.check.toLocaleString('ru-RU') + ' руб.\n' +
+                'Гостей в день на точку: ' + __roiState.guests + '\n' +
+                'Ориентировочная экономия за год: ' + __roiState.total.toLocaleString('ru-RU') + ' руб.';
+        }
+      } else if (context) {
+        var names = isEn
+          ? { basic: 'Basic', business: 'Business', enterprise: 'Enterprise' }
+          : { basic: 'Базовый', business: 'Бизнес', enterprise: 'Сеть' };
+        msg = (isEn ? 'Interested in the ' : 'Интересует тариф: ') + (names[context] || context) + (isEn ? ' plan' : '');
+      }
+      document.getElementById('leadMessage').value = msg;
+
+      modal.style.display = 'flex';
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function closeLeadForm() {
+      document.getElementById('leadFormModal').style.display = 'none';
+    }
+
+    function submitLeadForm(e) {
+      e.preventDefault();
+      var btn = document.getElementById('leadSubmitBtn');
+      btn.disabled = true;
+      var formData = new FormData(document.getElementById('leadForm'));
+      formData.append('access_key', WEB3FORMS_KEY);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          document.getElementById('leadFormStep1').style.display = 'none';
+          if (data && data.success) {
+            document.getElementById('leadFormSuccess').style.display = 'block';
+          } else {
+            document.getElementById('leadFormError').style.display = 'block';
+          }
+        })
+        .catch(function() {
+          document.getElementById('leadFormStep1').style.display = 'none';
+          document.getElementById('leadFormError').style.display = 'block';
+        });
+    }
+
+    // Opens the lead form automatically when arriving via #lead-form
+    // (used by the CTA buttons on /about.html, /cases/*.html and /blog/*.html,
+    // which link to index.html#lead-form since those static pages don't carry the modal themselves).
+    if (location.hash === '#lead-form') {
+      window.addEventListener('DOMContentLoaded', function() { openLeadForm(); });
     }
 
     // Solution detail placeholder

@@ -2,6 +2,9 @@
 .env
 .env.*
 !.env.example
+gsc-service-account-key.json
+*service-account*.json
+yandex_token.txt
 
 # Python
 __pycache__/
