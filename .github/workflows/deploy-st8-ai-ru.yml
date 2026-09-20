@@ -1,0 +1,57 @@
+name: Deploy st8-ai.ru
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'index.html'
+      - 'horeca.html'
+      - 'proizvodstvo.html'
+      - 'retail.html'
+      - 'logistika.html'
+      - 'ofisy.html'
+      - 'about.html'
+      - 'legal.html'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'llms.txt'
+      - 'favicon.ico'
+      - 'favicon-16x16.png'
+      - 'favicon-32x32.png'
+      - 'apple-touch-icon.png'
+      - 'android-chrome-192x192.png'
+      - 'android-chrome-512x512.png'
+      - 'bb8bb3a9f908bd5a07d884c189d70b87.txt'
+      - 'assets/**'
+      - 'cases/**'
+      - 'blog/**'
+      - '.github/workflows/deploy-st8-ai-ru.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage only st8-ai.ru site files
+        run: |
+          mkdir -p site-deploy
+          cp index.html horeca.html proizvodstvo.html retail.html logistika.html ofisy.html about.html legal.html site-deploy/
+          cp sitemap.xml robots.txt llms.txt site-deploy/
+          cp favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png site-deploy/
+          cp bb8bb3a9f908bd5a07d884c189d70b87.txt site-deploy/
+          cp -r assets site-deploy/
+          cp -r cases site-deploy/
+          cp -r blog site-deploy/
+
+      - name: Deploy over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./site-deploy/
+          server-dir: /www/st8-ai.ru/
+          dangerous-clean-slate: false
