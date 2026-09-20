@@ -22,6 +22,7 @@ on:
       - 'android-chrome-192x192.png'
       - 'android-chrome-512x512.png'
       - 'bb8bb3a9f908bd5a07d884c189d70b87.txt'
+      - 'og-image.jpg'
       - 'assets/**'
       - 'cases/**'
       - 'blog/**'
@@ -40,7 +41,7 @@ jobs:
           cp index.html horeca.html proizvodstvo.html retail.html logistika.html ofisy.html about.html legal.html site-deploy/
           cp sitemap.xml robots.txt llms.txt site-deploy/
           cp favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png site-deploy/
-          cp bb8bb3a9f908bd5a07d884c189d70b87.txt site-deploy/
+          cp bb8bb3a9f908bd5a07d884c189d70b87.txt og-image.jpg site-deploy/
           cp -r assets site-deploy/
           cp -r cases site-deploy/
           cp -r blog site-deploy/
