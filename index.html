@@ -1994,6 +1994,7 @@
           document.getElementById('leadFormStep1').style.display = 'none';
           if (data && data.success) {
             document.getElementById('leadFormSuccess').style.display = 'block';
+            if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form');
           } else {
             document.getElementById('leadFormError').style.display = 'block';
           }
