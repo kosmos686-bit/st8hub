@@ -26,6 +26,7 @@ on:
       - 'assets/**'
       - 'cases/**'
       - 'blog/**'
+      - 'en/**'
       - '.github/workflows/deploy-st8-ai-ru.yml'
   workflow_dispatch:
 
@@ -45,6 +46,7 @@ jobs:
           cp -r assets site-deploy/
           cp -r cases site-deploy/
           cp -r blog site-deploy/
+          cp -r en site-deploy/
 
       - name: Deploy over FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

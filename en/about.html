@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,25 +8,28 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <title>Блог ST8 AI — автоматизация бизнеса нейросетями</title>
-  <link rel="canonical" href="https://st8-ai.ru/blog/">
-  <link rel="alternate" hreflang="ru" href="https://st8-ai.ru/blog/">
-  <link rel="alternate" hreflang="en" href="https://st8-ai.ru/en/blog/">
-  <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/blog/">
-  <meta name="description" content="Блог ST8 AI об автоматизации бизнеса искусственным интеллектом: рестораны, производство, с чего начать внедрение ИИ.">
+  <title>About ST8 AI — Team and Results</title>
+  <link rel="canonical" href="https://st8-ai.ru/en/about.html">
+  <link rel="alternate" hreflang="ru" href="https://st8-ai.ru/about.html">
+  <link rel="alternate" hreflang="en" href="https://st8-ai.ru/en/about.html">
+  <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/about.html">
+  <meta name="description" content="ST8 AI is a team implementing artificial intelligence in business. 47 projects, 0 failures, 2-3 month payback. Founders: Alexey Gagarin and Yulia Popova.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="//assets/site.css">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Блог ST8 AI — автоматизация бизнеса нейросетями">
-  <meta property="og:description" content="Блог ST8 AI об автоматизации бизнеса искусственным интеллектом: рестораны, производство, с чего начать внедрение ИИ.">
-  <meta property="og:url" content="https://st8-ai.ru/blog/">
+  <meta property="og:title" content="About ST8 AI — Team and Results">
+  <meta property="og:description" content="ST8 AI is a team implementing artificial intelligence in business. 47 projects, 0 failures, 2-3 month payback. Founders: Alexey Gagarin and Yulia Popova.">
+  <meta property="og:url" content="https://st8-ai.ru/en/about.html">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Блог ST8 AI — автоматизация бизнеса нейросетями">
-  <meta name="twitter:description" content="Блог ST8 AI об автоматизации бизнеса искусственным интеллектом: рестораны, производство, с чего начать внедрение ИИ.">
+  <meta name="twitter:title" content="About ST8 AI — Team and Results">
+  <meta name="twitter:description" content="ST8 AI is a team implementing artificial intelligence in business. 47 projects, 0 failures, 2-3 month payback. Founders: Alexey Gagarin and Yulia Popova.">
   <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js" integrity="sha384-PpZ0v4GjRXD+zBXfYaMJkWUZG4mHqAlhTADbQwrM8oXYO7LGWz+NcISPEVyO9opc" crossorigin="anonymous"></script>
   <style>
+    /* Bilingual chrome — lang switch, market selector, mobile menu.
+       Kept local to this page (not in site.css) so cases/ pages,
+       which stay Russian-only, are unaffected. */
     .nav-actions { display: flex; align-items: center; gap: 12px; }
     .lang-switch {
       display: flex; align-items: center; gap: 4px;
@@ -41,7 +44,7 @@
     .lang-btn.active { background: var(--gold); color: #000; box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
     .lang-btn:hover:not(.active) { color: #fff; }
 
-    span[data-lang], h1[data-lang], h2[data-lang], h3[data-lang], p[data-lang], li[data-lang], strong[data-lang], a[data-lang], div[data-lang] { display: none; }
+    span[data-lang], h1[data-lang], h2[data-lang], h3[data-lang], p[data-lang], li[data-lang], strong[data-lang], a[data-lang] { display: none; }
     html[lang="ru"] [data-lang="ru"] { display: revert; }
     html[lang="en"] [data-lang="en"] { display: revert; }
 
@@ -78,6 +81,7 @@
     #marketModal .pricing-btn:hover { border-color: var(--gold); color: var(--gold); }
     .roi-result-note { font-size: 12px; color: var(--gray-500); margin-top: 12px; }
   </style>
+  
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
       (function(m,e,t,r,i,k,a){
@@ -95,21 +99,21 @@
 <body>
   <header class="topbar">
     <nav class="navbar">
-      <a href="../index.html" class="logo">
+      <a href="//" class="logo">
         <div class="logo-icon">ST8</div>
         <div class="logo-text">ST8<span>AI</span></div>
       </a>
       <div class="nav-links">
-        <a href="../index.html#solutions" class="nav-link"><span data-lang="ru">Решения</span></a>
-        <a href="../cases/" class="nav-link"><span data-lang="ru">Кейсы</span></a>
-        <a href="../blog/" class="nav-link active"><span data-lang="ru">Блог</span></a>
-        <a href="../about.html" class="nav-link"><span data-lang="ru">О нас</span></a>
-        <a href="../index.html#pricing" class="nav-link"><span data-lang="ru">Тарифы</span></a>
-        <a href="../index.html#contact" class="nav-link"><span data-lang="ru">Контакты</span></a>
+        <a href="//#solutions" class="nav-link"><span data-lang="en">Solutions</span></a>
+        <a href="//cases/" class="nav-link"><span data-lang="en">Cases</span></a>
+        <a href="//blog/" class="nav-link"><span data-lang="en">Blog</span></a>
+        <a href="//about.html" class="nav-link active"><span data-lang="en">About</span></a>
+        <a href="//#pricing" class="nav-link"><span data-lang="en">Pricing</span></a>
+        <a href="//#contact" class="nav-link"><span data-lang="en">Contacts</span></a>
       </div>
       <div class="nav-actions">
         <button class="lang-switch liquid-glass" id="marketBtn" style="padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
-          <span id="marketBtnLabel" style="font-size:12px;font-weight:600"><span data-lang="ru">Россия</span></span>
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600"><span data-lang="en">International</span></span>
         </button>
         <div class="lang-switch">
           <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
@@ -124,12 +128,12 @@
       </div>
     </nav>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="../index.html#solutions" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Решения</span></a>
-      <a href="../cases/" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Кейсы</span></a>
-      <a href="../blog/" class="mobile-menu-link active" onclick="toggleMenu()"><span data-lang="ru">Блог</span></a>
-      <a href="../about.html" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">О нас</span></a>
-      <a href="../index.html#pricing" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Тарифы</span></a>
-      <a href="../index.html#contact" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="ru">Контакты</span></a>
+      <a href="//#solutions" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="en">Solutions</span></a>
+      <a href="//cases/" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="en">Cases</span></a>
+      <a href="//blog/" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="en">Blog</span></a>
+      <a href="//about.html" class="mobile-menu-link active" onclick="toggleMenu()"><span data-lang="en">About</span></a>
+      <a href="//#pricing" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="en">Pricing</span></a>
+      <a href="//#contact" class="mobile-menu-link" onclick="toggleMenu()"><span data-lang="en">Contacts</span></a>
       <div class="mobile-menu-actions">
         <div class="lang-switch">
           <button class="lang-btn active" id="btnRuMobile" onclick="setLang('ru')">RU</button>
@@ -142,52 +146,64 @@
   <!-- MARKET SELECTOR MODAL -->
   <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
     <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
-      <div class="section-label" style="text-align:center"><span data-lang="ru">Выберите рынок</span></div>
-      <h3 style="font-size:22px;text-align:center;margin-bottom:24px;font-weight:400"><span data-lang="ru">Где вы работаете?</span></h3>
+      <div class="section-label" style="text-align:center"><span data-lang="en">Choose Your Market</span></div>
+      <h3 style="font-size:22px;text-align:center;margin-bottom:24px;font-weight:400"><span data-lang="en">Where Are You Based?</span></h3>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <button class="pricing-btn" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="ru">Россия</span></button>
-        <button class="pricing-btn" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="ru">ОАЭ</span></button>
-        <button class="pricing-btn" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="ru">Турция</span></button>
+        <button class="pricing-btn" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="en">Russia</span></button>
+        <button class="pricing-btn" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="en">UAE</span></button>
+        <button class="pricing-btn" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="en">Turkey</span></button>
       </div>
-      <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="ru">Можно изменить в любой момент вверху страницы</span></p>
+      <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="en">You can change this anytime at the top of the page</span></p>
     </div>
   </div>
 
   <main>
     <section class="hero-strip">
       <div class="container">
-        <p class="breadcrumb"><a href="../index.html"><span data-lang="ru">Главная</span></a> / <span data-lang="ru">Блог</span></p>
-        <div class="section-label"><span data-lang="ru">Блог</span></div>
-        <h1 class="page-title"><span data-lang="ru">Автоматизация бизнеса нейросетями</span></h1>
-        <p class="page-desc"><span data-lang="ru">Разборы того, как искусственный интеллект применяется в ресторанах, на производстве и в других отраслях — без маркетингового тумана, с цифрами.</span></p>
+        <p class="breadcrumb"><a href="//"><span data-lang="en">Home</span></a> / <span data-lang="en">About</span></p>
+        <div class="section-label"><span data-lang="en">About the Company</span></div>
+        <h1 class="page-title"><span data-lang="en">ST8 AI: Custom AI Solutions for Business</span></h1>
+        <p class="page-desc"><span data-lang="en">We implement artificial intelligence in restaurants, manufacturing, retail, logistics, and offices — not off-the-shelf products, but solutions built for each specific client.</span></p>
       </div>
     </section>
-    <div class="card-grid">
-      <a href="restoran-neyroseti.html" class="content-card">
-        <span class="card-tag">HoReCa</span>
-        <h3><span data-lang="ru">Автоматизация ресторана нейросетями</span></h3>
-        <p><span data-lang="ru">Цифровой администратор, предиктивные закупки и computer vision на кухне: списания -35%, средний чек +17%.</span></p>
-        <div class="card-cta"><span data-lang="ru">Читать статью →</span></div>
-      </a>
-      <a href="ai-proizvodstvo.html" class="content-card">
-        <span class="card-tag"><span data-lang="ru">Производство</span></span>
-        <h3><span data-lang="ru">Внедрение ИИ в производство</span></h3>
-        <p><span data-lang="ru">Computer vision, предиктивное обслуживание и оптимизация линий: точность 99.7%, простои -25%.</span></p>
-        <div class="card-cta"><span data-lang="ru">Читать статью →</span></div>
-      </a>
-      <a href="biznes-ii-start.html" class="content-card">
-        <span class="card-tag"><span data-lang="ru">Гайд</span></span>
-        <h3><span data-lang="ru">Автоматизация бизнеса ИИ: с чего начать</span></h3>
-        <p><span data-lang="ru">Пошаговый план: как выбрать направление, оценить данные, запустить пилот и зафиксировать KPI в договоре.</span></p>
-        <div class="card-cta"><span data-lang="ru">Читать статью →</span></div>
-      </a>
-    </div>
+    <article class="article-body">
+      <h2><span data-lang="en">What We Do</span></h2>
+      <p><span data-lang="en">ST8 AI develops and implements AI solutions for business in Russia, the UAE, and Turkey. The company has delivered 47 projects without a single failure — with a payback period of 2-3 months and a KPI guarantee fixed in the contract.</span></p>
+      <p><span data-lang="en">We work across five industries: <a href="//horeca.html">HoReCa</a>, manufacturing, retail &amp; e-commerce, logistics, and offices &amp; property management — and take on custom development for tasks that don't fit standard categories: voice assistants, computer vision, predictive models, integration of disparate systems.</span></p>
+
+      <h2><span data-lang="en">How We Reduce Risk for the Client</span></h2>
+      <p><span data-lang="en">Every project starts with a pilot at a single location — full-scale rollout happens only after the result is confirmed in practice, not in a presentation. The terms we work under are fixed in real contracts, not just marketing materials:</span></p>
+      <ul>
+        <li><strong><span data-lang="en">KPI guarantee</span></strong> — <span data-lang="en">target metrics are fixed in the contract before work begins.</span></li>
+        <li><strong><span data-lang="en">Pilot at 1 location</span></strong> — <span data-lang="en">full rollout only after a successful pilot.</span></li>
+        <li><strong><span data-lang="en">Exit without penalty</span></strong> — <span data-lang="en">30 days to exit the project with no penalties.</span></li>
+        <li><strong><span data-lang="en">City exclusivity</span></strong> — <span data-lang="en">we don't work with a client's direct competitors in the same city.</span></li>
+      </ul>
+
+      <h2><span data-lang="en">Team</span></h2>
+      <p><strong>Alexey Gagarin</strong> — <span data-lang="en">CEO and co-founder of ST8 AI, 15+ years in B2B sales. Responsible for company strategy and key account management.</span></p>
+      <p><strong>Yulia Popova</strong> — <span data-lang="en">co-founder, AI systems development. Responsible for technical implementation and rollout.</span></p>
+
+      <h2><span data-lang="en">Results</span></h2>
+      <div class="stat-row">
+        <div class="stat-item"><span class="stat-val">47</span><span class="stat-label" data-lang="en">Projects</span></div>
+        <div class="stat-item"><span class="stat-val">0</span><span class="stat-label" data-lang="en">Failures</span></div>
+        <div class="stat-item"><span class="stat-val" data-lang="en">2-3 mo</span><span class="stat-label" data-lang="en">Payback</span></div>
+      </div>
+      <p><span data-lang="en">Examples of implementations — on the "Cases" page: production automation for the dark kitchen chain Azbuka Vkusa, an AI site manager for developer Level Group, an AI process engineer for Unik Food.</span> <a href="//cases/"><span data-lang="en">Cases</span></a></p>
+
+      <div class="cta-box">
+        <h3><span data-lang="en">Want to Discuss Your Project?</span></h3>
+        <p><span data-lang="en">We'll explain how we can help your specific business and calculate the payback.</span></p>
+        <a href="//#lead-form" class="cta-btn"><span data-lang="en">Submit a Request →</span></a>
+      </div>
+    </article>
   </main>
   <footer class="footer" id="contact">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="../index.html" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
-        <p><span data-lang="ru">Кастомные ИИ-решения для бизнеса. 47 проектов, 0 провалов. Гарантия результата по договору.</span></p>
+        <a href="//" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+        <p><span data-lang="en">Custom AI solutions for business. 47 projects, 0 failures. Results guaranteed by contract.</span></p>
         <div style="display:flex;gap:12px">
           <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">✈</a>
           <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">☎</a>
@@ -195,43 +211,43 @@
         </div>
       </div>
       <div>
-        <h4 class="footer-heading"><span data-lang="ru">Решения</span></h4>
+        <h4 class="footer-heading"><span data-lang="en">Solutions</span></h4>
         <ul class="footer-links">
-          <li><a href="../horeca.html">HoReCa</a></li>
-          <li><a href="../proizvodstvo.html"><span data-lang="ru">Производство</span></a></li>
-          <li><a href="../retail.html"><span data-lang="ru">Ритейл</span></a></li>
-          <li><a href="../logistika.html"><span data-lang="ru">Логистика</span></a></li>
-          <li><a href="../ofisy.html"><span data-lang="ru">Офисы и УК</span></a></li>
+          <li><a href="//horeca.html">HoReCa</a></li>
+          <li><a href="//proizvodstvo.html"><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="//retail.html"><span data-lang="en">Retail</span></a></li>
+          <li><a href="//logistika.html"><span data-lang="en">Logistics</span></a></li>
+          <li><a href="//ofisy.html"><span data-lang="en">Offices &amp; PM</span></a></li>
         </ul>
       </div>
       <div>
-        <h4 class="footer-heading"><span data-lang="ru">Компания</span></h4>
+        <h4 class="footer-heading"><span data-lang="en">Company</span></h4>
         <ul class="footer-links">
-          <li><a href="../about.html"><span data-lang="ru">О нас</span></a></li>
-          <li><a href="../cases/"><span data-lang="ru">Кейсы</span></a></li>
-          <li><a href="../blog/"><span data-lang="ru">Блог</span></a></li>
-          <li><a href="#"><span data-lang="ru">Карьера</span></a></li>
+          <li><a href="//about.html"><span data-lang="en">About</span></a></li>
+          <li><a href="//cases/"><span data-lang="en">Cases</span></a></li>
+          <li><a href="//blog/"><span data-lang="en">Blog</span></a></li>
+          <li><a href="#"><span data-lang="en">Careers</span></a></li>
         </ul>
       </div>
       <div>
-        <h4 class="footer-heading"><span data-lang="ru">Контакты</span></h4>
+        <h4 class="footer-heading"><span data-lang="en">Contacts</span></h4>
         <div class="footer-contact">
-          <p><strong>Alexey Gagarin</strong><br>CEO &amp; Co-founder<br><span style="font-size:12px" data-lang="ru">15+ лет в B2B-продажах</span></p>
+          <p><strong>Alexey Gagarin</strong><br>CEO &amp; Co-founder<br><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
           <p style="margin-top:8px"><a href="tel:+79856905252" target="_blank" rel="noopener noreferrer">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
-          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="ru">Разработка ИИ-систем</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="en">AI Systems Development</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
         </div>
       </div>
     </div>
     <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
-      <p style="font-size:11px;color:var(--gray-600)"><span data-lang="ru">ИП Попова Ю.Д. · ИНН 662607100653 · ОГРНИП 326965800048074 · Свердловская обл., г. Полевской</span></p>
-      <p>ST8 AI. <span data-lang="ru">Все права защищены.</span></p>
-      <p id="legalLine"><a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span></a> | <span data-lang="ru">Гарантия KPI</span> | <span data-lang="ru">Поддержка 24/7</span></p>
+      <p style="font-size:11px;color:var(--gray-600)"><span data-lang="en">Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074 · Sverdlovsk region, Polevskoy</span></p>
+      <p>ST8 AI. <span data-lang="en">All rights reserved.</span></p>
+      <p id="legalLine"><a href="//legal.html" class="legal-link"><span data-lang="en">Privacy Notice</span></a> | <span data-lang="en">KPI Guarantee</span> | <span data-lang="en">24/7 Support</span></p>
     </div>
   </footer>
 
   <script>
     function setLang(lang) {
-      if (lang !== 'ru') { location.href = '/en/blog/'; return; }
+      if (lang !== 'en') { location.href = '/about.html'; return; }
       document.documentElement.lang = lang;
       document.querySelectorAll('.lang-btn').forEach(function(btn) {
         btn.classList.toggle('active',
@@ -242,7 +258,7 @@
       localStorage.setItem('st8-lang', lang);
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
-    var savedLang = 'ru';
+    var savedLang = 'en';
     setLang(savedLang);
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -252,9 +268,9 @@
       tr: { ru: 'Турция', en: 'Turkey' }
     };
     var MARKET_LEGAL = {
-      ru: '<a href="../legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
-      ae: '<a href="../legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
-      tr: '<a href="../legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+      ru: '<a href="legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a> | <span data-lang="ru">Гарантия KPI</span><span data-lang="en">KPI Guarantee</span> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
     };
     function openMarketModal() { document.getElementById('marketModal').style.display = 'flex'; }
     function closeMarketModal() { document.getElementById('marketModal').style.display = 'none'; }
