@@ -1,0 +1,4 @@
+# st8-ai.ru: permanent redirect www -> main domain (http->https is handled by nginx in the hosting panel)
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.st8-ai\.ru$ [NC]
+RewriteRule ^(.*)$ https://st8-ai.ru/$1 [R=301,L]

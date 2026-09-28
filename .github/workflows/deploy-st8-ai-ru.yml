@@ -27,6 +27,7 @@ on:
       - 'cases/**'
       - 'blog/**'
       - 'en/**'
+      - '.htaccess'
       - '.github/workflows/deploy-st8-ai-ru.yml'
   workflow_dispatch:
 
@@ -40,7 +41,7 @@ jobs:
         run: |
           mkdir -p site-deploy
           cp index.html horeca.html proizvodstvo.html retail.html logistika.html ofisy.html about.html legal.html site-deploy/
-          cp sitemap.xml robots.txt llms.txt site-deploy/
+          cp sitemap.xml robots.txt llms.txt .htaccess site-deploy/
           cp favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png site-deploy/
           cp bb8bb3a9f908bd5a07d884c189d70b87.txt og-image.jpg site-deploy/
           cp -r assets site-deploy/
