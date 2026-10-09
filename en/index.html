@@ -903,7 +903,7 @@
           <h1 class="hero-title animate-blur-fade-up" style="animation-delay:400ms"><span data-lang="en">Business Automation<br><span class="highlight">with Neural Networks</span></span></h1>
           <p class="hero-desc animate-blur-fade-up" style="animation-delay:500ms"><span data-lang="en">Digital host, predictive purchasing and computer vision — everything works as a single organism. Without stopping the business, with a guaranteed result by contract.</span></p>
           <div class="hero-ctas">
-            <a href="#roi" class="btn-primary animate-blur-fade-up" style="animation-delay:600ms"><i data-lucide="play" style="width:18px;height:18px;fill:currentColor"></i><span data-lang="en">Calculate Savings</span></a>
+            <button type="button" onclick="openLeadForm()" class="btn-primary animate-blur-fade-up" style="animation-delay:600ms">Discuss your process</button>
             <a href="#solutions" class="btn-secondary liquid-glass animate-blur-fade-up" style="animation-delay:700ms"><span data-lang="en">Learn More</span></a>
           </div>
         </div>
@@ -1571,8 +1571,8 @@
   <div id="leadFormModal" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
     <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
       <div id="leadFormStep1">
-        <h3 class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="en">Get a Personal Quote</span></h3>
-        <p style="font-size:14px;color:var(--gray-400);margin-bottom:24px"><span data-lang="en">Fill out the form — we'll prepare a proposal and reach out</span></p>
+        <h3 class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="en">Discuss your pilot</span></h3>
+        <p style="font-size:14px;color:var(--gray-400);margin-bottom:24px"><span data-lang="en">Tell us about one process and your current systems. We will discuss the data, scope, timing and cost of a pilot.</span></p>
         <form id="leadForm" onsubmit="submitLeadForm(event)">
           <div style="margin-bottom:16px">
             <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadName"><span data-lang="en">Name *</span></label>
@@ -1918,7 +1918,7 @@
         .then(function(res) { return res.json(); })
         .then(function(data) {
           document.getElementById('leadFormStep1').style.display = 'none';
-          if (data && data.success) {
+          if (data && data.success === true) {
             document.getElementById('leadFormSuccess').style.display = 'block';
             if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form');
           } else {
@@ -1961,5 +1961,6 @@
       });
     });
   </script>
+<script src="/assets/conversions.js" defer></script>
 </body>
 </html>
