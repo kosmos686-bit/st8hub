@@ -86,3 +86,34 @@ body.industry-page { background:var(--ink); color:#f1ecdf; font-family:var(--fon
 .industry-page .ip-steps li::before { position:static; width:auto; height:auto; border-radius:0; background:none; }
 .industry-page .ip-receipt .solution-stats { border-left:0; border-right:0; border-radius:0; background:transparent; }
 @media(max-width:639px){.industry-page .navbar{padding-left:16px;padding-right:16px}.industry-page .nav-actions{gap:6px}.industry-page #marketBtn{padding-left:8px!important;padding-right:8px!important}.industry-page .nav-actions>.lang-switch{padding-left:6px;padding-right:6px}}
+/* Market landing pages share the same paper components; contacts and copy stay local. */
+.market-page .wrap{max-width:1280px;padding-left:24px;padding-right:24px}
+.market-page .hero{padding-top:60px;padding-bottom:72px}
+.market-page main h1{font:600 clamp(28px,3.25vw,46px)/1.2 var(--font-display);letter-spacing:-.025em;overflow-wrap:anywhere}
+.market-page main h1 em{color:var(--gold-hi)}
+.market-page .lead{font:400 18px/1.7 var(--font-body);color:#c2bdae}
+.market-page .badge{font:500 12px/1.6 var(--font-mono);color:var(--gold-hi);border-color:#786d55}
+.market-page .btn{border-radius:9px;min-height:50px;justify-content:center;font:500 15px/1.5 var(--font-body)}
+.market-page main section{border-top:1px solid #393328;padding:56px 0}
+.market-page main h2{font:600 clamp(23px,2.3vw,32px)/1.4 var(--font-display);color:#f1ecdf}
+.market-page .sub{color:#c2bdae;line-height:1.7}
+.market-page .card,.market-page .term{background:var(--paper);color:#1a1814;border:0;border-radius:2px;padding:26px;box-shadow:0 20px 40px -28px #000}
+.market-page .card h3,.market-page .term strong{font:600 14px/1.6 var(--font-display);color:#1a1814}
+.market-page .card ul,.market-page .card p,.market-page .term span{color:#514b40;font:400 16px/1.7 var(--font-body)}
+.market-page .card li::before{background:#27407a}
+.market-page .step h3::before{color:#27407a;border-color:#27407a;font-family:var(--font-mono);flex:none}
+.market-page .ip-market-row{padding:18px 0;border-bottom:1px dashed #aaa28f;font:500 16px/1.5 var(--font-body);color:#1a1814;margin:0}
+.market-page .ip-receipt .ip-proof{color:#514b40}
+.market-page details{background:transparent;border:0;border-bottom:1px solid #494130;border-radius:0;padding:22px 0}
+.market-page summary{font:500 17px/1.6 var(--font-body);color:#f1ecdf}
+.market-page details p{color:#c2bdae;line-height:1.7}
+.market-page .cta{background:#15120e}
+.market-page footer{background:#100e0b;border-top:1px solid #393328}
+@media(max-width:639px){.market-page .wrap{padding-left:20px;padding-right:20px}.market-page .hero{padding-top:34px;padding-bottom:48px}.market-page main h1{font-size:27px}.market-page .lead{font-size:16px}.market-page .btns{flex-direction:column}.market-page .btn{width:100%}.market-page .bar{align-items:flex-start;gap:20px}.market-page nav{gap:12px;justify-content:flex-end;flex-wrap:wrap}.market-page main section{padding:40px 0}.market-page .grid,.market-page .terms{grid-template-columns:1fr}.market-page .card,.market-page .term{padding:24px 20px}}
+
+/* Turkish characters, local Latin Extended subsets. */
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/golos-text-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Golos Text";font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/golos-text-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/unbounded-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/ibm-plex-mono-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
