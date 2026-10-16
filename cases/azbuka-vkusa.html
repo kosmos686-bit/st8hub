@@ -157,7 +157,7 @@
   <div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
     <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
       <div id="leadFormStep1">
-        <h3 class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="ru">Обсудить задачу и план пилота</span></h3>
+        <h3 id="leadFormTitle" class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="ru">Обсудить задачу и план пилота</span></h3>
         <p style="font-size:14px;color:var(--gray-400);margin-bottom:24px"><span data-lang="ru">Опишите один процесс и вашу текущую систему. Свяжемся с вами, уточним данные и обсудим границы пилота, сроки и стоимость.</span></p>
         <form id="leadForm" onsubmit="submitLeadForm(event)">
           <div style="margin-bottom:16px">
@@ -298,5 +298,6 @@ if(location.hash==='#lead-form')openLeadForm();
  document.addEventListener('keydown',function(event){if(event.key==='Escape' && document.getElementById('leadFormModal').style.display==='flex')closeLeadForm();});
  document.addEventListener('click',function(event){var link=event.target.closest('a[href]');if(link && link.getAttribute('href')==='#lead-form'){event.preventDefault();event.stopImmediatePropagation();openLeadForm();}},true);
 </script>
+<script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
 </body>
 </html>

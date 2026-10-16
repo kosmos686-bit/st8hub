@@ -502,11 +502,11 @@
         );
       });
       localStorage.setItem('st8-lang', lang);
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedLang = 'en';
     setLang(savedLang);
-    if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
     var MARKET_LABELS = {
       ru: { ru: 'Россия', en: 'Russia' },
@@ -552,7 +552,7 @@
       if (!restoring) setLang(market === 'ru' ? 'ru' : 'en');
       updateContactLinks(market);
       closeMarketModal();
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedMarket = localStorage.getItem('st8-market');
     if (savedMarket) { setMarket(savedMarket, true); }

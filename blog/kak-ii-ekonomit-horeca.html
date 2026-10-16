@@ -175,7 +175,7 @@
       </div>
     </section>
     <article class="article-body"><p>Цифра 2–3 млн рублей — ориентир расчётной модели, а не обещание экономии ресторану. Калькулятор на главной ST8 AI показывает ориентировочную экономию за 12 месяцев и отдельно предупреждает: методику оценки согласовывают после аудита.</p>
-<h2>Что стоит за расчётом</h2><p>При исходных настройках калькулятора — 5 точек, средний чек 1 500 рублей и 80 гостей в день на точку — модель показывает 2 340 000 рублей за год. Это иллюстративный расчёт по заданным параметрам, не данные клиента и не прогноз результата.</p>
+<h2>Что стоит за расчётом</h2><p>Для примера возьмём доступные параметры калькулятора: 1 точка, средний чек 1 000 рублей и 20 гостей в день. По действующей формуле сайта модель показывает 2 376 000 рублей за год. Это иллюстративный расчёт по заданным параметрам, не данные клиента и не прогноз результата.</p>
 <h2>Какие процессы рассматривает ST8 AI</h2><p>На сайте <a href="/horeca.html">направления HoReCa</a> описаны цифровой администратор, предиктивные закупки, управление остатками и контроль кухни. Выбирать нужно один процесс, для которого доступны исходные данные и ответственный сотрудник.</p>
 <h2>Как проверить эффект</h2><p>До пилота фиксируют текущие показатели выбранного процесса и способ сравнения. После пилота сопоставляют фактические данные с исходным уровнем, учитывая объём заказов и период наблюдения. Расчёт калькулятора не заменяет эту проверку.</p>
 <h2>С чего начать</h2><p>Посмотрите <a href="/cases/azbuka-vkusa.html">кейс «Азбука Вкуса»</a> и <a href="/cases/unikfood.html">Unik Food</a>, затем сравните <a href="/#pricing">тарифы ST8 AI</a>. Для обсуждения сохраните параметры через кнопку под <a href="/#roi">калькулятором ROI</a>: они попадут в сообщение заявки.</p><div class="cta-box"><h2>Обсудим ваш процесс</h2><p>Выберем одну задачу, уточним данные и границы пилота.</p><a href="#lead-form" class="cta-btn">Обсудить задачу и план пилота →</a></div></article>
@@ -291,7 +291,7 @@
   <div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
     <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
       <div id="leadFormStep1">
-        <h3 class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="ru">Обсудить задачу и план пилота</span></h3>
+        <h3 id="leadFormTitle" class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="ru">Обсудить задачу и план пилота</span></h3>
         <p style="font-size:14px;color:var(--gray-400);margin-bottom:24px"><span data-lang="ru">Опишите один процесс и вашу текущую систему. Свяжемся с вами, уточним данные и обсудим границы пилота, сроки и стоимость.</span></p>
         <form id="leadForm" onsubmit="submitLeadForm(event)">
           <div style="margin-bottom:16px">
@@ -432,5 +432,6 @@ if(location.hash==='#lead-form')openLeadForm();
  document.addEventListener('keydown',function(event){if(event.key==='Escape' && document.getElementById('leadFormModal').style.display==='flex')closeLeadForm();});
  document.addEventListener('click',function(event){var link=event.target.closest('a[href]');if(link && link.getAttribute('href')==='#lead-form'){event.preventDefault();event.stopImmediatePropagation();openLeadForm();}},true);
 </script>
+<script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
 </body>
 </html>
