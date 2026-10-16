@@ -160,6 +160,22 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
   </style>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;subset=latin-ext&amp;display=swap">
+<style>
+  #leadFormModal { position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,.8); backdrop-filter:blur(8px); }
+  #leadFormModal[hidden], #leadFormModal [hidden] { display:none; }
+  #leadFormModal .lead-panel { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:32px 24px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; }
+  #leadFormModal h2 { font-size:24px; margin-bottom:12px; }
+  #leadFormModal p { color:var(--g400); margin-bottom:16px; }
+  #leadFormModal label { display:block; font-size:14px; color:var(--g400); margin:16px 0 6px; }
+  #leadFormModal input:not([type=checkbox]), #leadFormModal textarea { width:100%; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:#fff; font:inherit; }
+  #leadFormModal textarea { resize:vertical; }
+  #leadFormModal .lead-consent { display:flex; align-items:flex-start; gap:10px; font-size:12px; line-height:1.5; }
+  #leadFormModal input[type=checkbox] { margin-top:3px; accent-color:var(--gold); }
+  #leadFormModal a { color:var(--gold); }
+  button.btn { border:0; font-family:inherit; cursor:pointer; }
+  button.btn-line { background:transparent; border:1px solid rgba(255,255,255,.25); }
+  #leadFormModal button:disabled { opacity:.5; cursor:default; }
+</style>
 </head>
 <body>
   <a class="skip" href="#main">İçeriğe geç</a>
@@ -180,7 +196,7 @@
       <h1>Restoran, otel ve perakende için <em>yapay zekâ ile otomasyon</em></h1>
       <p class="lead">İşletmenizde para, zaman ya da kontrol kaybettiren tek bir süreci buluyor, mevcut sistemlerinize bağlıyor ve kısa, ölçülebilir bir pilotla etkisini kanıtlıyoruz. Platform değişikliği ve uzun sözleşme gerekmez.</p>
       <div class="btns">
-        <a class="btn btn-gold" href="https://wa.me/79856905252?text=Merhaba%20ST8%20AI%2C%20T%C3%BCrkiye%27deki%20i%C5%9Fletmem%20i%C3%A7in%20bir%20yapay%20zek%C3%A2%20pilotunu%20konu%C5%9Fmak%20istiyorum" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_tr">WhatsApp'tan yazın</a>
+        <a class="btn btn-gold" href="https://wa.me/79856905252?text=Merhaba%20ST8%20AI%2C%20T%C3%BCrkiye%27deki%20i%C5%9Fletmem%20i%C3%A7in%20bir%20yapay%20zek%C3%A2%20pilotunu%20konu%C5%9Fmak%20istiyorum" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_tr">WhatsApp'tan yazın</a><button class="btn btn-line" type="button" data-open-lead>Pilotu konuşalım</button>
         <a class="btn btn-line" href="mailto:info@st8-ai.ru?subject=T%C3%BCrkiye%27de%20yapay%20zek%C3%A2%20pilotu" data-goal="contact_email_tr">info@st8-ai.ru</a>
       </div>
     </div>
@@ -272,7 +288,7 @@
         <h2 id="contact">Size en çok maliyet çıkaran süreci anlatın</h2>
         <p class="sub">İki üç satırla yazmanız yeterli. Pilotun mantıklı olup olmadığını ve neleri kapsayacağını size bildiririz.</p>
         <div class="btns">
-          <a class="btn btn-gold" href="https://wa.me/79856905252?text=Merhaba%20ST8%20AI%2C%20T%C3%BCrkiye%27deki%20i%C5%9Fletmem%20i%C3%A7in%20bir%20yapay%20zek%C3%A2%20pilotunu%20konu%C5%9Fmak%20istiyorum" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_tr">WhatsApp</a>
+          <a class="btn btn-gold" href="https://wa.me/79856905252?text=Merhaba%20ST8%20AI%2C%20T%C3%BCrkiye%27deki%20i%C5%9Fletmem%20i%C3%A7in%20bir%20yapay%20zek%C3%A2%20pilotunu%20konu%C5%9Fmak%20istiyorum" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_tr">WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Pilotu konuşalım</button>
           <a class="btn btn-line" href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" data-goal="contact_telegram_tr">Telegram</a>
           <a class="btn btn-line" href="mailto:info@st8-ai.ru?subject=T%C3%BCrkiye%27de%20yapay%20zek%C3%A2%20pilotu" data-goal="contact_email_tr">E-posta</a>
         </div>
@@ -290,7 +306,7 @@
       <div>
         <p><a href="/en/" hreflang="en" lang="en">International site</a> · <a href="/ae/" hreflang="en-AE" lang="en">UAE</a> · <a href="/" hreflang="ru" lang="ru">Россия</a></p>
         <p><a href="/legal.html">Gizlilik ve hukuki bilgiler</a> (KVKK)</p>
-        <p>© ST8 AI. Tüm hakları saklıdır.</p>
+        <p id="international-services">Hizmetler: <a href="/tr/restoran-yapay-zeka-otomasyonu.html">Restoran yapay zeka otomasyonu</a> · <a href="/tr/otel-yapay-zeka-cozumleri.html">Otel yapay zeka çözümleri</a> · <a href="/tr/tesis-yonetimi-yapay-zeka.html">Tesis yönetimi yapay zeka</a></p><p><a href="/tr/blog/">Rehberler</a></p><p>© ST8 AI. Tüm hakları saklıdır.</p>
       </div>
     </div>
   </footer>
@@ -304,5 +320,12 @@
       try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: goal }); } catch (err) {}
     });
   </script>
-</body>
+<div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" hidden>
+ <div class="lead-panel"><div id="leadFormStep1"><h2 id="leadFormTitle">Pilotunuzu konuşalım</h2><p>Bir süreci ve mevcut sisteminizi anlatın. Verileri, kapsamı, takvimi ve fiyatı birlikte değerlendirelim.</p>
+ <form id="leadForm"><label for="leadName">Adınız *</label><input id="leadName" name="name" type="text" required autocomplete="name"><label for="leadPhone">Telefon *</label><input id="leadPhone" name="phone" type="tel" required autocomplete="tel"><label for="leadCompany">Şirket</label><input id="leadCompany" name="company" type="text" autocomplete="organization"><label for="leadMessage">Mesajınız</label><textarea id="leadMessage" name="message" rows="4"></textarea>
+ <label class="lead-consent"><input type="checkbox" id="leadConsent" name="consent" value="accepted" required><span>Başvuruma yanıt verilmesi amacıyla adımın, telefon numaramın, şirket ve mesaj bilgilerimin işlenmesini kabul ediyorum. <a href="/en/legal.html" target="_blank" rel="noopener" lang="en">Gizlilik bildirimi (İngilizce)</a></span></label>
+ <div class="btns"><button class="btn btn-gold" type="submit" id="leadSubmitBtn" disabled>Başvuruyu gönder</button><button class="btn btn-line" type="button" data-close-lead>Kapat</button></div></form></div>
+ <div id="leadFormSuccess" role="status" tabindex="-1" hidden><h2>Teşekkürler</h2><p>Başvurunuz alındı. Paylaştığınız süreç hakkında sizinle iletişime geçeceğiz.</p><button class="btn btn-line" type="button" data-close-lead>Kapat</button></div>
+ <div id="leadFormError" role="alert" tabindex="-1" hidden><h2>Gönderim doğrulanamadı</h2><p>Gönderimi otomatik olarak tekrarlamıyoruz. Durumu WhatsApp üzerinden bize iletebilirsiniz.</p><button class="btn btn-line" type="button" data-close-lead>Kapat</button></div>
+ <p class="note"><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">Telegram</a></p></div></div><script src="/assets/international-leads.js" defer></script></body>
 </html>

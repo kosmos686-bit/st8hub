@@ -41,3 +41,31 @@ ST8 AI работает на рынках России, ОАЭ и Турции. 
 - Email: info@st8-ai.ru
 - Основатель: Алексей Гагарин, CEO & Co-founder, 15+ лет в B2B-продажах
 - Со-основатель: Юлия Попова, разработка AI-систем
+
+## Международные рынки: UAE / Türkiye
+
+Международные страницы ST8 AI описывают предлагаемые пилоты на одном объекте. Объём, доступ к данным, цена, KPI и методика измерения согласовываются до запуска. В существующей модели AE/TR указаны запуск примерно за 7–10 дней и эксплуатация примерно 3–4 недели; конкретный график зависит от согласованного контура и данных. Кейсы на сайте относятся к указанным в них проектам и не подтверждают результат у нового клиента в ОАЭ или Турции.
+
+Для EN-страниц используется en-AE, для турецких — tr. Контакты: info@st8-ai.ru и существующий WhatsApp https://wa.me/79856905252. На страницах также есть форма обсуждения пилота.
+
+### UAE — English
+
+- Overview: https://st8-ai.ru/ae/
+- AI facility management UAE: https://st8-ai.ru/ae/ai-facility-management.html
+- AI for restaurants UAE: https://st8-ai.ru/ae/restaurant-automation.html
+- AI automation hospitality UAE: https://st8-ai.ru/ae/ai-for-hotels-hospitality.html
+- AI concierge for restaurants and hotels: https://st8-ai.ru/ae/ai-concierge.html
+- AI in facility management: where to start with a one-site pilot: https://st8-ai.ru/ae/blog/ai-facility-management-one-site-pilot.html
+- How restaurants and dark kitchens cut costs with AI: https://st8-ai.ru/ae/blog/how-restaurants-dark-kitchens-cut-costs-ai.html
+- How to run an AI pilot in one location: https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html
+- Guides: https://st8-ai.ru/ae/blog/
+
+### Türkiye — Türkçe
+
+- Overview: https://st8-ai.ru/tr/
+- Restoran yapay zeka otomasyonu: https://st8-ai.ru/tr/restoran-yapay-zeka-otomasyonu.html
+- Otel yapay zeka çözümleri: https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html
+- Tesis yönetimi yapay zeka: https://st8-ai.ru/tr/tesis-yonetimi-yapay-zeka.html
+- Restoranlarda yapay zeka ile maliyet düşürme: tek noktada pilot: https://st8-ai.ru/tr/blog/restoranlarda-yapay-zeka-maliyet-dusurme.html
+- Otel ve tesis yönetiminde yapay zeka nereden başlamalı: https://st8-ai.ru/tr/blog/otel-tesis-yonetimi-yapay-zeka-pilot.html
+- Guides: https://st8-ai.ru/tr/blog/

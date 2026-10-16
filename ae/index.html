@@ -158,6 +158,22 @@
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
   </style>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+  #leadFormModal { position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,.8); backdrop-filter:blur(8px); }
+  #leadFormModal[hidden], #leadFormModal [hidden] { display:none; }
+  #leadFormModal .lead-panel { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:32px 24px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; }
+  #leadFormModal h2 { font-size:24px; margin-bottom:12px; }
+  #leadFormModal p { color:var(--g400); margin-bottom:16px; }
+  #leadFormModal label { display:block; font-size:14px; color:var(--g400); margin:16px 0 6px; }
+  #leadFormModal input:not([type=checkbox]), #leadFormModal textarea { width:100%; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:#fff; font:inherit; }
+  #leadFormModal textarea { resize:vertical; }
+  #leadFormModal .lead-consent { display:flex; align-items:flex-start; gap:10px; font-size:12px; line-height:1.5; }
+  #leadFormModal input[type=checkbox] { margin-top:3px; accent-color:var(--gold); }
+  #leadFormModal a { color:var(--gold); }
+  button.btn { border:0; font-family:inherit; cursor:pointer; }
+  button.btn-line { background:transparent; border:1px solid rgba(255,255,255,.25); }
+  #leadFormModal button:disabled { opacity:.5; cursor:default; }
+</style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -181,7 +197,7 @@
       <h1>AI automation for <em>UAE hospitality, facilities management</em> and retail</h1>
       <p class="lead">We find one costly process in your operation, connect it to the systems you already use, and prove the effect on a short, measured pilot. No platform replacement, no long contract before results.</p>
       <div class="btns">
-        <a class="btn btn-gold" href="https://wa.me/79856905252?text=Hello%20ST8%20AI%2C%20I%27d%20like%20to%20discuss%20an%20AI%20pilot%20for%20my%20business%20in%20the%20UAE" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">Message us on WhatsApp</a>
+        <a class="btn btn-gold" href="https://wa.me/79856905252?text=Hello%20ST8%20AI%2C%20I%27d%20like%20to%20discuss%20an%20AI%20pilot%20for%20my%20business%20in%20the%20UAE" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">Message us on WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Discuss a one-site pilot</button>
         <a class="btn btn-line" href="mailto:info@st8-ai.ru?subject=AI%20pilot%20in%20the%20UAE" data-goal="contact_email_ae">info@st8-ai.ru</a>
       </div>
     </div>
@@ -273,7 +289,7 @@
         <h2 id="contact">Tell us one process that costs you money</h2>
         <p class="sub">Describe it in two or three lines. We will reply with whether a pilot makes sense and what it would involve.</p>
         <div class="btns">
-          <a class="btn btn-gold" href="https://wa.me/79856905252?text=Hello%20ST8%20AI%2C%20I%27d%20like%20to%20discuss%20an%20AI%20pilot%20for%20my%20business%20in%20the%20UAE" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">WhatsApp</a>
+          <a class="btn btn-gold" href="https://wa.me/79856905252?text=Hello%20ST8%20AI%2C%20I%27d%20like%20to%20discuss%20an%20AI%20pilot%20for%20my%20business%20in%20the%20UAE" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Discuss a one-site pilot</button>
           <a class="btn btn-line" href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" data-goal="contact_telegram_ae">Telegram</a>
           <a class="btn btn-line" href="mailto:info@st8-ai.ru?subject=AI%20pilot%20in%20the%20UAE" data-goal="contact_email_ae">Email</a>
         </div>
@@ -291,7 +307,7 @@
       <div>
         <p><a href="/en/">International site</a> · <a href="/tr/" hreflang="tr" lang="tr">Türkiye</a> · <a href="/" hreflang="ru" lang="ru">Россия</a></p>
         <p><a href="/legal.html">Privacy &amp; legal</a></p>
-        <p>© ST8 AI. All rights reserved.</p>
+        <p id="international-services">Services: <a href="/ae/ai-facility-management.html">AI facility management UAE</a> · <a href="/ae/restaurant-automation.html">AI for restaurants UAE</a> · <a href="/ae/ai-for-hotels-hospitality.html">AI automation hospitality UAE</a> · <a href="/ae/ai-concierge.html">AI concierge for restaurants and hotels</a></p><p><a href="/ae/blog/">Insights</a></p><p>© ST8 AI. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -305,5 +321,12 @@
       try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: goal }); } catch (err) {}
     });
   </script>
-</body>
+<div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" hidden>
+ <div class="lead-panel"><div id="leadFormStep1"><h2 id="leadFormTitle">Discuss your pilot</h2><p>Describe one process and your current systems. We will discuss the data, scope, timing and cost.</p>
+ <form id="leadForm"><label for="leadName">Name *</label><input id="leadName" name="name" type="text" required autocomplete="name"><label for="leadPhone">Phone *</label><input id="leadPhone" name="phone" type="tel" required autocomplete="tel"><label for="leadCompany">Company</label><input id="leadCompany" name="company" type="text" autocomplete="organization"><label for="leadMessage">Message</label><textarea id="leadMessage" name="message" rows="4"></textarea>
+ <label class="lead-consent"><input type="checkbox" id="leadConsent" name="consent" value="accepted" required><span>I agree to the processing of my name, phone, company and message to handle this enquiry and contact me. <a href="/en/legal.html" target="_blank" rel="noopener" lang="en">Privacy notice</a></span></label>
+ <div class="btns"><button class="btn btn-gold" type="submit" id="leadSubmitBtn" disabled>Send enquiry</button><button class="btn btn-line" type="button" data-close-lead>Close</button></div></form></div>
+ <div id="leadFormSuccess" role="status" tabindex="-1" hidden><h2>Thank you</h2><p>Your enquiry has been received. We will contact you about the process you described.</p><button class="btn btn-line" type="button" data-close-lead>Close</button></div>
+ <div id="leadFormError" role="alert" tabindex="-1" hidden><h2>Submission not confirmed</h2><p>We will not resend automatically. You can contact us through WhatsApp to check the request.</p><button class="btn btn-line" type="button" data-close-lead>Close</button></div>
+ <p class="note"><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">Telegram</a></p></div></div><script src="/assets/international-leads.js" defer></script></body>
 </html>
