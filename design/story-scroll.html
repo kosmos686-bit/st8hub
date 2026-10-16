@@ -1,0 +1,220 @@
+<title>ST8 AI История прокрутки</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@600;700&display=swap">
+<style>
+:root{--ink:#0b0a09;--paper:#ece6d6;--pi:#1a1814;--gold:#d4af37;--gold-hi:#e8c85a;--text:#f1ecdf;--muted:rgba(241,236,223,.66);--line:rgba(241,236,223,.14);--red:#b3361b;--gutter:clamp(20px,5.6vw,88px);color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--text);font-family:"Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.prog{position:fixed;left:0;right:0;top:0;height:3px;z-index:30;background:var(--gold);transform:scaleX(0);transform-origin:0 50%}
+.nav{position:fixed;top:3px;left:0;right:0;z-index:20;background:linear-gradient(var(--ink),rgba(11,10,9,0))}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:18px}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:18px}
+.brand i{display:grid;place-items:center;width:38px;height:38px;border:1.5px solid var(--gold);border-radius:9px;color:var(--gold);font-style:normal;font-size:11px;font-weight:700}
+.cta0{height:40px;padding:0 18px;display:inline-flex;align-items:center;border:1px solid rgba(212,175,55,.55);border-radius:10px;color:var(--gold-hi);font-weight:500;font-size:15px;background:rgba(11,10,9,.6)}
+.pin{position:relative}
+.stick{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center}
+.glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(800px 560px at 78% 20%,rgba(212,175,55,.14),transparent 62%)}
+h1,h2{margin:0;font-family:"Unbounded",sans-serif;font-weight:700;letter-spacing:-.03em;line-height:1.06}
+.mono{font-family:"IBM Plex Mono",monospace}
+.kick{margin:0 0 20px;font-size:15px;color:var(--muted)}
+
+/* сцена 0 */
+#s0{height:170svh}
+#s0 .stick{justify-content:center;text-align:center}
+#s0 h1{font-size:clamp(34px,7.4vw,112px)}
+#s0 .l{display:block;will-change:transform,opacity}
+#s0 .sub{margin:28px auto 0;max-width:34em;font-size:clamp(17px,1.5vw,21px);line-height:1.6;color:var(--muted)}
+#s0 .btns{margin-top:34px;display:flex;gap:14px 26px;justify-content:center;align-items:center;flex-wrap:wrap}
+.btn{height:56px;padding:0 28px;display:inline-flex;align-items:center;border-radius:10px;background:var(--gold);color:#16120a;font-weight:500;font-size:17px;box-shadow:0 12px 36px -12px rgba(212,175,55,.55)}
+.link{font-size:17px;font-weight:500;border-bottom:1px solid rgba(241,236,223,.4);padding-bottom:3px}
+.cue{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-size:13px;color:var(--muted)}
+.cue::after{content:"";display:block;width:1px;height:34px;margin:10px auto 0;background:linear-gradient(var(--gold),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* сцена 1: чек печатается */
+#s1{height:420svh}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center;width:100%}
+#s1 h2,#s2 h2{font-size:clamp(28px,3.6vw,54px)}
+#s1 p.t{margin:22px 0 0;max-width:27em;font-size:clamp(17px,1.4vw,20px);line-height:1.6;color:var(--muted)}
+.steps{margin:30px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:16px}
+.steps li{display:flex;gap:12px;align-items:center;color:rgba(241,236,223,.34);transition:color .4s}
+.steps li::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:none;transition:.4s}
+.steps li.on{color:var(--text)}.steps li.on::before{background:var(--gold-hi);box-shadow:0 0 10px var(--gold-hi)}
+.rwrap{position:relative;height:min(78svh,620px);display:flex;justify-content:center;align-items:flex-start;padding-top:10px}
+.slot{position:absolute;top:2px;left:50%;width:min(440px,100%);height:38px;transform:translateX(-50%);z-index:3;border-radius:12px;background:linear-gradient(180deg,#2a2723,#0b0a08);box-shadow:0 14px 28px -8px #000}
+.slot::after{content:"";position:absolute;right:16px;top:14px;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 2px rgba(212,175,55,.7)}
+.paper{background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--pi);font-family:"IBM Plex Mono",monospace;font-size:13.5px;line-height:1.5;filter:drop-shadow(0 26px 30px rgba(0,0,0,.55))}
+.perf{-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%}
+.rc{position:absolute;top:26px;left:50%;width:min(440px,100%);margin-left:calc(min(440px,100%)/-2);transform:rotate(2.2deg);transform-origin:50% 0}
+.rin{padding:6px 0 24px;overflow:hidden}
+.tk{padding:14px 20px;border-bottom:1.5px dashed rgba(26,24,20,.3);will-change:transform,opacity;opacity:0;transform:translateY(-30px)}
+.tk .m{display:flex;justify-content:space-between;font-weight:500;font-size:12.5px}.tk .m span:last-child{opacity:.55}
+.tk p{margin:6px 0 0}.tk .res{margin-top:8px;font-weight:500}
+mark{background:linear-gradient(var(--gold-hi),var(--gold-hi)) no-repeat 0 88%/var(--mk,0%) 62%;color:inherit;padding:0 3px;margin:0 -3px}
+
+/* сцена 2: отрасли */
+#s2{height:620svh}
+.ind{position:relative;min-height:min(70svh,560px);display:grid;align-items:center}
+.big{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(40px);transition:opacity .55s,transform .7s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.big.on{opacity:1;transform:none;pointer-events:auto}
+.num{font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(76px,13vw,200px);line-height:.95;letter-spacing:-.05em;color:var(--gold-hi)}
+.num small{font-size:.3em;letter-spacing:0;color:var(--text);font-weight:600;margin-left:.18em}
+.big h3{margin:18px 0 0;font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(20px,2.2vw,32px)}
+.big p{margin:12px 0 0;max-width:26em;font-size:clamp(16px,1.3vw,19px);line-height:1.55;color:var(--muted)}
+.big .row{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:15px;color:var(--muted)}.big .row b{color:var(--text);font-weight:500}
+.dots{display:flex;gap:8px;margin-top:34px}
+.dots i{width:34px;height:3px;background:var(--line);transition:.4s;transform-origin:0 50%}.dots i.on{background:var(--gold-hi)}
+.art{position:relative;height:min(70svh,560px);display:flex;align-items:center;justify-content:center}
+.art .sh{position:absolute;width:min(430px,100%);opacity:0;transform:rotate(3deg) translateY(36px);transition:opacity .55s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.art .sh.on{opacity:1;transform:rotate(3deg)}
+.pp{padding:16px 20px 28px}
+.pp h4{margin:0 0 8px;font-family:"Unbounded",sans-serif;font-size:13px;font-weight:600}
+.pp .l{display:flex;gap:10px;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(26,24,20,.3)}
+.pp .l b{color:var(--red);font-weight:500}
+.foot{margin:26px 0 0;font-size:13px;color:rgba(241,236,223,.5)}
+.stampx{z-index:2;position:absolute;right:22px;top:-14px;padding:5px 12px;border:3px solid var(--red);border-radius:6px;color:var(--red);font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.08em;transform:rotate(-8deg);background:var(--paper)}
+
+/* сцена 3: текст проявляется */
+#s3{height:300svh}
+#s3 .stick{justify-content:center}
+.rev{margin:0;max-width:17em;font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(30px,5.2vw,84px);line-height:1.12;letter-spacing:-.03em}
+.rev span{color:rgba(241,236,223,.16)}
+.rev em{font-style:normal}
+.rev span.on{color:var(--text)}
+.rev span.on.g{color:var(--gold-hi)}
+.rev span{transition:color .35s}
+
+/* сцена 4 */
+.fin{padding-block:clamp(72px,10vw,140px) 56px;background:radial-gradient(800px 420px at 20% 0%,rgba(212,175,55,.12),transparent 62%)}
+.fin h2{font-size:clamp(28px,4.4vw,66px);max-width:14em}
+.gar{margin:44px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.gar .paper{padding:20px 18px 28px;transform:rotate(var(--r,0deg))}
+.gar .paper b{display:block;margin-bottom:8px;font-family:"Unbounded",sans-serif;font-size:14px;font-weight:600}
+.gar .paper:nth-child(1){--r:-1.2deg}.gar .paper:nth-child(2){--r:.8deg}.gar .paper:nth-child(3){--r:-.6deg}.gar .paper:nth-child(4){--r:1.2deg}
+.fin .act{margin-top:44px;display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
+.tiers{margin-top:40px;display:flex;flex-wrap:wrap;gap:8px 30px;font-size:16px;color:var(--muted)}.tiers b{color:var(--text);font-weight:500}
+.legal{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;line-height:1.6;color:rgba(241,236,223,.5)}
+
+@media(max-width:900px){
+ .two{grid-template-columns:1fr;gap:6px;align-content:center}
+ #s1 .stick,#s2 .stick{align-items:flex-start;padding-top:74px}
+ #s1 h2,#s2 h2{font-size:clamp(24px,6.6vw,34px)}
+ #s1 p.t{display:none}.steps{display:none}
+ .rwrap{height:52svh;margin-top:44px}.rc{top:16px}
+ .ind{min-height:200px}.art{height:46svh}
+ .num{font-size:clamp(64px,22vw,112px)}
+ .big p{font-size:15px}.big .row{display:none}
+ .dots{margin-top:14px}
+ .gar{grid-template-columns:1fr 1fr}
+ .btn{width:100%;justify-content:center}
+}
+@media(max-width:560px){.gar{grid-template-columns:1fr}.tk{padding:11px 16px}.tk p{font-size:12.5px}}
+@media(prefers-reduced-motion:reduce){
+ *{transition:none!important;animation:none!important}
+ .pin{height:auto!important}.stick{position:relative;height:auto;min-height:100svh;padding-block:80px}
+ .tk{opacity:1!important;transform:none!important}mark{--mk:100%!important}
+ .big{position:relative;opacity:1;transform:none;margin-bottom:60px}.art .sh{position:relative;opacity:1;transform:rotate(2deg);margin-bottom:24px}.ind,.art{height:auto}
+ .rev span{color:var(--text)}.cue{display:none}
+}
+</style>
+
+<div class="prog" id="prog"></div>
+<header class="nav"><div class="wrap"><a class="brand" href="#"><i>ST8</i>ST8 AI</a><a class="cta0" href="#fin">Обсудить пилот</a></div></header>
+
+<!-- 0 -->
+<section class="pin" id="s0"><div class="stick"><div class="glow"></div><div class="wrap" style="width:100%">
+ <h1><span class="l" id="l1">Автоматизация</span><span class="l" id="l2">бизнеса</span><span class="l" id="l3" style="color:var(--gold-hi)">нейросетями</span></h1>
+ <p class="sub" id="sub">Цифровой администратор, предиктивные закупки и computer vision. Без остановки бизнеса, с измеримым результатом пилота.</p>
+ <div class="btns" id="btns"><a class="btn" href="#fin">Обсудить задачу и план пилота</a><a class="link" href="#s2">Все решения</a></div>
+</div><div class="cue">листайте</div></div></section>
+
+<!-- 1 -->
+<section class="pin" id="s1"><div class="stick"><div class="glow"></div><div class="wrap" style="width:100%"><div class="two">
+ <div><p class="kick">Одна смена в ресторане</p><h2>Каждое действие записывается в ленту</h2>
+  <p class="t">Гость написал в мессенджер, закончились сливки, пришёл плохой отзыв. Система сама отвечает, считает и собирает заказ. Вам остаётся нажать «ОК».</p>
+  <ul class="steps" id="steps"><li>Бронь принята</li><li>Закупка собрана</li><li>Отзыв разобран</li><li>Замена предложена</li></ul></div>
+ <div class="rwrap"><div class="slot"></div><div class="rc paper perf"><div class="rin">
+  <div class="tk"><div class="m"><span>19:12 гость</span><span>#0412</span></div><p>«Столик на четверых, сегодня после семи»</p><p class="res"><mark>Стол 12 на 19:30. Гостю ушло SMS.</mark></p></div>
+  <div class="tk"><div class="m"><span>21:40 склад</span><span>#0413</span></div><p>Сливки 33%: остаток 4 л, завтра нужно 14 л</p><p class="res"><mark>Заказ поставщику собран, ждёт вашего ОК.</mark></p></div>
+  <div class="tk"><div class="m"><span>09:20 отзыв</span><span>#0415</span></div><p>«Горячее ждали 40 минут», 2 из 5</p><p class="res"><mark>Ответ готов, управляющему отправлено.</mark></p></div>
+  <div class="tk"><div class="m"><span>12:30 поставщик</span><span>#0417</span></div><p>Лосось подорожал</p><p class="res"><mark>Предложена замена из вашего прайса.</mark></p></div>
+ </div></div></div>
+</div></div></div></section>
+
+<!-- 2 -->
+<section class="pin" id="s2"><div class="stick"><div class="glow"></div><div class="wrap" style="width:100%"><div class="two">
+ <div><p class="kick">Выберите свою отрасль, листая вниз</p>
+  <div class="ind" id="ind">
+   <div class="big on"><div class="num">−35<small>%</small></div><h3>Ресторан и HoReCa: списания</h3><p>Прогноз спроса на 7 дней вперёд и заказ поставщику без ручного подсчёта.</p><div class="row"><span><b>+17%</b> средний чек</span><span><b>−40%</b> no-show</span></div></div>
+   <div class="big"><div class="num">−60<small>%</small></div><h3>Производство: брак</h3><p>Камера замечает дефект за 50 мс, датчик предупреждает о поломке за 72 часа.</p><div class="row"><span><b>99,7%</b> точность</span><span><b>−25%</b> простои</span></div></div>
+   <div class="big"><div class="num">−30<small>%</small></div><h3>Магазин: недостача</h3><p>Прогноз по каждому товару и готовый заказ поставщику до того, как полка опустела.</p><div class="row"><span><b>94%</b> точность прогноза</span><span><b>+22%</b> оборот</span></div></div>
+   <div class="big"><div class="num">−25<small>%</small></div><h3>Склад и доставка: топливо</h3><p>Авария на трассе, и маршрут пересобран. Каждая точка остаётся в окне клиента.</p><div class="row"><span><b>−40%</b> ошибки</span><span><b>+18%</b> грузооборот</span></div></div>
+   <div class="big"><div class="num">−70<small>%</small></div><h3>Офис и УК: рутина</h3><p>Счета, заявки и письма сами раскладываются по людям. Человек только проверяет.</p><div class="row"><span><b>в 5 раз</b> быстрее</span><span><b>+35%</b> эффективность</span></div></div>
+  </div>
+  <div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <p class="foot">* Усреднённые показатели по проектам. Не гарантия результата для другого бизнеса.</p></div>
+ <div class="art" id="art" aria-hidden="true">
+  <div class="sh on"><div class="paper perf pp"><h4>Журнал смены, ресторан</h4><div class="l"><span>19:12 бронь</span><span>стол 12</span></div><div class="l"><span>21:40 закупка</span><span>сливки ×14 л</span></div><div class="l"><span>09:20 отзыв</span><span><mark style="--mk:100%">ответ готов</mark></span></div></div></div>
+  <div class="sh"><div class="paper perf pp"><h4>Журнал смены, линия 2</h4><div class="l"><span>02:15 партия 118</span><b>скол</b></div><div class="l"><span>02:15 снят с ленты</span><span><mark style="--mk:100%">фото технологу</mark></span></div><div class="l"><span>04:40 насос</span><span>вибрация растёт</span></div><div class="l"><span>04:40 ТО в ночь</span><span><mark style="--mk:100%">запчасть заказана</mark></span></div></div></div>
+  <div class="sh"><div class="paper perf pp"><h4>Заказ поставщику</h4><div class="l"><span>Молоко 3,2%</span><span>остаток 8 → ×13</span></div><div class="l"><span>Кофе зерно 1 кг</span><span>остаток 3 → ×15</span></div><div class="l"><span>Гречка 800 г</span><span>остаток 40, ок</span></div><div class="l"><span><mark style="--mk:100%">Собран, ждёт ОК</mark></span><span></span></div></div></div>
+  <div class="sh"><div style="position:relative"><div class="stampx">ПЕРЕСТРОЕН</div><div class="paper perf pp"><h4>Рейс 14, МКАД</h4><div class="l"><span>Авария на трассе</span><span><mark style="--mk:100%">маршрут новый</mark></span></div><div class="l"><span>Оптика Север, 13–15</span><span>14:25 в окне</span></div><div class="l"><span>Кафе у вокзала, 15–17</span><span>15:50 в окне</span></div></div></div></div>
+  <div class="sh"><div class="paper perf pp"><h4>Счёт №418 распознан</h4><div class="l"><span>тип</span><span><mark style="--mk:100%">счёт на оплату</mark></span></div><div class="l"><span>сумма</span><span><mark style="--mk:100%">84 300 ₽</mark></span></div><div class="l"><span>оплатить до</span><span>28.10.2026</span></div><div class="l"><span>статус</span><span>на проверке у бухгалтера</span></div></div></div>
+ </div>
+</div></div></div></section>
+
+<!-- 3 -->
+<section class="pin" id="s3"><div class="stick"><div class="glow"></div><div class="wrap" style="width:100%">
+ <p class="rev" id="rev" aria-label="47 проектов, 0 провалов, окупаемость 2–3 месяца. Пилот на одной точке, выход без штрафа.">
+ <span class="g">47</span> <span class="g">проектов.</span> <span class="g">0</span> <span class="g">провалов.</span> <span>Окупаемость</span> <span class="g">2–3</span> <span>месяца.</span> <span>Сначала</span> <span>пилот</span> <span>на</span> <span>одной</span> <span>точке,</span> <span>и</span> <span>выйти</span> <span>можно</span> <span>без</span> <span>штрафа.</span></p>
+</div></div></section>
+
+<!-- 4 -->
+<section class="fin" id="fin"><div class="wrap">
+ <h2>Договорная защита до старта</h2>
+ <div class="gar">
+  <div class="paper perf"><b>KPI до старта</b>Целевые показатели фиксируем в договоре до начала работ.</div>
+  <div class="paper perf"><b>Пилот на 1 точке</b>Полное внедрение только после успешного пилота.</div>
+  <div class="paper perf"><b>Выход без штрафа</b>30 дней на выход из проекта без штрафных санкций.</div>
+  <div class="paper perf"><b>Эксклюзив на город</b>Не работаем с вашими прямыми конкурентами в одном городе.</div>
+ </div>
+ <div class="tiers"><span>Базовый <b>от 65 000 ₽</b></span><span>Бизнес <b>от 165 000 ₽</b></span><span>Сеть <b>от 385 000 ₽</b></span></div>
+ <div class="act"><a class="btn" href="#">Обсудить задачу и план пилота</a><a class="link" href="#">Написать в Telegram</a></div>
+ <p class="legal">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса. Данные в демо условные.</p>
+</div></section>
+
+<script>
+(function(){
+var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function clamp(x){return x<0?0:x>1?1:x}
+function prog(el){var r=el.getBoundingClientRect(),h=el.offsetHeight-innerHeight;return h<=0?1:clamp(-r.top/h)}
+var s0=document.getElementById('s0'),s1=document.getElementById('s1'),s2=document.getElementById('s2'),s3=document.getElementById('s3');
+var l=[1,2,3].map(function(i){return document.getElementById('l'+i)}),sub=document.getElementById('sub'),btns=document.getElementById('btns');
+var tk=[].slice.call(document.querySelectorAll('.tk')),stp=[].slice.call(document.querySelectorAll('#steps li')),rc=document.querySelector('.rc');
+var big=[].slice.call(document.querySelectorAll('.big')),sh=[].slice.call(document.querySelectorAll('.art .sh')),dots=[].slice.call(document.querySelectorAll('#dots i'));
+var words=[].slice.call(document.querySelectorAll('#rev span')),pg=document.getElementById('prog'),cur=-1;
+function tick(){
+ var d=document.documentElement,sc=d.scrollHeight-innerHeight;pg.style.transform='scaleX('+(sc>0?clamp(scrollY/sc):0)+')';
+ /* 0 */
+ var p=prog(s0),e=p*p;
+ l.forEach(function(el,i){el.style.transform='translateY('+(-e*30*(i+1))+'px) scale('+(1-p*.12)+')';el.style.opacity=1-clamp((p-.25-i*.05)*2.2)});
+ sub.style.opacity=1-clamp(p*3);sub.style.transform='translateY('+(-p*60)+'px)';btns.style.opacity=1-clamp(p*3);
+ /* 1 */
+ p=prog(s1);var n=tk.length;
+ tk.forEach(function(t,i){var a=clamp((p*1.15-i/n*.9-.04)/.22);t.style.opacity=a;t.style.transform='translateY('+(-(1-a)*34)+'px)';t.style.setProperty('--mk',clamp((a-.55)/.45)*100+'%');t.querySelector('mark').style.setProperty('--mk',clamp((a-.5)/.5)*100+'%')});
+ stp.forEach(function(s,i){s.classList.toggle('on',p*1.15-i/n*.9-.04>.08)});
+ rc.style.transform='rotate(2.2deg) translateY('+(-clamp((p-.55)*1.4)*70)+'px)';
+ /* 2 */
+ p=prog(s2);var k=Math.min(4,Math.floor(p*5));
+ if(k!==cur){cur=k;big.forEach(function(b,i){b.classList.toggle('on',i===k)});sh.forEach(function(b,i){b.classList.toggle('on',i===k)});dots.forEach(function(b,i){b.classList.toggle('on',i<=k)})}
+ /* 3 */
+ p=prog(s3);var m=words.length,upto=p*1.25*m;
+ words.forEach(function(w,i){w.classList.toggle('on',i<upto)});
+}
+if(RM){words.forEach(function(w){w.classList.add('on')});tk.forEach(function(t){t.style.opacity=1;t.style.transform='none'})}
+else{var q=false;function on(){if(!q){q=true;requestAnimationFrame(function(){q=false;tick()})}}addEventListener('scroll',on,{passive:true});addEventListener('resize',on);tick()}
+})();
+</script>
