@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <title>Otel yapay zeka çözümleri | ST8 AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;subset=latin-ext&amp;display=swap" rel="stylesheet">
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112836376', 'ym');
+    ym(112836376, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #d4af37; --gold-light: #f0d78c; --gold-dark: #a08020;
+      --black: #000; --dark: #0a0a0a; --card: #111;
+      --g400: #9ca3af; --g500: #6b7280; --g600: #4b5563;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: #fff; -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; }
+    .skip { position: absolute; left: -9999px; top: 0; background: var(--gold); color: #000; padding: 8px 14px; z-index: 100; }
+    .skip:focus { left: 8px; top: 8px; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    header { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--gold); }
+    .logo-text { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
+    .logo-text span { color: var(--gold); font-weight: 300; }
+    nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
+    nav a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    nav a:hover { color: var(--gold); }
+    .hero { padding: 72px 0 56px; }
+    .badge { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,175,55,0.35); border-radius: 999px; padding: 6px 14px; margin-bottom: 22px; }
+    h1 { font-size: clamp(30px, 5.6vw, 54px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; max-width: 880px; }
+    h1 em { font-style: normal; color: var(--gold); }
+    .lead { margin-top: 22px; max-width: 700px; font-size: 18px; color: var(--g400); }
+    .btns { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; transition: transform .3s cubic-bezier(.32,.72,0,1), background .3s; }
+    .btn-gold { background: var(--gold); color: #000; }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-line { border: 1px solid rgba(255,255,255,0.25); color: #fff; }
+    .btn-line:hover { border-color: var(--gold); color: var(--gold); }
+    section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h2 { font-size: clamp(25px, 4vw, 36px); line-height: 1.18; letter-spacing: -0.025em; font-weight: 600; max-width: 780px; }
+    .sub { margin-top: 14px; color: var(--g400); max-width: 700px; }
+    .grid { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--card); border: 1px solid rgba(212,175,55,0.14); border-radius: 18px; padding: 24px; }
+    .card h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .card ul { list-style: none; color: var(--g400); font-size: 15px; }
+    .card li { padding-left: 18px; position: relative; margin-bottom: 8px; }
+    .card li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .steps { counter-reset: s; }
+    .step { counter-increment: s; }
+    .step h3::before { content: counter(s); display: inline-flex; width: 28px; height: 28px; margin-right: 10px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-size: 14px; align-items: center; justify-content: center; }
+    .step p { color: var(--g400); font-size: 15px; }
+    .terms { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .term { border-left: 2px solid var(--gold); padding: 4px 0 4px 16px; }
+    .term strong { display: block; margin-bottom: 4px; }
+    .term span { color: var(--g400); font-size: 15px; }
+    details { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px 22px; margin-top: 12px; }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { margin-top: 10px; color: var(--g400); font-size: 15px; }
+    .note { margin-top: 28px; font-size: 13px; color: var(--g500); max-width: 740px; }
+    .cta { text-align: center; }
+    .cta h2, .cta .sub { margin-left: auto; margin-right: auto; }
+    .cta .btns { justify-content: center; }
+    footer { padding: 36px 0 48px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 13px; color: var(--g500); }
+    footer .row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
+    footer a { color: var(--g400); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+    footer p { margin-bottom: 6px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;subset=latin-ext&amp;display=swap">
+
+<meta name="description" content="Tek otelde yapay zekâ pilotu: onaylı misafir bilgileri, personele devir ve ölçülebilir iş akışı. Kapsam ve KPI’lar önceden belirlenir.">
+<link rel="canonical" href="https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html">
+<link rel="alternate" hreflang="tr" href="https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html">
+<link rel="alternate" hreflang="en-AE" href="https://st8-ai.ru/ae/ai-for-hotels-hospitality.html">
+<link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/ae/ai-for-hotels-hospitality.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Otel yapay zeka çözümleri | ST8 AI">
+<meta property="og:description" content="Tek otelde yapay zekâ pilotu: onaylı misafir bilgileri, personele devir ve ölçülebilir iş akışı. Kapsam ve KPI’lar önceden belirlenir.">
+<meta property="og:url" content="https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html">
+<meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://st8-ai.ru/#organization",
+      "name": "ST8 AI",
+      "url": "https://st8-ai.ru/",
+      "email": "info@st8-ai.ru",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://st8-ai.ru/og-image.jpg"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Türkiye",
+          "item": "https://st8-ai.ru/tr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Otel yapay zeka çözümleri",
+          "item": "https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html#service",
+      "name": "Otel yapay zeka çözümleri",
+      "serviceType": "Otel yapay zeka çözümleri",
+      "description": "Tek otelde yapay zekâ pilotu: onaylı misafir bilgileri, personele devir ve ölçülebilir iş akışı. Kapsam ve KPI’lar önceden belirlenir.",
+      "url": "https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html",
+      "areaServed": "TR",
+      "inLanguage": "tr",
+      "provider": {
+        "@id": "https://st8-ai.ru/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://st8-ai.ru/tr/otel-yapay-zeka-cozumleri.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Otelde ilk pilot hangi işi kapsar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tek bir tesiste, sınırlı bir soru veya talep grubu seçilir. Bilgi kaynakları ve sorumlu ekip belirlenir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bilgi eksik olduğunda ne olur?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Önerilen akış açıklama ister ya da talebi personele devreder. Kaynakta olmayan otel bilgileri üretilmez."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Her otel yazılımına hazır bağlantı var mı?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bağlantı peşinen varsayılmaz. Kullanılabilecek erişim, dışa aktarım veya API seçenekleri ön incelemede değerlendirilir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Pilot ne kadar sürer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mevcut model yaklaşık 7–10 günde başlatma ve 3–4 hafta kullanım içerir. Takvim, kapsam ve erişimle netleşir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Başarı ölçütleri ne zaman belirlenir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Başlangıç değerleri ile karşılaştırma yöntemi, uygulamadan önce kararlaştırılır. KPI’lar pilot sözleşmesine yazılır."
+          }
+        }
+      ]
+    }
+  ]
+}</script>
+<style>
+  #leadFormModal { position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,.8); backdrop-filter:blur(8px); }
+  #leadFormModal[hidden], #leadFormModal [hidden] { display:none; }
+  #leadFormModal .lead-panel { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:32px 24px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; }
+  #leadFormModal h2 { font-size:24px; margin-bottom:12px; }
+  #leadFormModal p { color:var(--g400); margin-bottom:16px; }
+  #leadFormModal label { display:block; font-size:14px; color:var(--g400); margin:16px 0 6px; }
+  #leadFormModal input:not([type=checkbox]), #leadFormModal textarea { width:100%; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:#fff; font:inherit; }
+  #leadFormModal textarea { resize:vertical; }
+  #leadFormModal .lead-consent { display:flex; align-items:flex-start; gap:10px; font-size:12px; line-height:1.5; }
+  #leadFormModal input[type=checkbox] { margin-top:3px; accent-color:var(--gold); }
+  #leadFormModal a { color:var(--gold); }
+  button.btn { border:0; font-family:inherit; cursor:pointer; }
+  button.btn-line { background:transparent; border:1px solid rgba(255,255,255,.25); }
+  #leadFormModal button:disabled { opacity:.5; cursor:default; }
+</style>
+</head>
+<body><a class="skip" href="#main">İçeriğe geç</a><header>
+    <div class="wrap bar">
+      <a class="logo" href="/tr/" aria-label="ST8 AI ana sayfa"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+      <nav aria-label="Ana menü"><a href="/tr/">Türkiye</a><a href="/tr/blog/">Rehberler</a><a href="/ae/" lang="en">English (UAE)</a></nav>
+    </div>
+  </header><main id="main"><div class="wrap hero"><p class="label"><a href="/tr/">Türkiye</a></p><h1>Otel yapay zeka çözümleri</h1><p class="lead">Bir otelde yapay zekâ pilotuna misafir talebinden başlayabilirsiniz. ST8 AI, tek bir tesiste sınırlı bir iş akışını ele alır: onaylı bilgi, ilgili personele devir ve başlamadan önce sözleşmede belirlenen KPI&#x27;larla ölçülen bir deneme.</p><div class="btns"><a class="btn btn-gold" href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_tr">WhatsApp'tan yazın</a><button class="btn btn-line" type="button" data-open-lead>Pilotu konuşalım</button></div></div><section aria-labelledby="section-0"><div class="wrap"><h2 id="section-0">Sorun: yanıt vermek ile talebi tamamlamak aynı şey değil</h2><p class="sub">Misafirin sorusuna yanıt verilmesi, arkasındaki işin tamamlandığı anlamına gelmeyebilir. Bazı taleplerin başka bir ekip tarafından ele alınması gerekir. Ön incelemede mesajın nereden geldiği, hangi bilginin kullanıldığı ve talebin kime devredildiği belirlenir. Otelin mevcut işleyişi görülmeden hazır bir otomasyon şeması dayatılmaz.</p><p class="sub">Otel için yapay zeka değerlendirirken önce bu sınırı çizmek yararlıdır. Hangi sorular onaylı bilgilerle yanıtlanabilir? Hangi durumda personel karar vermelidir? İlk pilotun görevi, bu adımları tek bir tesiste anlaşılır ve değerlendirilebilir bir iş akışına dönüştürmektir.</p></div></section><section aria-labelledby="section-1"><div class="wrap"><h2 id="section-1">İlk uygulamanın kapsamı</h2><div class="grid"><div class="card"><h3>Onaylı misafir bilgileri</h3><p class="sub">Asistanın kullanacağı belgeler ve bilgiler otelle birlikte seçilir. İçeriğin sahibi ve hangi sorulara yanıt verebileceği belirlenir. Kaynakta bulunmayan bir hizmet, koşul veya politika üretilmez. Yeterli bilgi yoksa açıklama istenir ya da talep ilgili personele aktarılır. Bu sınır, pilotun değerlendirilmesini de kolaylaştırır.</p></div><div class="card"><h3>Talebin doğru ekibe ulaşması</h3><p class="sub">ST8 AI&#x27;ın uluslararası hizmetlerinde misafir soruları ve görev yönlendirme yer alır. Oteldeki pilot için bir talep türü seçilir; verinin alınması, analizi ve sorumlu kişiye iletilmesi birlikte tarif edilir. Personelin hangi noktada devreye girdiği ve sonucu nereye kaydettiği, bağlantı kurulmadan önce netleşmelidir.</p></div><div class="card"><h3>İstisnaların gözden geçirilmesi</h3><p class="sub">Her mesajın aynı şekilde ele alınacağı varsayılmaz. Ekip, hangi durumlarda kontrol gerektiğini ve bir talebin nasıl devralınacağını bilmelidir. Pilotta bu durumlar ayrıca incelenir. Böylece değerlendirme yalnızca gönderilmiş yanıtlara değil, seçilen iş akışının tamamına dayanır. Yetki sınırları belirsiz bir asistan yerine, görevi açık bir uygulama sınanır.</p></div></div></div></section><section aria-labelledby="section-2"><div class="wrap"><h2 id="section-2">Tek tesiste pilotun adımları</h2><div class="grid steps"><div class="card step"><h3>Süreci ve başlangıç değerlerini seçin</h3><p class="sub">Bir otel, bir soru veya talep grubu ve ilgili ekip belirlenir. Personelin bugün başvurduğu kaynaklar incelenir. Başlangıç değerleri kaydedilir; hangi göstergenin hangi kayıtlarla ölçüleceği kararlaştırılır. Pilotun sonunda yapılacak karşılaştırmanın yöntemi, uygulama başladıktan sonra değiştirilmez; değişiklik gerekirse ayrıca değerlendirilir.</p></div><div class="card step"><h3>Mevcut sisteme bağlantıyı netleştirin</h3><p class="sub">ST8 AI mevcut sistem ve tabloların üzerine eklenen bir katmandır. Kullanılabilecek dışa aktarımlar veya API&#x27;ler ön incelemede kontrol edilir. Belirli bir otel yazılımına erişim bulunduğu peşinen kabul edilmez. Veri kaynakları, erişim yetkileri ve çalışana devir noktaları pilotun kapsamı içinde tanımlanır.</p></div><div class="card step"><h3>Kullanım sonuçlarını birlikte inceleyin</h3><p class="sub">Türkiye sayfasındaki mevcut modele göre pilotun yaklaşık 7–10 günde başlatılması ve yaklaşık 3–4 hafta kullanılması planlanır. Süreler, kapsam ve veri erişimine göre netleştirilir. KPI&#x27;lar ve ölçüm yöntemi sözleşmeye uygulama öncesinde yazılır. Sonuçlar başlangıç değerleriyle karşılaştırılır; hatalar ve sınırlamalar görülmeden başka tesislere geçilmez.</p></div></div></div></section><section aria-labelledby="section-3"><div class="wrap"><h2 id="section-3">İlk görüşmede bir talebi anlatın</h2><p class="sub">Misafirle hangi kanaldan iletişim kurulduğunu, ekibin hangi kaynağa baktığını ve talebi kimin tamamladığını paylaşın. Böylece kapsam ve fiyat somut bir süreç üzerinden konuşulabilir. Sitedeki farklı sektör örnekleri iş akışlarını anlatır; oteliniz için ölçülmüş bir sonuç sunmaz. İlk amaç, kendi tesisinizde hangi hipotezin ve hangi verilerle sınanacağını belirlemektir.</p></div></section><section aria-labelledby="faq"><div class="wrap"><h2 id="faq">Sık sorulan sorular</h2><details><summary>Otelde ilk pilot hangi işi kapsar?</summary><p>Tek bir tesiste, sınırlı bir soru veya talep grubu seçilir. Bilgi kaynakları ve sorumlu ekip belirlenir.</p></details><details><summary>Bilgi eksik olduğunda ne olur?</summary><p>Önerilen akış açıklama ister ya da talebi personele devreder. Kaynakta olmayan otel bilgileri üretilmez.</p></details><details><summary>Her otel yazılımına hazır bağlantı var mı?</summary><p>Bağlantı peşinen varsayılmaz. Kullanılabilecek erişim, dışa aktarım veya API seçenekleri ön incelemede değerlendirilir.</p></details><details><summary>Pilot ne kadar sürer?</summary><p>Mevcut model yaklaşık 7–10 günde başlatma ve 3–4 hafta kullanım içerir. Takvim, kapsam ve erişimle netleşir.</p></details><details><summary>Başarı ölçütleri ne zaman belirlenir?</summary><p>Başlangıç değerleri ile karşılaştırma yöntemi, uygulamadan önce kararlaştırılır. KPI’lar pilot sözleşmesine yazılır.</p></details></div></section><section><div class="wrap"><h2>İlgili süreçler ve rehberler</h2><p class="sub"><a href="/tr/restoran-yapay-zeka-otomasyonu.html">Restoran yapay zeka otomasyonu</a> · <a href="/tr/tesis-yonetimi-yapay-zeka.html">Tesis yönetimi yapay zeka</a> · <a href="/tr/blog/">Rehberler</a></p><p class="sub"><a href="/tr/blog/otel-tesis-yonetimi-yapay-zeka-pilot.html">Otel ve tesis yönetiminde yapay zeka nereden başlamalı</a></p><p class="sub">Rusya’daki inşaat süreci örneği: <a href="/cases/level-group.html">Level Group</a>.</p></div></section><section class="cta"><div class="wrap"><h2>Tek bir iş akışını konuşalım</h2><p class="sub">Mevcut sisteminizi ve bir süreci anlatın; veri, kapsam ve pilotun değerlendirme yöntemini birlikte netleştirelim.</p><div class="btns"><a class="btn btn-gold" href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_tr">WhatsApp'tan yazın</a><button class="btn btn-line" type="button" data-open-lead>Pilotu konuşalım</button></div></div></section></main><footer>
+    <div class="wrap row">
+      <div>
+        <p><strong style="color:#fff">ST8 AI</strong> · Alexey Gagarin, CEO ve Kurucu Ortak</p>
+        <p><a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a> · <a href="tel:+79856905252">+7 985 690-52-52</a> · <a href="https://wa.me/79856905252" rel="noopener noreferrer">WhatsApp</a></p>
+        <p>Şahıs işletmesi Popova Yu.D. · Vergi no. 662607100653 · Sicil no. 326965800048074</p>
+      </div>
+      <div>
+        <p><a href="/en/" hreflang="en" lang="en">Uluslararası site</a> · <a href="/ae/" hreflang="en-AE" lang="en">UAE</a> · <a href="/" hreflang="ru" lang="ru">Россия</a></p>
+        <p><a href="/en/legal.html">Gizlilik bildirimi (İngilizce)</a></p>
+        <p>© ST8 AI. Tüm hakları saklıdır.</p>
+      </div>
+    </div>
+  </footer><div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" hidden>
+ <div class="lead-panel"><div id="leadFormStep1"><h2 id="leadFormTitle">Pilotunuzu konuşalım</h2><p>Bir süreci ve mevcut sisteminizi anlatın. Verileri, kapsamı, takvimi ve fiyatı birlikte değerlendirelim.</p>
+ <form id="leadForm"><label for="leadName">Adınız *</label><input id="leadName" name="name" type="text" required autocomplete="name"><label for="leadPhone">Telefon *</label><input id="leadPhone" name="phone" type="tel" required autocomplete="tel"><label for="leadCompany">Şirket</label><input id="leadCompany" name="company" type="text" autocomplete="organization"><label for="leadMessage">Mesajınız</label><textarea id="leadMessage" name="message" rows="4"></textarea>
+ <label class="lead-consent"><input type="checkbox" id="leadConsent" name="consent" value="accepted" required><span>Başvuruma yanıt verilmesi amacıyla adımın, telefon numaramın, şirket ve mesaj bilgilerimin işlenmesini kabul ediyorum. <a href="/en/legal.html" target="_blank" rel="noopener" lang="en">Gizlilik bildirimi (İngilizce)</a></span></label>
+ <div class="btns"><button class="btn btn-gold" type="submit" id="leadSubmitBtn" disabled>Başvuruyu gönder</button><button class="btn btn-line" type="button" data-close-lead>Kapat</button></div></form></div>
+ <div id="leadFormSuccess" role="status" tabindex="-1" hidden><h2>Teşekkürler</h2><p>Başvurunuz alındı. Paylaştığınız süreç hakkında sizinle iletişime geçeceğiz.</p><button class="btn btn-line" type="button" data-close-lead>Kapat</button></div>
+ <div id="leadFormError" role="alert" tabindex="-1" hidden><h2>Gönderim doğrulanamadı</h2><p>Gönderimi otomatik olarak tekrarlamıyoruz. Durumu WhatsApp üzerinden bize iletebilirsiniz.</p><button class="btn btn-line" type="button" data-close-lead>Kapat</button></div>
+ <p class="note"><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">Telegram</a></p></div></div><script>document.addEventListener('click',function(e){var a=e.target.closest('a[data-goal]');if(!a)return;var goal=a.getAttribute('data-goal');try{if(typeof ym==='function')ym(112836376,'reachGoal',goal);}catch(_){}try{if(typeof gtag==='function')gtag('event',goal);}catch(_){}});</script><script src="/assets/international-leads.js" defer></script></body></html>
