@@ -107,3 +107,24 @@
 .ss-rc { top: 34px; left: 50%; width: min(390px,86%); margin-left: calc(min(390px,86%) / -2); }
 @media(max-width:900px) { .ss-rwrap { height: min(62svh,560px); } }
 @media(prefers-reduced-motion:reduce) { .ss-rwrap { height: auto; } .ss-rc { inset: auto; margin: auto; width: 86%; } }
+
+/* Captions belong to the paper, not the introductory eyebrow. */
+.ss-receipt-figure { min-width: 0; }
+#story-scene-2 .ss-kick { font-size: 14px; color: rgba(241,236,223,.85); line-height: 1.5; }
+#story-scene-2 .ss-sh .ss-demo-caption { font: 400 12px/1.5 var(--font-body); margin: 18px 0 0; color: #d2cbbc; }
+@media(max-width:639px) {
+ .scroll-story.ss-motion #story-scene-1 { height: 160svh; }
+ .scroll-story.ss-motion #story-scene-2 { height: 230svh; }
+}
+@media(min-width:390px) and (max-width:639px) and (min-height:840px) {
+ .scroll-story.ss-motion #story-scene-1 { height: 210svh; }
+ .scroll-story.ss-motion #story-scene-2 { height: 300svh; }
+}
+@media(min-width:640px) and (max-width:900px) {
+ .scroll-story.ss-motion #story-scene-1 { height: 240svh; }
+ .scroll-story.ss-motion #story-scene-2 { height: 360svh; }
+}
+/* Let the caption follow the actual receipt height at every breakpoint. */
+.scroll-story .ss-receipt-figure .ss-rwrap { height: auto; padding-top: 34px; padding-bottom: 18px; }
+.scroll-story .ss-receipt-figure .ss-rc { position: relative; top: auto; left: auto; margin: 0 auto; }
+@media(prefers-reduced-motion:reduce) { .scroll-story .ss-receipt-figure .ss-rwrap { padding-top: 28px; } }
