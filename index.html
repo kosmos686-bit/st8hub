@@ -217,6 +217,11 @@
     }
     .nav-link:hover::after { width: 100%; }
     .nav-actions { display: flex; align-items: center; gap: 12px; }
+    @media(max-width:639px){
+      .navbar { flex-wrap: wrap; gap: 12px; }
+      .nav-actions { margin-left: auto; gap: 8px; }
+      .btn-hamburger { flex: none; }
+    }
     .btn-search { display: none; }
     @media(min-width:640px){
       .btn-search {
