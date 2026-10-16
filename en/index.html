@@ -953,24 +953,24 @@
       <div class="roi-grid">
         <div>
           <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="en">Number of locations</span><span class="roi-input-value" id="pointsValue">5</span></div>
-            <input type="range" class="roi-slider" id="points" min="1" max="50" value="5" oninput="calculateROI()">
+            <div class="roi-input-label"><span data-lang="en">Number of locations</span><span class="roi-input-value" id="pointsValue">1</span></div>
+            <input type="range" class="roi-slider" id="points" min="1" max="50" value="1" oninput="calculateROI()">
           </div>
           <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="en">Average check, EUR</span><span class="roi-input-value" id="checkValue">1 500</span></div>
-            <input type="range" class="roi-slider" id="check" min="500" max="10000" step="100" value="1500" oninput="calculateROI()">
+            <div class="roi-input-label"><span data-lang="en">Average check, EUR</span><span class="roi-input-value" id="checkValue">10</span></div>
+            <input type="range" class="roi-slider" id="check" min="500" max="10000" step="100" value="1000" oninput="calculateROI()">
           </div>
           <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="en">Guests per day (per location)</span><span class="roi-input-value" id="guestsValue">80</span></div>
-            <input type="range" class="roi-slider" id="guests" min="20" max="500" step="10" value="80" oninput="calculateROI()">
+            <div class="roi-input-label"><span data-lang="en">Guests per day (per location)</span><span class="roi-input-value" id="guestsValue">20</span></div>
+            <input type="range" class="roi-slider" id="guests" min="20" max="500" step="10" value="20" oninput="calculateROI()">
           </div>
         </div>
         <div>
           <div class="roi-results">
-            <div class="roi-result-value" id="roiTotal">2 340 000 <span data-lang="en">EUR</span></div>
+            <div class="roi-result-value" id="roiTotal">23,760 <span data-lang="en">EUR</span></div>
             <div class="roi-result-label"><span data-lang="en">estimated savings per 12 months*</span></div>
             <button type="button" onclick="openLeadForm('roi')" class="btn-primary" style="width:100%;justify-content:center"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="en">Get Personal Quote</span></button>
-            <div class="roi-result-note"><span data-lang="en">* This is an estimate based on averaged results across our projects (no-show reduction, procurement savings, check growth, write-off reduction). Exact figures are set in the contract after the audit.</span></div>
+            <div class="roi-result-note"><span data-lang="en">* Model-based estimate, not a guarantee of results. Measurement methods and target KPIs are agreed after the audit.</span></div>
           </div>
         </div>
       </div>
@@ -1643,7 +1643,7 @@
 
     // Последние значения калькулятора ROI — читаются формой заявки при открытии с контекстом 'roi'.
     // Объявлена здесь же (а не внутри calculateROI), чтобы не наступить на тот же TDZ-баг, что был с EUR_RATE.
-    var __roiState = { points: 5, check: 1500, guests: 80, total: 0 };
+    var __roiState = { points: 1, check: 1000, guests: 20, total: 2376000 };
 
     // Language switcher
     function setLang(lang) {
