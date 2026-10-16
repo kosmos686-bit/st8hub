@@ -1,0 +1,391 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ST8 AI HoReCa Лента смены</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>@font-face{font-family:"Unbounded";font-weight:600;font-display:swap;src:url(fonts/unbounded-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Unbounded";font-weight:600;font-display:swap;src:url(fonts/unbounded-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Unbounded";font-weight:700;font-display:swap;src:url(fonts/unbounded-cyrillic-700-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Unbounded";font-weight:700;font-display:swap;src:url(fonts/unbounded-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Golos Text";font-weight:400;font-display:swap;src:url(fonts/golos-text-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Golos Text";font-weight:400;font-display:swap;src:url(fonts/golos-text-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Golos Text";font-weight:500;font-display:swap;src:url(fonts/golos-text-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Golos Text";font-weight:500;font-display:swap;src:url(fonts/golos-text-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"IBM Plex Mono";font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"IBM Plex Mono";font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"IBM Plex Mono";font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
+<style>
+:root{
+  --ink:#0b0a09;
+  --ink-2:#100e0b;
+  --paper:#ece6d6;
+  --paper-ink:#1a1814;
+  --gold:#d4af37;
+  --gold-hi:#e8c85a;
+  --text:#f1ecdf;
+  --muted:rgba(241,236,223,.68);
+  --line:rgba(241,236,223,.14);
+  --gutter:clamp(20px,5.6vw,88px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--text);font-family:"Golos Text",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+
+/* ---------- кнопки ---------- */
+.btn{height:58px;padding:0 30px;display:inline-flex;align-items:center;border-radius:10px;background:var(--gold);color:#16120a;font-weight:500;font-size:17px;transition:background .2s,transform .2s;box-shadow:0 12px 36px -12px rgba(212,175,55,.55)}
+.btn:hover{background:var(--gold-hi);transform:translateY(-1px)}
+.link{font-size:17px;font-weight:500;border-bottom:1px solid rgba(241,236,223,.4);padding-bottom:3px;transition:border-color .2s}
+.link:hover{border-color:var(--gold-hi)}
+
+/* ---------- шапка ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;padding-block:28px;position:relative;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
+.brand i{display:grid;place-items:center;width:42px;height:42px;border:1.5px solid var(--gold);border-radius:10px;color:var(--gold);font-style:normal;font-size:12px;font-weight:700}
+.links{display:flex;gap:32px;font-size:15px;color:var(--muted)}
+.links a:hover{color:var(--text)}
+.links a[aria-current]{color:var(--text)}
+.nav-cta{height:42px;padding:0 20px;display:inline-flex;align-items:center;border:1px solid rgba(212,175,55,.55);border-radius:10px;color:var(--gold-hi);font-weight:500;font-size:15px;transition:background .2s,color .2s}
+.nav-cta:hover{background:var(--gold);color:var(--ink)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;padding:0;align-items:center;justify-content:center;cursor:pointer}
+.burger span{display:block;position:relative;width:20px;height:2px;background:var(--text);border-radius:2px}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--text);border-radius:2px}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+
+/* ---------- первый экран ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate;
+  background:radial-gradient(900px 620px at 76% 6%,rgba(212,175,55,.16),transparent 62%),radial-gradient(700px 500px at 8% 100%,rgba(120,90,40,.10),transparent 60%),var(--ink)}
+.crumbs{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.crumbs a:hover{color:var(--text)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:40px;align-items:center;padding-block:clamp(24px,5vh,56px) 72px;min-height:min(780px,calc(100svh - 120px))}
+.copy{min-width:0;max-width:700px}
+h1{margin:0;font-family:"Unbounded",sans-serif;font-weight:700;font-size:clamp(26px,3.1vw,45px);line-height:1.08;letter-spacing:-.025em;text-wrap:balance}
+.lead{margin:28px 0 0;max-width:31em;font-size:clamp(17px,1.35vw,20px);line-height:1.6;color:var(--muted)}
+.actions{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+.proof{margin:44px 0 0;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 30px;font-size:15px;color:var(--muted)}
+.proof b{color:var(--text);font-weight:500}
+.reveal{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.reveal>span{display:block;animation:up 1.1s cubic-bezier(.2,.8,.2,1) both}
+.rv2>span{animation-delay:.12s}.rv3>span{animation-delay:.24s}
+.fade{animation:fadein 1s ease-out .7s both}
+@keyframes up{from{transform:translateY(105%)}to{transform:translateY(0)}}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* принтер и лента */
+.printer{position:relative;height:min(74svh,680px);min-height:500px;display:flex;justify-content:center;transform:rotate(3.2deg);transform-origin:50% 0}
+.slot{position:absolute;top:0;left:50%;width:min(470px,100%);height:44px;transform:translateX(-50%);z-index:4;border-radius:14px;background:linear-gradient(180deg,#2a2723 0%,#15130f 55%,#0b0a08 100%);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 18px 40px -10px rgba(0,0,0,.8),0 0 0 1px rgba(0,0,0,.6)}
+.slot::before{content:"";position:absolute;left:22px;right:22px;bottom:9px;height:7px;border-radius:4px;background:#050403;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.slot::after{content:"";position:absolute;right:20px;top:12px;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 2px rgba(212,175,55,.7);animation:led 2.4s ease-in-out infinite}
+.window{position:absolute;top:34px;bottom:48px;left:50%;width:min(390px,86%);transform:translateX(-50%);overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 74%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 74%,transparent 100%)}
+.cap{position:absolute;z-index:5;left:50%;bottom:6px;transform:translateX(-50%);margin:0;width:min(390px,86%);font-size:13px;line-height:1.4;color:var(--muted);text-align:center}
+.feed{animation:feed 2.6s cubic-bezier(.16,.84,.24,1) .35s both}
+.drift{animation:drift 46s linear 3s infinite both}
+.tape{background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--paper-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13.5px;line-height:1.5;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.tk{padding:18px 24px;border-bottom:1.5px dashed rgba(26,24,20,.32)}
+.tk .meta{display:flex;justify-content:space-between;font-weight:500;font-size:12.5px}
+.tk .meta span:last-child{opacity:.6}
+.tk .ask{margin:7px 0 0;opacity:.82}
+.tk .res{margin:10px 0 0;font-weight:500}
+mark.hl,.tk .res span{background:linear-gradient(var(--gold-hi),var(--gold-hi)) no-repeat 0 88%/100% 62%;padding:0 3px;margin:0 -3px;color:inherit;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.feed .tk:nth-child(1) .res span{animation:mark .9s ease-out 1.0s both}
+.feed .tk:nth-child(2) .res span{animation:mark .9s ease-out 1.6s both}
+.feed .tk:nth-child(3) .res span{animation:mark .9s ease-out 2.2s both}
+.feed .tk:nth-child(4) .res span{animation:mark .9s ease-out 2.8s both}
+.feed .tk:nth-child(5) .res span{animation:mark .9s ease-out 3.4s both}
+.feed .tk:nth-child(6) .res span{animation:mark .9s ease-out 4.0s both}
+@keyframes feed{from{transform:translateY(-440px)}to{transform:translateY(0)}}
+@keyframes drift{from{transform:translateY(calc(var(--loop,900px) * -1))}to{transform:translateY(0)}}
+@keyframes mark{from{background-size:0 62%}to{background-size:100% 62%}}
+@keyframes led{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ---------- общие секции ---------- */
+section.sec{padding-block:clamp(72px,9vw,128px)}
+.alt{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+h2{margin:0;font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(26px,3vw,42px);line-height:1.12;letter-spacing:-.02em;text-wrap:balance;max-width:20em}
+.sub{margin:18px 0 0;max-width:36em;font-size:18px;line-height:1.6;color:var(--muted)}
+.note{margin:28px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted);max-width:44em}
+
+/* ---------- рейка с заказами ---------- */
+.rail{position:relative;margin-top:64px;padding-top:34px}
+.rail::before{content:"";position:absolute;left:-8px;right:-8px;top:0;height:14px;border-radius:7px;background:linear-gradient(180deg,#5b564c 0%,#2b2823 45%,#14120f 100%);box-shadow:0 8px 20px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.18) inset}
+.tickets{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;align-items:start;list-style:none;margin:0;padding:0}
+.ticket{position:relative;margin:0;padding:34px 18px 34px;background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--paper-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;line-height:1.55;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;
+  transform-origin:50% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+.ticket::before{content:"";position:absolute;left:50%;top:-34px;width:3px;height:34px;background:#8d867a;transform:translateX(-50%)}
+.ticket:nth-child(1){transform:rotate(-1.3deg)}.ticket:nth-child(2){transform:rotate(.9deg)}.ticket:nth-child(3){transform:rotate(-.5deg)}.ticket:nth-child(4){transform:rotate(1.2deg)}.ticket:nth-child(5){transform:rotate(-.9deg)}
+.ticket:hover{transform:rotate(0) translateY(6px)}
+.ticket h3{margin:0 0 12px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:15px;line-height:1.25;letter-spacing:-.01em}
+.ticket p{margin:0}
+.ticket .res{margin-top:16px;padding-top:12px;border-top:1.5px dashed rgba(26,24,20,.32);font-weight:500}
+
+/* ---------- чек результатов ---------- */
+.two{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.receipt{max-width:440px;width:100%;justify-self:center;padding:34px 30px 40px;background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--paper-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15px;line-height:1.55;transform:rotate(-1.6deg);
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/20px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/20px 100%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+.receipt .title{font-family:"Unbounded",sans-serif;font-weight:600;font-size:15px;text-align:center}
+.receipt .tsub{margin:4px 0 18px;text-align:center;font-size:12.5px;opacity:.65}
+.receipt .cut{border:0;border-top:2px dashed rgba(26,24,20,.35);margin:14px 0}
+.row{display:flex;align-items:baseline;gap:8px;padding:5px 0}
+.row .dots{flex:1;border-bottom:2px dotted rgba(26,24,20,.45);transform:translateY(-4px);min-width:12px}
+.row b{font-size:26px;font-weight:500;letter-spacing:-.02em}
+.row span:first-child{font-size:16px}
+.receipt .total{font-weight:500;font-size:14px;line-height:1.5}
+.receipt .star{margin:18px 0 0;font-size:11.5px;line-height:1.5;opacity:.65}
+.method{margin:0;padding:0;list-style:none;display:grid;gap:18px}
+.method li{display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;padding-top:18px;border-top:1px solid var(--line);font-size:17px;line-height:1.55;color:var(--muted)}
+.method li b{color:var(--text);font-weight:500}
+
+/* ---------- день ---------- */
+.day{margin-top:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;list-style:none;padding:0}
+.slip{margin:0;padding:26px 24px 34px;background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--paper-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:14px;line-height:1.6;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;filter:drop-shadow(0 18px 24px rgba(0,0,0,.4))}
+.slip h3{margin:0 0 12px;padding-bottom:12px;border-bottom:2px dashed rgba(26,24,20,.35);font-family:"Unbounded",sans-serif;font-weight:600;font-size:17px}
+.slip p{margin:0}
+.team{margin:56px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.team div{padding:20px 0;border-top:1px solid var(--line);font-size:16.5px;line-height:1.6;color:var(--muted)}
+.team b{display:block;margin-bottom:4px;color:var(--text);font-weight:500}
+
+/* ---------- этапы ---------- */
+.stages{margin:64px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 22px;counter-reset:st}
+.stage{position:relative;padding-top:44px;counter-increment:st}
+.stage::before{content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#16120a;font-weight:500;font-size:14px;z-index:1}
+.stage::after{content:"";position:absolute;left:30px;right:-22px;top:15px;border-top:2px dotted rgba(212,175,55,.5)}
+.stage:last-child::after{display:none}
+.stage h3{margin:0 0 10px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:17px;line-height:1.25}
+.stage p{margin:0;font-size:15px;line-height:1.55;color:var(--muted)}
+
+/* ---------- условия и цены ---------- */
+.contract{margin:0;padding:34px 34px 42px;background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--paper-ink);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:14.5px;line-height:1.6;list-style:none;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/20px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/20px 100%;filter:drop-shadow(0 24px 30px rgba(0,0,0,.45))}
+.contract li{padding:16px 0;border-top:2px dashed rgba(26,24,20,.3)}
+.contract li:first-child{border-top:0;padding-top:0}
+.contract b{display:block;font-family:"Unbounded",sans-serif;font-weight:600;font-size:15px;margin-bottom:4px}
+.price{margin:0;padding:0;list-style:none}
+.price li{padding:22px 0;border-top:1px solid var(--line)}
+.price li:last-child{border-bottom:1px solid var(--line)}
+.price .top{display:flex;align-items:baseline;gap:12px}
+.price .top strong{font-family:"Unbounded",sans-serif;font-weight:600;font-size:19px}
+.price .top .dots{flex:1;border-bottom:2px dotted rgba(241,236,223,.3);transform:translateY(-5px);min-width:12px}
+.price .top .sum{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:20px;color:var(--gold-hi);white-space:nowrap}
+.price p{margin:6px 0 0;max-width:34em;font-size:15.5px;line-height:1.55;color:var(--muted)}
+
+/* ---------- вопросы ---------- */
+.faq{margin-top:48px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;align-items:center;padding:24px 0;font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(16px,1.5vw,19px);line-height:1.3}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;position:relative;width:26px;height:26px;border:1px solid var(--line);border-radius:50%;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:var(--gold-hi);transform:translate(-50%,-50%)}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .35s}
+.faq details[open] summary i{transform:rotate(180deg);background:rgba(212,175,55,.14);border-color:rgba(212,175,55,.6)}
+.faq details[open] summary i::after{transform:translate(-50%,-50%) rotate(0)}
+.faq .ans{padding:0 0 26px;max-width:44em;font-size:17px;line-height:1.65;color:var(--muted)}
+
+/* ---------- финал ---------- */
+.final{padding-block:clamp(80px,10vw,150px);text-align:left;background:radial-gradient(800px 420px at 20% 100%,rgba(212,175,55,.14),transparent 60%),var(--ink)}
+.final h2{font-size:clamp(28px,4vw,56px);max-width:15em}
+.foot{padding-block:36px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+
+/* ---------- адаптив ---------- */
+@media (max-width:1100px){
+  .tickets{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:56px}
+  .rail{margin-top:56px}
+  .stages{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:40px}
+  .stage:nth-child(3)::after{display:none}
+}
+@media (max-width:900px){
+  .links,.nav-cta{display:none}
+  .burger{display:inline-flex}
+  .hgrid{grid-template-columns:1fr;gap:20px;min-height:0;padding-top:20px}
+  h1{font-size:clamp(23px,6vw,38px)}
+  .btn{width:100%;justify-content:center}
+  .printer{height:520px;min-height:0;transform:rotate(2.4deg);margin-top:8px}
+  .two{grid-template-columns:1fr}
+  .day{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr}
+  .method li{grid-template-columns:1fr;gap:4px}
+}
+@media (max-width:640px){
+  .tickets{grid-template-columns:1fr;row-gap:48px}
+  .ticket:nth-child(n){transform:rotate(0)}
+  .stages{grid-template-columns:1fr;row-gap:28px}
+  .stage{padding:0 0 0 48px}
+  .stage::after{display:none}
+  .price .top{flex-wrap:wrap}
+  .price .top .dots{display:none}
+  .price .top .sum{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .feed,.drift,.reveal>span,.fade,.slot::after,.feed .tk .res span{animation:none!important}
+  .ticket,.faq summary i{transition:none}
+}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <header class="nav">
+      <a class="brand" href="/" aria-label="ST8 AI на главную"><i>ST8</i>ST8 AI</a>
+      <nav class="links" aria-label="Основное меню">
+        <a href="#solutions" aria-current="page">Решения</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#roi">Калькулятор ROI</a>
+        <a href="#how">Как работает</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <a class="nav-cta" href="#contact">Обсудить пилот</a>
+      <button class="burger" aria-label="Открыть меню"><span></span></button>
+    </header>
+    <p class="crumbs"><a href="/">ST8 AI</a> / <a href="#solutions">Решения</a> / HoReCa</p>
+
+    <div class="hgrid">
+      <div class="copy">
+        <h1>
+          <span class="reveal"><span>ИИ&#8209;автоматизация</span></span>
+          <span class="reveal rv2"><span>для ресторанов</span></span>
+          <span class="reveal rv3"><span>и кафе</span></span>
+        </h1>
+        <p class="lead fade">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню и computer vision на кухне.</p>
+        <div class="actions fade">
+          <a class="btn" href="#contact">Обсудить задачу и план пилота</a>
+          <a class="link" href="#modules">Что входит в решение</a>
+        </div>
+        <p class="proof fade"><span>интеграция с iiko и R-Keeper <b>за 3 дня</b></span><span>выход из проекта <b>за 30 дней без штрафа</b></span></p>
+      </div>
+
+      <div class="printer" role="img" aria-label="Пример одной смены ресторана: чеки с событиями и тем, как их разобрал цифровой администратор">
+        <div class="slot"></div>
+        <p class="cap">Пример одной смены в ресторане</p>
+        <div class="window"><div class="feed"><div class="drift" id="drift"><div class="tape" id="tape">
+          <div class="tk"><div class="meta"><span>19:12 гость</span><span>#0412</span></div><p class="ask">«Столик на четверых, сегодня после семи»</p><p class="res"><span>Стол 12 на 19:30. Гостю ушло SMS.</span></p></div>
+          <div class="tk"><div class="meta"><span>21:40 склад</span><span>#0413</span></div><p class="ask">Сливки 33%: остаток 4 л, завтра нужно 14 л</p><p class="res"><span>Заказ поставщику собран, ждёт вашего ОК.</span></p></div>
+          <div class="tk"><div class="meta"><span>23:05 касса</span><span>#0414</span></div><p class="ask">Смена закрыта, в отчёте расхождение</p><p class="res"><span>Нашёл: 2 чека без оплаты.</span></p></div>
+          <div class="tk"><div class="meta"><span>09:20 отзыв</span><span>#0415</span></div><p class="ask">«Горячее ждали 40 минут» — 2 из 5</p><p class="res"><span>Ответ подготовлен, управляющему отправлено.</span></p></div>
+          <div class="tk"><div class="meta"><span>11:00 план</span><span>#0416</span></div><p class="ask">Завтра банкет на 40 человек</p><p class="res"><span>Заготовки и смены пересчитаны.</span></p></div>
+          <div class="tk"><div class="meta"><span>12:30 поставщик</span><span>#0417</span></div><p class="ask">Лосось подорожал</p><p class="res"><span>Предложена замена из вашего прайса.</span></p></div>
+        </div></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="sec" id="modules">
+  <div class="wrap">
+    <h2>Что входит в решение</h2>
+    <p class="sub">Пять модулей, которые работают поверх iiko или R-Keeper. Остановки ресторана не нужно.</p>
+    <div class="rail">
+      <ul class="tickets">
+        <li class="ticket"><h3>Цифровой администратор 24/7</h3><p>Принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии и дни рождения.</p><p class="res"><mark class="hl">No-show −40%*</mark></p></li>
+        <li class="ticket"><h3>Предиктивные закупки</h3><p>Прогноз спроса на 7 дней вперёд и готовый список заказа поставщикам.</p><p class="res"><mark class="hl">Списания −35%*</mark></p></li>
+        <li class="ticket"><h3>Управление остатками</h3><p>Контроль сроков годности, уведомления, порядок расхода по FIFO.</p><p class="res"><mark class="hl">Меньше продуктов в списании</mark></p></li>
+        <li class="ticket"><h3>Персонализация меню</h3><p>Рекомендации блюд по истории заказов гостя, без навязчивых допродаж по скрипту.</p><p class="res"><mark class="hl">Средний чек +17%*</mark></p></li>
+        <li class="ticket"><h3>Computer vision на кухне</h3><p>Контроль порций, чистоты и стандартов. Нарушения фиксируются с фото и временем.</p><p class="res"><mark class="hl">Отчёт по сменам</mark></p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="results">
+  <div class="wrap two">
+    <div class="receipt" role="group" aria-label="Результаты клиентов направления HoReCa">
+      <div class="title">РЕЗУЛЬТАТЫ КЛИЕНТОВ*</div>
+      <div class="tsub">проекты направления HoReCa</div>
+      <hr class="cut">
+      <div class="row"><span>Списания</span><span class="dots"></span><b>−35%</b></div>
+      <div class="row"><span>Средний чек</span><span class="dots"></span><b>+17%</b></div>
+      <div class="row"><span>No-show</span><span class="dots"></span><b>−40%</b></div>
+      <hr class="cut">
+      <div class="total">ИТОГО: считаем до и после пилота на вашей точке</div>
+      <p class="star">* Усреднённые показатели по проектам направления HoReCa, не гарантия одинакового результата для другого бизнеса.</p>
+    </div>
+    <div>
+      <h2>Как мы считаем эффект</h2>
+      <p class="sub">До старта пилота фиксируем исходные цифры за сопоставимый период, после сравниваем те же показатели на той же точке с поправкой на сезонность.</p>
+      <ul class="method" style="margin-top:36px">
+        <li><b>Фиксируем до старта</b><span>Сумму списаний, долю неявок по броням, средний чек и время ответа гостю. Целевые KPI прописываются в договоре.</span></li>
+        <li><b>Сравниваем после</b><span>Те же показатели на той же точке. Без KPI «на глаз» через месяц не понять, дал ли проект эффект.</span></li>
+        <li><b>Прикидка до аудита</b><span>Калькулятор на главной считает экономию по числу точек, среднему чеку и потоку гостей.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="day">
+  <div class="wrap">
+    <h2>Как это выглядит в обычный день</h2>
+    <p class="sub">Каждое утро цикл повторяется, а модель учитывает то, что произошло вчера.</p>
+    <ul class="day">
+      <li class="slip"><h3>Утро</h3><p>Шеф открывает прогноз на неделю и готовый заказ поставщикам. Система уже учла бронь на банкет в субботу и дождливый прогноз погоды.</p></li>
+      <li class="slip"><h3>День</h3><p>Цифровой администратор принимает брони в мессенджерах и напоминает гостям о вечернем визите. Тем, кто не подтвердил, предлагает перенести время.</p></li>
+      <li class="slip"><h3>Вечер</h3><p>Управляющий получает сводку: сколько гостей пришло по броням, какие продукты близки к концу срока годности, где на кухне были отклонения от стандарта.</p></li>
+    </ul>
+    <div class="team">
+      <div><b>Администратор и хостес</b>Перестают весь вечер отвечать на звонки и сообщения о бронях. Занимаются гостями в зале и сложными ситуациями.</div>
+      <div><b>Шеф и закупщик</b>Начинают день с готового прогноза и списка заказа. Вместо пересчёта остатков по памяти проверяют и правят предложенное.</div>
+      <div><b>Управляющий</b>Видит в одном отчёте списания, no-show, средний чек и нарушения стандартов. Разбирает причины, а не собирает цифры по таблицам.</div>
+      <div><b>Собственник сети</b>Сравнивает точки по одним и тем же показателям и видит, где процессы работают хуже и почему.</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="how">
+  <div class="wrap">
+    <h2>Как проходит внедрение</h2>
+    <p class="sub">Ресторан работает как обычно: всё подключается параллельно текущим процессам.</p>
+    <ol class="stages">
+      <li class="stage"><h3>Аудит</h3><p>Смотрим, какие данные есть в iiko или R-Keeper, как устроены брони и закупки, где теряются деньги. На выходе список модулей и KPI пилота.</p></li>
+      <li class="stage"><h3>Интеграция</h3><p>Около 3 дней. Подключаемся к учётной системе, мессенджерам и CRM.</p></li>
+      <li class="stage"><h3>Обучение модели</h3><p>ИИ учится на истории продаж, меню и броней вашего заведения. Чем длиннее история, тем быстрее выходит на рабочую точность.</p></li>
+      <li class="stage"><h3>Пилот на одной точке</h3><p>Сравниваем показатели с KPI: списания, no-show, средний чек, время ответа гостю.</p></li>
+      <li class="stage"><h3>Тиражирование</h3><p>После подтверждённого результата подключаем остальные точки. Появляется аналитика по сети.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="pricing">
+  <div class="wrap two" style="align-items:start">
+    <div>
+      <h2>Стоимость</h2>
+      <p class="sub">Ориентиры по размеру заведения. Точную цену называем после аудита.</p>
+      <ul class="price" style="margin-top:36px">
+        <li><div class="top"><strong>1–3 точки</strong><span class="dots"></span><span class="sum">от 65 000 ₽</span></div><p>Цифровой администратор, интеграция с Telegram, Макс и iiko или R-Keeper, CRM с напоминаниями.</p></li>
+        <li><div class="top"><strong>4–10 точек</strong><span class="dots"></span><span class="sum">от 165 000 ₽</span></div><p>Добавляются предиктивные закупки и кросс-аналитика по сети.</p></li>
+        <li><div class="top"><strong>Сеть от 10 точек</strong><span class="dots"></span><span class="sum">от 385 000 ₽</span></div><p>Единая система управления, computer vision на кухнях и автозакупки у поставщиков.</p></li>
+      </ul>
+    </div>
+    <ul class="contract" aria-label="Условия внедрения">
+      <li><b>KPI фиксируем до старта</b>Целевые показатели пилота прописываются в договоре до начала работ.</li>
+      <li><b>Пилот на одном объекте</b>Масштабируем только после подтверждённого результата.</li>
+      <li><b>Выход без штрафа</b>30 дней на выход из проекта без штрафных санкций.</li>
+      <li><b>Эксклюзив на город</b>Не работаем с вашими прямыми конкурентами в одном городе.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec alt" id="faq">
+  <div class="wrap">
+    <h2>Частые вопросы</h2>
+    <div class="faq">
+      <details open><summary>Сколько стоит внедрение ИИ в ресторане?<i></i></summary><div class="ans">Базовый пакет от 65 000 ₽ для 1–3 точек: цифровой администратор для бронирования, интеграция Telegram и Макс, подключение iiko или R-Keeper, базовая CRM.</div></details>
+      <details><summary>Как ИИ снижает списания?<i></i></summary><div class="ans">Предиктивные закупки прогнозируют спрос на 7 дней вперёд по данным из iiko или R-Keeper. На практике это снижает списания на 35%*.</div></details>
+      <details><summary>Сколько занимает интеграция с iiko или R-Keeper?<i></i></summary><div class="ans">Подключение занимает 3 дня. Дальше ИИ обучается на реальных данных заведения: меню, продажи, брони.</div></details>
+      <details><summary>Нужно ли менять кассовую систему или покупать оборудование?<i></i></summary><div class="ans">Нет. Мы подключаемся к уже работающей системе. Оборудование нужно только для computer vision на кухне: камеры над рабочими зонами, их состав определяем на аудите.</div></details>
+      <details><summary>Заменит ли цифровой администратор хостес?<i></i></summary><div class="ans">Он берёт рутину: брони, подтверждения, ответы на типовые вопросы 24/7. Нестандартные ситуации и живое общение с гостями остаются за сотрудниками.</div></details>
+      <details><summary>Что будет, если пилот не покажет результат?<i></i></summary><div class="ans">KPI пилота фиксируются в договоре до старта. Если результат не достигнут, у вас есть 30 дней на выход из проекта без штрафных санкций.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="contact">
+  <div class="wrap">
+    <h2>Опишите один процесс и вашу текущую систему</h2>
+    <p class="sub">Обсудим необходимые данные, границы пилота, сроки и стоимость.</p>
+    <div class="actions" style="margin-top:40px">
+      <a class="btn" href="#contact">Обсудить задачу и план пилота</a>
+      <a class="link" href="https://t.me/Zzima686">Написать в Telegram</a>
+    </div>
+    <div class="foot" style="margin-top:96px"><span>ST8 AI. Кастомные ИИ-решения для бизнеса. 47 проектов, 0 провалов.</span><span>152-ФЗ · Поддержка 24/7</span></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var t=document.getElementById('tape'); if(!t) return;
+  var holder=document.getElementById('drift');
+  var clone=t.cloneNode(true); clone.removeAttribute('id'); clone.setAttribute('aria-hidden','true');
+  holder.appendChild(clone);
+  function size(){ holder.style.setProperty('--loop', t.offsetHeight+'px'); }
+  size(); window.addEventListener('resize', size);
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(size); }
+})();
+</script>
