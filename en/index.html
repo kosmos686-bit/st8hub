@@ -888,7 +888,7 @@
     <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
       <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
         <div class="section-label" style="text-align:center"><span data-lang="en">Choose Your Market</span></div>
-        <h3 class="section-title" style="font-size:22px;text-align:center;margin-bottom:24px"><span data-lang="en">Where Are You Based?</span></h3>
+        <h3 id="leadFormTitle" class="section-title" style="font-size:22px;text-align:center;margin-bottom:24px"><span data-lang="en">Where Are You Based?</span></h3>
         <div style="display:flex;flex-direction:column;gap:10px">
           <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="en">Russia</span></button>
           <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="en">UAE</span></button>
@@ -1575,7 +1575,7 @@
   </div>
 
   <!-- LEAD FORM MODAL -->
-  <div id="leadFormModal" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+  <div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
     <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
       <div id="leadFormStep1">
         <h3 class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="en">Discuss your pilot</span></h3>
@@ -1598,17 +1598,16 @@
             <textarea id="leadMessage" name="message" rows="4" style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px;resize:vertical"></textarea>
           </div>
           <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;cursor:pointer">
-            <input type="checkbox" id="leadConsent" required onchange="document.getElementById('leadSubmitBtn').disabled = !this.checked" style="margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--gold)">
+            <input type="checkbox" id="leadConsent" name="consent" value="accepted" required onchange="document.getElementById('leadSubmitBtn').disabled = !this.checked" style="margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--gold)">
             <span style="font-size:12px;color:var(--gray-400);line-height:1.5">
               
               <span data-lang="en">By submitting this request, you consent to the processing of the personal data you provide (name, phone number) by ST8 AI for the purpose of handling your request and contacting you, in accordance with Russian Federal Law 152-FZ. Data is not shared with third parties without your consent.</span>
             </span>
           </label>
+          <p style="font-size:12px;margin-bottom:16px"><a href="/en/legal.html" target="_blank" rel="noopener">Privacy policy</a></p>
           <input type="hidden" name="subject" value="Новая заявка с сайта st8-ai.ru">
           <input type="hidden" name="from_name" value="ST8 AI Website">
-          <!-- Web3Forms: получатель заявок задаётся при регистрации ключа на web3forms.com — укажи там email info@st8-ai.ru.
-               Если Web3Forms поддерживает переопределение получателя прямо полем формы — раскомментируй строку ниже. -->
-          <!-- <input type="hidden" name="email" value="info@st8-ai.ru"> -->
+          <!-- Web3Forms recipient is configured for the access key: info@st8-ai.ru. -->
           <div style="display:flex;gap:10px;flex-wrap:wrap">
             <button type="submit" id="leadSubmitBtn" disabled class="pricing-btn pricing-btn-primary" style="flex:1;min-width:160px">
               <span data-lang="en">Send Request</span>
@@ -1616,6 +1615,7 @@
             <button type="button" class="pricing-btn pricing-btn-secondary" style="flex:0 0 auto;width:auto;padding:14px 20px" onclick="closeLeadForm()"><span data-lang="en">Cancel</span></button>
           </div>
         </form>
+<p style="font-size:14px;margin-top:16px"><a href="https://t.me/Zzima686" target="_blank" rel="noopener">Telegram</a> · <a href="https://wa.me/79856905252" target="_blank" rel="noopener">WhatsApp</a></p>
       </div>
       <div id="leadFormSuccess" style="display:none;text-align:center;padding:20px 0">
         <div style="width:56px;height:56px;border-radius:50%;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--gold)"><i data-lucide="check" style="width:28px;height:28px"></i></div>
@@ -1878,6 +1878,7 @@
       document.getElementById('leadFormSuccess').style.display = 'none';
       document.getElementById('leadFormError').style.display = 'none';
       document.getElementById('leadSubmitBtn').disabled = true;
+      document.getElementById('leadSubmitBtn').dataset.sending = 'false';
 
       var isEn = document.documentElement.lang === 'en';
       var msg = '';
@@ -1904,16 +1905,23 @@
       document.getElementById('leadMessage').value = msg;
 
       modal.style.display = 'flex';
+      window.__leadFocus = document.activeElement;
+      document.getElementById('leadName').focus();
       if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeLeadForm() {
       document.getElementById('leadFormModal').style.display = 'none';
+      if (window.__leadFocus) window.__leadFocus.focus();
     }
 
     function submitLeadForm(e) {
       e.preventDefault();
+      var form = document.getElementById('leadForm');
+      if (!form.reportValidity()) return;
       var btn = document.getElementById('leadSubmitBtn');
+      if (btn.dataset.sending === 'true') return;
+      btn.dataset.sending = 'true';
       btn.disabled = true;
       var formData = new FormData(document.getElementById('leadForm'));
       formData.append('access_key', WEB3FORMS_KEY);
@@ -1922,12 +1930,13 @@
         headers: { 'Accept': 'application/json' },
         body: formData
       })
-        .then(function(res) { return res.json(); })
+        .then(function(res) { if (!res.ok) throw new Error('Form request failed'); return res.json(); })
         .then(function(data) {
           document.getElementById('leadFormStep1').style.display = 'none';
           if (data && data.success === true) {
             document.getElementById('leadFormSuccess').style.display = 'block';
-            if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form'); if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form' });
+            try { if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form'); } catch (_) {}
+            try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form' }); } catch (_) {}
           } else {
             document.getElementById('leadFormError').style.display = 'block';
           }
@@ -1941,9 +1950,10 @@
     // Opens the lead form automatically when arriving via #lead-form
     // (used by the CTA buttons on /about.html, /cases/*.html and /blog/*.html,
     // which link to index.html#lead-form since those static pages don't carry the modal themselves).
-    if (location.hash === '#lead-form') {
-      window.addEventListener('DOMContentLoaded', function() { openLeadForm(); });
-    }
+    function openLeadFormFromHash() { if (location.hash === '#lead-form') openLeadForm(); }
+    window.addEventListener('hashchange', openLeadFormFromHash);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', openLeadFormFromHash);
+    else openLeadFormFromHash();
 
     // Solution detail placeholder
     function showSolutionDetail(type) {
@@ -1970,5 +1980,9 @@
   </script>
 <script src="/assets/conversions.js" defer></script>
 <script>document.addEventListener('DOMContentLoaded',function(){if(typeof lucide!=='undefined')lucide.createIcons();});</script>
+<script>
+ document.addEventListener('keydown',function(event){if(event.key==='Escape' && document.getElementById('leadFormModal').style.display==='flex')closeLeadForm();});
+ document.addEventListener('click',function(event){var link=event.target.closest('a[href]');if(link && link.getAttribute('href')==='#lead-form'){event.preventDefault();event.stopImmediatePropagation();openLeadForm();}},true);
+</script>
 </body>
 </html>
