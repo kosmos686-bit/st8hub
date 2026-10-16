@@ -16,9 +16,9 @@
   <link rel="alternate" hreflang="tr" href="https://st8-ai.ru/tr/">
   <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/en/">
   <meta name="description" content="ST8 AI внедряет ИИ в ресторанах, на производстве, в ритейле и логистике. 47 проектов, 0 провалов. Окупаемость 2-3 месяца. Гарантия KPI по договору.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/unbounded-cyrillic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/golos-text-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/fonts.css">
   <!-- TODO: заменить на актуальный домен и og:image (1200x630) перед публикацией -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Внедрение ИИ в бизнес — автоматизация процессов нейросетями | ST8 AI">
@@ -142,6 +142,13 @@
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js" integrity="sha384-PpZ0v4GjRXD+zBXfYaMJkWUZG4mHqAlhTADbQwrM8oXYO7LGWz+NcISPEVyO9opc" crossorigin="anonymous"></script>
   <style>
+    :root {
+      --ink: #0b0a09; --paper: #ece6d6; --gold: #d4af37; --gold-hi: #e8c85a;
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --gold: #d4af37; --gold-light: #f0d78c; --gold-dark: #a08020;
@@ -149,7 +156,7 @@
       --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563;
     }
     body {
-      font-family: 'Inter', sans-serif; background: var(--black); color: #fff;
+      font-family: var(--font-body); background: var(--black); color: #fff;
       overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
     @keyframes blurFadeUp {
@@ -907,7 +914,6 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 </head>
 <body>
 <!-- Background Video -->
