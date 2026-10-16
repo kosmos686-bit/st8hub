@@ -358,6 +358,47 @@ mark.hl,.tk .res span{background:linear-gradient(var(--gold-hi),var(--gold-hi)) 
 .legal{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;line-height:1.6;color:var(--muted);max-width:60em}
 .ftl{display:flex;flex-wrap:wrap;gap:8px 24px;margin-bottom:14px}
 .ftl a:hover{color:var(--text)}
+
+/* ---- единый язык: всё как бумага на тёмном ---- */
+.tab{border-radius:4px;border-style:dashed}
+.tab[aria-selected=true]{background:var(--paper);color:var(--pi);border:1px solid var(--paper);box-shadow:inset 0 -7px 0 var(--gold-hi)}
+.tag::after{content:"";display:block;height:13px;margin:6px 4px 0;background:repeating-linear-gradient(90deg,#1a1814 0 2px,transparent 2px 3px,#1a1814 3px 5px,transparent 5px 8px)}
+.photo{display:inline-block;width:100%;padding:10px 10px 12px;background:var(--paper);box-shadow:0 18px 30px -12px rgba(0,0,0,.7);transform:rotate(-.6deg)}
+.photo .belt{border:0;border-radius:2px}
+.photo .plab{margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--pi);display:flex;justify-content:space-between}
+.cnt{background:var(--paper);color:#5a5448;padding:14px 18px;box-shadow:0 14px 22px -10px rgba(0,0,0,.6);transform:rotate(.5deg);margin:18px 0}
+.cnt b{color:var(--pi)}
+.cnt .r b{color:#b3361b}
+.log{background:var(--paper);color:var(--pi);padding:10px 14px;height:118px;-webkit-mask:linear-gradient(180deg,#000 75%,transparent);mask:linear-gradient(180deg,#000 75%,transparent)}
+.log div{border-bottom:1px dashed rgba(26,24,20,.3)}
+.log b{color:#b3361b}
+.vib{background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);border:0;color:var(--pi);
+ -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/16px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/16px 100%;padding-bottom:26px}
+.vib svg{background:repeating-linear-gradient(0deg,rgba(26,24,20,.1) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(26,24,20,.08) 0 1px,transparent 1px 40px)}
+.vib svg polyline{stroke:#1a1814}
+.vib label,.vib #vlab{color:#5a5448!important}
+.map{background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);border:0;box-shadow:0 20px 30px -12px rgba(0,0,0,.7);transform:rotate(-.5deg)}
+#rNow{stroke:#1a1814!important}
+.map .hl2{fill:none;stroke:#e8c85a;stroke-width:12;opacity:.7;stroke-linecap:round;stroke-linejoin:round}
+.stamp{position:absolute;right:14px;top:14px;padding:6px 12px;border:3px solid #b3361b;border-radius:6px;color:#b3361b;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.08em;transform:rotate(-8deg);opacity:0;transition:opacity .3s,transform .3s}
+.stamp.on{opacity:.9;transform:rotate(-8deg) scale(1)}
+.rec{background:repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper);color:var(--pi);border:0;
+ -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/16px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/16px 100%;padding-bottom:26px}
+.rec .f{border-bottom:1px dashed rgba(26,24,20,.3)}
+.rec .f span:first-child{color:#6a6354}
+.rec .f span:last-child{background:linear-gradient(var(--gold-hi),var(--gold-hi)) no-repeat 0 88%/100% 58%;align-self:flex-start;padding:0 3px;margin:0 -3px;animation:mark .7s ease-out both}
+.rec .done{color:#2a7a4a}
+.rec span[style]{color:#6a6354!important}
+.dev{position:relative}
+.dev::before{content:"";position:absolute;top:-8px;left:50%;width:74px;height:20px;background:rgba(232,200,90,.6);transform:translateX(-50%) rotate(-3deg);z-index:2;box-shadow:0 2px 4px rgba(0,0,0,.35)}
+.dev figcaption{display:inline-block;margin-top:16px;padding:8px 12px;background:var(--paper);color:#5a5448;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.4;transform:rotate(-.7deg);box-shadow:0 8px 14px -6px rgba(0,0,0,.6)}
+.dev figcaption b{color:var(--pi)}
+.dev:nth-child(even) figcaption{transform:rotate(.8deg)}
+.dev:nth-child(even) .scr{transform:rotate(.6deg)}
+.dev:nth-child(odd) .scr{transform:rotate(-.5deg)}
+.dev:hover .scr{transform:rotate(0) translateY(-6px)}
+@keyframes mark{from{background-size:0 58%}to{background-size:100% 58%}}
+
 @media(max-width:1100px){.tiers,.cases{grid-template-columns:1fr}.steps4{grid-template-columns:repeat(2,minmax(0,1fr))}.steps4 li:nth-child(2)::after{display:none}.guar{grid-template-columns:repeat(2,minmax(0,1fr))}.roi{grid-template-columns:1fr}.tickets{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:900px){.hgrid{grid-template-columns:1fr;gap:20px;min-height:0;padding-top:20px}h1{font-size:clamp(26px,7.2vw,40px)}.btn{width:100%;justify-content:center}.printer{height:520px;min-height:0;transform:rotate(2.4deg);margin-top:8px}.hnav .links,.hnav .nav-cta,.mk{display:none}.hnav .hburger{display:inline-flex;margin-left:auto}.people{grid-template-columns:1fr}}
 @media(max-width:640px){.steps4,.guar{grid-template-columns:1fr}.steps4 li::after{display:none}.tickets{grid-template-columns:1fr;row-gap:48px}.ticket:nth-child(n){transform:none}.case .pic{height:280px}}
@@ -424,9 +465,9 @@ mark.hl,.tk .res span{background:linear-gradient(var(--gold-hi),var(--gold-hi)) 
   <p class="fn">* Усреднённые показатели по проектам направления. Работает на серверах завода, данные не покидают территорию. Линия и показания в демо условные.</p>
  </div>
  <div class="stage">
-  <div class="belt" id="belt"><div class="cam" id="cam"><em id="camT">проверка</em></div></div>
+  <div class="photo"><div class="belt" id="belt"><div class="cam" id="cam"><em id="camT">проверка</em></div></div><div class="plab"><span>Камера 1 · линия 2</span><span>кадр 50 мс</span></div></div>
   <div class="cnt"><div>проверено<b id="nOk">0</b></div><div class="r">брак<b id="nBad">0</b></div><div>кадр<b>50 мс</b></div></div>
-  <div class="log" id="log"></div>
+  <div class="log" id="log"><div>Журнал смены · линия 2 · партия 118</div><div>камера 1 включена, сплошной контроль</div></div>
   <div class="vib">
    <svg viewBox="0 0 400 110" preserveAspectRatio="none" aria-label="Вибрация подшипника"><line x1="0" y1="34" x2="400" y2="34" stroke="#e0603f" stroke-dasharray="5 5" stroke-width="1"/><text x="4" y="28" fill="#e0603f" font-size="10" font-family="IBM Plex Mono">порог</text><polyline id="vline" fill="none" stroke="#e8c85a" stroke-width="1.6"/></svg>
    <div class="row"><label for="vday" class="mono" style="font-size:13px;color:var(--muted)">насос линии 2, время:</label><input id="vday" type="range" min="0" max="3" step="1" value="0"><span class="mono" id="vlab" style="min-width:7em">сегодня</span></div>
@@ -465,20 +506,20 @@ mark.hl,.tk .res span{background:linear-gradient(var(--gold-hi),var(--gold-hi)) 
  <div class="stage">
   <div class="bar"><button class="go" id="lgBtn">Авария на МКАДе</button><button class="chip" id="lgReset" hidden>Вернуть исходный маршрут</button></div>
   <div class="lg">
-   <div class="map">
+   <div class="map"><div class="stamp" id="stamp">ПЕРЕСТРОЕН</div>
     <svg viewBox="0 0 640 360" role="img" aria-label="Схема маршрута">
-     <g stroke="#2a261f" stroke-width="1" fill="none"><path d="M0 60H640M0 130H640M0 200H640M0 270H640M0 340H640M80 0V360M200 0V360M320 0V360M440 0V360M560 0V360"/></g>
-     <ellipse cx="330" cy="190" rx="270" ry="150" fill="none" stroke="#3b362c" stroke-width="10"/>
-     <text x="318" y="52" fill="#6f6859" font-size="12" font-family="IBM Plex Mono" text-anchor="middle">МКАД</text>
-     <path id="rOld" d="M70 300L210 230L360 150L440 115L520 110L560 260" fill="none" stroke="#6f6859" stroke-width="3" stroke-dasharray="6 6" opacity=".0"/>
+     <g stroke="rgba(26,24,20,.14)" stroke-width="1" fill="none"><path d="M0 60H640M0 130H640M0 200H640M0 270H640M0 340H640M80 0V360M200 0V360M320 0V360M440 0V360M560 0V360"/></g>
+     <ellipse cx="330" cy="190" rx="270" ry="150" fill="none" stroke="rgba(26,24,20,.2)" stroke-width="10"/>
+     <text x="318" y="52" fill="#6a6354" font-size="12" font-family="IBM Plex Mono" text-anchor="middle">МКАД</text>
+     <path id="rOld" d="M70 300L210 230L360 150L440 115L520 110L560 260" fill="none" stroke="#6a6354" stroke-width="3" stroke-dasharray="6 6" opacity=".0"/>
      <path id="rNow" d="M70 300L210 230L360 150L440 115L520 110L560 260" fill="none" stroke="#e8c85a" stroke-width="4" stroke-linejoin="round"/>
      <g id="acc" opacity="0"><circle cx="440" cy="115" r="16" fill="#e0603f"/><path d="M432 107l16 16M448 107l-16 16" stroke="#fff" stroke-width="3"/></g>
      <g font-family="IBM Plex Mono" font-size="12" font-weight="500">
-      <g><rect x="52" y="284" width="38" height="32" rx="6" fill="#ece6d6"/><text x="71" y="305" text-anchor="middle" fill="#1a1814">склад</text></g>
-      <circle cx="210" cy="230" r="13" fill="#ece6d6"/><text x="210" y="234" text-anchor="middle" fill="#1a1814">1</text>
-      <circle cx="360" cy="150" r="13" fill="#ece6d6"/><text x="360" y="154" text-anchor="middle" fill="#1a1814">2</text>
-      <circle id="s3" cx="520" cy="110" r="13" fill="#ece6d6"/><text id="s3t" x="520" y="114" text-anchor="middle" fill="#1a1814">3</text>
-      <circle id="s4" cx="560" cy="260" r="13" fill="#ece6d6"/><text id="s4t" x="560" y="264" text-anchor="middle" fill="#1a1814">4</text>
+      <g><rect x="52" y="284" width="38" height="32" rx="6" fill="#1a1814"/><text x="71" y="305" text-anchor="middle" fill="#ece6d6">склад</text></g>
+      <circle cx="210" cy="230" r="13" fill="#1a1814"/><text x="210" y="234" text-anchor="middle" fill="#ece6d6">1</text>
+      <circle cx="360" cy="150" r="13" fill="#1a1814"/><text x="360" y="154" text-anchor="middle" fill="#ece6d6">2</text>
+      <circle id="s3" cx="520" cy="110" r="13" fill="#1a1814"/><text id="s3t" x="520" y="114" text-anchor="middle" fill="#ece6d6">3</text>
+      <circle id="s4" cx="560" cy="260" r="13" fill="#1a1814"/><text id="s4t" x="560" y="264" text-anchor="middle" fill="#ece6d6">4</text>
      </g>
      <g id="truck"><rect x="-15" y="-9" width="30" height="18" rx="4" fill="#d4af37"/><rect x="6" y="-6" width="9" height="12" rx="2" fill="#16120a"/></g>
     </svg>
@@ -685,6 +726,7 @@ G.addEventListener('input',est);est();
  function roi(){var p=+$('rp').value,c=+$('rc').value,g=+$('rgst').value;$('rpv').textContent=p;$('rcv').textContent=c.toLocaleString('ru-RU');$('rgv').textContent=g;
   var m=p*g*c*30;var t=Math.round(m*.05*12+m*.08*12+m*.17*12+m*.03*12);$('rtot').textContent=t.toLocaleString('ru-RU')}
  ['rp','rc','rgst'].forEach(function(i){$(i).addEventListener('input',roi)});roi();
+ var stp=$('stamp');if(stp){$('lgBtn').addEventListener('click',function(){stp.classList.add('on')});$('lgReset').addEventListener('click',function(){stp.classList.remove('on')})}
  var t=$('tape');if(t){var h=$('drift'),cl=t.cloneNode(true);cl.removeAttribute('id');cl.setAttribute('aria-hidden','true');h.appendChild(cl);
   var size=function(){h.style.setProperty('--loop',t.offsetHeight+'px')};size();window.addEventListener('resize',size);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size)}
 })();
