@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <title>How to run an AI pilot in one location | ST8 AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112836376', 'ym');
+    ym(112836376, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #d4af37; --gold-light: #f0d78c; --gold-dark: #a08020;
+      --black: #000; --dark: #0a0a0a; --card: #111;
+      --g400: #9ca3af; --g500: #6b7280; --g600: #4b5563;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: #fff; -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; }
+    .skip { position: absolute; left: -9999px; top: 0; background: var(--gold); color: #000; padding: 8px 14px; z-index: 100; }
+    .skip:focus { left: 8px; top: 8px; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    header { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--gold); }
+    .logo-text { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
+    .logo-text span { color: var(--gold); font-weight: 300; }
+    nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
+    nav a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    nav a:hover { color: var(--gold); }
+    .hero { padding: 72px 0 56px; }
+    .badge { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,175,55,0.35); border-radius: 999px; padding: 6px 14px; margin-bottom: 22px; }
+    h1 { font-size: clamp(32px, 6vw, 58px); line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; max-width: 860px; }
+    h1 em { font-style: normal; color: var(--gold); }
+    .lead { margin-top: 22px; max-width: 680px; font-size: 18px; color: var(--g400); }
+    .btns { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; transition: transform .3s cubic-bezier(.32,.72,0,1), background .3s; }
+    .btn-gold { background: var(--gold); color: #000; }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-line { border: 1px solid rgba(255,255,255,0.25); color: #fff; }
+    .btn-line:hover { border-color: var(--gold); color: var(--gold); }
+    section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h2 { font-size: clamp(26px, 4vw, 38px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; max-width: 760px; }
+    .sub { margin-top: 14px; color: var(--g400); max-width: 680px; }
+    .grid { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--card); border: 1px solid rgba(212,175,55,0.14); border-radius: 18px; padding: 24px; }
+    .card h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .card ul { list-style: none; color: var(--g400); font-size: 15px; }
+    .card li { padding-left: 18px; position: relative; margin-bottom: 8px; }
+    .card li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .steps { counter-reset: s; }
+    .step { counter-increment: s; }
+    .step h3::before { content: counter(s); display: inline-flex; width: 28px; height: 28px; margin-right: 10px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-size: 14px; align-items: center; justify-content: center; }
+    .step p { color: var(--g400); font-size: 15px; }
+    .terms { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .term { border-left: 2px solid var(--gold); padding: 4px 0 4px 16px; }
+    .term strong { display: block; margin-bottom: 4px; }
+    .term span { color: var(--g400); font-size: 15px; }
+    details { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px 22px; margin-top: 12px; }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { margin-top: 10px; color: var(--g400); font-size: 15px; }
+    .note { margin-top: 28px; font-size: 13px; color: var(--g500); max-width: 720px; }
+    .cta { text-align: center; }
+    .cta h2, .cta .sub { margin-left: auto; margin-right: auto; }
+    .cta .btns { justify-content: center; }
+    footer { padding: 36px 0 48px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 13px; color: var(--g500); }
+    footer .row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
+    footer a { color: var(--g400); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+    footer p { margin-bottom: 6px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+<meta name="description" content="Define one AI workflow, check the information, fix pilot KPIs and compare results with a baseline before discussing a wider rollout.">
+<link rel="canonical" href="https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html">
+<link rel="alternate" hreflang="en-AE" href="https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html">
+<link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to run an AI pilot in one location | ST8 AI">
+<meta property="og:description" content="Define one AI workflow, check the information, fix pilot KPIs and compare results with a baseline before discussing a wider rollout.">
+<meta property="og:url" content="https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html">
+<meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
+<meta property="og:locale" content="en_AE">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://st8-ai.ru/#organization",
+      "name": "ST8 AI",
+      "url": "https://st8-ai.ru/",
+      "email": "info@st8-ai.ru",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://st8-ai.ru/og-image.jpg"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "UAE",
+          "item": "https://st8-ai.ru/ae/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Insights",
+          "item": "https://st8-ai.ru/ae/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to run an AI pilot in one location",
+          "item": "https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html#article",
+      "headline": "How to run an AI pilot in one location",
+      "description": "Define one AI workflow, check the information, fix pilot KPIs and compare results with a baseline before discussing a wider rollout.",
+      "mainEntityOfPage": "https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html",
+      "url": "https://st8-ai.ru/ae/blog/how-to-run-ai-pilot-one-location.html",
+      "inLanguage": "en-AE",
+      "dateModified": "2026-10-16",
+      "author": {
+        "@id": "https://st8-ai.ru/#organization"
+      },
+      "publisher": {
+        "@id": "https://st8-ai.ru/#organization"
+      }
+    }
+  ]
+}</script>
+<style>
+  #leadFormModal { position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,.8); backdrop-filter:blur(8px); }
+  #leadFormModal[hidden], #leadFormModal [hidden] { display:none; }
+  #leadFormModal .lead-panel { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:32px 24px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; }
+  #leadFormModal h2 { font-size:24px; margin-bottom:12px; }
+  #leadFormModal p { color:var(--g400); margin-bottom:16px; }
+  #leadFormModal label { display:block; font-size:14px; color:var(--g400); margin:16px 0 6px; }
+  #leadFormModal input:not([type=checkbox]), #leadFormModal textarea { width:100%; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:#fff; font:inherit; }
+  #leadFormModal textarea { resize:vertical; }
+  #leadFormModal .lead-consent { display:flex; align-items:flex-start; gap:10px; font-size:12px; line-height:1.5; }
+  #leadFormModal input[type=checkbox] { margin-top:3px; accent-color:var(--gold); }
+  #leadFormModal a { color:var(--gold); }
+  button.btn { border:0; font-family:inherit; cursor:pointer; }
+  button.btn-line { background:transparent; border:1px solid rgba(255,255,255,.25); }
+  #leadFormModal button:disabled { opacity:.5; cursor:default; }
+</style>
+</head>
+<body><a class="skip" href="#main">Skip to content</a><header>
+    <div class="wrap bar">
+      <a class="logo" href="/ae/" aria-label="ST8 AI UAE home"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+      <nav aria-label="Main"><a href="/ae/">UAE</a><a href="/ae/blog/">Insights</a><a href="/tr/" lang="tr">Türkçe</a></nav>
+    </div>
+  </header><main id="main"><div class="wrap hero"><p class="label"><a href="/ae/">UAE</a> / <a href="/ae/blog/">Insights</a></p><h1>How to run an AI pilot in one location</h1><p class="lead">A pilot should answer a question about a real process. Choosing one location helps limit the experiment, but it is not the full brief. The team also needs to agree which information enters the workflow, what the system produces and who is responsible for acting on its output.</p><div class="btns"><a class="btn btn-gold" href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">Message us on WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Discuss a one-site pilot</button></div></div><section aria-labelledby="section-0"><div class="wrap"><h2 id="section-0">Make the process understandable before discussing the technology</h2><p class="sub">Start with a short account of how the work happens today. Follow an enquiry, document or operational request from its source to its outcome. Name the current system and the staff who use it. This gives the audit something concrete to examine and prevents the scope from becoming a list of unrelated AI capabilities.</p><p class="sub">ST8 AI&#x27;s existing site describes applications in hospitality, facilities management, retail and other operations. The choice of industry does not establish the internal process at a particular location. A pilot needs your actual information and decision points. The first useful deliverable is therefore a bounded workflow, not a claim that the same module will produce the same effect everywhere.</p></div></section><section aria-labelledby="section-1"><div class="wrap"><h2 id="section-1">Select one output and the person who will use it</h2><p class="sub">The proposed flow can be described as data, analysis, exception or recommendation, then responsible action. Decide what the output means in the selected process. Is it information for review, a handover to a team or a request for clarification? Identify where the staff member sees it and how the resulting action is recorded.</p><p class="sub">This step keeps the pilot connected to daily work. If nobody owns the output, even a technically correct analysis can remain outside the process being tested. The boundary should also define when the system stops and a person takes over. Those limits are useful both during implementation and when the team reviews exceptions at the end.</p></div></section><section aria-labelledby="section-2"><div class="wrap"><h2 id="section-2">Check the information and access together</h2><p class="sub">The international ST8 AI model is an AI layer above existing ERP, CRM, POS systems or spreadsheets. During the audit, establish which exports or APIs are available for the chosen task. Agree the scope of access and who is responsible for the source material. Do not infer a ready integration merely from a familiar system name.</p><p class="sub">Select the information that the pilot actually needs. For a guest assistant, that includes approved material for the enquiries in scope. For a facilities workflow, it may involve the reports or records used for routing requests. These are scoping examples, not claims about your operation. The audit determines which inputs are suitable and what preparation is required.</p></div></section><section aria-labelledby="section-3"><div class="wrap"><h2 id="section-3">Record the baseline before making the change</h2><p class="sub">Choose indicators that describe the selected process and establish their current values. Agree how the same indicators will be assessed after the pilot. The measurement method and target KPIs belong in the contract before launch, so the final discussion uses the same definitions as the initial decision.</p><p class="sub">Keep the comparison conditions explicit. The observation period and the volume of work can affect how a result should be read. A model estimate is useful for discussing assumptions, but it does not replace records from the location. If an illustrative calculation is introduced, label it as a model and keep it separate from measured results. No universal savings percentage is needed to define a useful test.</p></div></section><section aria-labelledby="section-4"><div class="wrap"><h2 id="section-4">Agree a launch boundary that can be checked</h2><p class="sub">The existing UAE pages describe about 7–10 days for launch and roughly 3–4 weeks of operation. Scope and data access must be agreed alongside that model. The pilot brief should make clear what is included, which information sources are connected and who reviews the output. Price follows the scope discussion rather than an unsupported assumption about the work.</p><p class="sub">Choose a specific application page to make this conversation easier: <a href="../ai-facility-management.html">facilities management</a>, <a href="../restaurant-automation.html">restaurant automation</a> or <a href="../ai-for-hotels-hospitality.html">hotel guest assistance</a>. Each describes a limited workflow. They are different starting points for an audit, not a requirement to include every service in the first experiment.</p></div></section><section aria-labelledby="section-5"><div class="wrap"><h2 id="section-5">Review exceptions while the pilot is running</h2><p class="sub">Routine outputs show only part of the workflow. Agree how staff handle missing information, unclear requests and recommendations that need a second look. Keep their actions attached to the process that is being measured. This helps the final review explain both what the system produced and what happened after people used it.</p><p class="sub">Avoid quietly expanding the experiment when a new idea appears. Record the idea and decide whether it belongs in a later scope. If the pilot boundary changes, the comparison needs to reflect that change. Otherwise the baseline describes one process while the final result describes another, making the rollout decision harder to support with evidence.</p></div></section><section aria-labelledby="section-6"><div class="wrap"><h2 id="section-6">Decide what the evidence supports next</h2><p class="sub">Compare the agreed indicators, examine errors and identify limitations. A working pilot may still need refinement before it can be used at another location. The decision should follow the records from the selected site. Existing cases, such as <a href="../../cases/level-group.html">Level Group&#x27;s construction workflow</a>, provide context for other processes but do not establish your result.</p><p class="sub">To begin, send a short description of one location, one process and the current system through WhatsApp or the form below. ST8 AI can then discuss the available data and prepare a proposed scope with the responsible people, measurement method and conditions for a meaningful pilot review.</p></div></section><section><div class="wrap"><h2>Related workflows and guides</h2><p class="sub"><a href="/ae/ai-facility-management.html">AI facility management UAE</a> · <a href="/ae/restaurant-automation.html">AI for restaurants UAE</a> · <a href="/ae/ai-for-hotels-hospitality.html">AI automation hospitality UAE</a> · <a href="/ae/ai-concierge.html">AI concierge for restaurants and hotels</a> · <a href="/ae/blog/">Insights</a></p></div></section><section class="cta"><div class="wrap"><h2>Discuss one workflow</h2><p class="sub">Describe your current system and one process so we can agree the data, pilot boundary and measurement method.</p><div class="btns"><a class="btn btn-gold" href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">Message us on WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Discuss a one-site pilot</button></div></div></section></main><footer>
+    <div class="wrap row">
+      <div>
+        <p><strong style="color:#fff">ST8 AI</strong> · Alexey Gagarin, CEO &amp; Co-founder</p>
+        <p><a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a> · <a href="tel:+79856905252">+7 985 690-52-52</a> · <a href="https://wa.me/79856905252" rel="noopener noreferrer">WhatsApp</a></p>
+        <p>Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074</p>
+      </div>
+      <div>
+        <p><a href="/en/">International site</a> · <a href="/tr/" hreflang="tr" lang="tr">Türkiye</a> · <a href="/" hreflang="ru" lang="ru">Россия</a></p>
+        <p><a href="/en/legal.html">Privacy &amp; legal</a></p>
+        <p>© ST8 AI. All rights reserved.</p>
+      </div>
+    </div>
+  </footer><div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" hidden>
+ <div class="lead-panel"><div id="leadFormStep1"><h2 id="leadFormTitle">Discuss your pilot</h2><p>Describe one process and your current systems. We will discuss the data, scope, timing and cost.</p>
+ <form id="leadForm"><label for="leadName">Name *</label><input id="leadName" name="name" type="text" required autocomplete="name"><label for="leadPhone">Phone *</label><input id="leadPhone" name="phone" type="tel" required autocomplete="tel"><label for="leadCompany">Company</label><input id="leadCompany" name="company" type="text" autocomplete="organization"><label for="leadMessage">Message</label><textarea id="leadMessage" name="message" rows="4"></textarea>
+ <label class="lead-consent"><input type="checkbox" id="leadConsent" name="consent" value="accepted" required><span>I agree to the processing of my name, phone, company and message to handle this enquiry and contact me. <a href="/en/legal.html" target="_blank" rel="noopener" lang="en">Privacy notice</a></span></label>
+ <div class="btns"><button class="btn btn-gold" type="submit" id="leadSubmitBtn" disabled>Send enquiry</button><button class="btn btn-line" type="button" data-close-lead>Close</button></div></form></div>
+ <div id="leadFormSuccess" role="status" tabindex="-1" hidden><h2>Thank you</h2><p>Your enquiry has been received. We will contact you about the process you described.</p><button class="btn btn-line" type="button" data-close-lead>Close</button></div>
+ <div id="leadFormError" role="alert" tabindex="-1" hidden><h2>Submission not confirmed</h2><p>We will not resend automatically. You can contact us through WhatsApp to check the request.</p><button class="btn btn-line" type="button" data-close-lead>Close</button></div>
+ <p class="note"><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">Telegram</a></p></div></div><script>document.addEventListener('click',function(e){var a=e.target.closest('a[data-goal]');if(!a)return;var goal=a.getAttribute('data-goal');try{if(typeof ym==='function')ym(112836376,'reachGoal',goal);}catch(_){}try{if(typeof gtag==='function')gtag('event',goal);}catch(_){}});</script><script src="/assets/international-leads.js" defer></script></body></html>
