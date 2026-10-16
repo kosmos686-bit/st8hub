@@ -915,6 +915,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
   <link rel="stylesheet" href="/assets/receipt-hero.css">
+  <link rel="stylesheet" href="/assets/receipt-roi.css">
 </head>
 <body class="receipt-home">
 <!-- Background Video -->
@@ -1043,38 +1044,38 @@
 
   <!-- ROI CALCULATOR -->
   <section class="section-roi" id="roi">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Калькулятор</span></div>
-      <h2 class="section-title"><span data-lang="ru">Сколько вы <span style="color:var(--gold)">сэкономите</span> за год?</span></h2>
-      <p class="section-desc"><span data-lang="ru">Ползунки ниже рассчитывают ориентировочную экономию на основе усреднённых данных наших проектов</span></p>
-    </div>
-    <div class="roi-calculator reveal">
-      <div class="roi-grid">
-        <div>
-          <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="ru">Количество точек</span><span class="roi-input-value" id="pointsValue">1</span></div>
-            <input type="range" class="roi-slider" id="points" min="1" max="50" value="1" oninput="calculateROI()">
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="ru">Средний чек, руб.</span><span class="roi-input-value" id="checkValue">1 000</span></div>
-            <input type="range" class="roi-slider" id="check" min="500" max="10000" step="100" value="1000" oninput="calculateROI()">
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="ru">Гостей в день (на точку)</span><span class="roi-input-value" id="guestsValue">20</span></div>
-            <input type="range" class="roi-slider" id="guests" min="20" max="500" step="10" value="20" oninput="calculateROI()">
-          </div>
-        </div>
-        <div>
-          <div class="roi-results">
-            <div class="roi-result-value" id="roiTotal">2 376 000 <span data-lang="ru">руб.</span></div>
-            <div class="roi-result-label"><span data-lang="ru">ориентировочная экономия за 12 месяцев*</span></div>
-            <button type="button" onclick="openLeadForm('roi')" class="btn-primary" style="width:100%;justify-content:center"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Обсудить задачу и план пилота</span></button>
-            <div class="roi-result-note"><span data-lang="ru">* Оценка по модели, не гарантия результата. Методику измерения и целевые показатели согласовываем после аудита.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
+<div class="roi-calculator reveal">
+<div class="roi-grid">
+<div class="roi-controls"><div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Калькулятор</span></div>
+<h2 class="section-title"><span data-lang="ru">Сколько вы <span style="color:var(--gold)">сэкономите</span> за год?</span></h2>
+<p class="section-desc"><span data-lang="ru">Ползунки ниже рассчитывают ориентировочную экономию на основе усреднённых данных наших проектов</span></p>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="points"><span data-lang="ru">Количество точек</span><span class="roi-input-value" id="pointsValue">1</span></label>
+<input class="roi-slider" id="points" max="50" min="1" oninput="calculateROI()" type="range" value="1"/>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="check"><span data-lang="ru">Средний чек, руб.</span><span class="roi-input-value" id="checkValue">1 000</span></label>
+<input class="roi-slider" id="check" max="10000" min="500" oninput="calculateROI()" step="100" type="range" value="1000"/>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="guests"><span data-lang="ru">Гостей в день (на точку)</span><span class="roi-input-value" id="guestsValue">20</span></label>
+<input class="roi-slider" id="guests" max="500" min="20" oninput="calculateROI()" step="10" type="range" value="20"/>
+</div>
+</div>
+<div>
+<div class="roi-results">
+<div aria-live="polite" class="roi-result-value" id="roiTotal">2 376 000 <span data-lang="ru">руб.</span></div>
+<div class="roi-result-label"><span data-lang="ru">ориентировочная экономия за 12 месяцев*</span></div>
+<button class="btn-primary" onclick="openLeadForm('roi')" style="width:100%;justify-content:center" type="button"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Обсудить задачу и план пилота</span></button>
+<div class="roi-result-note"><span data-lang="ru">* Оценка по модели, не гарантия результата. Методику измерения и целевые показатели согласовываем после аудита.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
   <!-- SOLUTIONS -->
   <section class="section-solutions" id="solutions">

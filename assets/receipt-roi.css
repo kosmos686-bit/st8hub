@@ -1,0 +1,39 @@
+/* Stage 4: existing ROI calculator, presented as a printed estimate. */
+.receipt-home #roi { background: var(--ink); border-top: 1px solid #393328; padding: 88px max(24px, calc((100vw - 1280px) / 2)); color: #f1ecdf; }
+.receipt-home #roi .reveal { opacity: 1; transform: none; }
+.receipt-home #roi .roi-calculator { max-width: none; margin: 0; padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.receipt-home #roi .roi-grid { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: clamp(32px,6vw,88px); align-items: center; }
+.receipt-home #roi .roi-controls { min-width: 0; }
+.receipt-home #roi .section-header { text-align: left; margin: 0 0 34px; }
+.receipt-home #roi .section-label { color: var(--gold-hi); font: 500 12px/1.5 var(--font-mono); letter-spacing: .1em; }
+.receipt-home #roi .section-title { color: #f1ecdf; font: 600 clamp(25px,2.5vw,36px)/1.2 var(--font-display); letter-spacing: -.025em; text-wrap: balance; }
+.receipt-home #roi .section-desc { max-width: 540px; margin: 20px 0 0; font: 400 17px/1.65 var(--font-body); color: #c2bdae; }
+.receipt-home #roi .roi-input-group { margin: 0 0 28px; }
+.receipt-home #roi .roi-input-group:last-child { margin-bottom: 0; }
+.receipt-home #roi .roi-input-label { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 16px; color: #f1ecdf; font: 400 16px/1.5 var(--font-body); }
+.receipt-home #roi .roi-input-value { flex: none; color: var(--gold-hi); font: 500 22px/1.4 var(--font-mono); }
+.receipt-home #roi .roi-slider { display: block; width: 100%; height: 6px; margin: 0; border: 0; border-radius: 3px; background: #494130; accent-color: var(--gold); cursor: pointer; }
+.receipt-home #roi .roi-slider::-webkit-slider-thumb { appearance: none; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--ink); background: var(--gold-hi); box-shadow: 0 0 0 1px #a18d43; }
+.receipt-home #roi .roi-slider::-moz-range-thumb { width: 17px; height: 17px; border-radius: 50%; border: 3px solid var(--ink); background: var(--gold-hi); }
+.receipt-home #roi .roi-results { display: flex; flex-direction: column; width: 100%; max-width: 440px; margin: auto; padding: 34px 30px 38px; border: 0; border-radius: 0; background: repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper); color: #1a1814; font-family: var(--font-mono); transform: rotate(1.4deg); box-shadow: 0 28px 50px -28px #000; position: relative; }
+.receipt-home #roi .roi-results::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 8px; background: linear-gradient(135deg,var(--paper) 25%,transparent 25%) -4px 0/8px 8px,linear-gradient(225deg,var(--paper) 25%,transparent 25%) -4px 0/8px 8px; }
+.receipt-home #roi .roi-result-label { order: -1; margin: 0 0 20px; padding-bottom: 20px; border-bottom: 2px dashed #9c9584; font: 600 14px/1.6 var(--font-display); color: #1a1814; text-transform: uppercase; letter-spacing: .01em; text-align: center; }
+.receipt-home #roi .roi-result-value { margin: 0 0 24px; padding: 4px 0 22px; border-bottom: 2px dashed #9c9584; color: #1a1814; font: 500 clamp(28px,3.2vw,44px)/1.3 var(--font-mono); text-align: center; overflow-wrap: anywhere; }
+.receipt-home #roi .roi-result-value span { font: 400 14px/1.6 var(--font-mono); }
+.receipt-home #roi .btn-primary { width: 100%; min-height: 54px; justify-content: center; padding: 14px 18px; border-radius: 8px; font: 500 15px/1.5 var(--font-body); color: #17130b; background: var(--gold); box-shadow: none; transition: transform .2s; }
+.receipt-home #roi .btn-primary:hover { background: var(--gold-hi); transform: translateY(-2px); }
+.receipt-home #roi .btn-primary svg { flex: none; }
+.receipt-home #roi .roi-result-note { margin-top: 20px; color: #5f594d; font: 400 12px/1.6 var(--font-mono); text-align: left; }
+.receipt-home #roi :focus-visible { outline: 3px solid var(--gold-hi); outline-offset: 6px; }
+.receipt-home #roi .roi-results :focus-visible { outline-color: #3c3422; }
+@media(max-width:900px) { .receipt-home #roi .roi-grid { grid-template-columns: minmax(0,1fr); gap: 44px; } }
+@media(max-width:639px) {
+  .receipt-home #roi { padding: 54px 20px 64px; }
+  .receipt-home #roi .section-title { font-size: 25px; }
+  .receipt-home #roi .section-desc { font-size: 16px; }
+  .receipt-home #roi .roi-input-label { font-size: 14px; }
+  .receipt-home #roi .roi-input-value { font-size: 20px; }
+  .receipt-home #roi .roi-results { width: calc(100% - 8px); padding: 28px 22px 32px; }
+  .receipt-home #roi .roi-result-value { font-size: 30px; }
+}
+@media(prefers-reduced-motion:reduce) { .receipt-home #roi *, .receipt-home #roi *::after { transition: none !important; animation: none !important; } .receipt-home #roi .roi-results { transform: none; } }
