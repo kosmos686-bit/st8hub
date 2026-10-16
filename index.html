@@ -12,7 +12,9 @@
   <link rel="canonical" href="https://st8-ai.ru/">
   <link rel="alternate" hreflang="ru" href="https://st8-ai.ru/">
   <link rel="alternate" hreflang="en" href="https://st8-ai.ru/en/">
-  <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/">
+  <link rel="alternate" hreflang="en-AE" href="https://st8-ai.ru/ae/">
+  <link rel="alternate" hreflang="tr" href="https://st8-ai.ru/tr/">
+  <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/en/">
   <meta name="description" content="ST8 AI внедряет ИИ в ресторанах, на производстве, в ритейле и логистике. 47 проектов, 0 провалов. Окупаемость 2-3 месяца. Гарантия KPI по договору.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -895,6 +897,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
 </head>
 <body>
 <!-- Background Video -->
@@ -1605,6 +1610,8 @@
           <li><a href="/about.html"><span data-lang="ru">О нас</span></a></li>
           <li><a href="/cases/"><span data-lang="ru">Кейсы</span></a></li>
           <li><a href="/blog/"><span data-lang="ru">Блог</span></a></li>
+          <li><a href="/ae/" hreflang="en-AE" lang="en">UAE</a></li>
+          <li><a href="/tr/" hreflang="tr" lang="tr">Türkiye</a></li>
           <li><a href="#"><span data-lang="ru">Карьера</span></a></li>
         </ul>
       </div>
@@ -1994,7 +2001,7 @@
           document.getElementById('leadFormStep1').style.display = 'none';
           if (data && data.success === true) {
             document.getElementById('leadFormSuccess').style.display = 'block';
-            if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form');
+            if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form'); if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form' });
           } else {
             document.getElementById('leadFormError').style.display = 'block';
           }
