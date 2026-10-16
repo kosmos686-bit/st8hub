@@ -96,6 +96,15 @@
 <meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Automating Your Business with AI: Where to Start | ST8 AI", "description": "Automating your business with artificial intelligence: where to start, how to choose a direction, how much it costs, and how to reduce pilot risk.", "url": "https://st8-ai.ru/en/blog/biznes-ii-start.html", "inLanguage": "en", "publisher": {"@type": "Organization", "name": "ST8 AI", "url": "https://st8-ai.ru/", "email": "info@st8-ai.ru"}}</script>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+#leadFormModal .section-title { color:#fff; font-weight:500; }
+#leadFormModal .pricing-btn { border-radius:10px; padding:14px 20px; border:1px solid #d4af37; font:600 14px Inter,sans-serif; cursor:pointer; }
+#leadFormModal .pricing-btn-primary { background:#d4af37; color:#000; }
+#leadFormModal .pricing-btn-secondary { background:#0a0a0a; color:#d4af37; }
+#leadFormModal .pricing-btn:disabled { opacity:.5; cursor:default; }
+#leadFormModal a { color:#d4af37; }
+#leadFormModal :focus-visible { outline:2px solid #d4af37; outline-offset:3px; }
+</style>
 </head>
 <body>
   <header class="topbar">
@@ -279,11 +288,11 @@
         );
       });
       localStorage.setItem('st8-lang', lang);
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedLang = 'en';
     setLang(savedLang);
-    if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
     var MARKET_LABELS = {
       ru: { ru: 'Россия', en: 'Russia' },
@@ -428,7 +437,7 @@ var __roiState={};
       modal.style.display = 'flex';
       window.__leadFocus = document.activeElement;
       document.getElementById('leadName').focus();
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeLeadForm() {

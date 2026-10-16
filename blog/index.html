@@ -97,6 +97,15 @@
 <meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Блог ST8 AI — автоматизация бизнеса нейросетями", "description": "Блог ST8 AI об автоматизации бизнеса искусственным интеллектом: рестораны, производство, с чего начать внедрение ИИ.", "url": "https://st8-ai.ru/blog/", "inLanguage": "ru", "publisher": {"@type": "Organization", "name": "ST8 AI", "url": "https://st8-ai.ru/", "email": "info@st8-ai.ru"}}</script>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+#leadFormModal .section-title { color:#fff; font-weight:500; }
+#leadFormModal .pricing-btn { border-radius:10px; padding:14px 20px; border:1px solid #d4af37; font:600 14px Inter,sans-serif; cursor:pointer; }
+#leadFormModal .pricing-btn-primary { background:#d4af37; color:#000; }
+#leadFormModal .pricing-btn-secondary { background:#0a0a0a; color:#d4af37; }
+#leadFormModal .pricing-btn:disabled { opacity:.5; cursor:default; }
+#leadFormModal a { color:#d4af37; }
+#leadFormModal :focus-visible { outline:2px solid #d4af37; outline-offset:3px; }
+</style>
 </head>
 <body>
   <header class="topbar">
@@ -169,6 +178,10 @@
       </div>
     </section>
     <div class="card-grid">
+<a href="kak-ii-ekonomit-horeca.html" class="content-card"><span class="card-tag">Практика ST8 AI</span><h3>Как ИИ экономит 2-3 млн в HoReCa</h3><p>Разбираем ориентировочный расчёт ROI на сайте ST8 AI: исходные данные, ограничения модели и проверка эффекта на пилоте.</p><div class="card-cta">Читать статью →</div></a>
+<a href="7-oshibok-vnedreniya-ii.html" class="content-card"><span class="card-tag">Практика ST8 AI</span><h3>7 ошибок внедрения ИИ</h3><p>Как выбрать процесс, подготовить данные и проверить пилот ИИ: семь ошибок, которые стоит обсудить до старта проекта ST8 AI.</p><div class="card-cta">Читать статью →</div></a>
+<a href="kak-zapustit-pilot-ii.html" class="content-card"><span class="card-tag">Практика ST8 AI</span><h3>Как запустить пилот ИИ: один процесс и проверяемый результат</h3><p>Подготовка пилота ST8 AI: выбор процесса, источники данных, исходные показатели, ответственность и решение о масштабировании.</p><div class="card-cta">Читать статью →</div></a>
+
       <a href="vnedrenie-ii-v-biznes.html" class="content-card">
         <span class="card-tag"><span data-lang="ru">Гайд</span></span>
         <h3><span data-lang="ru">Внедрение ИИ в бизнес: как проходит проект</span></h3>
@@ -251,11 +264,11 @@
         );
       });
       localStorage.setItem('st8-lang', lang);
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedLang = 'ru';
     setLang(savedLang);
-    if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
     var MARKET_LABELS = {
       ru: { ru: 'Россия', en: 'Russia' },
@@ -400,7 +413,7 @@ var __roiState={};
       modal.style.display = 'flex';
       window.__leadFocus = document.activeElement;
       document.getElementById('leadName').focus();
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeLeadForm() {

@@ -1730,7 +1730,7 @@
         );
       });
       localStorage.setItem('st8-lang', lang);
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
       calculateROI();
     }
     var savedLang = 'ru';
@@ -1738,7 +1738,7 @@
     calculateROI();
 
     // Initialize Lucide icons
-    if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
     function openLegalModal() {
       document.getElementById('legalModal').style.display = 'flex';
@@ -1804,7 +1804,7 @@
       if (!restoring) setLang(market === 'ru' ? 'ru' : 'en');
       updateContactLinks(market);
       closeMarketModal();
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedMarket = localStorage.getItem('st8-market');
     if (savedMarket) {
@@ -1923,7 +1923,7 @@
         var detail = card.querySelector('.solution-detail');
         var inner = card.querySelector('.solution-detail-inner');
         detail.style.maxHeight = detail.scrollHeight + 'px';
-        if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
         // Content height can still change after this point (web font swap,
         // language switch, window resize) — keep max-height in sync while open.
         if (typeof ResizeObserver !== 'undefined') {
@@ -1981,7 +1981,7 @@
       modal.style.display = 'flex';
       window.__leadFocus = document.activeElement;
       document.getElementById('leadName').focus();
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeLeadForm() {

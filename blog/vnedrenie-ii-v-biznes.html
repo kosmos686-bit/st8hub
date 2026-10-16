@@ -193,6 +193,15 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
 <meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+#leadFormModal .section-title { color:#fff; font-weight:500; }
+#leadFormModal .pricing-btn { border-radius:10px; padding:14px 20px; border:1px solid #d4af37; font:600 14px Inter,sans-serif; cursor:pointer; }
+#leadFormModal .pricing-btn-primary { background:#d4af37; color:#000; }
+#leadFormModal .pricing-btn-secondary { background:#0a0a0a; color:#d4af37; }
+#leadFormModal .pricing-btn:disabled { opacity:.5; cursor:default; }
+#leadFormModal a { color:#d4af37; }
+#leadFormModal :focus-visible { outline:2px solid #d4af37; outline-offset:3px; }
+</style>
 </head>
 <body>
   <header class="topbar">
@@ -423,11 +432,11 @@
         );
       });
       localStorage.setItem('st8-lang', lang);
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedLang = 'ru';
     setLang(savedLang);
-    if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 
     var MARKET_LABELS = {
       ru: { ru: 'Россия', en: 'Russia' },
@@ -572,7 +581,7 @@ var __roiState={};
       modal.style.display = 'flex';
       window.__leadFocus = document.activeElement;
       document.getElementById('leadName').focus();
-      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeLeadForm() {
