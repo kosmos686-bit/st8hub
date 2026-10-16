@@ -1,2 +1,4 @@
 /* The production hero keeps the original Inter typography. */
 .receipt-home .hero { font-family: Inter, sans-serif; }
+/* Original hero, with only the requested seam into the ink section. */
+.receipt-home .hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background: linear-gradient(transparent, #0b0a09); z-index: 2; pointer-events: none; }
