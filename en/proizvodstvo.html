@@ -63,7 +63,7 @@
     ]
   }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js" integrity="sha384-PpZ0v4GjRXD+zBXfYaMJkWUZG4mHqAlhTADbQwrM8oXYO7LGWz+NcISPEVyO9opc" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js" integrity="sha384-PpZ0v4GjRXD+zBXfYaMJkWUZG4mHqAlhTADbQwrM8oXYO7LGWz+NcISPEVyO9opc" crossorigin="anonymous"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -335,11 +335,12 @@
 
       ym(112836376, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 </head>
 <body>
     <nav class="navbar">
@@ -501,11 +502,11 @@
         );
       });
       localStorage.setItem('st8-lang', lang);
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedLang = 'en';
     setLang(savedLang);
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+    if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
 
     var MARKET_LABELS = {
       ru: { ru: 'Россия', en: 'Russia' },
@@ -551,7 +552,7 @@
       if (!restoring) setLang(market === 'ru' ? 'ru' : 'en');
       updateContactLinks(market);
       closeMarketModal();
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+      if (typeof lucide !== 'undefined') if (typeof lucide !== 'undefined') lucide.createIcons();
     }
     var savedMarket = localStorage.getItem('st8-market');
     if (savedMarket) { setMarket(savedMarket, true); }
@@ -573,5 +574,6 @@
     function openLegalModal() { window.location.href = '/legal.html'; }
 </script>
 <script src="/assets/conversions.js" defer></script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(typeof lucide!=='undefined')lucide.createIcons();});</script>
 </body>
 </html>
