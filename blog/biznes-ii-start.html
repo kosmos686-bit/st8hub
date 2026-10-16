@@ -388,13 +388,13 @@
         </form>
 <p style="font-size:14px;margin-top:16px"><a href="https://t.me/Zzima686" target="_blank" rel="noopener">Telegram</a> · <a href="https://wa.me/79856905252" target="_blank" rel="noopener">WhatsApp</a></p>
       </div>
-      <div id="leadFormSuccess" style="display:none;text-align:center;padding:20px 0">
+      <div id="leadFormSuccess" role="status" aria-live="polite" style="display:none;text-align:center;padding:20px 0">
         <div style="width:56px;height:56px;border-radius:50%;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--gold)"><i data-lucide="check" style="width:28px;height:28px"></i></div>
         <h3 class="section-title" style="font-size:20px;margin-bottom:12px"><span data-lang="ru">Спасибо!</span></h3>
         <p style="font-size:15px;color:var(--gray-400);line-height:1.6"><span data-lang="ru">Мы подготовим для вас персональное КП и свяжемся в течение рабочего дня.</span></p>
         <button class="pricing-btn pricing-btn-secondary" style="margin-top:24px" onclick="closeLeadForm()"><span data-lang="ru">Закрыть</span></button>
       </div>
-      <div id="leadFormError" style="display:none;text-align:center;padding:20px 0">
+      <div id="leadFormError" role="alert" style="display:none;text-align:center;padding:20px 0">
         <div style="width:56px;height:56px;border-radius:50%;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#f87171"><i data-lucide="alert-triangle" style="width:28px;height:28px"></i></div>
         <h3 class="section-title" style="font-size:20px;margin-bottom:12px"><span data-lang="ru">Не получилось отправить</span></h3>
         <p style="font-size:15px;color:var(--gray-400);line-height:1.6;margin-bottom:20px"><span data-lang="ru">Похоже, проблема с соединением. Напишите нам напрямую в Telegram — ответим быстро.</span></p>
@@ -442,12 +442,15 @@ var __roiState={};
 
       modal.style.display = 'flex';
       window.__leadFocus = document.activeElement;
+      window.__leadBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
       document.getElementById('leadName').focus();
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeLeadForm() {
       document.getElementById('leadFormModal').style.display = 'none';
+      document.body.style.overflow = window.__leadBodyOverflow || '';
       if (window.__leadFocus) window.__leadFocus.focus();
     }
 
