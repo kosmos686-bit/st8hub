@@ -916,6 +916,7 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
   <link rel="stylesheet" href="/assets/receipt-hero.css">
   <link rel="stylesheet" href="/assets/receipt-roi.css">
+  <link rel="stylesheet" href="/assets/receipt-industries.css">
 </head>
 <body class="receipt-home">
 <!-- Background Video -->
@@ -1079,210 +1080,109 @@
 
   <!-- SOLUTIONS -->
   <section class="section-solutions" id="solutions">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Решения</span></div>
-      <h2 class="section-title"><span data-lang="ru">ИИ для <span style="color:var(--gold)">вашей отрасли</span></span></h2>
-      <p class="section-desc"><span data-lang="ru">Кастомные решения под конкретного клиента — не коробочные продукты</span></p>
-    </div>
-    <div class="solutions-grid">
-      <!-- HoReCa -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="utensils" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title">HoReCa</h3>
-          <p class="solution-desc"><span data-lang="ru">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</span></p>
-          <span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="ru">Списания -35%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong data-lang="ru">Цифровой администратор 24/7</strong> — <span data-lang="ru">принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии, дни рождения</span></li>
-              <li><strong data-lang="ru">Предиктивные закупки</strong> — <span data-lang="ru">прогнозирует спрос на 7 дней вперёд, снижает списания на 35%</span></li>
-              <li><strong data-lang="ru">Управление остатками</strong> — <span data-lang="ru">контроль сроков годности, автоматические уведомления, FIFO</span></li>
-              <li><strong data-lang="ru">Персонализация меню</strong> — <span data-lang="ru">рекомендации блюд на основе истории заказов гостя</span></li>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">контроль порций, чистоты, соблюдения стандартов на кухне</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Интеграция с iiko / R-Keeper за 3 дня. ИИ обучается на ваших данных — меню, продажи, брони. Через неделю система предсказывает спрос точнее менеджера с 10-летним стажем.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">-35%</span><span class="solution-stat-label" data-lang="ru">Списания</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+17%</span><span class="solution-stat-label" data-lang="ru">Средний чек</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label">No-show</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/horeca.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Решения</span></div>
+<h2 class="section-title"><span data-lang="ru">ИИ для <span style="color:var(--gold)">вашей отрасли</span></span></h2>
+<p class="section-desc"><span data-lang="ru">Кастомные решения под конкретного клиента — не коробочные продукты</span></p>
+</div>
+<div aria-label="Отрасли" class="industry-tabs" role="tablist"><button aria-controls="industry-panel-horeca" aria-selected="true" class="industry-tab" id="industry-tab-horeca" role="tab" tabindex="0" type="button">HoReCa</button><button aria-controls="industry-panel-production" aria-selected="false" class="industry-tab" id="industry-tab-production" role="tab" tabindex="-1" type="button"><span data-lang="ru">Производство</span></button><button aria-controls="industry-panel-retail" aria-selected="false" class="industry-tab" id="industry-tab-retail" role="tab" tabindex="-1" type="button"><span data-lang="ru">Ритейл и E-commerce</span></button><button aria-controls="industry-panel-logistics" aria-selected="false" class="industry-tab" id="industry-tab-logistics" role="tab" tabindex="-1" type="button"><span data-lang="ru">Логистика</span></button><button aria-controls="industry-panel-office" aria-selected="false" class="industry-tab" id="industry-tab-office" role="tab" tabindex="-1" type="button"><span data-lang="ru">Офисы и УК</span></button><button aria-controls="industry-panel-custom" aria-selected="false" class="industry-tab" id="industry-tab-custom" role="tab" tabindex="-1" type="button"><span data-lang="ru">Кастомная разработка</span></button></div><div class="industry-panels"><article aria-labelledby="industry-tab-horeca" class="industry-panel" id="industry-panel-horeca" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="utensils" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title">HoReCa</h3>
+<p class="solution-desc"><span data-lang="ru">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</span></p>
+<span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="ru">Списания -35%*</span></span>
 
-      <!-- Production -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="factory" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Производство</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Компьютерное зрение для контроля качества, предиктивное обслуживание оборудования, оптимизация линий</span></p>
-          <span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="ru">Точность 99.7%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">обнаружение дефектов за 50 мс, точность 99.7%</span></li>
-              <li><strong data-lang="ru">Предиктивное обслуживание</strong> — <span data-lang="ru">прогноз поломок за 72 часа, планирование ТО</span></li>
-              <li><strong data-lang="ru">Оптимизация линий</strong> — <span data-lang="ru">балансировка нагрузки, снижение простоев на 25%</span></li>
-              <li><strong data-lang="ru">Контроль качества</strong> — <span data-lang="ru">автоматическая проверка по ГОСТ и внутренним стандартам</span></li>
-              <li><strong data-lang="ru">Аналитика OEE</strong> — <span data-lang="ru">Overall Equipment Effectiveness в реальном времени</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Устанавливаем камеры на линию, интегрируем с MES/ERP. ИИ обучается на образцах брака и дефектов. Система работает on-premise — данные не покидают территорию завода.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">99.7%</span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-25%</span><span class="solution-stat-label" data-lang="ru">Простои</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-60%</span><span class="solution-stat-label" data-lang="ru">Брак</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/proizvodstvo.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">-35%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Списания</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+17%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Средний чек</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-40%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label">No-show</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Интеграция с iiko / R-Keeper за 3 дня. ИИ обучается на ваших данных — меню, продажи, брони. Через неделю система предсказывает спрос точнее менеджера с 10-летним стажем.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/horeca.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Цифровой администратор 24/7</strong> — <span data-lang="ru">принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии, дни рождения</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Предиктивные закупки</strong> — <span data-lang="ru">прогнозирует спрос на 7 дней вперёд, снижает списания на 35%</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Управление остатками</strong> — <span data-lang="ru">контроль сроков годности, автоматические уведомления, FIFO</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Персонализация меню</strong> — <span data-lang="ru">рекомендации блюд на основе истории заказов гостя</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">контроль порций, чистоты, соблюдения стандартов на кухне</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-production" class="industry-panel" hidden="" id="industry-panel-production" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="factory" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Производство</span></h3>
+<p class="solution-desc"><span data-lang="ru">Компьютерное зрение для контроля качества, предиктивное обслуживание оборудования, оптимизация линий</span></p>
+<span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="ru">Точность 99.7%*</span></span>
 
-      <!-- Retail -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="shopping-cart" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Ритейл и E-commerce</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Прогнозирование спроса, автозакупки, перераспределение товара, персонализация, интеграция с маркетплейсами</span></p>
-          <span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="ru">Прогноз 94%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong data-lang="ru">Прогноз спроса</strong> — <span data-lang="ru">точность 94%, учёт сезонности, погоды, событий</span></li>
-              <li><strong data-lang="ru">Автозакупки</strong> — <span data-lang="ru">формирование заказов поставщикам без участия человека</span></li>
-              <li><strong data-lang="ru">Перераспределение</strong> — <span data-lang="ru">автоматический баланс stock между точками и складами</span></li>
-              <li><strong data-lang="ru">Персонализация</strong> — <span data-lang="ru">рекомендации товаров на основе поведения клиента</span></li>
-              <li><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">1С, МойСклад, Wildberries, Ozon, Яндекс.Маркет</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Подключаемся к вашей учётной системе за 1 день. ИИ анализирует историю продаж, остатки, поставки. Через 2 недели система предсказывает спрос точнее Excel с макросами.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">94%</span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-30%</span><span class="solution-stat-label" data-lang="ru">Недостача</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+22%</span><span class="solution-stat-label" data-lang="ru">Оборот</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/retail.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">99.7%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-25%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Простои</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-60%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Брак</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Устанавливаем камеры на линию, интегрируем с MES/ERP. ИИ обучается на образцах брака и дефектов. Система работает on-premise — данные не покидают территорию завода.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/proizvodstvo.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">обнаружение дефектов за 50 мс, точность 99.7%</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Предиктивное обслуживание</strong> — <span data-lang="ru">прогноз поломок за 72 часа, планирование ТО</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Оптимизация линий</strong> — <span data-lang="ru">балансировка нагрузки, снижение простоев на 25%</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Контроль качества</strong> — <span data-lang="ru">автоматическая проверка по ГОСТ и внутренним стандартам</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Аналитика OEE</strong> — <span data-lang="ru">Overall Equipment Effectiveness в реальном времени</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-retail" class="industry-panel" hidden="" id="industry-panel-retail" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="shopping-cart" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Ритейл и E-commerce</span></h3>
+<p class="solution-desc"><span data-lang="ru">Прогнозирование спроса, автозакупки, перераспределение товара, персонализация, интеграция с маркетплейсами</span></p>
+<span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="ru">Прогноз 94%*</span></span>
 
-      <!-- Logistics -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="truck" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Логистика</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Оптимизация маршрутов, computer vision для проверки комплектации, прогноз загруженности складов</span></p>
-          <span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="ru">Топливо -25%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong data-lang="ru">Оптимизация маршрутов</strong> — <span data-lang="ru">снижение пробега на 25%, учёт пробок, временных окон</span></li>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">проверка комплектации заказа при отгрузке, защита от ошибок</span></li>
-              <li><strong data-lang="ru">Прогноз загруженности</strong> — <span data-lang="ru">планирование складских мощностей на 14 дней</span></li>
-              <li><strong data-lang="ru">Трекинг в реальном времени</strong> — <span data-lang="ru">GPS + ИИ-прогноз времени прибытия</span></li>
-              <li><strong data-lang="ru">Экодрайвинг</strong> — <span data-lang="ru">анализ стиля вождения, снижение расхода топлива</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Интеграция с WMS/TMS за 2-3 дня. ИИ строит маршруты с учётом 50+ параметров. Система адаптируется к изменениям в реальном времени — авария на МКАДе = маршрут перестроен за 30 секунд.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">-25%</span><span class="solution-stat-label" data-lang="ru">Топливо</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label" data-lang="ru">Ошибки</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+18%</span><span class="solution-stat-label" data-lang="ru">Грузооборот</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/logistika.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">94%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-30%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Недостача</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+22%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Оборот</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Подключаемся к вашей учётной системе за 1 день. ИИ анализирует историю продаж, остатки, поставки. Через 2 недели система предсказывает спрос точнее Excel с макросами.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/retail.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Прогноз спроса</strong> — <span data-lang="ru">точность 94%, учёт сезонности, погоды, событий</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Автозакупки</strong> — <span data-lang="ru">формирование заказов поставщикам без участия человека</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Перераспределение</strong> — <span data-lang="ru">автоматический баланс stock между точками и складами</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Персонализация</strong> — <span data-lang="ru">рекомендации товаров на основе поведения клиента</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">1С, МойСклад, Wildberries, Ozon, Яндекс.Маркет</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-logistics" class="industry-panel" hidden="" id="industry-panel-logistics" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="truck" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Логистика</span></h3>
+<p class="solution-desc"><span data-lang="ru">Оптимизация маршрутов, computer vision для проверки комплектации, прогноз загруженности складов</span></p>
+<span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="ru">Топливо -25%*</span></span>
 
-      <!-- Office -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="building-2" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Офисы и УК</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Автоматизация документооборота, ИИ-ассистенты, распознавание сканов, маршрутизация задач, аналитика</span></p>
-          <span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong>ИИ-<span data-lang="ru">ассистент</span></strong> — <span data-lang="ru">отвечает на вопросы сотрудников, ищет документы, ставит задачи</span></li>
-              <li><strong data-lang="ru">Распознавание документов</strong> — <span data-lang="ru">сканы, PDF, фото → структурированные данные за 2 сек</span></li>
-              <li><strong data-lang="ru">Маршрутизация задач</strong> — <span data-lang="ru">ИИ распределяет заявки между исполнителями по загрузке</span></li>
-              <li><strong data-lang="ru">Аналитика</strong> — <span data-lang="ru">дашборды, прогнозы, автоматические отчёты для руководства</span></li>
-              <li><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">Битрикс24, amoCRM, 1С, SAP, Google Workspace</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Подключаемся к вашей CRM/ECM за 1 день. ИИ обучается на ваших документах и процессах. Секретарь перестаёт отвечать на одни и те же вопросы 20 раз в день.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">5x</span><span class="solution-stat-label" data-lang="ru">Быстрее</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-70%</span><span class="solution-stat-label" data-lang="ru">Рутина</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+35%</span><span class="solution-stat-label" data-lang="ru">Эффективность</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/ofisy.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">-25%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Топливо</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-40%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Ошибки</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+18%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Грузооборот</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Интеграция с WMS/TMS за 2-3 дня. ИИ строит маршруты с учётом 50+ параметров. Система адаптируется к изменениям в реальном времени — авария на МКАДе = маршрут перестроен за 30 секунд.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/logistika.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Оптимизация маршрутов</strong> — <span data-lang="ru">снижение пробега на 25%, учёт пробок, временных окон</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">проверка комплектации заказа при отгрузке, защита от ошибок</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Прогноз загруженности</strong> — <span data-lang="ru">планирование складских мощностей на 14 дней</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Трекинг в реальном времени</strong> — <span data-lang="ru">GPS + ИИ-прогноз времени прибытия</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Экодрайвинг</strong> — <span data-lang="ru">анализ стиля вождения, снижение расхода топлива</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-office" class="industry-panel" hidden="" id="industry-panel-office" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="building-2" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Офисы и УК</span></h3>
+<p class="solution-desc"><span data-lang="ru">Автоматизация документооборота, ИИ-ассистенты, распознавание сканов, маршрутизация задач, аналитика</span></p>
+<span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее*</span></span>
 
-      <!-- Custom -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Кастомная разработка</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Любая задача: от голосового цифрового администратора до полной автоматизации цепочки поставок. Обучаем на ваших данных</span></p>
-          <span class="solution-metric"><i data-lucide="check-circle" style="width:14px;height:14px"></i><span data-lang="ru">Гарантия KPI</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что мы делаем</h4>
-            <ul>
-              <li><strong data-lang="ru">Голосовые ассистенты</strong> — <span data-lang="ru">для колл-центров, ресепшн, служб поддержки</span></li>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">любые задачи: от подсчёта посетителей до контроля СИЗ</span></li>
-              <li><strong data-lang="ru">Прогнозные модели</strong> — <span data-lang="ru">спрос, отток, ценообразование, риски</span></li>
-              <li><strong data-lang="ru">Автоматизация процессов</strong> — <span data-lang="ru">от заявки до отчёта без человека</span></li>
-              <li><strong data-lang="ru">Интеграция систем</strong> — <span data-lang="ru">связываем то, что не хотит работать вместе</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. До запуска фиксируем исходные показатели и KPI проекта. После внедрения оцениваем фактический эффект на данных клиента.</span></p>
-            <h4 data-lang="ru">Почему ST8 AI</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">47</span><span class="solution-stat-label" data-lang="ru">Проектов</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">0</span><span class="solution-stat-label" data-lang="ru">Провалов</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">2-3</span><span class="solution-stat-label" data-lang="ru">Мес окупаемость</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section><!-- PRICING -->
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">5x<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Быстрее</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-70%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Рутина</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+35%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Эффективность</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Подключаемся к вашей CRM/ECM за 1 день. ИИ обучается на ваших документах и процессах. Секретарь перестаёт отвечать на одни и те же вопросы 20 раз в день.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/ofisy.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong>ИИ-<span data-lang="ru">ассистент</span></strong> — <span data-lang="ru">отвечает на вопросы сотрудников, ищет документы, ставит задачи</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Распознавание документов</strong> — <span data-lang="ru">сканы, PDF, фото → структурированные данные за 2 сек</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Маршрутизация задач</strong> — <span data-lang="ru">ИИ распределяет заявки между исполнителями по загрузке</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Аналитика</strong> — <span data-lang="ru">дашборды, прогнозы, автоматические отчёты для руководства</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">Битрикс24, amoCRM, 1С, SAP, Google Workspace</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-custom" class="industry-panel" hidden="" id="industry-panel-custom" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Кастомная разработка</span></h3>
+<p class="solution-desc"><span data-lang="ru">Любая задача: от голосового цифрового администратора до полной автоматизации цепочки поставок. Обучаем на ваших данных</span></p>
+<span class="solution-metric"><i data-lucide="check-circle" style="width:14px;height:14px"></i><span data-lang="ru">Гарантия KPI</span></span>
+
+</div><h4 data-lang="ru">Почему ST8 AI</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">47<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Проектов</span></div>
+<div class="solution-stat"><span class="solution-stat-val">0<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Провалов</span></div>
+<div class="solution-stat"><span class="solution-stat-val">2-3<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Мес окупаемость</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. До запуска фиксируем исходные показатели и KPI проекта. После внедрения оцениваем фактический эффект на данных клиента.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/about.html"><span data-lang="ru">Подробнее на странице</span></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что мы делаем</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Голосовые ассистенты</strong> — <span data-lang="ru">для колл-центров, ресепшн, служб поддержки</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">любые задачи: от подсчёта посетителей до контроля СИЗ</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Прогнозные модели</strong> — <span data-lang="ru">спрос, отток, ценообразование, риски</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Автоматизация процессов</strong> — <span data-lang="ru">от заявки до отчёта без человека</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Интеграция систем</strong> — <span data-lang="ru">связываем то, что не хотит работать вместе</span></li>
+</ul></div></article></div>
+</section><!-- PRICING -->
   <section class="section-pricing" id="pricing">
     <div class="section-header reveal">
       <div class="section-label"><span data-lang="ru">Тарифы</span></div>
@@ -2089,5 +1989,6 @@
 </script>
 <script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
   <script src="/assets/receipt-hero.js" defer></script>
+  <script src="/assets/receipt-industries.js" defer></script>
 </body>
 </html>
