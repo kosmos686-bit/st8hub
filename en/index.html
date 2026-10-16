@@ -161,7 +161,9 @@
       color: #fff; background: none; border: none; cursor: pointer;
     }
     @media(min-width:1024px){ .btn-hamburger { display: none; } }
-    .hamburger-icon { transition: all 0.5s ease-out; }
+    .hamburger-icon { position: relative; width: 20px; height: 20px; flex: none; transition: all 0.5s ease-out; }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { top: 0; left: 0; }
+    #marketBtn { color: #fff; font-family: inherit; }
     .hamburger-icon.open { transform: rotate(180deg); }
     .hamburger-icon .icon-menu, .hamburger-icon .icon-x { transition: all 0.5s ease-out; }
     .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
