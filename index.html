@@ -108,6 +108,9 @@
 /* Reserve icon boxes before the deferred Lucide replacement, preventing late reflow. */
 .receipt-home .hero i[data-lucide] { display: inline-block; flex-shrink: 0; }
 
+@media(max-width:639px) {
+ .receipt-home .hero .scroll-indicator { left: auto; right: 20px; bottom: 10px; transform: none; gap: 2px; }
+}
   </style>
   <!-- TODO: заменить на актуальный домен и og:image (1200x630) перед публикацией -->
   <meta property="og:type" content="website">
