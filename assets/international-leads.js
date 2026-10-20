@@ -76,7 +76,7 @@
       success.hidden = false;
       success.focus();
       try { if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form'); } catch (_) {}
-      try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form' }); } catch (_) {}
+      try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form', method: 'form' }); } catch (_) {}
     }).catch(function () {
       step.hidden = true;
       error.hidden = false;

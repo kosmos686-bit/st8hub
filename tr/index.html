@@ -176,6 +176,7 @@
   button.btn-line { background:transparent; border:1px solid rgba(255,255,255,.25); }
   #leadFormModal button:disabled { opacity:.5; cursor:default; }
 </style>
+  <script src="/assets/conversions.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">İçeriğe geç</a>
@@ -316,6 +317,7 @@
       var a = e.target.closest('a[data-goal]');
       if (!a) return;
       var goal = a.getAttribute('data-goal');
+      if (/^contact_(telegram|whatsapp)_/.test(goal)) return;
       try { if (typeof ym === 'function') ym(112836376, 'reachGoal', goal); } catch (err) {}
       try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: goal }); } catch (err) {}
     });
