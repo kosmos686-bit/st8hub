@@ -320,7 +320,6 @@
       var goal = a.getAttribute('data-goal');
       if (/^contact_(telegram|whatsapp)_/.test(goal)) return;
       try { if (typeof ym === 'function') ym(112836376, 'reachGoal', goal); } catch (err) {}
-      try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: goal }); } catch (err) {}
     });
   </script>
 <div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" hidden>

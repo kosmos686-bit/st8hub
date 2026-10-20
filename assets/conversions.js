@@ -10,7 +10,7 @@
     if (url.hostname === 'wa.me' && url.pathname.replace(/\/$/, '') === '/79856905252') goal = 'whatsapp_click';
     if (goal) {
       try { if (typeof ym === 'function') ym(112836376, 'reachGoal', goal); } catch (_) {}
-      try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: goal === 'telegram_click' ? 'telegram' : 'whatsapp' }); } catch (_) {}
+      try { if (typeof gtag === 'function') gtag('event', 'messenger_click', { method: goal === 'telegram_click' ? 'telegram' : 'whatsapp' }); } catch (_) {}
     }
   }, true);
 })();
