@@ -124,25 +124,110 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "ST8 AI",
-    "url": "https://st8-ai.ru/",
-    "email": "info@st8-ai.ru",
-    "telephone": "+7 985 690-52-52",
-    "areaServed": [
-      "RU",
-      "AE",
-      "TR"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Москва",
-      "addressCountry": "RU"
-    },
-    "description": "Прикладная интеграция ИИ: один процесс, подключение к существующим системам, измеримый пилот.",
-    "sameAs": [
-      "https://vk.ru/st8_ai",
-      "https://dzen.ru/id/6a85c5270d706c349104b645"
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "name": "ST8 AI",
+        "url": "https://st8-ai.ru/",
+        "email": "info@st8-ai.ru",
+        "telephone": "+7 985 690-52-52",
+        "areaServed": [
+          "RU",
+          "AE",
+          "TR"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Москва",
+          "addressCountry": "RU"
+        },
+        "description": "Прикладная интеграция ИИ: один процесс, подключение к существующим системам, измеримый пилот.",
+        "sameAs": [
+          "https://t.me/Zzima686",
+          "https://wa.me/79856905252",
+          "https://vk.ru/st8_ai",
+          "https://dzen.ru/id/6a85c5270d706c349104b645"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://st8-ai.ru/#organization",
+        "name": "ST8 AI",
+        "url": "https://st8-ai.ru",
+        "logo": "https://st8-ai.ru/og-image.jpg",
+        "description": "Прикладная интеграция ИИ: один процесс, подключение к существующим системам, измеримый пилот.",
+        "email": "info@st8-ai.ru",
+        "telephone": "+7-985-690-52-52",
+        "sameAs": [
+          "https://t.me/Zzima686",
+          "https://wa.me/79856905252",
+          "https://vk.ru/st8_ai",
+          "https://dzen.ru/id/6a85c5270d706c349104b645"
+        ],
+        "founder": [
+          {
+            "@type": "Person",
+            "name": "Алексей Гагарин",
+            "jobTitle": "CEO & Co-founder"
+          },
+          {
+            "@type": "Person",
+            "name": "Юлия Попова",
+            "jobTitle": "Co-founder"
+          }
+        ],
+        "areaServed": [
+          "RU",
+          "AE",
+          "TR"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://st8-ai.ru/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Что если у нас нет данных для обучения модели?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Начинаем с того, что уже есть в вашей учётной системе (кассы, CRM, склад) — этого обычно достаточно для первой рабочей версии. Модель дообучается по мере накопления данных в процессе пилота."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Что будет с нашими данными?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Данные остаются вашими и не передаются третьим лицам. Для производственных задач возможен on-premise режим — данные вообще не покидают вашу территорию."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Что если решение не окупится?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Целевые KPI фиксируются в договоре до начала работ. После внедрения мы прозрачно показываем фактический эффект на данных клиента."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Сколько занимает внедрение?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Аудит — 1-2 дня, настройка и интеграция — от 3 дней до 2-3 недель в зависимости от масштаба, пилот на одной точке перед полным запуском."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Что входит в поддержку?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Поддержка 24/7, дообучение модели на новых данных, доработки по мере роста бизнеса. Условия зависят от тарифа."
+            }
+          }
+        ]
+      }
     ]
   }
   </script>
