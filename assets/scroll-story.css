@@ -142,3 +142,25 @@
   .scroll-story.ss-motion #story-scene-1 .ss-steps { display: grid; }
   .scroll-story.ss-motion #story-scene-2 .ss-row { display: flex; }
 }
+
+/* Clickable notebooks open a detail card with a lead CTA. */
+.ss-rc[role="button"], .ss-sh.ss-click { cursor: pointer; }
+.scroll-story.ss-motion .ss-sh.ss-click { pointer-events: auto; }
+.ss-rc:focus-visible, .ss-sh:focus-visible { outline: 3px solid var(--gold-hi); outline-offset: 6px; }
+.ss-sh { transition-property: opacity, transform; }
+@media (hover:hover) { .ss-rc[role="button"]:hover .ss-rin, .ss-sh.ss-click:hover .ss-pp { filter: brightness(1.04); } }
+.ss-more { margin-top: 20px; padding: 0; background: none; border: 0; border-bottom: 1px solid #a2987f; color: #f1ecdf; font: 500 15px/1.6 var(--font-body); cursor: pointer; }
+.story-modal { position: fixed; inset: 0; z-index: 110; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0,0,0,.78); backdrop-filter: blur(6px); }
+.story-modal[hidden] { display: none; }
+.story-modal-card { position: relative; width: min(480px,100%); max-height: 90svh; overflow-y: auto; padding: 32px 28px 28px; transform: rotate(-.6deg); }
+.story-modal-x { position: absolute; top: 8px; right: 10px; width: 44px; height: 44px; border: 0; background: none; color: #1a1814; font-size: 28px; line-height: 1; cursor: pointer; }
+.story-modal-kick { margin: 0 0 6px; font: 500 12px/1.4 var(--font-mono); color: #6f6857; }
+.story-modal-card h3 { margin: 0; font: 700 clamp(24px,5vw,32px)/1.15 var(--font-display); letter-spacing: -.02em; }
+.story-modal-text { margin: 14px 0 0; font: 400 15px/1.6 var(--font-body); }
+.story-modal-list { margin: 16px 0 0; padding: 0; list-style: none; }
+.story-modal-list li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px dashed #9c9584; font: 400 13px/1.5 var(--font-mono); }
+.story-modal-foot { margin: 12px 0 0; font: 400 12px/1.5 var(--font-body); color: #6f6857; }
+.story-modal-act { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.story-modal-skip { background: none; border: 0; border-bottom: 1px solid #6f6857; color: #1a1814; font: 400 15px/1.6 var(--font-body); cursor: pointer; padding: 0; }
+@media (max-width:560px) { .story-modal-card { padding: 28px 20px 22px; } .story-modal-act .ss-btn { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .story-modal-card { transform: none; } }
