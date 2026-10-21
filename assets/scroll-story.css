@@ -165,18 +165,20 @@
 @media (max-width:560px) { .story-modal-card { padding: 28px 20px 22px; } .story-modal-act .ss-btn { width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .story-modal-card { transform: none; } }
 
-/* Faded industry backdrops: a dark photo behind the scene, dissolving into the page. */
+/* Industry backdrops: sharp line illustrations that dissolve into the page on all sides. */
 .ss-bgs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%); }
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%), linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%), linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-composite: intersect; }
 .ss-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity .9s ease; }
-.ss-bg.ss-on { opacity: .55; }
-.ss-bgs::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,9,8,.92) 0, rgba(10,9,8,.55) 45%, rgba(10,9,8,.25) 100%); }
+.ss-bg.ss-on { opacity: .85; }
+.ss-bgs::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 60% at 30% 45%, rgba(10,9,8,.78) 0, rgba(10,9,8,.35) 70%, rgba(10,9,8,0) 100%); }
 #story-scene-2 .ss-wrap { position: relative; z-index: 1; }
+#story-scene-2 .ss-big h3, #story-scene-2 .ss-big p, #story-scene-2 .ss-num { text-shadow: 0 1px 16px rgba(10,9,8,.95); }
 @media (max-width:900px) {
-  .ss-bgs { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%), linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%), linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%); mask-composite: intersect; }
-  .ss-bg { filter: brightness(1.55) contrast(1.05) saturate(1.1); }
-  .ss-bg.ss-on { opacity: .9; }
-  .ss-bgs::after { background: radial-gradient(ellipse 90% 70% at 50% 40%, rgba(10,9,8,.5) 0, rgba(10,9,8,.2) 100%); }
-  #story-scene-2 .ss-big h3, #story-scene-2 .ss-big p, #story-scene-2 .ss-num { text-shadow: 0 1px 14px rgba(10,9,8,.9); }
+  .ss-bg { background-size: 190% auto; background-position: 58% 66%; background-repeat: no-repeat; }
+  .ss-bg.ss-on { opacity: .8; }
+  .ss-bgs::after { background: linear-gradient(to bottom, rgba(10,9,8,.88) 0, rgba(10,9,8,.7) 42%, rgba(10,9,8,0) 62%); }
 }
 @media (prefers-reduced-motion: reduce) { .ss-bg { transition: none; } }
