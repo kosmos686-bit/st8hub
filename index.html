@@ -1010,6 +1010,7 @@
   <link rel="stylesheet" href="/assets/scroll-story.css">
   <link rel="stylesheet" href="/assets/receipt-lower.css">
   <link rel="stylesheet" href="/assets/paper-cards.css">
+  <link rel="stylesheet" href="/assets/pricing-receipt.css">
 </head>
 <body class="receipt-home">
 <!-- Background Video -->
@@ -1309,12 +1310,15 @@
 <h2 class="section-title"><span data-lang="ru">Выберите <span style="color:var(--gold)">масштаб</span> внедрения</span></h2>
 <p class="section-desc"><span data-lang="ru">Все тарифы включают обучение моделей на ваших данных и интеграцию без остановки бизнеса</span></p>
 </div>
+<div class="pr-printer" aria-hidden="true"><i></i><span>ST8 AI печатает ваш тариф</span><b>№ 0001</b></div>
 <div class="pricing-grid">
 <div class="pricing-card reveal">
+<div class="pr-hd"><b>ST8 AI · тариф № 01</b>касса цифрового администратора</div>
 <div class="pricing-name"><span data-lang="ru">Базовый</span></div>
 <div class="pricing-subtitle"><span data-lang="ru"><span class="paper-num">1-3</span> точки</span></div>
 <div class="pricing-price"><span data-lang="ru">от <span class="paper-num">65 000</span> <span>руб.</span></span></div>
 <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
+<span class="pr-hand" aria-hidden="true">для старта</span>
 <ul class="pricing-features">
 <li><i data-lucide="check"></i><span data-lang="ru">Цифровой администратор бронирования</span></li>
 <li><i data-lucide="check"></i><span data-lang="ru">Telegram + Мессенджер Макс</span></li>
@@ -1323,14 +1327,19 @@
 <li><i data-lucide="check"></i><span data-lang="ru">Настройка за <span class="paper-num">3</span> дня</span></li>
 <li><i data-lucide="check"></i><span data-lang="ru">Поддержка <span class="paper-num">24/7</span></span></li>
 </ul>
+<div class="pr-tot"><span>итого</span><span>от 65 000 ₽</span></div>
 <button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('basic')"><span data-lang="ru">Запустить пилот</span></button>
+<div class="pr-bc" aria-hidden="true"></div><div class="pr-bcn" aria-hidden="true">ST8-0001-BAS</div>
 </div>
 <div class="pricing-card featured reveal">
 <div class="pricing-badge"><span data-lang="ru">Популярный</span></div>
+<div class="pr-stamp" aria-hidden="true">ВЫБОР<br>ИИ</div>
+<div class="pr-hd"><b>ST8 AI · тариф № 02</b>касса цифрового администратора</div>
 <div class="pricing-name"><span data-lang="ru">Бизнес</span></div>
 <div class="pricing-subtitle"><span data-lang="ru"><span class="paper-num">4-10</span> точек</span></div>
 <div class="pricing-price"><span data-lang="ru">от <span class="paper-num">165 000</span> <span>руб.</span></span></div>
 <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
+<span class="pr-hand" aria-hidden="true">золотая середина</span>
 <ul class="pricing-features">
 <li><i data-lucide="check"></i><span data-lang="ru">Всё из Базового</span></li>
 <li><i data-lucide="check"></i><span data-lang="ru">Интеграция Remarket</span></li>
@@ -1339,13 +1348,17 @@
 <li><i data-lucide="check"></i><span data-lang="ru">Персонализация для VIP</span></li>
 <li><i data-lucide="check"></i><span data-lang="ru">Выделенный менеджер</span></li>
 </ul>
+<div class="pr-tot"><span>итого</span><span>от 165 000 ₽</span></div>
 <button class="pricing-btn pricing-btn-primary" onclick="openLeadForm('business')"><i data-lucide="rocket" style="width:16px;height:16px"></i><span data-lang="ru">Запустить пилот</span></button>
+<div class="pr-bc" aria-hidden="true"></div><div class="pr-bcn" aria-hidden="true">ST8-0002-BIZ</div>
 </div>
 <div class="pricing-card reveal">
+<div class="pr-hd"><b>ST8 AI · тариф № 03</b>касса цифрового администратора</div>
 <div class="pricing-name"><span data-lang="ru">Сеть</span></div>
 <div class="pricing-subtitle"><span data-lang="ru"><span class="paper-num">10</span>+ точек</span></div>
 <div class="pricing-price"><span data-lang="ru">от <span class="paper-num">385 000</span> <span>руб.</span></span></div>
 <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
+<span class="pr-hand" aria-hidden="true">для сетей</span>
 <ul class="pricing-features">
 <li><i data-lucide="check"></i><span data-lang="ru">Всё из Бизнес</span></li>
 <li><i data-lucide="check"></i><span data-lang="ru">Единая система управления сетью</span></li>
@@ -1354,7 +1367,9 @@
 <li><i data-lucide="check"></i>On-premise deployment</li>
 <li><i data-lucide="check"></i><span data-lang="ru">Обучение команды</span></li>
 </ul>
+<div class="pr-tot"><span>итого</span><span>от 385 000 ₽</span></div>
 <button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('enterprise')"><span data-lang="ru">Обсудить проект</span></button>
+<div class="pr-bc" aria-hidden="true"></div><div class="pr-bcn" aria-hidden="true">ST8-0003-NET</div>
 </div>
 </div>
 </section>
@@ -2087,6 +2102,7 @@
 <script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
   <script src="/assets/receipt-industries.js" defer></script>
   <script src="/assets/scroll-story.js" defer></script>
+  <script src="/assets/pricing-receipt.js" defer></script>
   <script src="/assets/hero-media.js" defer></script>
 </body>
 </html>
