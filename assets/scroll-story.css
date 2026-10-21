@@ -31,7 +31,7 @@
 .ss-row { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: #c2bdae; }
 .ss-row b { color: #f1ecdf; font-weight: 500; }
 .ss-dots { display: flex; gap: 8px; margin-top: 24px; }
-.ss-dots i { width: 34px; height: 3px; padding: 10px 0; background-clip: content-box; box-sizing: content-box; background: var(--gold-hi); opacity: .2; }
+.ss-dots i { width: 34px; height: 3px; padding: 10px 0; box-sizing: content-box; background: var(--gold-hi); background-clip: content-box; opacity: .2; }
 .ss-foot { margin-top: 22px; font-size: 12px; color: #c2bdae; }
 .ss-art { position: relative; display: grid; gap: 30px; min-height: 400px; align-content: center; }
 .ss-sh { width: min(430px,96%); margin: 0 auto; }

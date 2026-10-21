@@ -15,7 +15,7 @@
   // Backdrop photos start loading right after the page itself has loaded, so they are ready long before the scene is reached.
   function loadBg(bg) { if (bg && bg.dataset.bg) { bg.style.backgroundImage = 'url(' + bg.dataset.bg + ')'; delete bg.dataset.bg; } }
   function loadAll() { backdrops.forEach(loadBg); }
-  if (document.readyState === 'complete') loadAll(); else window.addEventListener('load', loadAll, { once: true });
+  loadAll();
   var bgScene = root.querySelector('#story-scene-2');
   if (bgScene && 'IntersectionObserver' in window) {
     var bgIo = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { loadAll(); bgIo.disconnect(); } }, { rootMargin: '1500px 0px' });
@@ -116,6 +116,11 @@
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) { dragged = true; goTo(selectedIndex() + (dx < 0 ? 1 : -1)); }
     });
     window.addEventListener('pointercancel', function () { sx = null; });
+    scenes[1].addEventListener('click', function (e) {
+      if (dragged || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (e.target.closest('a, button, .ss-dots, .ss-more')) return;
+      e.stopPropagation(); e.preventDefault(); goTo(selectedIndex() + 1);
+    }, true);
     scenes[1].addEventListener('click', function (e) { if (dragged) { e.stopPropagation(); e.preventDefault(); dragged = false; } }, true);
     scenes[1].addEventListener('dragstart', function (e) { e.preventDefault(); });
     scenes[1].style.userSelect = 'none';
