@@ -95,6 +95,32 @@
     }, { threshold: 0.3 });
     scenes.forEach(function (scene) { io.observe(scene); });
   } else { state.p1 = state.p2 = state.p3 = 1; }
+  // Manual switching of industries: swipe on touch, drag with the mouse, click on the dots. Autoplay continues from the chosen slide.
+  function goTo(i) {
+    var n = industries.length;
+    i = (i % n + n) % n;
+    t0[1] = performance.now() - i * DUR[1];
+    schedule();
+    if (reduce.matches) return;
+    state.p2 = (i + .01) / n;
+    render();
+  }
+  if (scenes[1]) {
+    var sx = null, sy = 0, dragged = false;
+    scenes[1].style.touchAction = 'pan-y';
+    scenes[1].addEventListener('pointerdown', function (e) { if (e.button > 0) return; sx = e.clientX; sy = e.clientY; dragged = false; });
+    window.addEventListener('pointerup', function (e) {
+      if (sx === null) return;
+      var dx = e.clientX - sx, dy = e.clientY - sy;
+      sx = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) { dragged = true; goTo(selectedIndex() + (dx < 0 ? 1 : -1)); }
+    });
+    window.addEventListener('pointercancel', function () { sx = null; });
+    scenes[1].addEventListener('click', function (e) { if (dragged) { e.stopPropagation(); e.preventDefault(); dragged = false; } }, true);
+    scenes[1].addEventListener('dragstart', function (e) { e.preventDefault(); });
+    scenes[1].style.userSelect = 'none';
+  }
+  dots.forEach(function (dot, i) { dot.style.cursor = 'pointer'; dot.addEventListener('click', function () { goTo(i); }); });
   if (reduce.addEventListener) reduce.addEventListener('change', motionChanged);
   else reduce.addListener(motionChanged);
 
