@@ -1,0 +1,139 @@
+/* Stage 6 only: pricing, process, cases, guarantees and FAQ. */
+.receipt-home .s6-block { background: var(--ink); color: #f1ecdf; padding: clamp(54px,8vw,116px) max(20px,calc((100vw - 1280px)/2)); border-top: 1px solid #393328; }
+.receipt-home #how.s6-block, .receipt-home #guarantees.s6-block { background: #100e0b; }
+.s6-block .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease-out, transform .55s ease-out; }
+.s6-block .reveal.visible { opacity: 1; transform: none; }
+.s6-block > .section-header { text-align: left; max-width: 760px; margin: 0 0 44px; }
+.s6-block .section-label { font: 500 12px/1.5 var(--font-mono); letter-spacing: .1em; color: var(--gold-hi); }
+.s6-block .section-title { color: #f1ecdf; font: 600 clamp(25px,2.5vw,36px)/1.2 var(--font-display); letter-spacing: -.025em; text-wrap: balance; }
+.s6-block .section-desc { max-width: none; margin: 20px 0 0; color: #c2bdae; font: 400 17px/1.65 var(--font-body); }
+.s6-block :focus-visible { outline: 3px solid var(--gold-hi); outline-offset: 5px; }
+.s6-block *, .s6-block *::before, .s6-block *::after { transition-property: transform,opacity; }
+/* Paper tiers from the reference, with the existing prices and feature lists. */
+.s6-block .pricing-grid { max-width: none; margin: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; align-items: stretch; }
+.s6-block .pricing-card, .s6-block .pricing-card.featured { min-width: 0; position: relative; display: flex; flex-direction: column; padding: 30px 24px 34px; margin: 0 0 8px; border: 0; border-radius: 0; transform: none; background: repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px),var(--paper); color: #1a1814; font: 400 14px/1.6 var(--font-mono); box-shadow: none; }
+.s6-block .pricing-card::before { display: none; }
+.s6-block .pricing-card::after { content: ''; position: absolute; left: 0; right: 0; bottom: -7px; height: 8px; background: linear-gradient(135deg,var(--paper) 25%,transparent 25%) -4px 0/8px 8px,linear-gradient(225deg,var(--paper) 25%,transparent 25%) -4px 0/8px 8px; }
+.s6-block .pricing-name { color: #1a1814; font: 600 20px/1.4 var(--font-display); margin: 0 0 5px; }
+.s6-block .pricing-subtitle { color: #5f594d; font: 400 13px/1.6 var(--font-mono); margin-bottom: 20px; }
+.s6-block .pricing-price { color: #1a1814; font: 600 clamp(23px,2.15vw,30px)/1.4 var(--font-display); letter-spacing: -.025em; margin: 0 0 6px; }
+.s6-block .pricing-price > span { font: inherit; }
+.s6-block .pricing-price > span > span { font: 400 13px/1.6 var(--font-mono); }
+.s6-block .pricing-period { color: #5f594d; font: 400 12px/1.6 var(--font-mono); margin-bottom: 0; }
+.s6-block .pricing-features { list-style: none; display: grid; gap: 10px; margin: 20px 0 26px; padding: 20px 0 0; border-top: 2px dashed #9c9584; }
+.s6-block .pricing-features li { display: flex; align-items: baseline; gap: 8px; padding: 0; color: #1a1814; font: 400 13px/1.65 var(--font-mono); }
+.s6-block .pricing-features li::before { content: '+'; font-weight: 500; flex: none; }
+.s6-block .pricing-features li svg { display: none; }
+.s6-block .pricing-btn { margin-top: auto; min-height: 50px; padding: 12px 16px; border: 0; border-radius: 8px; background: #1a1814; color: var(--paper); font: 500 15px/1.5 var(--font-body); }
+.s6-block .pricing-card.featured .pricing-btn { background: var(--gold); color: #17130b; }
+.s6-block .pricing-btn:hover { transform: translateY(-2px); }
+.s6-block .pricing-card :focus-visible { outline-color: #3c3422; }
+.s6-block .pricing-badge { position: absolute; top: 18px; right: 16px; left: auto; transform: none; padding: 3px 7px; background: var(--gold-hi); color: #1a1814; font: 500 10px/1.5 var(--font-mono); border: 0; border-radius: 4px; }
+/* Existing numbered steps become a dotted process rail. */
+.s6-block .how-grid { display: grid; max-width: none; margin: 0; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 26px; }
+#how.s6-block .how-step { min-width: 0; position: relative; padding: 54px 0 0; text-align: left; border: 0; background: transparent; }
+#how.s6-block .how-number { position: absolute; top: 0; left: 0; display: grid; place-items: center; width: 32px; height: 32px; margin: 0; border: 0; border-radius: 50%; background: var(--gold); color: #17130b; font: 500 16px/1 var(--font-mono); box-shadow: none; }
+#how.s6-block .how-step::after { content: ''; position: absolute; left: 40px; right: -26px; top: 16px; border-top: 2px dotted #88743d; }
+#how.s6-block .how-step:last-child::after { display: none; }
+.s6-block .how-title { margin: 0 0 12px; color: #f1ecdf; font: 600 17px/1.4 var(--font-display); }
+.s6-block .how-desc { margin: 0; color: #c2bdae; font: 400 15.5px/1.65 var(--font-body); }
+/* Cases retain their existing previews and destinations; no screenshot processing here. */
+.s6-block .projects-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+.s6-block .project-card { min-width: 0; display: flex; flex-direction: column; margin: 0; border: 1px solid #494130; border-radius: 16px; overflow: hidden; color: #f1ecdf; background: linear-gradient(#191610,#100e0b); text-decoration: none; box-shadow: none; transition: transform .2s; }
+.s6-block a.project-card:hover { transform: translateY(-4px); border-color: #8c7a42; }
+.s6-block .project-card:not(a) { grid-column: 1/-1; min-height: 220px; }
+.s6-block .project-preview { position: relative; height: 250px; padding: 46px 18px 42px; background: radial-gradient(ellipse at 50% 0,#302610,transparent 75%); border-bottom: 1px solid #494130; }
+.s6-block .project-preview * { animation: none !important; }
+.s6-block .project-visual { max-width: 100%; }
+.s6-demo-note { position: absolute; left: 14px; bottom: 12px; max-width: calc(100% - 28px); color: #c2bdae; font: 400 10px/1.5 var(--font-mono); }
+.s6-block .project-client-badge { top: 14px; left: 14px; border: 1px solid #5a5036; background: #191610; color: #f1ecdf; }
+.s6-block .project-body { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 24px 22px; }
+.s6-block .client-name { color: #f1ecdf; font-size: 15px; }
+.s6-block .client-type { color: #c2bdae; font-size: 12px; }
+.s6-block .project-title { color: #f1ecdf; margin: 8px 0 14px; font: 600 19px/1.4 var(--font-display); }
+.s6-block .project-desc { color: #c2bdae; font: 400 15.5px/1.65 var(--font-body); margin: 0 0 20px; }
+.s6-block .project-tags { flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.s6-block .project-tag { border: 1px solid #494130; background: transparent; color: #c2bdae; font: 400 11px/1.5 var(--font-mono); }
+.s6-block .project-cta { margin-top: auto; }
+.s6-block .project-cta-btn { border: 0; padding: 4px 0; background: transparent; color: var(--gold-hi); }
+.s6-block .legal-note { color: #c2bdae; font: 400 12px/1.65 var(--font-body); text-align: left; margin: 28px 0 0; }
+/* Contract wording remains intact in four understated columns. */
+#guarantees.s6-block .how-step { min-width: 0; padding: 22px 0 0; border: 0; border-top: 2px solid var(--gold); background: transparent; text-align: left; }
+#guarantees.s6-block .how-number { display: none; }
+#guarantees.s6-block .how-step::after { display: none; }
+/* Native details provide keyboard operation without altering the old site scripts. */
+.s6-faq { border-top: 1px solid #494130; }
+.s6-faq-item { margin: 0; border-bottom: 1px solid #494130; }
+.s6-faq summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 25px 0; cursor: pointer; list-style: none; }
+.s6-faq summary::-webkit-details-marker { display: none; }
+.s6-faq summary .solution-title { margin: 0; min-width: 0; color: #f1ecdf; font: 600 clamp(16px,1.5vw,19px)/1.4 var(--font-display); }
+.s6-faq-icon { position: relative; width: 27px; height: 27px; flex: none; border: 1px solid #786d55; border-radius: 50%; transition: transform .3s; }
+.s6-faq-icon::before, .s6-faq-icon::after { content: ''; position: absolute; top: 50%; left: 50%; width: 11px; height: 1.5px; background: var(--gold-hi); transform: translate(-50%,-50%); }
+.s6-faq-icon::after { transform: translate(-50%,-50%) rotate(90deg); transition: transform .3s; }
+.s6-faq-item[open] .s6-faq-icon { transform: rotate(180deg); }
+.s6-faq-item[open] .s6-faq-icon::after { transform: translate(-50%,-50%) rotate(0); }
+.s6-faq-answer { max-width: 760px; padding: 0 0 26px; color: #c2bdae; font: 400 17px/1.7 var(--font-body); }
+.s6-faq-answer p { margin: 0; }
+@media(max-width:1100px) {
+  .s6-block .pricing-grid, .s6-block .projects-grid { grid-template-columns: minmax(0,1fr); }
+  .s6-block .how-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #how.s6-block .how-step:nth-child(2)::after { display: none; }
+}
+@media(max-width:639px) {
+  .s6-block > .section-header { margin-bottom: 32px; }
+  .s6-block .section-title { font-size: 25px; }
+  .s6-block .section-desc { font-size: 16px; }
+  .s6-block .pricing-grid { gap: 28px; }
+  .s6-block .pricing-price { font-size: 28px; }
+  .s6-block .how-grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  #how.s6-block .how-step::after { display: none; }
+  .s6-block .project-preview { height: 240px; }
+  .s6-block .project-card:not(a) { padding: 28px 20px !important; }
+  .s6-faq summary { gap: 16px; padding: 22px 0; }
+  .s6-faq-answer { font-size: 16px; }
+}
+@media(prefers-reduced-motion:reduce) { .s6-block *, .s6-block *::before, .s6-block *::after { animation: none !important; transition: none !important; } }
+
+/* Compact mobile reading rhythm: no hidden copy or horizontal card carousel. */
+@media(max-width:639px) {
+ .receipt-home .s6-block { padding: 32px 20px; }
+ .s6-block > .section-header { margin-bottom: 20px; }
+ .s6-block .section-title { font-size: 23px; }
+ .s6-block .section-desc { margin-top: 12px; font-size: 15px; line-height: 1.5; }
+ .s6-block .pricing-grid { gap: 20px; }
+ .s6-block .pricing-card, .s6-block .pricing-card.featured { padding: 20px 16px; }
+ .s6-block .pricing-name { font-size: 18px; }
+ .s6-block .pricing-subtitle { margin-bottom: 10px; }
+ .s6-block .pricing-price { font-size: 25px; }
+ .s6-block .pricing-features { gap: 6px; margin: 12px 0 16px; padding-top: 12px; }
+ .s6-block .pricing-features li { margin: 0; font-family: var(--font-body); font-size: 14px; line-height: 1.5; }
+ .s6-block .how-grid { gap: 20px; }
+ #how.s6-block .how-step { padding: 0 0 0 46px; }
+ .s6-block .how-title { font-size: 16px; margin-bottom: 8px; }
+ .s6-block .how-desc { font-size: 15px; line-height: 1.5; }
+ #guarantees.s6-block .how-step { padding-top: 14px; }
+ .s6-block .projects-grid { gap: 18px; }
+ .s6-block .project-preview { height: 165px; padding: 32px 14px 28px; }
+ .s6-block .project-visual { transform: scale(.75); transform-origin: center; }
+ .s6-block .project-body { padding: 16px; }
+ .s6-block .project-title { font-size: 17px; margin: 6px 0 10px; }
+ .s6-block .project-desc { font-size: 15px; line-height: 1.5; margin-bottom: 12px; }
+ .s6-block .project-tags { margin-bottom: 12px; }
+ .s6-block .project-card:not(a) { min-height: 0; padding: 20px 16px !important; }
+ .s6-block .legal-note { margin-top: 16px; }
+ .s6-faq summary { padding: 17px 0; gap: 12px; }
+ .s6-faq summary .solution-title { font-size: 15px; }
+ .s6-faq-answer { font-size: 15px; line-height: 1.5; padding-bottom: 18px; }
+}
+@media(prefers-reduced-motion:reduce) { .s6-block .reveal { opacity: 1; transform: none; } }
+
+.s6-block .pricing-price span { color: inherit; }
+.s6-block .pricing-features li { margin-bottom: 0; }
+#guarantees.s6-block .how-step { background: var(--paper); padding: 24px 18px; border-top: 3px solid var(--gold); }
+#guarantees.s6-block .how-title { color: #1a1814; }
+#guarantees.s6-block .how-desc { color: #514b40; }
+@media(max-width:639px) {
+ #guarantees.s6-block .how-step { padding: 12px; }
+ #guarantees.s6-block .how-grid { gap: 12px; }
+ .s6-block .project-preview .project-visual { position: absolute; top: 50%; left: 50%; width: 100%; height: auto; padding: 0 16px; transform: translate(-50%,-50%) scale(.75); }
+}

@@ -16,9 +16,102 @@
   <link rel="alternate" hreflang="tr" href="https://st8-ai.ru/tr/">
   <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/en/">
   <meta name="description" content="Автоматизация бизнеса с помощью ИИ: находим процесс, где теряются деньги, подключаем ИИ к вашим системам и измеряем эффект на пилоте. Москва.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="/assets/fonts.css" data-site-fonts>
+  <noscript><link rel="stylesheet" href="/assets/fonts.css"></noscript>
+  <link rel="preload" as="font" href="/assets/hero-fonts/inter-cyrillic.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="/assets/hero-fonts/inter-latin.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/hero-poster-mobile.webp" media="(max-width:639px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/hero-poster.webp" media="(min-width:640px)" fetchpriority="high">
+  <style id="hero-critical">
+/* Same Google Fonts Inter v20, self-hosted; SIL OFL in hero-fonts/OFL.txt. */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-cyrillic-ext.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-greek-ext.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-greek.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-vietnamese.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* The production hero keeps the original Inter typography. */
+.receipt-home .hero { font-family: Inter, sans-serif; }
+/* Original hero, with only the requested seam into the ink section. */
+.receipt-home .hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background: linear-gradient(transparent, #0b0a09); z-index: 2; pointer-events: none; }
+
+/* A real first-frame image paints immediately, even with JS or autoplay unavailable. */
+.hero-video picture, .hero-video img { display: block; width: 100%; height: 100%; }
+.hero-video img { object-fit: cover; }
+.hero-video video { position: absolute; inset: 0; opacity: 0; }
+.hero-video video.is-playing { opacity: 1; }
+@media(prefers-reduced-motion:reduce) {
+ .receipt-home .hero .animate-blur-fade-up { animation: none !important; opacity: 1; transform: none; filter: none; }
+}
+/* Mobile hero is readable on first paint; its final design is unchanged. */
+@media(max-width:900px) {
+ .receipt-home .hero .animate-blur-fade-up { animation: none !important; opacity: 1; transform: none; filter: none; }
+ .receipt-home .hero .scroll-indicator { animation: none; }
+}
+/* Reserve icon boxes before the deferred Lucide replacement, preventing late reflow. */
+.receipt-home .hero i[data-lucide] { display: inline-block; flex-shrink: 0; }
+
+@media(max-width:639px) {
+ .receipt-home .hero .scroll-indicator { left: auto; right: 20px; bottom: 10px; transform: none; gap: 2px; }
+}
+  </style>
   <!-- TODO: заменить на актуальный домен и og:image (1200x630) перед публикацией -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Автоматизация бизнеса с помощью ИИ — пилот | ST8 AI">
@@ -140,6 +233,13 @@
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js" integrity="sha384-PpZ0v4GjRXD+zBXfYaMJkWUZG4mHqAlhTADbQwrM8oXYO7LGWz+NcISPEVyO9opc" crossorigin="anonymous"></script>
   <style>
+    :root {
+      --ink: #0b0a09; --paper: #ece6d6; --gold: #d4af37; --gold-hi: #e8c85a;
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --gold: #d4af37; --gold-light: #f0d78c; --gold-dark: #a08020;
@@ -147,7 +247,7 @@
       --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563;
     }
     body {
-      font-family: 'Inter', sans-serif; background: var(--black); color: #fff;
+      font-family: var(--font-body); background: var(--black); color: #fff;
       overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
     @keyframes blurFadeUp {
@@ -905,14 +1005,21 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/receipt-roi.css">
+  <link rel="stylesheet" href="/assets/receipt-industries.css">
+  <link rel="stylesheet" href="/assets/scroll-story.css">
+  <link rel="stylesheet" href="/assets/receipt-lower.css">
+  <link rel="stylesheet" href="/assets/paper-cards.css">
 </head>
-<body>
+<body class="receipt-home">
 <!-- Background Video -->
   <div class="hero-video">
-    <video autoplay muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect fill='%23000' width='1920' height='1080'/%3E%3C/svg%3E">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4" type="video/mp4">
-    </video>
+    <picture>
+      <source media="(max-width:639px)" srcset="/assets/hero-poster-mobile.webp">
+      <source media="(max-width:900px)" srcset="/assets/hero-poster.webp">
+      <img src="/assets/hero-poster.webp" alt="" width="1920" height="1068" fetchpriority="high" decoding="async">
+    </picture>
+    <video muted loop playsinline preload="none" data-poster="/assets/hero-poster.webp" aria-hidden="true" data-video-src="/assets/hero-desktop.mp4"></video>
   </div>
   <div class="blur-overlay"></div>
   <div class="particles" id="particles"></div>
@@ -1019,569 +1126,470 @@
     <div class="scroll-indicator"><span data-lang="ru">Вниз</span><i data-lucide="chevron-down" style="width:20px;height:20px;color:#6b7280"></i></div>
   </section>
 
-  <!-- ROI CALCULATOR -->
+<div class="scroll-story" id="scroll-story"><section class="ss-pin" id="story-scene-1"><div class="ss-stick"><div class="ss-glow"></div><div class="ss-wrap"><div class="ss-two">
+<div><h2>Каждое действие записывается в ленту</h2>
+<p class="ss-t">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</p>
+<ul class="ss-steps"><li>Бронь принята</li><li>Закупка собрана</li><li>Отзыв разобран</li><li>Замена предложена</li></ul></div>
+<div class="ss-receipt-figure"><div class="ss-rwrap"><div class="ss-slot"></div><div class="ss-rc ss-paper ss-perf"><div class="ss-rin">
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">19:12</span> гость</span><span><span class="paper-num">#0412</span></span></div><p>«Столик на четверых, сегодня после семи»</p><p class="ss-res"><mark class="ss-mark">Стол <span class="paper-num">12</span> на <span class="paper-num">19:30</span>. Гостю ушло SMS.</mark></p></div>
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">21:40</span> склад</span><span><span class="paper-num">#0413</span></span></div><p>Сливки <span class="paper-num">33%</span>: остаток <span class="paper-num">4</span> л, завтра нужно <span class="paper-num">14</span> л</p><p class="ss-res"><mark class="ss-mark">Заказ поставщику собран, ждёт вашего ОК.</mark><span aria-hidden="true" class="paper-ink paper-ink--red">осталось нажать ОК</span></p></div>
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">09:20</span> отзыв</span><span><span class="paper-num">#0415</span></span></div><p>«Горячее ждали <span class="paper-num">40</span> минут», <span class="paper-num">2</span> из <span class="paper-num">5</span></p><p class="ss-res"><mark class="ss-mark">Ответ готов, управляющему отправлено.</mark><span aria-hidden="true" class="paper-ink">ответ готов ✓</span></p></div>
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">12:30</span> поставщик</span><span><span class="paper-num">#0417</span></span></div><p>Лосось подорожал</p><p class="ss-res"><mark class="ss-mark">Предложена замена из вашего прайса.</mark></p></div>
+</div></div></div><p class="ss-demo-caption">Иллюстративный сценарий. Данные условные.</p></div>
+</div></div></div></section><section class="ss-pin" id="story-scene-2"><div class="ss-stick"><div class="ss-glow"></div><div class="ss-wrap"><div class="ss-two">
+<div><p class="ss-kick">Выберите свою отрасль, листая вниз</p>
+<div class="ss-ind">
+<div class="ss-big ss-on"><div class="ss-num">-35%*</div><h3>HoReCa</h3><p>Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</p><div class="ss-row"><span><b>+17%*</b> Средний чек</span><span><b>-40%*</b> No-show</span></div></div>
+<div class="ss-big"><div class="ss-num">-60%*</div><h3>Производство</h3><p>Компьютерное зрение для контроля качества, предиктивное обслуживание оборудования, оптимизация линий</p><div class="ss-row"><span><b>99.7%*</b> Точность</span><span><b>-25%*</b> Простои</span></div></div>
+<div class="ss-big"><div class="ss-num">-30%*</div><h3>Ритейл и E-commerce</h3><p>Прогнозирование спроса, автозакупки, перераспределение товара, персонализация, интеграция с маркетплейсами</p><div class="ss-row"><span><b>94%*</b> Точность</span><span><b>+22%*</b> Оборот</span></div></div>
+<div class="ss-big"><div class="ss-num">-25%*</div><h3>Логистика</h3><p>Оптимизация маршрутов, computer vision для проверки комплектации, прогноз загруженности складов</p><div class="ss-row"><span><b>-40%*</b> Ошибки</span><span><b>+18%*</b> Грузооборот</span></div></div>
+<div class="ss-big"><div class="ss-num">-70%*</div><h3>Офисы и УК</h3><p>Автоматизация документооборота, ИИ-ассистенты, распознавание сканов, маршрутизация задач, аналитика</p><div class="ss-row"><span><b>5x*</b> Быстрее</span><span><b>+35%*</b> Эффективность</span></div></div>
+</div>
+<div class="ss-dots"><i class="ss-on"></i><i></i><i></i><i></i><i></i></div>
+<p class="ss-foot">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</p></div>
+<div aria-hidden="true" class="ss-art">
+<div class="ss-sh ss-on"><div class="ss-paper ss-perf ss-pp"><h4>Журнал смены, ресторан</h4><div class="ss-l"><span><span class="paper-num">19:12</span> бронь</span><span>стол <span class="paper-num">12</span></span></div><div class="ss-l"><span><span class="paper-num">21:40</span> закупка</span><span>сливки ×<span class="paper-num">14</span> л</span></div><div class="ss-l"><span><span class="paper-num">09:20</span> отзыв</span><span><mark class="ss-mark">ответ готов</mark></span></div><span aria-hidden="true" class="paper-ink">ответ готов ✓</span></div><p class="ss-demo-caption">Иллюстративный сценарий. Данные условные.</p></div>
+<div class="ss-sh"><div class="ss-paper ss-perf ss-pp"><h4>Журнал смены, линия <span class="paper-num">2</span></h4><div class="ss-l"><span><span class="paper-num">02:15</span> партия <span class="paper-num">118</span></span><b>скол</b></div><div class="ss-l"><span><span class="paper-num">02:15</span> снят с ленты</span><span><mark class="ss-mark">фото технологу</mark></span></div><div class="ss-l"><span><span class="paper-num">04:40</span> насос</span><span>вибрация растёт</span></div><div class="ss-l"><span><span class="paper-num">04:40</span> ТО в ночь</span><span><mark class="ss-mark">запчасть заказана</mark></span></div><span aria-hidden="true" class="paper-ink">фото технологу</span></div><p class="ss-demo-caption">Иллюстративный сценарий. Данные условные.</p></div>
+<div class="ss-sh"><div class="ss-paper ss-perf ss-pp"><h4>Заказ поставщику</h4><div class="ss-l"><span>Молоко <span class="paper-num">3,2%</span></span><span>остаток <span class="paper-num">8</span> → ×<span class="paper-num">13</span></span></div><div class="ss-l"><span>Кофе зерно <span class="paper-num">1</span> кг</span><span>остаток <span class="paper-num">3</span> → ×<span class="paper-num">15</span></span></div><div class="ss-l"><span>Гречка <span class="paper-num">800</span> г</span><span>остаток <span class="paper-num">40</span>, ок</span></div><div class="ss-l"><span><mark class="ss-mark">Собран, ждёт ОК</mark></span><span></span></div><span aria-hidden="true" class="paper-ink paper-ink--red">осталось нажать ОК</span></div><p class="ss-demo-caption">Иллюстративный сценарий. Данные условные.</p></div>
+<div class="ss-sh"><div><div class="ss-stampx">ПЕРЕСТРОЕН</div><div class="ss-paper ss-perf ss-pp"><h4>Рейс <span class="paper-num">14</span>, МКАД</h4><div class="ss-l"><span>Авария на трассе</span><span><mark class="ss-mark">маршрут новый</mark></span></div><div class="ss-l"><span>Оптика Север, <span class="paper-num">13–15</span></span><span><span class="paper-num">14:25</span> в окне</span></div><div class="ss-l"><span>Кафе у вокзала, <span class="paper-num">15–17</span></span><span><span class="paper-num">15:50</span> в окне</span></div><span aria-hidden="true" class="paper-ink">маршрут новый</span></div></div><p class="ss-demo-caption">Иллюстративный сценарий. Данные условные.</p></div>
+<div class="ss-sh"><div class="ss-paper ss-perf ss-pp"><h4>Счёт №<span class="paper-num">418</span> распознан</h4><div class="ss-l"><span>тип</span><span><mark class="ss-mark">счёт на оплату</mark></span></div><div class="ss-l"><span>сумма</span><span><mark class="ss-mark"><span class="paper-num">84 300</span> ₽</mark></span></div><div class="ss-l"><span>оплатить до</span><span><span class="paper-num">28.10.2026</span></span></div><div class="ss-l"><span>статус</span><span>на проверке у бухгалтера</span></div><span aria-hidden="true" class="paper-ink">на проверке</span></div><p class="ss-demo-caption">Иллюстративный сценарий. Данные условные.</p></div>
+</div>
+</div></div></div></section><section class="ss-pin" id="story-scene-3"><div class="ss-stick"><div class="ss-glow"></div><div class="ss-wrap">
+<p class="ss-rev"><span class="ss-word">Окупаемость<span aria-hidden="true" class="ss-word-lit">Окупаемость</span></span> <span class="ss-word">2-3<span aria-hidden="true" class="ss-word-lit">2-3</span></span> <span class="ss-word">мес.<span aria-hidden="true" class="ss-word-lit">мес.</span></span> <span class="ss-word">Пилот<span aria-hidden="true" class="ss-word-lit">Пилот</span></span> <span class="ss-word">на<span aria-hidden="true" class="ss-word-lit">на</span></span> <span class="ss-word">1<span aria-hidden="true" class="ss-word-lit">1</span></span> <span class="ss-word">точке.<span aria-hidden="true" class="ss-word-lit">точке.</span></span> <span class="ss-word">Выход<span aria-hidden="true" class="ss-word-lit">Выход</span></span> <span class="ss-word">без<span aria-hidden="true" class="ss-word-lit">без</span></span> <span class="ss-word">штрафа.<span aria-hidden="true" class="ss-word-lit">штрафа.</span></span> </p>
+</div></div></section><section class="ss-fin" id="story-scene-4"><div class="ss-wrap">
+<h2><span data-lang="ru">Новый рынок — <span style="color:var(--gold)">не риск</span></span></h2>
+<div class="ss-gar">
+<div class="ss-paper ss-perf"><b>KPI пилота фиксируем до запуска</b>Целевые показатели фиксируются в договоре до старта проекта</div>
+<div class="ss-paper ss-perf"><b>Пилот на <span class="paper-num">1</span> точке</b>Полное внедрение только после успешного пилота, не наоборот</div>
+<div class="ss-paper ss-perf"><b>Выход без штрафа</b><span class="paper-num">30</span> дней на выход из проекта без штрафных санкций</div>
+<div class="ss-paper ss-perf"><b>Эксклюзив на город</b>Мы не работаем с вашими прямыми конкурентами в одном городе</div>
+</div>
+<div class="ss-tiers"><span>Базовый <b>от 65 000 руб.</b></span><span>Бизнес <b>от 165 000 руб.</b></span><span>Сеть <b>от 385 000 руб.</b></span></div>
+<div class="ss-act"><button class="ss-btn" onclick="openLeadForm()" type="button">Обсудить задачу и план пилота</button><a class="ss-link contact-link" href="https://t.me/Zzima686" rel="noopener noreferrer" target="_blank"><span class="contact-link-label">Написать в Telegram</span></a></div>
+<p class="ss-legal">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса. Данные в демо условные.</p>
+</div></section></div>
+
+
+
   <section class="section-roi" id="roi">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Калькулятор</span></div>
-      <h2 class="section-title"><span data-lang="ru">Сколько вы <span style="color:var(--gold)">сэкономите</span> за год?</span></h2>
-      <p class="section-desc"><span data-lang="ru">Ползунки ниже рассчитывают ориентировочную экономию на основе усреднённых данных наших проектов</span></p>
-    </div>
-    <div class="roi-calculator reveal">
-      <div class="roi-grid">
-        <div>
-          <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="ru">Количество точек</span><span class="roi-input-value" id="pointsValue">1</span></div>
-            <input type="range" class="roi-slider" id="points" min="1" max="50" value="1" oninput="calculateROI()">
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="ru">Средний чек, руб.</span><span class="roi-input-value" id="checkValue">1 000</span></div>
-            <input type="range" class="roi-slider" id="check" min="500" max="10000" step="100" value="1000" oninput="calculateROI()">
-          </div>
-          <div class="roi-input-group">
-            <div class="roi-input-label"><span data-lang="ru">Гостей в день (на точку)</span><span class="roi-input-value" id="guestsValue">20</span></div>
-            <input type="range" class="roi-slider" id="guests" min="20" max="500" step="10" value="20" oninput="calculateROI()">
-          </div>
-        </div>
-        <div>
-          <div class="roi-results">
-            <div class="roi-result-value" id="roiTotal">2 376 000 <span data-lang="ru">руб.</span></div>
-            <div class="roi-result-label"><span data-lang="ru">ориентировочная экономия за 12 месяцев*</span></div>
-            <button type="button" onclick="openLeadForm('roi')" class="btn-primary" style="width:100%;justify-content:center"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Обсудить задачу и план пилота</span></button>
-            <div class="roi-result-note"><span data-lang="ru">* Оценка по модели, не гарантия результата. Методику измерения и целевые показатели согласовываем после аудита.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
+<div class="roi-calculator reveal">
+<div class="roi-grid">
+<div class="roi-controls"><div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Калькулятор</span></div>
+<h2 class="section-title"><span data-lang="ru">Сколько вы <span style="color:var(--gold)">сэкономите</span> за год?</span></h2>
+<p class="section-desc"><span data-lang="ru">Ползунки ниже рассчитывают ориентировочную экономию на основе усреднённых данных наших проектов</span></p>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="points"><span data-lang="ru">Количество точек</span><span class="roi-input-value" id="pointsValue">1</span></label>
+<input class="roi-slider" id="points" max="50" min="1" oninput="calculateROI()" type="range" value="1"/>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="check"><span data-lang="ru">Средний чек, руб.</span><span class="roi-input-value" id="checkValue">1 000</span></label>
+<input class="roi-slider" id="check" max="10000" min="500" oninput="calculateROI()" step="100" type="range" value="1000"/>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="guests"><span data-lang="ru">Гостей в день (на точку)</span><span class="roi-input-value" id="guestsValue">20</span></label>
+<input class="roi-slider" id="guests" max="500" min="20" oninput="calculateROI()" step="10" type="range" value="20"/>
+</div>
+</div>
+<div>
+<div class="roi-results">
+<div aria-live="polite" class="roi-result-value" id="roiTotal">2 376 000 <span data-lang="ru">руб.</span></div>
+<div class="roi-result-label"><span data-lang="ru">ориентировочная экономия за 12 месяцев*</span></div>
+<button class="btn-primary" onclick="openLeadForm('roi')" style="width:100%;justify-content:center" type="button"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="ru">Обсудить задачу и план пилота</span></button>
+<div class="roi-result-note"><span data-lang="ru">* Оценка по модели, не гарантия результата. Методику измерения и целевые показатели согласовываем после аудита.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
   <!-- SOLUTIONS -->
-  <section class="section-solutions" id="solutions">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Решения</span></div>
-      <h2 class="section-title"><span data-lang="ru">ИИ для <span style="color:var(--gold)">вашей отрасли</span></span></h2>
-      <p class="section-desc"><span data-lang="ru">Кастомные решения под конкретного клиента — не коробочные продукты</span></p>
-    </div>
-    <div class="solutions-grid">
-      <!-- HoReCa -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="utensils" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title">HoReCa</h3>
-          <p class="solution-desc"><span data-lang="ru">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</span></p>
-          <span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="ru">Списания -35%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong data-lang="ru">Цифровой администратор 24/7</strong> — <span data-lang="ru">принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии, дни рождения</span></li>
-              <li><strong data-lang="ru">Предиктивные закупки</strong> — <span data-lang="ru">прогнозирует спрос на 7 дней вперёд, снижает списания на 35%</span></li>
-              <li><strong data-lang="ru">Управление остатками</strong> — <span data-lang="ru">контроль сроков годности, автоматические уведомления, FIFO</span></li>
-              <li><strong data-lang="ru">Персонализация меню</strong> — <span data-lang="ru">рекомендации блюд на основе истории заказов гостя</span></li>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">контроль порций, чистоты, соблюдения стандартов на кухне</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Интеграция с iiko / R-Keeper за 3 дня. ИИ обучается на ваших данных — меню, продажи, брони. Через неделю система предсказывает спрос точнее менеджера с 10-летним стажем.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">-35%</span><span class="solution-stat-label" data-lang="ru">Списания</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+17%</span><span class="solution-stat-label" data-lang="ru">Средний чек</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label">No-show</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/horeca.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
+<section class="section-solutions" id="solutions">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Решения</span></div>
+<h2 class="section-title"><span data-lang="ru">ИИ для <span style="color:var(--gold)">вашей отрасли</span></span></h2>
+<p class="section-desc"><span data-lang="ru">Кастомные решения под конкретного клиента — не коробочные продукты</span></p>
+</div>
+<div aria-label="Отрасли" class="industry-tabs" role="tablist"><button aria-controls="industry-panel-horeca" aria-selected="true" class="industry-tab" id="industry-tab-horeca" role="tab" tabindex="0" type="button">HoReCa</button><button aria-controls="industry-panel-production" aria-selected="false" class="industry-tab" id="industry-tab-production" role="tab" tabindex="-1" type="button"><span data-lang="ru">Производство</span></button><button aria-controls="industry-panel-retail" aria-selected="false" class="industry-tab" id="industry-tab-retail" role="tab" tabindex="-1" type="button"><span data-lang="ru">Ритейл и E-commerce</span></button><button aria-controls="industry-panel-logistics" aria-selected="false" class="industry-tab" id="industry-tab-logistics" role="tab" tabindex="-1" type="button"><span data-lang="ru">Логистика</span></button><button aria-controls="industry-panel-office" aria-selected="false" class="industry-tab" id="industry-tab-office" role="tab" tabindex="-1" type="button"><span data-lang="ru">Офисы и УК</span></button><button aria-controls="industry-panel-custom" aria-selected="false" class="industry-tab" id="industry-tab-custom" role="tab" tabindex="-1" type="button"><span data-lang="ru">Кастомная разработка</span></button></div><div class="industry-panels"><article aria-labelledby="industry-tab-horeca" class="industry-panel" id="industry-panel-horeca" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="utensils" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title">HoReCa</h3>
+<p class="solution-desc"><span data-lang="ru">Цифровой администратор 24/7, предиктивные закупки, управление остатками, персонализация меню, computer vision на кухне</span></p>
+<span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="ru">Списания -35%*</span></span>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">-35%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Списания</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+17%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Средний чек</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-40%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label">No-show</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Интеграция с iiko / R-Keeper за 3 дня. ИИ обучается на ваших данных — меню, продажи, брони. Через неделю система предсказывает спрос точнее менеджера с 10-летним стажем.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/horeca.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Цифровой администратор <span class="paper-num">24/7</span></strong> — <span data-lang="ru">принимает брони, отвечает в мессенджерах, помнит предпочтения гостей, аллергии, дни рождения</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Предиктивные закупки</strong> — <span data-lang="ru">прогнозирует спрос на <span class="paper-num">7</span> дней вперёд, снижает списания на <span class="paper-num">35%</span></span></li>
+<li class="industry-ticket"><strong data-lang="ru">Управление остатками</strong> — <span data-lang="ru">контроль сроков годности, автоматические уведомления, FIFO</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Персонализация меню</strong> — <span data-lang="ru">рекомендации блюд на основе истории заказов гостя</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">контроль порций, чистоты, соблюдения стандартов на кухне</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-production" class="industry-panel" hidden="" id="industry-panel-production" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="factory" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Производство</span></h3>
+<p class="solution-desc"><span data-lang="ru">Компьютерное зрение для контроля качества, предиктивное обслуживание оборудования, оптимизация линий</span></p>
+<span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="ru">Точность 99.7%*</span></span>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">99.7%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-25%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Простои</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-60%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Брак</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Устанавливаем камеры на линию, интегрируем с MES/ERP. ИИ обучается на образцах брака и дефектов. Система работает on-premise — данные не покидают территорию завода.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/proizvodstvo.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">обнаружение дефектов за <span class="paper-num">50</span> мс, точность <span class="paper-num">99.7%</span></span></li>
+<li class="industry-ticket"><strong data-lang="ru">Предиктивное обслуживание</strong> — <span data-lang="ru">прогноз поломок за <span class="paper-num">72</span> часа, планирование ТО</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Оптимизация линий</strong> — <span data-lang="ru">балансировка нагрузки, снижение простоев на <span class="paper-num">25%</span></span></li>
+<li class="industry-ticket"><strong data-lang="ru">Контроль качества</strong> — <span data-lang="ru">автоматическая проверка по ГОСТ и внутренним стандартам</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Аналитика OEE</strong> — <span data-lang="ru">Overall Equipment Effectiveness в реальном времени</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-retail" class="industry-panel" hidden="" id="industry-panel-retail" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="shopping-cart" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Ритейл и E-commerce</span></h3>
+<p class="solution-desc"><span data-lang="ru">Прогнозирование спроса, автозакупки, перераспределение товара, персонализация, интеграция с маркетплейсами</span></p>
+<span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="ru">Прогноз 94%*</span></span>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">94%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-30%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Недостача</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+22%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Оборот</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Подключаемся к вашей учётной системе за 1 день. ИИ анализирует историю продаж, остатки, поставки. Через 2 недели система предсказывает спрос точнее Excel с макросами.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/retail.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Прогноз спроса</strong> — <span data-lang="ru">точность <span class="paper-num">94%</span>, учёт сезонности, погоды, событий</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Автозакупки</strong> — <span data-lang="ru">формирование заказов поставщикам без участия человека</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Перераспределение</strong> — <span data-lang="ru">автоматический баланс stock между точками и складами</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Персонализация</strong> — <span data-lang="ru">рекомендации товаров на основе поведения клиента</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru"><span class="paper-num">1</span>С, МойСклад, Wildberries, Ozon, Яндекс.Маркет</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-logistics" class="industry-panel" hidden="" id="industry-panel-logistics" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="truck" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Логистика</span></h3>
+<p class="solution-desc"><span data-lang="ru">Оптимизация маршрутов, computer vision для проверки комплектации, прогноз загруженности складов</span></p>
+<span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="ru">Топливо -25%*</span></span>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">-25%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Топливо</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-40%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Ошибки</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+18%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Грузооборот</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Интеграция с WMS/TMS за 2-3 дня. ИИ строит маршруты с учётом 50+ параметров. Система адаптируется к изменениям в реальном времени — авария на МКАДе = маршрут перестроен за 30 секунд.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/logistika.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Оптимизация маршрутов</strong> — <span data-lang="ru">снижение пробега на <span class="paper-num">25%</span>, учёт пробок, временных окон</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">проверка комплектации заказа при отгрузке, защита от ошибок</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Прогноз загруженности</strong> — <span data-lang="ru">планирование складских мощностей на <span class="paper-num">14</span> дней</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Трекинг в реальном времени</strong> — <span data-lang="ru">GPS + ИИ-прогноз времени прибытия</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Экодрайвинг</strong> — <span data-lang="ru">анализ стиля вождения, снижение расхода топлива</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-office" class="industry-panel" hidden="" id="industry-panel-office" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="building-2" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Офисы и УК</span></h3>
+<p class="solution-desc"><span data-lang="ru">Автоматизация документооборота, ИИ-ассистенты, распознавание сканов, маршрутизация задач, аналитика</span></p>
+<span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее*</span></span>
+</div><h4 data-lang="ru">Результаты клиентов*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">5x<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Быстрее</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-70%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Рутина</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+35%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Эффективность</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Подключаемся к вашей CRM/ECM за 1 день. ИИ обучается на ваших документах и процессах. Секретарь перестаёт отвечать на одни и те же вопросы 20 раз в день.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/ofisy.html" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что входит в решение</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong>ИИ-<span data-lang="ru">ассистент</span></strong> — <span data-lang="ru">отвечает на вопросы сотрудников, ищет документы, ставит задачи</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Распознавание документов</strong> — <span data-lang="ru">сканы, PDF, фото → структурированные данные за <span class="paper-num">2</span> сек</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Маршрутизация задач</strong> — <span data-lang="ru">ИИ распределяет заявки между исполнителями по загрузке</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Аналитика</strong> — <span data-lang="ru">дашборды, прогнозы, автоматические отчёты для руководства</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">Битрикс<span class="paper-num">24</span>, amoCRM, <span class="paper-num">1</span>С, SAP, Google Workspace</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-custom" class="industry-panel" hidden="" id="industry-panel-custom" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="ru">Кастомная разработка</span></h3>
+<p class="solution-desc"><span data-lang="ru">Любая задача: от голосового цифрового администратора до полной автоматизации цепочки поставок. Обучаем на ваших данных</span></p>
+</div><h4 data-lang="ru">Почему ST8 AI</h4><div class="solution-stats" style="grid-template-columns:1fr">
+<div class="solution-stat"><span class="solution-stat-val">2-3<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="ru">Мес окупаемость</span></div>
+</div><p class="industry-footnote"><span data-lang="ru">* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p><h4 data-lang="ru">Как это работает</h4><p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. До запуска фиксируем исходные показатели и KPI проекта. После внедрения оцениваем фактический эффект на данных клиента.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a><a class="solution-more-link" href="/about.html"><span data-lang="ru">Подробнее на странице</span></a></div></div><div class="industry-modules"><h4 data-lang="ru">Что мы делаем</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="ru">Голосовые ассистенты</strong> — <span data-lang="ru">для колл-центров, ресепшн, служб поддержки</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="ru">любые задачи: от подсчёта посетителей до контроля СИЗ</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Прогнозные модели</strong> — <span data-lang="ru">спрос, отток, ценообразование, риски</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Автоматизация процессов</strong> — <span data-lang="ru">от заявки до отчёта без человека</span></li>
+<li class="industry-ticket"><strong data-lang="ru">Интеграция систем</strong> — <span data-lang="ru">связываем то, что не хотит работать вместе</span></li>
+</ul></div></article></div>
+</section>
+<!-- PRICING -->
+<section class="section-pricing s6-block" id="pricing">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Тарифы</span></div>
+<h2 class="section-title"><span data-lang="ru">Выберите <span style="color:var(--gold)">масштаб</span> внедрения</span></h2>
+<p class="section-desc"><span data-lang="ru">Все тарифы включают обучение моделей на ваших данных и интеграцию без остановки бизнеса</span></p>
+</div>
+<div class="pricing-grid">
+<div class="pricing-card reveal">
+<div class="pricing-name"><span data-lang="ru">Базовый</span></div>
+<div class="pricing-subtitle"><span data-lang="ru"><span class="paper-num">1-3</span> точки</span></div>
+<div class="pricing-price"><span data-lang="ru">от <span class="paper-num">65 000</span> <span>руб.</span></span></div>
+<div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
+<ul class="pricing-features">
+<li><i data-lucide="check"></i><span data-lang="ru">Цифровой администратор бронирования</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Telegram + Мессенджер Макс</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Интеграция iiko / R-Keeper</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Базовая CRM и напоминания</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Настройка за <span class="paper-num">3</span> дня</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Поддержка <span class="paper-num">24/7</span></span></li>
+</ul>
+<button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('basic')"><span data-lang="ru">Запустить пилот</span></button>
+</div>
+<div class="pricing-card featured reveal">
+<div class="pricing-badge"><span data-lang="ru">Популярный</span></div>
+<div class="pricing-name"><span data-lang="ru">Бизнес</span></div>
+<div class="pricing-subtitle"><span data-lang="ru"><span class="paper-num">4-10</span> точек</span></div>
+<div class="pricing-price"><span data-lang="ru">от <span class="paper-num">165 000</span> <span>руб.</span></span></div>
+<div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
+<ul class="pricing-features">
+<li><i data-lucide="check"></i><span data-lang="ru">Всё из Базового</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Интеграция Remarket</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Предиктивные закупки (<span class="paper-num">7</span> дней)</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Кросс-аналитика по точкам</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Персонализация для VIP</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Выделенный менеджер</span></li>
+</ul>
+<button class="pricing-btn pricing-btn-primary" onclick="openLeadForm('business')"><i data-lucide="rocket" style="width:16px;height:16px"></i><span data-lang="ru">Запустить пилот</span></button>
+</div>
+<div class="pricing-card reveal">
+<div class="pricing-name"><span data-lang="ru">Сеть</span></div>
+<div class="pricing-subtitle"><span data-lang="ru"><span class="paper-num">10</span>+ точек</span></div>
+<div class="pricing-price"><span data-lang="ru">от <span class="paper-num">385 000</span> <span>руб.</span></span></div>
+<div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
+<ul class="pricing-features">
+<li><i data-lucide="check"></i><span data-lang="ru">Всё из Бизнес</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Единая система управления сетью</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Computer vision на кухнях</span></li>
+<li><i data-lucide="check"></i><span data-lang="ru">Автозакупки у поставщиков</span></li>
+<li><i data-lucide="check"></i>On-premise deployment</li>
+<li><i data-lucide="check"></i><span data-lang="ru">Обучение команды</span></li>
+</ul>
+<button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('enterprise')"><span data-lang="ru">Обсудить проект</span></button>
+</div>
+</div>
+</section>
 
-      <!-- Production -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="factory" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Производство</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Компьютерное зрение для контроля качества, предиктивное обслуживание оборудования, оптимизация линий</span></p>
-          <span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="ru">Точность 99.7%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">обнаружение дефектов за 50 мс, точность 99.7%</span></li>
-              <li><strong data-lang="ru">Предиктивное обслуживание</strong> — <span data-lang="ru">прогноз поломок за 72 часа, планирование ТО</span></li>
-              <li><strong data-lang="ru">Оптимизация линий</strong> — <span data-lang="ru">балансировка нагрузки, снижение простоев на 25%</span></li>
-              <li><strong data-lang="ru">Контроль качества</strong> — <span data-lang="ru">автоматическая проверка по ГОСТ и внутренним стандартам</span></li>
-              <li><strong data-lang="ru">Аналитика OEE</strong> — <span data-lang="ru">Overall Equipment Effectiveness в реальном времени</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Устанавливаем камеры на линию, интегрируем с MES/ERP. ИИ обучается на образцах брака и дефектов. Система работает on-premise — данные не покидают территорию завода.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">99.7%</span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-25%</span><span class="solution-stat-label" data-lang="ru">Простои</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-60%</span><span class="solution-stat-label" data-lang="ru">Брак</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/proizvodstvo.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Retail -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="shopping-cart" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Ритейл и E-commerce</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Прогнозирование спроса, автозакупки, перераспределение товара, персонализация, интеграция с маркетплейсами</span></p>
-          <span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="ru">Прогноз 94%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong data-lang="ru">Прогноз спроса</strong> — <span data-lang="ru">точность 94%, учёт сезонности, погоды, событий</span></li>
-              <li><strong data-lang="ru">Автозакупки</strong> — <span data-lang="ru">формирование заказов поставщикам без участия человека</span></li>
-              <li><strong data-lang="ru">Перераспределение</strong> — <span data-lang="ru">автоматический баланс stock между точками и складами</span></li>
-              <li><strong data-lang="ru">Персонализация</strong> — <span data-lang="ru">рекомендации товаров на основе поведения клиента</span></li>
-              <li><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">1С, МойСклад, Wildberries, Ozon, Яндекс.Маркет</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Подключаемся к вашей учётной системе за 1 день. ИИ анализирует историю продаж, остатки, поставки. Через 2 недели система предсказывает спрос точнее Excel с макросами.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">94%</span><span class="solution-stat-label" data-lang="ru">Точность</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-30%</span><span class="solution-stat-label" data-lang="ru">Недостача</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+22%</span><span class="solution-stat-label" data-lang="ru">Оборот</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/retail.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Logistics -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="truck" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Логистика</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Оптимизация маршрутов, computer vision для проверки комплектации, прогноз загруженности складов</span></p>
-          <span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="ru">Топливо -25%*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong data-lang="ru">Оптимизация маршрутов</strong> — <span data-lang="ru">снижение пробега на 25%, учёт пробок, временных окон</span></li>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">проверка комплектации заказа при отгрузке, защита от ошибок</span></li>
-              <li><strong data-lang="ru">Прогноз загруженности</strong> — <span data-lang="ru">планирование складских мощностей на 14 дней</span></li>
-              <li><strong data-lang="ru">Трекинг в реальном времени</strong> — <span data-lang="ru">GPS + ИИ-прогноз времени прибытия</span></li>
-              <li><strong data-lang="ru">Экодрайвинг</strong> — <span data-lang="ru">анализ стиля вождения, снижение расхода топлива</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Интеграция с WMS/TMS за 2-3 дня. ИИ строит маршруты с учётом 50+ параметров. Система адаптируется к изменениям в реальном времени — авария на МКАДе = маршрут перестроен за 30 секунд.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">-25%</span><span class="solution-stat-label" data-lang="ru">Топливо</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-40%</span><span class="solution-stat-label" data-lang="ru">Ошибки</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+18%</span><span class="solution-stat-label" data-lang="ru">Грузооборот</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/logistika.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Office -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="building-2" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Офисы и УК</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Автоматизация документооборота, ИИ-ассистенты, распознавание сканов, маршрутизация задач, аналитика</span></p>
-          <span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="ru">В 5x быстрее*</span></span>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что входит в решение</h4>
-            <ul>
-              <li><strong>ИИ-<span data-lang="ru">ассистент</span></strong> — <span data-lang="ru">отвечает на вопросы сотрудников, ищет документы, ставит задачи</span></li>
-              <li><strong data-lang="ru">Распознавание документов</strong> — <span data-lang="ru">сканы, PDF, фото → структурированные данные за 2 сек</span></li>
-              <li><strong data-lang="ru">Маршрутизация задач</strong> — <span data-lang="ru">ИИ распределяет заявки между исполнителями по загрузке</span></li>
-              <li><strong data-lang="ru">Аналитика</strong> — <span data-lang="ru">дашборды, прогнозы, автоматические отчёты для руководства</span></li>
-              <li><strong data-lang="ru">Интеграция</strong> — <span data-lang="ru">Битрикс24, amoCRM, 1С, SAP, Google Workspace</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Подключаемся к вашей CRM/ECM за 1 день. ИИ обучается на ваших документах и процессах. Секретарь перестаёт отвечать на одни и те же вопросы 20 раз в день.</span></p>
-            <h4 data-lang="ru">Результаты клиентов*</h4>
-            <div class="solution-stats">
-              <div class="solution-stat"><span class="solution-stat-val">5x</span><span class="solution-stat-label" data-lang="ru">Быстрее</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">-70%</span><span class="solution-stat-label" data-lang="ru">Рутина</span></div>
-              <div class="solution-stat"><span class="solution-stat-val">+35%</span><span class="solution-stat-label" data-lang="ru">Эффективность</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-            <a href="/ofisy.html" class="solution-more-link" onclick="event.stopPropagation()"><span data-lang="ru">Подробнее на странице</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Custom -->
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <div class="solution-icon"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
-          <h3 class="solution-title"><span data-lang="ru">Кастомная разработка</span></h3>
-          <p class="solution-desc"><span data-lang="ru">Любая задача: от голосового цифрового администратора до полной автоматизации цепочки поставок. Обучаем на ваших данных</span></p>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail">
-          <div class="solution-detail-inner">
-            <h4 data-lang="ru">Что мы делаем</h4>
-            <ul>
-              <li><strong data-lang="ru">Голосовые ассистенты</strong> — <span data-lang="ru">для колл-центров, ресепшн, служб поддержки</span></li>
-              <li><strong>Computer vision</strong> — <span data-lang="ru">любые задачи: от подсчёта посетителей до контроля СИЗ</span></li>
-              <li><strong data-lang="ru">Прогнозные модели</strong> — <span data-lang="ru">спрос, отток, ценообразование, риски</span></li>
-              <li><strong data-lang="ru">Автоматизация процессов</strong> — <span data-lang="ru">от заявки до отчёта без человека</span></li>
-              <li><strong data-lang="ru">Интеграция систем</strong> — <span data-lang="ru">связываем то, что не хотит работать вместе</span></li>
-            </ul>
-            <h4 data-lang="ru">Как это работает</h4>
-            <p><span data-lang="ru">Вы описываете задачу — мы делаем аудит и предлагаем решение за 2-3 дня. Разработка от 2 недель. До запуска фиксируем исходные показатели и KPI проекта. После внедрения оцениваем фактический эффект на данных клиента.</span></p>
-            <h4 data-lang="ru">Почему ST8 AI</h4>
-            <div class="solution-stats" style="grid-template-columns:1fr">
-              <div class="solution-stat"><span class="solution-stat-val">2-3</span><span class="solution-stat-label" data-lang="ru">Мес окупаемость</span></div>
-            </div>
-            <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Написать в Telegram</span></span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section><!-- PRICING -->
-  <section class="section-pricing" id="pricing">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Тарифы</span></div>
-      <h2 class="section-title"><span data-lang="ru">Выберите <span style="color:var(--gold)">масштаб</span> внедрения</span></h2>
-      <p class="section-desc"><span data-lang="ru">Все тарифы включают обучение моделей на ваших данных и интеграцию без остановки бизнеса</span></p>
-    </div>
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <div class="pricing-name"><span data-lang="ru">Базовый</span></div>
-        <div class="pricing-subtitle"><span data-lang="ru">1-3 точки</span></div>
-        <div class="pricing-price"><span data-lang="ru">от 65 000 <span>руб.</span></span></div>
-        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
-        <ul class="pricing-features">
-          <li><i data-lucide="check"></i><span data-lang="ru">Цифровой администратор бронирования</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Telegram + Мессенджер Макс</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Интеграция iiko / R-Keeper</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Базовая CRM и напоминания</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Настройка за 3 дня</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Поддержка 24/7</span></li>
-        </ul>
-        <button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('basic')"><span data-lang="ru">Запустить пилот</span></button>
-      </div>
-      <div class="pricing-card featured reveal">
-        <div class="pricing-badge"><span data-lang="ru">Популярный</span></div>
-        <div class="pricing-name"><span data-lang="ru">Бизнес</span></div>
-        <div class="pricing-subtitle"><span data-lang="ru">4-10 точек</span></div>
-        <div class="pricing-price"><span data-lang="ru">от 165 000 <span>руб.</span></span></div>
-        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
-        <ul class="pricing-features">
-          <li><i data-lucide="check"></i><span data-lang="ru">Всё из Базового</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Интеграция Remarket</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Предиктивные закупки (7 дней)</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Кросс-аналитика по точкам</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Персонализация для VIP</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Выделенный менеджер</span></li>
-        </ul>
-        <button class="pricing-btn pricing-btn-primary" onclick="openLeadForm('business')"><i data-lucide="rocket" style="width:16px;height:16px"></i><span data-lang="ru">Запустить пилот</span></button>
-      </div>
-      <div class="pricing-card reveal">
-        <div class="pricing-name"><span data-lang="ru">Сеть</span></div>
-        <div class="pricing-subtitle"><span data-lang="ru">10+ точек</span></div>
-        <div class="pricing-price"><span data-lang="ru">от 385 000 <span>руб.</span></span></div>
-        <div class="pricing-period"><span data-lang="ru">единоразово + поддержка</span></div>
-        <ul class="pricing-features">
-          <li><i data-lucide="check"></i><span data-lang="ru">Всё из Бизнес</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Единая система управления сетью</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Computer vision на кухнях</span></li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Автозакупки у поставщиков</span></li>
-          <li><i data-lucide="check"></i>On-premise deployment</li>
-          <li><i data-lucide="check"></i><span data-lang="ru">Обучение команды</span></li>
-        </ul>
-        <button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('enterprise')"><span data-lang="ru">Обсудить проект</span></button>
-      </div>
-    </div>
-  </section>
 
   <!-- HOW IT WORKS -->
-  <section class="section-how" id="how">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Процесс</span></div>
-      <h2 class="section-title"><span data-lang="ru">От аудита до <span style="color:var(--gold)">результата</span></span></h2>
-      <p class="section-desc"><span data-lang="ru">Внедрение без остановки бизнеса — работаем ночью и в выходные</span></p>
-    </div>
-    <div class="how-grid">
-      <div class="how-step reveal">
-        <div class="how-number">1</div>
-        <h3 class="how-title"><span data-lang="ru">Аудит</span></h3>
-        <p class="how-desc"><span data-lang="ru">Анализируем процессы, данные и инфраструктуру за 1-2 дня</span></p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-number">2</div>
-        <h3 class="how-title"><span data-lang="ru">Настройка</span></h3>
-        <p class="how-desc"><span data-lang="ru">Обучаем модели на ваших данных, настраиваем интеграции</span></p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-number">3</div>
-        <h3 class="how-title"><span data-lang="ru">Запуск</span></h3>
-        <p class="how-desc"><span data-lang="ru">Пилот на 1 точке, тестирование, доработка под реальную нагрузку</span></p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-number">4</div>
-        <h3 class="how-title"><span data-lang="ru">Масштабирование</span></h3>
-        <p class="how-desc"><span data-lang="ru">Распространяем на всю сеть, обучаем команду, передаём документацию</span></p>
-      </div>
-    </div>
-  </section>
+  <section class="section-how s6-block" id="how">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Процесс</span></div>
+<h2 class="section-title"><span data-lang="ru">От аудита до <span style="color:var(--gold)">результата</span></span></h2>
+<p class="section-desc"><span data-lang="ru">Внедрение без остановки бизнеса — работаем ночью и в выходные</span></p>
+</div>
+<div class="how-grid">
+<div class="how-step reveal">
+<div class="how-number">1</div>
+<h3 class="how-title"><span data-lang="ru">Аудит</span></h3>
+<p class="how-desc"><span data-lang="ru">Анализируем процессы, данные и инфраструктуру за 1-2 дня</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number">2</div>
+<h3 class="how-title"><span data-lang="ru">Настройка</span></h3>
+<p class="how-desc"><span data-lang="ru">Обучаем модели на ваших данных, настраиваем интеграции</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number">3</div>
+<h3 class="how-title"><span data-lang="ru">Запуск</span></h3>
+<p class="how-desc"><span data-lang="ru">Пилот на 1 точке, тестирование, доработка под реальную нагрузку</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number">4</div>
+<h3 class="how-title"><span data-lang="ru">Масштабирование</span></h3>
+<p class="how-desc"><span data-lang="ru">Распространяем на всю сеть, обучаем команду, передаём документацию</span></p>
+</div>
+</div>
+</section>
 
 
   <!-- PROJECTS / DEMOS -->
-  <section class="section-projects" id="projects">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Кейсы</span></div>
-      <h2 class="section-title"><span data-lang="ru">Решения для <span style="color:var(--gold)">ключевых клиентов</span></span></h2>
-      <p class="section-desc"><span data-lang="ru">Работающие пилоты и внедренные системы — от dark kitchen до строительных холдингов</span></p>
-    </div>
-    <div class="projects-grid">
-      <!-- Azbuka -->
-      <a href="https://kosmos686-bit.github.io/st8-dark/kitchen/" target="_blank" rel="noopener noreferrer" class="project-card reveal">
-        <div class="project-preview">
-          <div class="project-client-badge">
-            <span class="client-dot"></span>
-            <span data-lang="ru">Клиент ST8 AI</span>
-          </div>
-          <div class="project-visual kitchen-visual">
-            <div class="kitchen-station">
-              <span class="station-label" data-lang="ru">Горячий цех</span>
-              <span class="station-queue" data-lang="ru">0 в очереди</span>
-            </div>
-            <div class="kitchen-ai-msg">
-              <i data-lucide="sparkles" style="width:14px;height:14px"></i>
-              <span data-lang="ru">ИИ: приготовить порции батчем — экономия времени</span>
-            </div>
-            <div class="kitchen-station">
-              <span class="station-label" data-lang="ru">Холодный цех</span>
-              <span class="station-queue" data-lang="ru">0 в очереди</span>
-            </div>
-            <div class="kitchen-ai-msg">
-              <i data-lucide="sparkles" style="width:14px;height:14px"></i>
-              <span data-lang="ru">ИИ: подготовить блюда к пиковой нагрузке</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-client-row">
-            <div class="client-logo azbuka">АВ</div>
-            <div class="client-info">
-              <div class="client-name"><span data-lang="ru">Азбука Вкуса</span> <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
-              <div class="client-type"><span data-lang="ru">Сеть dark kitchen · Москва</span></div>
-            </div>
-          </div>
-          <h3 class="project-title">ST8 Dark Intelligence</h3>
-          <p class="project-desc"><span data-lang="ru">ИИ-планирование производства. Прогнозирует пиковые часы, оптимизирует батч-приготовление. Интеграция с iiko и складом.</span></p>
-          <div class="project-tags">
-            <span class="project-tag" data-lang="ru">Прогноз спроса</span>
-            <span class="project-tag" data-lang="ru">Оптимизация цеха</span>
-            <span class="project-tag">iiko</span>
-          </div>
-          <div class="project-cta">
-            <span class="project-cta-btn"><span data-lang="ru">Подробнее о проекте</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Level Group -->
-      <a href="https://kosmos686-bit.github.io/st8-stroy/" target="_blank" rel="noopener noreferrer" class="project-card reveal">
-        <div class="project-preview">
-          <div class="project-client-badge">
-            <span class="client-dot"></span>
-            <span data-lang="ru">Клиент ST8 AI</span>
-          </div>
-          <div class="project-visual stroy-visual">
-            <div class="stroy-header">
-              <span class="stroy-logo">ST8 BUILD</span>
-              <span class="stroy-sub">AI MASTER</span>
-            </div>
-            <div class="stroy-progress">
-              <div class="stroy-progress-bar" style="width:0%"></div>
-            </div>
-            <div class="stroy-tags">
-              <span data-lang="ru">Стройка</span>
-              <span data-lang="ru">Сметы</span>
-              <span data-lang="ru">ГОСТ</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-client-row">
-            <div class="client-logo level">LG</div>
-            <div class="client-info">
-              <div class="client-name">Level Group <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
-              <div class="client-type"><span data-lang="ru">Девелопер · Москва</span></div>
-            </div>
-          </div>
-          <h3 class="project-title">ST8 BUILD — AI Master</h3>
-          <p class="project-desc"><span data-lang="ru">ИИ-прораб для крупного девелопера. Автоматизация смет, проверка по ГОСТ, контроль сроков стройки, прогноз рисков и перерасхода.</span></p>
-          <div class="project-tags">
-            <span class="project-tag" data-lang="ru">Сметы</span>
-            <span class="project-tag" data-lang="ru">ГОСТ</span>
-            <span class="project-tag" data-lang="ru">Контроль сроков</span>
-          </div>
-          <div class="project-cta">
-            <span class="project-cta-btn"><span data-lang="ru">Подробнее о проекте</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Unik Food -->
-      <a href="https://kosmos686-bit.github.io/st8-resto/unikfood.html" target="_blank" rel="noopener noreferrer" class="project-card reveal">
-        <div class="project-preview">
-          <div class="project-client-badge">
-            <span class="client-dot"></span>
-            <span data-lang="ru">Клиент ST8 AI</span>
-          </div>
-          <div class="project-visual resto-visual">
-            <div class="resto-header">
-              <span class="resto-logo">ST8 RESTO</span>
-              <span class="resto-sub">CHEFF AI</span>
-            </div>
-            <div class="resto-progress">
-              <div class="resto-progress-bar" style="width:0%"></div>
-            </div>
-            <div class="resto-tags">
-              <span data-lang="ru">ТТК</span>
-              <span>HACCP</span>
-              <span data-lang="ru">КБЖУ</span>
-            </div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-client-row">
-            <div class="client-logo unik">UF</div>
-            <div class="client-info">
-              <div class="client-name">Unik Food <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
-              <div class="client-type"><span data-lang="ru">Dark Kitchen · Екатеринбург</span></div>
-            </div>
-          </div>
-          <h3 class="project-title">CHEFF AI</h3>
-          <p class="project-desc"><span data-lang="ru">ИИ-технолог для dark kitchen. Расчет КБЖУ, генерация ТТК, контроль HACCP, заказ поставщикам, анализ себестоимости. Интеграция iiko + 1С.</span></p>
-          <div class="project-tags">
-            <span class="project-tag" data-lang="ru">ТТК</span>
-            <span class="project-tag">HACCP</span>
-            <span class="project-tag">1С</span>
-          </div>
-          <div class="project-cta">
-            <span class="project-cta-btn"><span data-lang="ru">Подробнее о проекте</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Future markets placeholder -->
-      <div class="project-card reveal" style="align-items:center;justify-content:center;text-align:center;padding:32px 24px">
-        <div style="width:48px;height:48px;border-radius:50%;border:1px dashed rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;margin:24px auto 16px;color:var(--gold)"><i data-lucide="rocket" style="width:20px;height:20px"></i></div>
-        <h3 class="project-title"><span data-lang="ru">Скоро: пилот в ОАЭ и Турции</span></h3>
-        <p class="project-desc"><span data-lang="ru">Подход, который мы отработали в России, разворачиваем на новых рынках. Станьте одним из первых клиентов.</span></p>
-        <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" style="margin:8px auto 0"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Стать первым</span></span></a>
-      </div>
-    </div>
-    <p class="legal-note reveal"><span data-lang="ru">* Названия и логотипы клиентов используются с их согласия. Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p>
-  </section>
+  <section class="section-projects s6-block" id="projects">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Кейсы</span></div>
+<h2 class="section-title"><span data-lang="ru">Решения для <span style="color:var(--gold)">ключевых клиентов</span></span></h2>
+<p class="section-desc"><span data-lang="ru">Работающие пилоты и внедренные системы — от dark kitchen до строительных холдингов</span></p>
+</div>
+<div class="projects-grid">
+<!-- Azbuka -->
+<a class="project-card reveal" href="https://kosmos686-bit.github.io/st8-dark/kitchen/" rel="noopener noreferrer" target="_blank">
+<div class="project-preview">
+<div class="project-client-badge">
+<span class="client-dot"></span>
+<span data-lang="ru">Клиент ST8 AI</span>
+</div>
+<div class="project-visual kitchen-visual">
+<div class="kitchen-station">
+<span class="station-label" data-lang="ru">Горячий цех</span>
+<span class="station-queue" data-lang="ru">0 в очереди</span>
+</div>
+<div class="kitchen-ai-msg">
+<i data-lucide="sparkles" style="width:14px;height:14px"></i>
+<span data-lang="ru">ИИ: приготовить порции батчем — экономия времени</span>
+</div>
+<div class="kitchen-station">
+<span class="station-label" data-lang="ru">Холодный цех</span>
+<span class="station-queue" data-lang="ru">0 в очереди</span>
+</div>
+<div class="kitchen-ai-msg">
+<i data-lucide="sparkles" style="width:14px;height:14px"></i>
+<span data-lang="ru">ИИ: подготовить блюда к пиковой нагрузке</span>
+</div>
+</div>
+<span class="s6-demo-note">Данные в демо условные.</span></div>
+<div class="project-body">
+<div class="project-client-row">
+<div class="client-logo azbuka">АВ</div>
+<div class="client-info">
+<div class="client-name"><span data-lang="ru">Азбука Вкуса</span> <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
+<div class="client-type"><span data-lang="ru">Сеть dark kitchen · Москва</span></div>
+</div>
+</div>
+<h3 class="project-title">ST8 Dark Intelligence</h3>
+<p class="project-desc"><span data-lang="ru">ИИ-планирование производства. Прогнозирует пиковые часы, оптимизирует батч-приготовление. Интеграция с iiko и складом.</span></p>
+<div class="project-tags">
+<span class="project-tag" data-lang="ru">Прогноз спроса</span>
+<span class="project-tag" data-lang="ru">Оптимизация цеха</span>
+<span class="project-tag">iiko</span>
+</div>
+<div class="project-cta">
+<span class="project-cta-btn"><span data-lang="ru">Подробнее о проекте</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
+</div>
+</div>
+</a>
+<!-- Level Group -->
+<a class="project-card reveal" href="https://kosmos686-bit.github.io/st8-stroy/" rel="noopener noreferrer" target="_blank">
+<div class="project-preview">
+<div class="project-client-badge">
+<span class="client-dot"></span>
+<span data-lang="ru">Клиент ST8 AI</span>
+</div>
+<div class="project-visual stroy-visual">
+<div class="stroy-header">
+<span class="stroy-logo">ST8 BUILD</span>
+<span class="stroy-sub">AI MASTER</span>
+</div>
+<div class="stroy-progress">
+<div class="stroy-progress-bar" style="width:0%"></div>
+</div>
+<div class="stroy-tags">
+<span data-lang="ru">Стройка</span>
+<span data-lang="ru">Сметы</span>
+<span data-lang="ru">ГОСТ</span>
+</div>
+</div>
+<span class="s6-demo-note">Данные в демо условные.</span></div>
+<div class="project-body">
+<div class="project-client-row">
+<div class="client-logo level">LG</div>
+<div class="client-info">
+<div class="client-name">Level Group <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
+<div class="client-type"><span data-lang="ru">Девелопер · Москва</span></div>
+</div>
+</div>
+<h3 class="project-title">ST8 BUILD — AI Master</h3>
+<p class="project-desc"><span data-lang="ru">ИИ-прораб для крупного девелопера. Автоматизация смет, проверка по ГОСТ, контроль сроков стройки, прогноз рисков и перерасхода.</span></p>
+<div class="project-tags">
+<span class="project-tag" data-lang="ru">Сметы</span>
+<span class="project-tag" data-lang="ru">ГОСТ</span>
+<span class="project-tag" data-lang="ru">Контроль сроков</span>
+</div>
+<div class="project-cta">
+<span class="project-cta-btn"><span data-lang="ru">Подробнее о проекте</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
+</div>
+</div>
+</a>
+<!-- Unik Food -->
+<a class="project-card reveal" href="https://kosmos686-bit.github.io/st8-resto/unikfood.html" rel="noopener noreferrer" target="_blank">
+<div class="project-preview">
+<div class="project-client-badge">
+<span class="client-dot"></span>
+<span data-lang="ru">Клиент ST8 AI</span>
+</div>
+<div class="project-visual resto-visual">
+<div class="resto-header">
+<span class="resto-logo">ST8 RESTO</span>
+<span class="resto-sub">CHEFF AI</span>
+</div>
+<div class="resto-progress">
+<div class="resto-progress-bar" style="width:0%"></div>
+</div>
+<div class="resto-tags">
+<span data-lang="ru">ТТК</span>
+<span>HACCP</span>
+<span data-lang="ru">КБЖУ</span>
+</div>
+</div>
+<span class="s6-demo-note">Данные в демо условные.</span></div>
+<div class="project-body">
+<div class="project-client-row">
+<div class="client-logo unik">UF</div>
+<div class="client-info">
+<div class="client-name">Unik Food <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
+<div class="client-type"><span data-lang="ru">Dark Kitchen · Екатеринбург</span></div>
+</div>
+</div>
+<h3 class="project-title">CHEFF AI</h3>
+<p class="project-desc"><span data-lang="ru">ИИ-технолог для dark kitchen. Расчет КБЖУ, генерация ТТК, контроль HACCP, заказ поставщикам, анализ себестоимости. Интеграция iiko + 1С.</span></p>
+<div class="project-tags">
+<span class="project-tag" data-lang="ru">ТТК</span>
+<span class="project-tag">HACCP</span>
+<span class="project-tag">1С</span>
+</div>
+<div class="project-cta">
+<span class="project-cta-btn"><span data-lang="ru">Подробнее о проекте</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
+</div>
+</div>
+</a>
+<!-- Future markets placeholder -->
+<div class="project-card reveal" style="align-items:center;justify-content:center;text-align:center;padding:32px 24px">
+<div style="width:48px;height:48px;border-radius:50%;border:1px dashed rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;margin:24px auto 16px;color:var(--gold)"><i data-lucide="rocket" style="width:20px;height:20px"></i></div>
+<h3 class="project-title"><span data-lang="ru">Скоро: пилот в ОАЭ и Турции</span></h3>
+<p class="project-desc"><span data-lang="ru">Подход, который мы отработали в России, разворачиваем на новых рынках. Станьте одним из первых клиентов.</span></p>
+<a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" rel="noopener noreferrer" style="margin:8px auto 0" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="ru">Стать первым</span></span></a>
+</div>
+</div>
+<p class="legal-note reveal"><span data-lang="ru">* Названия и логотипы клиентов используются с их согласия. Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.</span></p>
+</section>
 
   <!-- RISK REDUCTION FOR NEW MARKETS -->
-  <section class="section-how">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Гарантии</span></div>
-      <h2 class="section-title"><span data-lang="ru">Новый рынок — <span style="color:var(--gold)">не риск</span></span></h2>
-      <p class="section-desc"><span data-lang="ru">Условия из наших реальных договоров — не маркетинг</span></p>
-    </div>
-    <div class="how-grid">
-      <div class="how-step reveal">
-        <div class="how-number"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
-        <h3 class="how-title"><span data-lang="ru">KPI пилота фиксируем до запуска</span></h3>
-        <p class="how-desc"><span data-lang="ru">Целевые показатели фиксируются в договоре до старта проекта</span></p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-number"><i data-lucide="flask-conical" style="width:20px;height:20px"></i></div>
-        <h3 class="how-title"><span data-lang="ru">Пилот на 1 точке</span></h3>
-        <p class="how-desc"><span data-lang="ru">Полное внедрение только после успешного пилота, не наоборот</span></p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-number"><i data-lucide="door-open" style="width:20px;height:20px"></i></div>
-        <h3 class="how-title"><span data-lang="ru">Выход без штрафа</span></h3>
-        <p class="how-desc"><span data-lang="ru">30 дней на выход из проекта без штрафных санкций</span></p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-number"><i data-lucide="lock" style="width:20px;height:20px"></i></div>
-        <h3 class="how-title"><span data-lang="ru">Эксклюзив на город</span></h3>
-        <p class="how-desc"><span data-lang="ru">Мы не работаем с вашими прямыми конкурентами в одном городе</span></p>
-      </div>
-    </div>
-  </section>
+<section class="section-how s6-block" id="guarantees">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Гарантии</span></div>
+<h2 class="section-title"><span data-lang="ru">Новый рынок — <span style="color:var(--gold)">не риск</span></span></h2>
+<p class="section-desc"><span data-lang="ru">Условия из наших реальных договоров — не маркетинг</span></p>
+</div>
+<div class="how-grid">
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="ru">KPI пилота фиксируем до запуска</span></h3>
+<p class="how-desc"><span data-lang="ru">Целевые показатели фиксируются в договоре до старта проекта</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="flask-conical" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="ru">Пилот на <span class="paper-num">1</span> точке</span></h3>
+<p class="how-desc"><span data-lang="ru">Полное внедрение только после успешного пилота, не наоборот</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="door-open" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="ru">Выход без штрафа</span></h3>
+<p class="how-desc"><span data-lang="ru"><span class="paper-num">30</span> дней на выход из проекта без штрафных санкций</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="lock" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="ru">Эксклюзив на город</span></h3>
+<p class="how-desc"><span data-lang="ru">Мы не работаем с вашими прямыми конкурентами в одном городе</span></p>
+</div>
+</div>
+</section>
+
 
   <!-- FAQ -->
-  <section class="section-solutions" id="faq">
-    <div class="section-header reveal">
-      <div class="section-label"><span data-lang="ru">Вопросы</span></div>
-      <h2 class="section-title"><span data-lang="ru">Частые <span style="color:var(--gold)">вопросы</span></span></h2>
-    </div>
-    <div class="solutions-grid" style="grid-template-columns:1fr;max-width:800px">
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <h3 class="solution-title"><span data-lang="ru">Что если у нас нет данных для обучения модели?</span></h3>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail"><div class="solution-detail-inner">
-          <p><span data-lang="ru">Начинаем с того, что уже есть в вашей учётной системе (кассы, CRM, склад) — этого обычно достаточно для первой рабочей версии. Модель дообучается по мере накопления данных в процессе пилота.</span></p>
-        </div></div>
-      </div>
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <h3 class="solution-title"><span data-lang="ru">Что будет с нашими данными?</span></h3>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail"><div class="solution-detail-inner">
-          <p><span data-lang="ru">Данные остаются вашими и не передаются третьим лицам. Для производственных задач возможен on-premise режим — данные вообще не покидают вашу территорию.</span></p>
-        </div></div>
-      </div>
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <h3 class="solution-title"><span data-lang="ru">Что если решение не окупится?</span></h3>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail"><div class="solution-detail-inner">
-          <p><span data-lang="ru">Целевые KPI фиксируются в договоре до начала работ. После внедрения мы прозрачно показываем фактический эффект на данных клиента.</span></p>
-        </div></div>
-      </div>
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <h3 class="solution-title"><span data-lang="ru">Сколько занимает внедрение?</span></h3>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail"><div class="solution-detail-inner">
-          <p><span data-lang="ru">Аудит — 1-2 дня, настройка и интеграция — от 3 дней до 2-3 недель в зависимости от масштаба, пилот на одной точке перед полным запуском.</span></p>
-        </div></div>
-      </div>
-      <div class="solution-card reveal" onclick="toggleSolution(this)">
-        <div class="solution-card-main">
-          <h3 class="solution-title"><span data-lang="ru">Что входит в поддержку?</span></h3>
-          <div class="solution-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></div>
-        </div>
-        <div class="solution-detail"><div class="solution-detail-inner">
-          <p><span data-lang="ru">Поддержка 24/7, дообучение модели на новых данных, доработки по мере роста бизнеса. Условия зависят от тарифа.</span></p>
-        </div></div>
-      </div>
-    </div>
-  </section>
+  <section class="section-solutions s6-block" id="faq">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="ru">Вопросы</span></div>
+<h2 class="section-title"><span data-lang="ru">Частые <span style="color:var(--gold)">вопросы</span></span></h2>
+</div>
+<div class="s6-faq reveal"><details class="s6-faq-item" name="stage6-faq" open=""><summary><h3 class="solution-title"><span data-lang="ru">Что если у нас нет данных для обучения модели?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="ru">Начинаем с того, что уже есть в вашей учётной системе (кассы, CRM, склад) — этого обычно достаточно для первой рабочей версии. Модель дообучается по мере накопления данных в процессе пилота.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="ru">Что будет с нашими данными?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="ru">Данные остаются вашими и не передаются третьим лицам. Для производственных задач возможен on-premise режим — данные вообще не покидают вашу территорию.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="ru">Что если решение не окупится?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="ru">Целевые KPI фиксируются в договоре до начала работ. После внедрения мы прозрачно показываем фактический эффект на данных клиента.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="ru">Сколько занимает внедрение?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="ru">Аудит — 1-2 дня, настройка и интеграция — от 3 дней до 2-3 недель в зависимости от масштаба, пилот на одной точке перед полным запуском.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="ru">Что входит в поддержку?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="ru">Поддержка 24/7, дообучение модели на новых данных, доработки по мере роста бизнеса. Условия зависят от тарифа.</span></p>
+</div></details></div>
+</section>
 <!-- FOOTER -->
   <footer class="footer" id="contact">
     <div class="footer-grid">
@@ -2062,5 +2070,8 @@
  document.addEventListener('click',function(event){var link=event.target.closest('a[href]');if(link && link.getAttribute('href')==='#lead-form'){event.preventDefault();event.stopImmediatePropagation();openLeadForm();}},true);
 </script>
 <script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
+  <script src="/assets/receipt-industries.js" defer></script>
+  <script src="/assets/scroll-story.js" defer></script>
+  <script src="/assets/hero-media.js" defer></script>
 </body>
 </html>
