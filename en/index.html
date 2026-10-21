@@ -1176,7 +1176,7 @@
             <h4 data-lang="en">How It Works</h4>
             <p><span data-lang="en">You describe the task — we audit and propose a solution in 2-3 days. Development from 2 weeks. Target KPIs are agreed in the contract before the project starts.</span></p>
             <h4 data-lang="en">Why ST8 AI</h4>
-            <div class="solution-stats">
+            <div class="solution-stats" style="grid-template-columns:1fr">
               <div class="solution-stat"><span class="solution-stat-val">2-3</span><span class="solution-stat-label" data-lang="en">Months ROI</span></div>
             </div>
             <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="solution-cta-btn contact-link" onclick="event.stopPropagation()"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a>
@@ -1941,7 +1941,7 @@
           if (data && data.success === true) {
             document.getElementById('leadFormSuccess').style.display = 'block';
             try { if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form'); } catch (_) {}
-            try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form' }); } catch (_) {}
+            try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form', method: 'form' }); } catch (_) {}
           } else {
             document.getElementById('leadFormError').style.display = 'block';
           }
