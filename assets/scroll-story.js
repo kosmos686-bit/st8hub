@@ -10,6 +10,7 @@
   var receipt = root.querySelector('.ss-rc');
   var industries = Array.prototype.slice.call(root.querySelectorAll('.ss-big'));
   var papers = Array.prototype.slice.call(root.querySelectorAll('.ss-art .ss-sh'));
+  var backdrops = Array.prototype.slice.call(root.querySelectorAll('.ss-bg'));
   var dots = Array.prototype.slice.call(root.querySelectorAll('.ss-dots i'));
   var words = Array.prototype.slice.call(root.querySelectorAll('.ss-word'));
   var DUR = [3000, 2400, 2000];
@@ -46,6 +47,7 @@
       paper.setAttribute('aria-hidden', String(!visible));
       paper.style.transform = reduced ? 'none' : 'translateY(-50%) rotate(3deg) translateY(' + (visible ? 0 : 36) + 'px)';
     });
+    backdrops.forEach(function (bg, index) { bg.classList.toggle('ss-on', index === selected); });
     dots.forEach(function (dot, index) { dot.style.opacity = index <= selected || reduced ? '1' : '.2'; });
     p = reduced ? 1 : state.p3;
     words.forEach(function (word, index) {
