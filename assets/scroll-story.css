@@ -128,3 +128,17 @@
 .scroll-story .ss-receipt-figure .ss-rwrap { height: auto; padding-top: 34px; padding-bottom: 18px; }
 .scroll-story .ss-receipt-figure .ss-rc { position: relative; top: auto; left: auto; margin: 0 auto; }
 @media(prefers-reduced-motion:reduce) { .scroll-story .ss-receipt-figure .ss-rwrap { padding-top: 28px; } }
+
+/* Autoplay: scenes are normal blocks, not scroll-pinned. */
+.scroll-story.ss-motion .ss-pin, .scroll-story.ss-motion #story-scene-1, .scroll-story.ss-motion #story-scene-2, .scroll-story.ss-motion #story-scene-3 { height: auto !important; }
+.scroll-story.ss-motion .ss-stick { position: relative; top: auto; height: auto; min-height: 0; overflow: visible; }
+.scroll-story.ss-motion .ss-big { transition: opacity .6s ease, transform .6s ease; }
+.scroll-story.ss-motion .ss-sh { transition: opacity .6s ease, transform .6s ease; }
+.scroll-story.ss-motion .ss-tk { transition: opacity .35s ease, transform .35s ease; }
+.scroll-story.ss-motion .ss-word-lit { transition: opacity .3s ease; }
+.scroll-story.ss-motion #story-scene-1 .ss-wrap, .scroll-story.ss-motion #story-scene-2 .ss-wrap, .scroll-story.ss-motion #story-scene-3 .ss-wrap { padding-top: 72px; padding-bottom: 72px; }
+@media(max-width:900px) {
+  .scroll-story.ss-motion #story-scene-1 .ss-t, .scroll-story.ss-motion #story-scene-1 .ss-steps, .scroll-story.ss-motion #story-scene-2 .ss-row { display: block; }
+  .scroll-story.ss-motion #story-scene-1 .ss-steps { display: grid; }
+  .scroll-story.ss-motion #story-scene-2 .ss-row { display: flex; }
+}
