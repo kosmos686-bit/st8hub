@@ -137,3 +137,30 @@
  #guarantees.s6-block .how-grid { gap: 12px; }
  .s6-block .project-preview .project-visual { position: absolute; top: 50%; left: 50%; width: 100%; height: auto; padding: 0 16px; transform: translate(-50%,-50%) scale(.75); }
 }
+
+/* Pricing polish: a clear hierarchy on desktop, a swipeable row of receipts on phones. */
+.s6-block .pricing-grid { counter-reset: tariff; padding-top: 14px; }
+.s6-block .pricing-card { counter-increment: tariff; transition: transform .25s ease, box-shadow .25s ease; }
+.s6-block .pricing-card::before { display: block; content: 'ТАРИФ № 0' counter(tariff); margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid #c9c1ad; color: #7a735f; font: 500 11px/1.4 var(--font-mono); letter-spacing: .08em; }
+.s6-block .pricing-card.featured { margin-top: -14px; padding-top: 44px; box-shadow: 0 0 0 2px var(--gold-hi), 0 28px 60px rgba(0,0,0,.55); z-index: 1; }
+.s6-block .pricing-card.featured::before { color: #1a1814; border-bottom-color: #1a1814; }
+.s6-block .pricing-card.featured .pricing-badge { top: 30px; }
+.s6-block .pricing-price { font-size: clamp(26px,2.5vw,36px); margin: 4px 0 8px; }
+.s6-block .pricing-price > span > span { font-size: 14px; }
+.s6-block .pricing-card:not(.featured):hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+.s6-block .pricing-card.featured:hover { transform: translateY(-4px); }
+.pricing-dots { display: none; }
+@media (max-width: 900px) {
+  .s6-block .pricing-grid { display: flex; grid-template-columns: none; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 14px 0 28px; margin: 0 -20px; padding-left: 20px; padding-right: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+  .s6-block .pricing-grid::-webkit-scrollbar { display: none; }
+  .s6-block .pricing-card, .s6-block .pricing-card.featured { flex: 0 0 min(84vw,340px); scroll-snap-align: center; margin: 0; }
+  .s6-block .pricing-card.featured { padding-top: 30px; }
+  .s6-block .pricing-card.featured .pricing-badge { top: 16px; }
+  .pricing-dots { display: flex; justify-content: center; gap: 8px; margin: -6px 0 0; }
+  .pricing-dots i { width: 28px; height: 3px; background: var(--gold-hi); opacity: .25; transition: opacity .25s ease; }
+  .pricing-dots i.on { opacity: 1; }
+  .pricing-swipe { display: block; margin: 12px 0 0; text-align: center; color: #c2bdae; font: 400 12px/1.5 var(--font-body); }
+}
+.pricing-swipe { display: none; }
+@media (prefers-reduced-motion: reduce) { .s6-block .pricing-card { transition: none; } .s6-block .pricing-card:hover { transform: none !important; } }
+@media (max-width: 900px) { .s6-block .pricing-card.reveal { opacity: 1; transform: none; } }

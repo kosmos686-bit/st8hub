@@ -1357,6 +1357,8 @@
 <button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('enterprise')"><span data-lang="ru">Обсудить проект</span></button>
 </div>
 </div>
+<div class="pricing-dots" aria-hidden="true"><i></i><i class="on"></i><i></i></div>
+<p class="pricing-swipe">Листайте, чтобы сравнить тарифы</p>
 </section>
 
 
@@ -2087,6 +2089,7 @@
 <script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
   <script src="/assets/receipt-industries.js" defer></script>
   <script src="/assets/scroll-story.js" defer></script>
+  <script src="/assets/pricing-carousel.js" defer></script>
   <script src="/assets/hero-media.js" defer></script>
 </body>
 </html>
