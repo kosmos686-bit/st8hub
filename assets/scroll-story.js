@@ -12,7 +12,7 @@
   var papers = Array.prototype.slice.call(root.querySelectorAll('.ss-art .ss-sh'));
   var dots = Array.prototype.slice.call(root.querySelectorAll('.ss-dots i'));
   var words = Array.prototype.slice.call(root.querySelectorAll('.ss-word'));
-  var DUR = [5200, 3600, 3400];
+  var DUR = [3000, 2400, 2000];
   var state = { p1: 0, p2: 0, p3: 0 };
   var inView = [false, false, false];
   var t0 = [0, 0, 0];
