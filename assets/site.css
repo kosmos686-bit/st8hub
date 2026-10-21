@@ -194,3 +194,22 @@ a.cta-btn:hover { background: var(--gold-light); color: #000 !important; transfo
 .footer-bottom p { font-size: 12px; color: var(--gray-600); }
 .footer-bottom a.legal-link { color: var(--gray-500); text-decoration: underline; }
 .footer-bottom a.legal-link:hover { color: var(--gold); }
+
+/* Таблица «до / после» на страницах кейсов */
+.ba-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 24px 0 8px; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; background: var(--dark-card); }
+.ba-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.ba-table th { text-align: left; padding: 14px 16px; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(212,175,55,0.25); }
+.ba-table td { padding: 14px 16px; vertical-align: top; color: var(--gray-400); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.ba-table tr:last-child td { border-bottom: 0; }
+.ba-table td strong { color: #fff; font-weight: 600; }
+.ba-table td:first-child { width: 22%; }
+@media (max-width: 480px) { .article-body .stat-row .stat-val { font-size: 20px; white-space: nowrap; } .article-body .stat-row .stat-label { font-size: 11px; } }
+@media (max-width: 640px) {
+  .ba-wrap { overflow: visible; border: 0; background: none; }
+  .ba-table, .ba-table tbody, .ba-table tr, .ba-table td { display: block; width: 100%; min-width: 0; }
+  .ba-table thead { display: none; }
+  .ba-table tr { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+  .ba-table td { padding: 6px 0; border: 0; }
+  .ba-table td:first-child { width: 100%; font-size: 15px; padding-bottom: 8px; }
+  .ba-table td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+}
