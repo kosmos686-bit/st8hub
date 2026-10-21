@@ -187,3 +187,10 @@
   .hero .hero-left { position: relative; isolation: isolate; }
   .hero .hero-left::before { content: ''; position: absolute; inset: -22px -18px; z-index: -1; border-radius: 20px; background: rgba(8,7,6,.58); filter: blur(10px); pointer-events: none; }
 }
+/* hero title readability on desktop, whatever frame the video is on */
+.hero .hero-title { text-shadow: 0 2px 22px rgba(8,7,6,.9), 0 0 4px rgba(8,7,6,.7); }
+.hero .hero-title .highlight { text-shadow: 0 2px 22px rgba(8,7,6,.95), 0 0 5px rgba(8,7,6,.85), 0 0 1px rgba(8,7,6,.9); }
+@media (min-width: 901px) {
+  .hero .hero-left { position: relative; isolation: isolate; }
+  .hero .hero-left::before { content: ''; position: absolute; top: -40px; bottom: -40px; left: -60px; right: -140px; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 40% 50%, rgba(8,7,6,.72) 0, rgba(8,7,6,.55) 55%, rgba(8,7,6,0) 100%); filter: blur(6px); }
+}

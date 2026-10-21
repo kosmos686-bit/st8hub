@@ -23,8 +23,10 @@
 #pricing .pr-bc { height: 34px; margin-top: 22px; background: repeating-linear-gradient(90deg,#1a1814 0 2px,transparent 2px 4px,#1a1814 4px 5px,transparent 5px 9px,#1a1814 9px 12px,transparent 12px 14px); opacity: .85; }
 #pricing .pr-bcn { margin-top: 4px; text-align: center; font: 400 10px/1.4 var(--font-mono); letter-spacing: .3em; color: #5f594d; }
 #pricing .pr-stamp { position: absolute; right: 18px; top: 84px; transform: rotate(11deg); padding: 5px 12px; border: 2px solid #c0321b; border-radius: 6px; color: #c0321b; font: 700 12px/1.3 var(--font-mono); letter-spacing: .1em; text-align: center; opacity: .88; }
+/* tariffs never depend on the generic .reveal observer: the print-out animation is the only reveal */
+#pricing .pricing-card.reveal { opacity: 1; transform: none; transition: none; }
 /* print-out animation, started when the section enters the viewport */
-#pricing.pr-armed .pricing-card { clip-path: inset(0 0 100% 0); transform: translateY(-40px); }
+#pricing.pr-armed:not(.pr-in) .pricing-card { clip-path: inset(0 0 100% 0); transform: translateY(-40px); pointer-events: none; }
 #pricing.pr-armed .pr-stamp { opacity: 0; }
 #pricing.pr-armed.pr-in .pricing-card { clip-path: inset(0); transform: none; transition: clip-path .5s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1); }
 #pricing.pr-armed.pr-in .pricing-card:nth-child(2) { transition-delay: .1s; }
