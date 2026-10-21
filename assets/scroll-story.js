@@ -12,15 +12,14 @@
   var papers = Array.prototype.slice.call(root.querySelectorAll('.ss-art .ss-sh'));
   var backdrops = Array.prototype.slice.call(root.querySelectorAll('.ss-bg'));
   var dots = Array.prototype.slice.call(root.querySelectorAll('.ss-dots i'));
-  // Backdrop photos load only when the industries scene is close to the viewport: first the visible one, then the rest.
+  // Backdrop photos start loading right after the page itself has loaded, so they are ready long before the scene is reached.
   function loadBg(bg) { if (bg && bg.dataset.bg) { bg.style.backgroundImage = 'url(' + bg.dataset.bg + ')'; delete bg.dataset.bg; } }
+  function loadAll() { backdrops.forEach(loadBg); }
+  if (document.readyState === 'complete') loadAll(); else window.addEventListener('load', loadAll, { once: true });
   var bgScene = root.querySelector('#story-scene-2');
-  if (bgScene && backdrops.length) {
-    var loadAll = function () { loadBg(backdrops[0]); setTimeout(function () { backdrops.slice(1).forEach(loadBg); }, 600); };
-    if ('IntersectionObserver' in window) {
-      var bgIo = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { loadAll(); bgIo.disconnect(); } }, { rootMargin: '300px 0px' });
-      bgIo.observe(bgScene);
-    } else loadAll();
+  if (bgScene && 'IntersectionObserver' in window) {
+    var bgIo = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { loadAll(); bgIo.disconnect(); } }, { rootMargin: '1500px 0px' });
+    bgIo.observe(bgScene);
   }
 
   var words = Array.prototype.slice.call(root.querySelectorAll('.ss-word'));
