@@ -169,7 +169,7 @@
 .ss-bgs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%); }
 .ss-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity .9s ease; }
-.ss-bg.ss-on { opacity: .42; }
+.ss-bg.ss-on { opacity: .55; }
 .ss-bgs::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,9,8,.92) 0, rgba(10,9,8,.55) 45%, rgba(10,9,8,.25) 100%); }
 #story-scene-2 .ss-wrap { position: relative; z-index: 1; }
 @media (max-width:900px) { .ss-bg.ss-on { opacity: .32; } .ss-bgs::after { background: rgba(10,9,8,.55); } }
