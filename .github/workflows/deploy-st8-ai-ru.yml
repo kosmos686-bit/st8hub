@@ -1,4 +1,5 @@
 name: Deploy st8-ai.ru
+# redeploy 2026-10-21: re-sync after concurrent runs
 
 on:
   push:
