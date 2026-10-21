@@ -1,0 +1,28 @@
+/* Legal page: the policy text lies on a sheet of paper over the dark page, like the rest of the site. */
+:root { --paper:#ece6d6; --ink:#0b0a09; --red:#c0321b; --rc-d:'Unbounded',sans-serif; --rc-b:'Golos Text','Inter',system-ui,sans-serif; --rc-m:'IBM Plex Mono',ui-monospace,monospace; }
+html { background: var(--ink); }
+body { background: var(--ink); font-family: var(--rc-b); padding: 28px 12px 60px; }
+.wrap { position: relative; max-width: 860px; margin: 0 auto; padding: 44px 52px 76px; color: #1a1814;
+  background: repeating-linear-gradient(0deg,rgba(60,50,30,.035) 0 1px,transparent 1px 3px), var(--paper); box-shadow: 0 30px 60px rgba(0,0,0,.55);
+  -webkit-mask: conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 14px 100%; mask: conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 14px 100%; }
+.logo, .logo-text { color: #1a1814; font-family: var(--rc-d); }
+.logo-text span { color: #8a6d12; }
+.logo-icon { border-color: #1a1814; color: #1a1814; border-radius: 6px; }
+.lang-switch { background: rgba(26,24,20,.06); border: 1px dashed #8d8670; border-radius: 4px; }
+.lang-btn { color: #5f594d; border-radius: 3px; font-family: var(--rc-m); }
+.lang-btn.active { background: #1a1814; color: var(--paper); }
+h1 { font-family: var(--rc-d); font-weight: 700; font-size: clamp(22px,3.4vw,32px); line-height: 1.2; letter-spacing: -.03em; color: #1a1814; }
+h1 .highlight { color: var(--red); font-weight: 700; }
+.updated { font-family: var(--rc-m); color: #5f594d; }
+h2 { font-family: var(--rc-m); font-weight: 600; font-size: 15px; color: #1a1814; margin: 36px 0 12px; padding-top: 18px; border-top: 1px dashed #8d8670; }
+p, li { font-size: 15px; line-height: 1.75; color: #2a261e; }
+li::marker { color: var(--red); }
+a { color: #1a1814; text-decoration: none; background: linear-gradient(transparent 62%, rgba(192,50,27,.22) 62%); border-bottom: 1px solid #8d8670; }
+a:hover { background: rgba(240,200,60,.5); }
+.logo, .back-link { background: none; border-bottom: 0; }
+.back-link { color: #5f594d; font-family: var(--rc-m); }
+.back-link:hover { color: var(--red); background: none; }
+.card { background: rgba(26,24,20,.06); border: 1px dashed #8d8670; border-radius: 0; }
+.note { color: #3a352b; border-left: 3px solid var(--red); font-size: 13px; }
+.placeholder { color: #8a1f0f; background: rgba(240,200,60,.4); border-radius: 0; }
+@media (max-width: 700px) { body { padding: 14px 8px 40px; } .wrap { padding: 30px 20px 60px; } }
