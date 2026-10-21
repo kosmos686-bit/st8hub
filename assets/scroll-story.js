@@ -119,18 +119,19 @@
     if (paused) { t0[1] += performance.now() - pausedAt; paused = false; schedule(); }
     if (restore !== false && lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
+  var I18N = window.SS_I18N || {};
   function industryData(i) {
     var big = industries[i];
     return {
-      kick: 'Отрасль',
+      kick: I18N.kick || 'Отрасль',
       title: big.querySelector('h3').textContent,
       text: big.querySelector('p').textContent,
-      rows: Array.prototype.map.call(big.querySelectorAll('.ss-row span'), function (s) { return [s.lastChild.textContent.trim(), s.querySelector('b').textContent]; }).concat([[ 'Главный показатель', big.querySelector('.ss-num').textContent ]]),
-      foot: '* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.',
-      lead: 'Интересует автоматизация: ' + big.querySelector('h3').textContent
+      rows: Array.prototype.map.call(big.querySelectorAll('.ss-row span'), function (s) { return [s.lastChild.textContent.trim(), s.querySelector('b').textContent]; }).concat([[ I18N.main || 'Главный показатель', big.querySelector('.ss-num').textContent ]]),
+      foot: I18N.foot || '* Результаты приведены по конкретным проектам и не являются гарантией одинакового результата для другого бизнеса.',
+      lead: (I18N.lead || 'Интересует автоматизация: ') + big.querySelector('h3').textContent
     };
   }
-  var tapeData = {
+  var tapeData = I18N.tape || {
     kick: 'Как это работает',
     title: 'Цифровой администратор 24/7',
     text: 'Каждое действие фиксируется в ленте: бронь, закупка, отзыв, замена поставщика. Вы видите, что сделала система, и подтверждаете то, что важно. Мы начинаем с одного процесса на одной точке.',
@@ -166,7 +167,7 @@
       if (typeof openLeadForm === 'function') {
         openLeadForm();
         var msg = document.getElementById('leadMessage');
-        if (msg && lead) { msg.value = lead + ' (с главной страницы)'; msg.dispatchEvent(new Event('input', { bubbles: true })); }
+        if (msg && lead) { msg.value = lead + (I18N.from || ' (с главной страницы)'); msg.dispatchEvent(new Event('input', { bubbles: true })); }
       }
     });
   }

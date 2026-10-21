@@ -21,7 +21,7 @@
   else window.addEventListener('resize', updateNavHeight);
   var burger = hero.querySelector('#hamburger');
   if (burger) {
-    burger.setAttribute('aria-label', 'Меню');
+    burger.setAttribute('aria-label', (window.SS_I18N && window.SS_I18N.menu) || 'Меню');
     burger.setAttribute('aria-controls', 'mobileMenu');
     burger.setAttribute('aria-expanded', 'false');
     burger.addEventListener('click', function () {
