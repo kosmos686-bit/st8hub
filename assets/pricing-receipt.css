@@ -26,9 +26,9 @@
 /* tariffs never depend on the generic .reveal observer: the print-out animation is the only reveal */
 #pricing .pricing-card.reveal { opacity: 1; transform: none; transition: none; }
 /* print-out animation, started when the section enters the viewport */
-#pricing.pr-armed:not(.pr-in) .pricing-card { clip-path: inset(0 0 100% 0); transform: translateY(-40px); pointer-events: none; }
+#pricing.pr-armed:not(.pr-in) .pricing-card { clip-path: inset(0 0 100% 0); pointer-events: none; }
 #pricing.pr-armed .pr-stamp { opacity: 0; }
-#pricing.pr-armed.pr-in .pricing-card { clip-path: inset(0); transform: none; transition: clip-path .5s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1); }
+#pricing.pr-armed.pr-in .pricing-card { clip-path: inset(0); transform: none; transition: clip-path .45s cubic-bezier(.2,.8,.2,1); }
 #pricing.pr-armed.pr-in .pricing-card:nth-child(2) { transition-delay: .1s; }
 #pricing.pr-armed.pr-in .pricing-card:nth-child(3) { transition-delay: .2s; }
 #pricing.pr-armed.pr-in .pr-stamp { opacity: .88; animation: pr-stamp .3s .5s cubic-bezier(.3,1.8,.5,1) both; }
