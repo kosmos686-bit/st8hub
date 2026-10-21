@@ -6,328 +6,2095 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <title>AI Automation for UAE Hospitality, FM &amp; Retail | ST8 AI</title>
-  <meta name="description" content="Short, measured AI pilots for UAE restaurants, hotels, facilities management and retail: guest concierge, forecasting, purchasing and task routing.">
+  <title>AI Business Automation for the UAE — Pilot | ST8 AI</title>
   <link rel="canonical" href="https://st8-ai.ru/ae/">
   <link rel="alternate" hreflang="ru" href="https://st8-ai.ru/">
   <link rel="alternate" hreflang="en" href="https://st8-ai.ru/en/">
   <link rel="alternate" hreflang="en-AE" href="https://st8-ai.ru/ae/">
   <link rel="alternate" hreflang="tr" href="https://st8-ai.ru/tr/">
   <link rel="alternate" hreflang="x-default" href="https://st8-ai.ru/en/">
+  <meta name="description" content="AI business automation for UAE hospitality, facilities management and retail: we find the process where money is lost, connect AI to your systems and measure the effect in a pilot.">
+  <link rel="preload" as="style" href="/assets/fonts.css" data-site-fonts>
+  <noscript><link rel="stylesheet" href="/assets/fonts.css"></noscript>
+  <link rel="preload" as="font" href="/assets/hero-fonts/inter-cyrillic.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="/assets/hero-fonts/inter-latin.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/hero-poster-mobile.webp" media="(max-width:639px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/hero-poster.webp" media="(min-width:640px)" fetchpriority="high">
+  <style id="hero-critical">
+/* Same Google Fonts Inter v20, self-hosted; SIL OFL in hero-fonts/OFL.txt. */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-cyrillic-ext.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-greek-ext.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-greek.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-vietnamese.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/hero-fonts/inter-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* The production hero keeps the original Inter typography. */
+.receipt-home .hero { font-family: Inter, sans-serif; }
+/* Original hero, with only the requested seam into the ink section. */
+.receipt-home .hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background: linear-gradient(transparent, #0b0a09); z-index: 2; pointer-events: none; }
+
+/* A real first-frame image paints immediately, even with JS or autoplay unavailable. */
+.hero-video picture, .hero-video img { display: block; width: 100%; height: 100%; }
+.hero-video img { object-fit: cover; }
+.hero-video video { position: absolute; inset: 0; opacity: 0; }
+.hero-video video.is-playing { opacity: 1; }
+@media(prefers-reduced-motion:reduce) {
+ .receipt-home .hero .animate-blur-fade-up { animation: none !important; opacity: 1; transform: none; filter: none; }
+}
+/* Mobile hero is readable on first paint; its final design is unchanged. */
+@media(max-width:900px) {
+ .receipt-home .hero .animate-blur-fade-up { animation: none !important; opacity: 1; transform: none; filter: none; }
+ .receipt-home .hero .scroll-indicator { animation: none; }
+}
+/* Reserve icon boxes before the deferred Lucide replacement, preventing late reflow. */
+.receipt-home .hero i[data-lucide] { display: inline-block; flex-shrink: 0; }
+
+@media(max-width:639px) {
+ .receipt-home .hero .scroll-indicator { left: auto; right: 20px; bottom: 10px; transform: none; gap: 2px; }
+}
+  </style>
+  
   <meta property="og:type" content="website">
-  <meta property="og:title" content="AI Automation for UAE Hospitality, FM &amp; Retail | ST8 AI">
-  <meta property="og:description" content="Short, measured AI pilots for UAE restaurants, hotels, facilities management and retail.">
+  <meta property="og:locale" content="en_AE">
+  <meta property="og:title" content="AI Business Automation for the UAE — Pilot | ST8 AI">
+  <meta property="og:description" content="AI business automation for UAE hospitality, facilities management and retail: we find the process where money is lost, connect AI to your systems and measure the effect in a pilot.">
   <meta property="og:url" content="https://st8-ai.ru/ae/">
   <meta property="og:image" content="https://st8-ai.ru/og-image.jpg">
-  <meta property="og:locale" content="en_AE">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="twitter:title" content="AI Business Automation for the UAE — Pilot | ST8 AI">
+  <meta name="twitter:description" content="AI business automation for UAE hospitality, facilities management and retail: we find the process where money is lost, connect AI to your systems and measure the effect in a pilot.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "name": "ST8 AI",
+        "url": "https://st8-ai.ru/",
+        "email": "info@st8-ai.ru",
+        "telephone": "+7 985 690-52-52",
+        "areaServed": [
+          "RU",
+          "AE",
+          "TR"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Moscow",
+          "addressCountry": "RU"
+        },
+        "description": "Applied AI integration: one process, connection to existing systems, a measurable pilot.",
+        "sameAs": [
+          "https://t.me/Zzima686",
+          "https://wa.me/79856905252",
+          "https://vk.ru/st8_ai",
+          "https://dzen.ru/id/6a85c5270d706c349104b645"
+        ]
+      },
       {
         "@type": "Organization",
         "@id": "https://st8-ai.ru/#organization",
         "name": "ST8 AI",
         "url": "https://st8-ai.ru",
         "logo": "https://st8-ai.ru/og-image.jpg",
+        "description": "Applied AI integration: one process, connection to existing systems, a measurable pilot.",
         "email": "info@st8-ai.ru",
-        "sameAs": ["https://t.me/Zzima686", "https://wa.me/79856905252"],
-        "areaServed": ["AE", "TR", "RU"]
-      },
-      {
-        "@type": "Service",
-        "@id": "https://st8-ai.ru/ae/#service",
-        "serviceType": "AI automation pilots for hospitality, facilities management, retail and logistics",
-        "provider": { "@id": "https://st8-ai.ru/#organization" },
-        "areaServed": { "@type": "Country", "name": "United Arab Emirates" },
-        "url": "https://st8-ai.ru/ae/"
+        "telephone": "+7-985-690-52-52",
+        "sameAs": [
+          "https://t.me/Zzima686",
+          "https://wa.me/79856905252",
+          "https://vk.ru/st8_ai",
+          "https://dzen.ru/id/6a85c5270d706c349104b645"
+        ],
+        "founder": [
+          {
+            "@type": "Person",
+            "name": "Alexey Gagarin",
+            "jobTitle": "CEO & Co-founder"
+          },
+          {
+            "@type": "Person",
+            "name": "Yulia Popova",
+            "jobTitle": "Co-founder"
+          }
+        ],
+        "areaServed": [
+          "RU",
+          "AE",
+          "TR"
+        ]
       },
       {
         "@type": "FAQPage",
+        "@id": "https://st8-ai.ru/#faq",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How does an AI pilot with ST8 AI work?",
-            "acceptedAnswer": { "@type": "Answer", "text": "We start with a short audit of one costly process, connect to the data you already have, and launch a pilot on a single site in about 7 to 10 days. The pilot runs for roughly 3 to 4 weeks, and the target KPIs are written into the contract before launch." }
-          },
-          {
-            "@type": "Question",
-            "name": "Do we have to replace our POS, ERP or CRM?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. ST8 AI works as an AI layer on top of the systems you already use and connects through their existing exports or APIs." }
-          },
-          {
-            "@type": "Question",
-            "name": "What does a pilot cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Scope and price depend on the process and the systems involved, so we agree them after a short audit instead of publishing a single price." }
+            "name": "What if we have no data to train the model on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We start with what you already have in your accounting system (tills, CRM, warehouse) — that is usually enough for a first working version. The model keeps learning as data accumulates during the pilot."
+            }
           },
           {
             "@type": "Question",
             "name": "What happens to our data?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Your data stays yours and is not shared with third parties. For sensitive environments an on-premise deployment is possible." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your data stays yours and is not passed to third parties. For manufacturing tasks an on-premise mode is possible — the data never leaves your site."
+            }
           },
           {
             "@type": "Question",
-            "name": "Can we stop if the pilot does not work?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our contracts include a 30-day exit without penalty, and full rollout only starts after a successful single-site pilot." }
+            "name": "What if the solution does not pay back?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Target KPIs are fixed in the contract before work begins. After rollout we transparently show the actual effect on the client's data."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does rollout take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Audit — 1-2 days, setup and integration — from 3 days to 2-3 weeks depending on scale, with a pilot at one location before full launch."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does support include?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "24/7 support, retraining the model on new data, improvements as the business grows. Terms depend on the plan."
+            }
           }
         ]
       }
     ]
   }
   </script>
-  <script>
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112836376', 'ym');
-    ym(112836376, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-  </script>
-  <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lucide@1.25.0/dist/umd/lucide.js" integrity="sha384-PpZ0v4GjRXD+zBXfYaMJkWUZG4mHqAlhTADbQwrM8oXYO7LGWz+NcISPEVyO9opc" crossorigin="anonymous"></script>
   <style>
+    :root {
+      --ink: #0b0a09; --paper: #ece6d6; --gold: #d4af37; --gold-hi: #e8c85a;
+      --font-display: 'Unbounded', sans-serif;
+      --font-body: 'Golos Text', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --gold: #d4af37; --gold-light: #f0d78c; --gold-dark: #a08020;
-      --black: #000; --dark: #0a0a0a; --card: #111;
-      --g400: #9ca3af; --g500: #6b7280; --g600: #4b5563;
+      --black: #000000; --dark: #0a0a0a; --dark-card: #111111;
+      --gray-400: #9ca3af; --gray-500: #6b7280; --gray-600: #4b5563;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--black); color: #fff; -webkit-font-smoothing: antialiased; line-height: 1.6; overflow-x: hidden; }
-    a { color: inherit; }
-    .skip { position: absolute; left: -9999px; top: 0; background: var(--gold); color: #000; padding: 8px 14px; z-index: 100; }
-    .skip:focus { left: 8px; top: 8px; }
-    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
-    header { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--gold); }
+    body {
+      font-family: var(--font-body); background: var(--black); color: #fff;
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    }
+    @keyframes blurFadeUp {
+      from { opacity: 0; filter: blur(20px); transform: translateY(40px); }
+      to { opacity: 1; filter: blur(0); transform: translateY(0); }
+    }
+    .animate-blur-fade-up {
+      opacity: 0; animation: blurFadeUp 1s ease-out forwards;
+    }
+    .liquid-glass {
+      background: rgba(255,255,255,0.01); background-blend-mode: luminosity;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      border: none; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+      position: relative; overflow: hidden; cursor: pointer; transition: all 0.3s ease;
+    }
+    .liquid-glass:hover {
+      background: rgba(255,255,255,0.05);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), 0 0 20px rgba(212,175,55,0.1);
+    }
+    .liquid-glass::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+    .hero {
+      position: relative; width: 100%; height: 100dvh; min-height: 600px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .hero-video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+    }
+    .hero-video video { width: 100%; height: 100%; object-fit: cover; }
+    .blur-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      mask-image: linear-gradient(to top, black 0%, transparent 45%);
+      -webkit-mask-image: linear-gradient(to top, black 0%, transparent 45%);
+      pointer-events: none; z-index: 1;
+    }
+    .navbar {
+      position: relative; z-index: 50; display: flex;
+      justify-content: space-between; align-items: center; padding: 16px 16px;
+    }
+    @media(min-width:640px){ .navbar { padding: 16px 24px; } }
+    @media(min-width:768px){ .navbar { padding: 24px 48px; } }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+    .logo-icon {
+      width: 36px; height: 36px; border: 1.5px solid var(--gold); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: var(--gold); letter-spacing: -0.02em;
+    }
     .logo-text { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
     .logo-text span { color: var(--gold); font-weight: 300; }
-    nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
-    nav a { color: rgba(255,255,255,0.7); text-decoration: none; }
-    nav a:hover { color: var(--gold); }
-    .hero { padding: 72px 0 56px; }
-    .badge { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,175,55,0.35); border-radius: 999px; padding: 6px 14px; margin-bottom: 22px; }
-    h1 { font-size: clamp(32px, 6vw, 58px); line-height: 1.08; letter-spacing: -0.035em; font-weight: 600; max-width: 860px; }
-    h1 em { font-style: normal; color: var(--gold); }
-    .lead { margin-top: 22px; max-width: 680px; font-size: 18px; color: var(--g400); }
-    .btns { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; transition: transform .3s cubic-bezier(.32,.72,0,1), background .3s; }
-    .btn-gold { background: var(--gold); color: #000; }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .btn-line { border: 1px solid rgba(255,255,255,0.25); color: #fff; }
-    .btn-line:hover { border-color: var(--gold); color: var(--gold); }
-    section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
-    .label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    h2 { font-size: clamp(26px, 4vw, 38px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 600; max-width: 760px; }
-    .sub { margin-top: 14px; color: var(--g400); max-width: 680px; }
-    .grid { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .card { background: var(--card); border: 1px solid rgba(212,175,55,0.14); border-radius: 18px; padding: 24px; }
-    .card h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 10px; }
-    .card ul { list-style: none; color: var(--g400); font-size: 15px; }
-    .card li { padding-left: 18px; position: relative; margin-bottom: 8px; }
-    .card li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-    .steps { counter-reset: s; }
-    .step { counter-increment: s; }
-    .step h3::before { content: counter(s); display: inline-flex; width: 28px; height: 28px; margin-right: 10px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-size: 14px; align-items: center; justify-content: center; }
-    .step p { color: var(--g400); font-size: 15px; }
-    .terms { display: grid; gap: 16px; margin-top: 32px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .term { border-left: 2px solid var(--gold); padding: 4px 0 4px 16px; }
-    .term strong { display: block; margin-bottom: 4px; }
-    .term span { color: var(--g400); font-size: 15px; }
-    details { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px 22px; margin-top: 12px; }
-    summary { cursor: pointer; font-weight: 600; }
-    details p { margin-top: 10px; color: var(--g400); font-size: 15px; }
-    .note { margin-top: 28px; font-size: 13px; color: var(--g500); max-width: 720px; }
-    .cta { text-align: center; }
-    .cta h2, .cta .sub { margin-left: auto; margin-right: auto; }
-    .cta .btns { justify-content: center; }
-    footer { padding: 36px 0 48px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 13px; color: var(--g500); }
-    footer .row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
-    footer a { color: var(--g400); text-decoration: none; }
-    footer a:hover { color: var(--gold); }
-    footer p { margin-bottom: 6px; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+    .nav-links { display: none; }
+    @media(min-width:1024px){ .nav-links { display: flex; align-items: center; gap: 32px; } }
+    .nav-link {
+      color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 400;
+      transition: color 0.3s ease; position: relative;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--gold); transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    @media(max-width:639px){
+      .navbar { flex-wrap: wrap; gap: 12px; }
+      .nav-actions { margin-left: auto; gap: 8px; }
+      .btn-hamburger { flex: none; }
+    }
+    .btn-search { display: none; }
+    @media(min-width:640px){
+      .btn-search {
+        display: flex; align-items: center; gap: 8px; color: #fff;
+        font-size: 14px; font-weight: 500; padding: 8px 20px; border-radius: 9999px;
+      }
+    }
+    @media(min-width:768px){ .btn-search { padding: 8px 24px; } }
+    .btn-user {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; color: #fff;
+    }
+    .btn-hamburger {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; background: none; border: none; cursor: pointer;
+    }
+    @media(min-width:1024px){ .btn-hamburger { display: none; } }
+    .hamburger-icon { position: relative; width: 20px; height: 20px; flex: none; transition: all 0.5s ease-out; }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { top: 0; left: 0; }
+    #marketBtn { color: #fff; font-family: inherit; }
+    .hamburger-icon.open { transform: rotate(180deg); }
+    .hamburger-icon .icon-menu, .hamburger-icon .icon-x { transition: all 0.5s ease-out; }
+    .hamburger-icon.open .icon-menu { opacity: 0; transform: scale(0.5); }
+    .hamburger-icon:not(.open) .icon-x { opacity: 0; transform: scale(0.5); }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switch {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px; padding: 4px;
+    }
+    .lang-btn {
+      padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+      transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .lang-btn.active {
+      background: var(--gold); color: #000;
+      box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+    }
+    .lang-btn:hover:not(.active) { color: #fff; }
+    /* Language switcher - only hide/show inline text spans, not structural elements */
+    span[data-lang] { display: none; }
+    html[lang="ru"] span[data-lang="ru"] { display: inline; }
+    html[lang="en"] span[data-lang="en"] { display: inline; }
+
+    /* For block-level translated elements (headings, paragraphs, strong in lists) */
+    h4[data-lang], p[data-lang], strong[data-lang], a[data-lang] { display: none; }
+    html[lang="ru"] strong[data-lang="ru"] { display: inline; }
+    html[lang="en"] strong[data-lang="en"] { display: inline; }
+    html[lang="ru"] a[data-lang="ru"] { display: inline; }
+    html[lang="en"] a[data-lang="en"] { display: inline; }
+    html[lang="ru"] h4[data-lang="ru"] { display: block; }
+    html[lang="en"] h4[data-lang="en"] { display: block; }
+    html[lang="ru"] p[data-lang="ru"] { display: block; }
+    html[lang="en"] p[data-lang="en"] { display: block; }
+
+    .mobile-menu {
+      position: absolute; top: 72px; left: 0; right: 0; z-index: 40;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+      padding: 16px; transform: translateY(-16px); opacity: 0;
+      pointer-events: none; transition: all 0.5s ease-out;
+    }
+    .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-link {
+      display: block; padding: 12px 16px; color: rgba(255,255,255,0.8);
+      text-decoration: none; font-size: 15px; border-radius: 8px;
+      transition: all 0.3s ease; opacity: 0; transform: translateX(-20px);
+    }
+    .mobile-menu.open .mobile-menu-link { opacity: 1; transform: translateX(0); }
+    .mobile-menu-link:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .mobile-menu-actions {
+      display: none; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08); gap: 12px;
+    }
+    @media(max-width:639px){ .mobile-menu-actions { display: flex; } }
+    .hero-content {
+      position: relative; z-index: 10; flex: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 16px 32px;
+    }
+    @media(min-width:640px){ .hero-content { padding: 0 24px 32px; } }
+    @media(min-width:768px){ .hero-content { padding: 0 48px 64px; } }
+    .hero-inner { display: flex; flex-direction: column; gap: 32px; }
+    @media(min-width:768px){ .hero-inner { flex-direction: row; align-items: flex-end; gap: 48px; } }
+    .hero-left { flex: 1; }
+    .hero-right { display: flex; gap: 12px; }
+    @media(min-width:768px){ .hero-right { justify-content: flex-end; } }
+    .stats-bar { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    @media(min-width:640px){ .stats-bar { gap: 24px; margin-bottom: 24px; } }
+    .stat-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.7); }
+    @media(min-width:640px){ .stat-item { font-size: 14px; gap: 8px; } }
+    .stat-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+    @media(min-width:640px){ .stat-item svg { width: 20px; height: 20px; } }
+    .stat-item .stat-value { font-weight: 600; color: var(--gold); }
+    .hero-title {
+      font-size: 32px; font-weight: 400; letter-spacing: -0.04em;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    @media(min-width:640px){ .hero-title { font-size: 48px; margin-bottom: 20px; } }
+    @media(min-width:768px){ .hero-title { font-size: 56px; } }
+    @media(min-width:1024px){ .hero-title { font-size: 64px; } }
+    .hero-title .highlight { color: var(--gold); font-weight: 300; }
+    .hero-desc {
+      font-size: 16px; color: var(--gray-400); line-height: 1.6;
+      margin-bottom: 24px; max-width: 600px;
+    }
+    @media(min-width:640px){ .hero-desc { font-size: 18px; margin-bottom: 32px; } }
+    @media(min-width:768px){ .hero-desc { font-size: 20px; } }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #000; font-size: 15px; font-weight: 600;
+      padding: 12px 28px; border-radius: 9999px; text-decoration: none;
+      border: none; cursor: pointer; transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: var(--gold); color: #000; transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(212,175,55,0.3);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: #fff; font-size: 15px; font-weight: 500;
+      padding: 12px 28px; border-radius: 9999px; text-decoration: none; border: none;
+    }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #fff; font-size: 14px; font-weight: 500;
+      padding: 10px 20px; border-radius: 9999px;
+    }
+    @media(min-width:640px){ .btn-nav { padding: 12px 24px; } }
+    .trust-badges { position: relative; z-index: 10; padding: 0 16px 24px; }
+    @media(min-width:640px){ .trust-badges { padding: 0 24px 32px; } }
+    @media(min-width:768px){ .trust-badges { padding: 0 48px 48px; } }
+    .trust-inner {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    @media(min-width:640px){ .trust-inner { gap: 32px; } }
+    .trust-label {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--gray-500); font-weight: 500;
+    }
+    .trust-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+    .trust-logo {
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.4);
+      letter-spacing: 0.02em; transition: color 0.3s ease;
+    }
+    .trust-logo:hover { color: rgba(255,255,255,0.7); }
+    .scroll-indicator {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: flex; flex-direction: column; align-items: center;
+      gap: 8px; opacity: 0.5; animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+    .scroll-indicator span {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray-500);
+    }
+    .section-roi {
+      position: relative; z-index: 10; background: var(--black); padding: 80px 16px;
+    }
+    @media(min-width:640px){ .section-roi { padding: 100px 24px; } }
+    @media(min-width:768px){ .section-roi { padding: 120px 48px; } }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    @media(min-width:768px){ .section-header { margin-bottom: 64px; } }
+    .section-label {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--gold); font-weight: 600; margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 28px; font-weight: 400; letter-spacing: -0.03em;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    @media(min-width:640px){ .section-title { font-size: 36px; } }
+    @media(min-width:768px){ .section-title { font-size: 44px; } }
+    .section-desc { font-size: 16px; color: var(--gray-400); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+    .roi-calculator {
+      max-width: 900px; margin: 0 auto; background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 32px 24px;
+    }
+    @media(min-width:640px){ .roi-calculator { padding: 48px 40px; } }
+    .roi-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media(min-width:768px){ .roi-grid { grid-template-columns: 1fr 1fr; gap: 48px; } }
+    .roi-input-group { margin-bottom: 24px; }
+    .roi-input-label {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.7);
+    }
+    .roi-input-value { font-weight: 600; color: var(--gold); font-size: 16px; }
+    .roi-slider {
+      width: 100%; height: 4px; -webkit-appearance: none; appearance: none;
+      background: rgba(255,255,255,0.1); border-radius: 2px; outline: none;
+    }
+    .roi-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
+      border-radius: 50%; background: var(--gold); cursor: pointer;
+      box-shadow: 0 0 20px rgba(212,175,55,0.4); transition: transform 0.2s ease;
+    }
+    .roi-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .roi-slider::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%; background: var(--gold);
+      cursor: pointer; border: none;
+    }
+    .roi-results {
+      background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 16px; padding: 24px; text-align: center;
+    }
+    @media(min-width:640px){ .roi-results { padding: 32px; } }
+    .roi-result-value {
+      font-size: 36px; font-weight: 300; color: var(--gold);
+      letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    @media(min-width:640px){ .roi-result-value { font-size: 48px; } }
+    .roi-result-label { font-size: 14px; color: var(--gray-400); margin-bottom: 20px; }
+    .roi-result-note { font-size: 12px; color: var(--gray-500); margin-top: 12px; }
+    .section-solutions {
+      position: relative; z-index: 10; background: var(--dark); padding: 80px 16px;
+    }
+    @media(min-width:640px){ .section-solutions { padding: 100px 24px; } }
+    @media(min-width:768px){ .section-solutions { padding: 120px 48px; } }
+    .solutions-grid {
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media(min-width:640px){ .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(min-width:1024px){ .solutions-grid { grid-template-columns: repeat(3, 1fr); } }
+    .solution-card {
+      background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 28px 24px; transition: all 0.4s ease; cursor: pointer;
+    }
+    .solution-card:hover {
+      border-color: rgba(212,175,55,0.2); transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .solution-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; color: var(--gold);
+    }
+    .solution-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .solution-desc { font-size: 14px; color: var(--gray-400); line-height: 1.6; margin-bottom: 16px; }
+    .solution-metric {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
+      font-weight: 600; color: var(--gold); background: rgba(212,175,55,0.08);
+      padding: 6px 12px; border-radius: 20px;
+    }
+    .section-pricing {
+      position: relative; z-index: 10; background: var(--black); padding: 80px 16px;
+    }
+    @media(min-width:640px){ .section-pricing { padding: 100px 24px; } }
+    @media(min-width:768px){ .section-pricing { padding: 120px 48px; } }
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    @media(min-width:768px){ .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pricing-card {
+      background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px; padding: 32px 24px; position: relative; transition: all 0.4s ease;
+    }
+    .pricing-card:hover { border-color: rgba(212,175,55,0.15); transform: translateY(-4px); }
+    .pricing-card.featured {
+      border-color: rgba(212,175,55,0.3);
+      background: linear-gradient(180deg, rgba(212,175,55,0.03) 0%, var(--dark-card) 100%);
+    }
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: #000; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 6px 16px; border-radius: 20px;
+    }
+    .pricing-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+    .pricing-subtitle { font-size: 13px; color: var(--gray-500); margin-bottom: 20px; }
+    .pricing-price { font-size: 36px; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .pricing-price span { font-size: 16px; color: var(--gray-500); font-weight: 400; }
+    .pricing-period { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
+    .pricing-features { list-style: none; margin-bottom: 28px; }
+    .pricing-features li {
+      display: flex; align-items: flex-start; gap: 10px; font-size: 14px;
+      color: rgba(255,255,255,0.7); margin-bottom: 12px; line-height: 1.5;
+    }
+    .pricing-features li svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+    .pricing-btn {
+      width: 100%; display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 14px; border-radius: 9999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease;
+    }
+    .pricing-btn-primary { background: #fff; color: #000; }
+    .pricing-btn-primary:hover { background: var(--gold); }
+    .pricing-btn-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .pricing-btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .section-how {
+      position: relative; z-index: 10; background: var(--dark); padding: 80px 16px;
+    }
+    @media(min-width:640px){ .section-how { padding: 100px 24px; } }
+    @media(min-width:768px){ .section-how { padding: 120px 48px; } }
+    .how-grid {
+      display: grid; grid-template-columns: 1fr; gap: 24px;
+      max-width: 1000px; margin: 0 auto;
+    }
+    @media(min-width:768px){ .how-grid { grid-template-columns: repeat(4, 1fr); } }
+    .how-step { text-align: center; padding: 24px; position: relative; }
+    @media(min-width:768px){
+      .how-step:not(:last-child)::after {
+        content: ''; position: absolute; top: 50%; right: -12px;
+        width: 24px; height: 1px; background: rgba(212,175,55,0.3);
+      }
+    }
+    .how-number {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(212,175,55,0.3); display: flex;
+      align-items: center; justify-content: center; font-size: 18px;
+      font-weight: 600; color: var(--gold); margin: 0 auto 16px;
+    }
+    .how-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .how-desc { font-size: 13px; color: var(--gray-400); line-height: 1.6; }
+    .footer {
+      position: relative; z-index: 10; background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 16px 32px;
+    }
+    @media(min-width:640px){ .footer { padding: 64px 24px 32px; } }
+    @media(min-width:768px){ .footer { padding: 80px 48px 32px; } }
+    .footer-grid {
+      display: grid; grid-template-columns: 1fr; gap: 40px;
+      max-width: 1200px; margin: 0 auto 48px;
+    }
+    @media(min-width:768px){ .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; } }
+    .footer-brand { max-width: 320px; }
+    .footer-brand .logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: var(--gray-400); line-height: 1.6; margin-bottom: 20px; }
+    .footer-heading {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--gray-500); margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-contact { font-size: 14px; color: var(--gray-400); line-height: 1.8; }
+    .footer-contact a { color: var(--gray-400); text-decoration: none; transition: color 0.3s ease; }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; flex-direction: column; gap: 12px;
+      align-items: center; text-align: center;
+    }
+    @media(min-width:640px){ .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
+    .footer-bottom p { font-size: 12px; color: var(--gray-600); }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .particles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 2; overflow: hidden;
+    }
+    .particle {
+      position: absolute; width: 2px; height: 2px;
+      background: rgba(212,175,55,0.3); border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; } 90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+    }
+
+@media (max-width:768px){
+  .blur-overlay{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    background:rgba(0,0,0,.35);
+  }
+  .particles{
+    display:none;
+  }
+}
+
+
+    .section-projects {
+      position: relative; z-index: 10; background: var(--black); padding: 64px 16px;
+    }
+    @media(min-width:640px){ .section-projects { padding: 80px 24px; } }
+    @media(min-width:1024px){ .section-projects { padding: 120px 48px; } }
+    .projects-grid {
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media(min-width:640px){ .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+    @media(min-width:1024px){ .projects-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+    .project-card {
+      background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; overflow: hidden; transition: all 0.4s ease;
+      display: flex; flex-direction: column;
+    }
+    @media(min-width:640px){ .project-card { border-radius: 18px; } }
+    @media(min-width:1024px){ .project-card { border-radius: 20px; } }
+    .project-card:hover {
+      border-color: rgba(212,175,55,0.2); transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .project-preview {
+      position: relative; height: 180px; background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.06); overflow: hidden;
+      flex-shrink: 0;
+    }
+    @media(min-width:640px){ .project-preview { height: 200px; } }
+    @media(min-width:1024px){ .project-preview { height: 220px; } }
+    .project-client-badge {
+      position: absolute; top: 10px; left: 10px; z-index: 5;
+      display: flex; align-items: center; gap: 5px;
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px;
+      background: rgba(212,175,55,0.12); color: var(--gold);
+      border: 1px solid rgba(212,175,55,0.25);
+    }
+    @media(min-width:640px){ .project-client-badge { font-size: 10px; padding: 5px 12px; top: 12px; left: 12px; } }
+    .client-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); animation: pulse-dot 2s infinite;
+    }
+    @media(min-width:640px){ .client-dot { width: 6px; height: 6px; } }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .project-body {
+      padding: 16px 18px 20px;
+      display: flex; flex-direction: column; flex: 1;
+    }
+    @media(min-width:640px){ .project-body { padding: 18px 22px 22px; } }
+    @media(min-width:1024px){ .project-body { padding: 20px 24px 24px; } }
+    .project-client-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-decoration: none; transition: all 0.3s ease;
+      border-radius: 8px; padding: 6px; margin: -6px -6px 10px;
+    }
+    @media(min-width:640px){ .project-client-row { gap: 12px; padding: 8px; margin: -8px -8px 12px; margin-bottom: 12px; padding-bottom: 12px; } }
+    .project-client-row:hover {
+      background: rgba(255,255,255,0.03);
+    }
+    .project-client-row:hover .client-name {
+      color: var(--gold);
+    }
+    .client-logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+    @media(min-width:640px){ .client-logo { width: 40px; height: 40px; border-radius: 10px; font-size: 13px; } }
+    .client-logo.azbuka {
+      background: linear-gradient(135deg, #1a3a1a, #2d5a2d);
+      color: #7cb87c; border: 1px solid rgba(124,184,124,0.3);
+    }
+    .client-logo.level {
+      background: linear-gradient(135deg, #1a1a3a, #2d2d5a);
+      color: #8b8bd4; border: 1px solid rgba(139,139,212,0.3);
+    }
+    .client-logo.unik {
+      background: linear-gradient(135deg, #3a1a1a, #5a2d2d);
+      color: #d48484; border: 1px solid rgba(212,132,132,0.3);
+    }
+    .client-info { min-width: 0; flex: 1; }
+    .client-name {
+      font-size: 13px; font-weight: 600; color: #fff;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    @media(min-width:640px){ .client-name { font-size: 14px; } }
+    .client-type {
+      font-size: 11px; color: var(--gray-500); margin-top: 2px;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    @media(min-width:640px){ .client-type { font-size: 12px; } }
+    .project-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.01em; }
+    @media(min-width:640px){ .project-title { font-size: 16px; margin-bottom: 8px; } }
+    @media(min-width:1024px){ .project-title { font-size: 17px; } }
+    .project-desc { font-size: 12px; color: var(--gray-400); line-height: 1.6; margin-bottom: 12px; flex: 1; }
+    @media(min-width:640px){ .project-desc { font-size: 13px; margin-bottom: 16px; } }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+    @media(min-width:640px){ .project-tags { gap: 6px; } }
+    .project-tag {
+      font-size: 10px; font-weight: 500; color: var(--gold);
+      background: rgba(212,175,55,0.08); padding: 3px 8px; border-radius: 20px;
+    }
+    @media(min-width:640px){ .project-tag { font-size: 11px; padding: 4px 10px; } }
+    /* Kitchen visual */
+    .kitchen-visual {
+      padding: 40px 16px 16px; display: flex; flex-direction: column; gap: 8px;
+    }
+    @media(min-width:640px){ .kitchen-visual { padding: 44px 18px 18px; gap: 9px; } }
+    @media(min-width:1024px){ .kitchen-visual { padding: 48px 20px 20px; gap: 10px; } }
+    .kitchen-station {
+      display: flex; justify-content: space-between; align-items: center; font-size: 11px;
+    }
+    @media(min-width:640px){ .kitchen-station { font-size: 12px; } }
+    .station-label { color: rgba(255,255,255,0.7); font-weight: 500; }
+    .station-queue { color: var(--gold); font-weight: 600; font-size: 10px; }
+    @media(min-width:640px){ .station-queue { font-size: 11px; } }
+    .kitchen-ai-msg {
+      font-size: 9px; color: var(--gray-400); line-height: 1.4;
+      padding: 5px 8px; background: rgba(212,175,55,0.05);
+      border-radius: 6px; border-left: 2px solid var(--gold);
+      display: flex; align-items: flex-start; gap: 4px;
+    }
+    @media(min-width:640px){ .kitchen-ai-msg { font-size: 10px; padding: 6px 10px; gap: 5px; } }
+    /* Stroy visual */
+    .stroy-visual {
+      padding: 40px 16px 16px; display: flex; flex-direction: column; gap: 12px;
+    }
+    @media(min-width:640px){ .stroy-visual { padding: 44px 18px 18px; } }
+    @media(min-width:1024px){ .stroy-visual { padding: 48px 20px 20px; gap: 14px; } }
+    .stroy-header { display: flex; flex-direction: column; gap: 2px; }
+    @media(min-width:640px){ .stroy-header { gap: 3px; } }
+    .stroy-logo { font-size: 16px; font-weight: 700; letter-spacing: 0.05em; color: #fff; }
+    @media(min-width:640px){ .stroy-logo { font-size: 17px; } }
+    @media(min-width:1024px){ .stroy-logo { font-size: 18px; } }
+    .stroy-sub { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+    @media(min-width:640px){ .stroy-sub { font-size: 11px; } }
+    .stroy-progress {
+      width: 100%; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+    }
+    .stroy-progress-bar {
+      height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px;
+      animation: stroy-progress 3s ease-out forwards;
+    }
+    @keyframes stroy-progress { from { width: 0%; } to { width: 73%; } }
+    .stroy-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    @media(min-width:640px){ .stroy-tags { gap: 6px; } }
+    .stroy-tags span {
+      font-size: 9px; color: var(--gray-500); background: rgba(255,255,255,0.04);
+      padding: 2px 7px; border-radius: 20px;
+    }
+    @media(min-width:640px){ .stroy-tags span { font-size: 10px; padding: 3px 8px; } }
+    /* Resto visual */
+    .resto-visual {
+      padding: 40px 16px 16px; display: flex; flex-direction: column; gap: 12px;
+    }
+    @media(min-width:640px){ .resto-visual { padding: 44px 18px 18px; } }
+    @media(min-width:1024px){ .resto-visual { padding: 48px 20px 20px; gap: 14px; } }
+    .resto-header { display: flex; flex-direction: column; gap: 2px; }
+    @media(min-width:640px){ .resto-header { gap: 3px; } }
+    .resto-logo { font-size: 16px; font-weight: 700; letter-spacing: 0.05em; color: #fff; }
+    @media(min-width:640px){ .resto-logo { font-size: 17px; } }
+    @media(min-width:1024px){ .resto-logo { font-size: 18px; } }
+    .resto-sub { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+    @media(min-width:640px){ .resto-sub { font-size: 11px; } }
+    .resto-progress {
+      width: 100%; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+    }
+    .resto-progress-bar {
+      height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px;
+      animation: resto-progress 3s ease-out forwards;
+    }
+    @keyframes resto-progress { from { width: 0%; } to { width: 61%; } }
+    .resto-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    @media(min-width:640px){ .resto-tags { gap: 6px; } }
+    .resto-tags span {
+      font-size: 9px; color: var(--gray-500); background: rgba(255,255,255,0.04);
+      padding: 2px 7px; border-radius: 20px;
+    }
+    @media(min-width:640px){ .resto-tags span { font-size: 10px; padding: 3px 8px; } }
+
+    /* SOLUTION DETAIL ACCORDION */
+    .solution-card { cursor: pointer; }
+    .solution-card-main { position: relative; }
+    .solution-toggle {
+      position: absolute; top: 20px; right: 20px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-500); transition: all 0.3s ease;
+    }
+    @media(min-width:640px){ .solution-toggle { width: 36px; height: 36px; top: 24px; right: 24px; } }
+    .solution-card:hover .solution-toggle { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.2); color: var(--gold); }
+    .solution-card.active .solution-toggle { transform: rotate(180deg); background: rgba(212,175,55,0.15); border-color: var(--gold); color: var(--gold); }
+    .solution-detail {
+      max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      opacity: 0; padding-top: 0;
+    }
+    .solution-card.active .solution-detail { opacity: 1; padding-top: 20px; }
+    .solution-detail-inner { padding-top: 4px; padding-bottom: 4px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .solution-detail-inner h4 {
+      font-size: 13px; font-weight: 600; color: var(--gold); margin: 16px 0 10px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    @media(min-width:640px){ .solution-detail-inner h4 { font-size: 14px; margin: 20px 0 12px; } }
+    .solution-detail-inner h4:first-child { margin-top: 4px; }
+    .solution-detail-inner ul { list-style: none; padding: 0; margin: 0 0 12px; }
+    .solution-detail-inner ul li {
+      font-size: 12px; color: var(--gray-400); line-height: 1.7;
+      padding-left: 16px; position: relative; margin-bottom: 6px;
+    }
+    @media(min-width:640px){ .solution-detail-inner ul li { font-size: 13px; margin-bottom: 8px; } }
+    .solution-detail-inner ul li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+    }
+    .solution-detail-inner ul li strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .solution-detail-inner p {
+      font-size: 12px; color: var(--gray-400); line-height: 1.7; margin-bottom: 12px;
+    }
+    @media(min-width:640px){ .solution-detail-inner p { font-size: 13px; } }
+    .solution-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      margin: 16px 0; padding: 12px; background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.08); border-radius: 12px;
+    }
+    @media(min-width:640px){ .solution-stats { gap: 12px; padding: 16px; margin: 20px 0; } }
+    .solution-stat { text-align: center; }
+    .solution-stat-val {
+      display: block; font-size: 18px; font-weight: 300; color: var(--gold); letter-spacing: -0.02em;
+    }
+    @media(min-width:640px){ .solution-stat-val { font-size: 22px; } }
+    .solution-stat-label { display: block; font-size: 10px; color: var(--gray-500); margin-top: 4px; }
+    @media(min-width:640px){ .solution-stat-label { font-size: 11px; } }
+    .solution-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #000; font-size: 13px; font-weight: 600;
+      padding: 10px 20px; border-radius: 9999px; text-decoration: none;
+      margin-top: 8px; margin-bottom: 4px; transition: all 0.3s ease; border: none; cursor: pointer;
+    }
+    @media(min-width:640px){ .solution-cta-btn { font-size: 14px; padding: 12px 24px; margin-bottom: 0; } }
+    .solution-cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.3); }
+    .solution-more-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      color: var(--gray-400); font-size: 13px; font-weight: 500;
+      text-decoration: none; margin-top: 8px; margin-left: 12px; transition: color 0.3s ease;
+    }
+    @media(min-width:640px){ .solution-more-link { font-size: 14px; } }
+    .solution-more-link:hover { color: var(--gold); }
+
+    /* Project CTA button */
+    .project-card { text-decoration: none; color: inherit; }
+    .project-cta { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+    @media(min-width:640px){ .project-cta { margin-top: 16px; padding-top: 16px; } }
+    .project-cta-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; color: var(--gold);
+      transition: all 0.3s ease;
+    }
+    @media(min-width:640px){ .project-cta-btn { font-size: 13px; gap: 8px; } }
+    .project-card:hover .project-cta-btn { color: var(--gold-light); gap: 10px; }
+    .project-cta-btn i { transition: transform 0.3s ease; }
+    .project-card:hover .project-cta-btn i { transform: translateX(3px); }
+    .legal-note { font-size: 11px; color: var(--gray-600); line-height: 1.6; max-width: 1200px; margin: 16px auto 0; padding: 0 16px; text-align: center; }
+    .footer-bottom a.legal-link { color: var(--gray-500); text-decoration: underline; }
+    .footer-bottom a.legal-link:hover { color: var(--gold); }
+    @media (max-width:768px){
+  .blur-overlay{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    background:rgba(0,0,0,.35);
+  }
+  .particles{
+    display:none;
+  }
+}
   </style>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-<style>
-  #leadFormModal { position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,.8); backdrop-filter:blur(8px); }
-  #leadFormModal[hidden], #leadFormModal [hidden] { display:none; }
-  #leadFormModal .lead-panel { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:32px 24px; max-width:480px; width:100%; max-height:90vh; overflow-y:auto; }
-  #leadFormModal h2 { font-size:24px; margin-bottom:12px; }
-  #leadFormModal p { color:var(--g400); margin-bottom:16px; }
-  #leadFormModal label { display:block; font-size:14px; color:var(--g400); margin:16px 0 6px; }
-  #leadFormModal input:not([type=checkbox]), #leadFormModal textarea { width:100%; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:#fff; font:inherit; }
-  #leadFormModal textarea { resize:vertical; }
-  #leadFormModal .lead-consent { display:flex; align-items:flex-start; gap:10px; font-size:12px; line-height:1.5; }
-  #leadFormModal input[type=checkbox] { margin-top:3px; accent-color:var(--gold); }
-  #leadFormModal a { color:var(--gold); }
-  button.btn { border:0; font-family:inherit; cursor:pointer; }
-  button.btn-line { background:transparent; border:1px solid rgba(255,255,255,.25); }
-  #leadFormModal button:disabled { opacity:.5; cursor:default; }
-</style>
-  <script src="/assets/conversions.js" defer></script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112836376', 'ym');
+
+      ym(112836376, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/112836376" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8FVRCB166N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8FVRCB166N');</script>
+  <link rel="stylesheet" href="/assets/receipt-roi.css">
+  <link rel="stylesheet" href="/assets/receipt-industries.css">
+  <link rel="stylesheet" href="/assets/scroll-story.css">
+  <link rel="stylesheet" href="/assets/receipt-lower.css">
+  <link rel="stylesheet" href="/assets/paper-cards.css">
+  <link rel="stylesheet" href="/assets/pricing-receipt.css">
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header>
-    <div class="wrap bar">
-      <a class="logo" href="/en/" aria-label="ST8 AI home"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
-      <nav aria-label="Main">
-        <a href="/en/horeca.html">Hospitality</a>
-        <a href="/en/logistika.html">Logistics</a>
-        <a href="/en/retail.html">Retail</a>
-        <a href="/en/about.html">About</a>
-        <a href="/tr/" hreflang="tr" lang="tr">Türkçe</a>
-        <a href="/" hreflang="ru" lang="ru">Русский</a>
-      </nav>
+<body class="receipt-home">
+<!-- Background Video -->
+  <div class="hero-video">
+    <picture>
+      <source media="(max-width:639px)" srcset="/assets/hero-poster-mobile.webp">
+      <source media="(max-width:900px)" srcset="/assets/hero-poster.webp">
+      <img src="/assets/hero-poster.webp" alt="" width="1920" height="1068" fetchpriority="high" decoding="async">
+    </picture>
+    <video muted loop playsinline preload="none" data-poster="/assets/hero-poster.webp" aria-hidden="true" data-video-src="/assets/hero-desktop.mp4"></video>
+  </div>
+  <div class="blur-overlay"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <nav class="navbar">
+      <a href="/ae/" class="logo animate-blur-fade-up" style="animation-delay:0ms">
+        <div class="logo-icon">ST8</div>
+        <div class="logo-text">ST8<span>AI</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#solutions" class="nav-link animate-blur-fade-up" style="animation-delay:100ms"><span data-lang="en">Solutions</span></a>
+        <a href="#pricing" class="nav-link animate-blur-fade-up" style="animation-delay:150ms"><span data-lang="en">Pricing</span></a>
+        <a href="#roi" class="nav-link animate-blur-fade-up" style="animation-delay:200ms"><span data-lang="en">Calculator</span></a>
+        <a href="#how" class="nav-link animate-blur-fade-up" style="animation-delay:250ms"><span data-lang="en">How it works</span></a>
+        <a href="#contact" class="nav-link animate-blur-fade-up" style="animation-delay:300ms"><span data-lang="en">Contact</span></a>
+      </div>
+      <div class="nav-actions">
+        <button class="lang-switch liquid-glass animate-blur-fade-up" id="marketBtn" style="animation-delay:280ms;padding:6px 14px;border:1px solid rgba(212,175,55,0.15);cursor:pointer" onclick="openMarketModal()">
+          <i data-lucide="globe" style="width:14px;height:14px;color:var(--gold)"></i>
+          <span id="marketBtnLabel" style="font-size:12px;font-weight:600;margin-left:6px"><span data-lang="en">Russia</span></span>
+        </button>
+        <div class="lang-switch animate-blur-fade-up" style="animation-delay:300ms">
+          <button class="lang-btn active" id="btnRu" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="btn-hamburger liquid-glass animate-blur-fade-up" id="hamburger" style="animation-delay:350ms" onclick="toggleMenu()">
+          <div class="hamburger-icon" id="hamburgerIcon">
+            <i data-lucide="menu" class="icon-menu" style="width:20px;height:20px;position:absolute"></i>
+            <i data-lucide="x" class="icon-x" style="width:20px;height:20px;position:absolute"></i>
+          </div>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#solutions" class="mobile-menu-link" style="transition-delay:50ms" onclick="toggleMenu()"><span data-lang="en">Solutions</span></a>
+      <a href="#pricing" class="mobile-menu-link" style="transition-delay:100ms" onclick="toggleMenu()"><span data-lang="en">Pricing</span></a>
+      <a href="#roi" class="mobile-menu-link" style="transition-delay:150ms" onclick="toggleMenu()"><span data-lang="en">ROI calculator</span></a>
+      <a href="#how" class="mobile-menu-link" style="transition-delay:200ms" onclick="toggleMenu()"><span data-lang="en">How it works</span></a>
+      <a href="#contact" class="mobile-menu-link" style="transition-delay:250ms" onclick="toggleMenu()"><span data-lang="en">Contact</span></a>
+      <div class="mobile-menu-actions">
+        <div class="lang-switch" style="flex:1;justify-content:center">
+          <button class="lang-btn active" id="btnRuMobile" onclick="setLang('ru')">RU</button>
+          <button class="lang-btn" id="btnEnMobile" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
     </div>
-  </header>
 
-  <main id="main">
-    <div class="wrap hero">
-      <div class="badge">Pilots now open in the UAE</div>
-      <h1>AI automation for <em>UAE hospitality, facilities management</em> and retail</h1>
-      <p class="lead">We find one costly process in your operation, connect it to the systems you already use, and prove the effect on a short, measured pilot. No platform replacement, no long contract before results.</p>
-      <div class="btns">
-        <a class="btn btn-gold" href="https://wa.me/79856905252?text=Hello%20ST8%20AI%2C%20I%27d%20like%20to%20discuss%20an%20AI%20pilot%20for%20my%20business%20in%20the%20UAE" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">Message us on WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Discuss a one-site pilot</button>
-        <a class="btn btn-line" href="mailto:info@st8-ai.ru?subject=AI%20pilot%20in%20the%20UAE" data-goal="contact_email_ae">info@st8-ai.ru</a>
+    <!-- MARKET SELECTOR MODAL -->
+    <div id="marketModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+      <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:520px;width:100%">
+        <div class="section-label" style="text-align:center"><span data-lang="en">Choose your market</span></div>
+        <h3 class="section-title" style="font-size:22px;text-align:center;margin-bottom:24px"><span data-lang="en">Where do you operate?</span></h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ru')">🇷🇺 &nbsp;<span data-lang="en">Russia</span></button>
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('ae')">🇦🇪 &nbsp;<span data-lang="en">UAE</span></button>
+          <button class="pricing-btn pricing-btn-secondary" style="justify-content:flex-start;padding:14px 18px" onclick="setMarket('tr')">🇹🇷 &nbsp;<span data-lang="en">Turkey</span></button>
+        </div>
+        <p class="roi-result-note" style="text-align:center;margin-top:20px"><span data-lang="en">You can change it any time at the top of the page</span></p>
       </div>
     </div>
 
-    <section aria-labelledby="where">
-      <div class="wrap">
-        <div class="label">Where we start</div>
-        <h2 id="where">Four operations where AI pays back first</h2>
-        <p class="sub">We do not sell a generic chatbot. We pick a process where money, speed, control or quality is leaking, and fix that one first.</p>
-        <div class="grid">
-          <div class="card">
-            <h3>Restaurants &amp; hotels</h3>
-            <ul>
-              <li>AI guest concierge for bookings and questions in WhatsApp</li>
-              <li>Demand forecasting and purchasing recommendations</li>
-              <li>Stock control and food-waste reduction</li>
-            </ul>
+    <div class="hero-content">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="stats-bar animate-blur-fade-up" style="animation-delay:300ms">
+            <div class="stat-item"><i data-lucide="trending-up"></i><span><span data-lang="en">ROI <span class="stat-value">2-3 mo</span></span></span></div>
           </div>
-          <div class="card">
-            <h3>Facilities management</h3>
-            <ul>
-              <li>Request intake and task routing between teams</li>
-              <li>Document and report processing</li>
-              <li>Computer vision for compliance checks on site</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Retail &amp; e-commerce</h3>
-            <ul>
-              <li>Demand forecasting by store and SKU</li>
-              <li>Replenishment orders prepared for approval</li>
-              <li>Stock redistribution between locations</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Logistics</h3>
-            <ul>
-              <li>Route and delivery-window optimisation</li>
-              <li>Order completeness checks at dispatch</li>
-              <li>Warehouse load forecasting</li>
-            </ul>
+          <h1 class="hero-title animate-blur-fade-up" style="animation-delay:400ms"><span data-lang="en">Business automation<br><span class="highlight">with neural networks</span></span></h1>
+          <p class="hero-desc animate-blur-fade-up" style="animation-delay:500ms"><span data-lang="en">A digital host, predictive purchasing and computer vision — all working as one organism. No business downtime, with a measurable pilot result.</span></p>
+          <div class="hero-ctas">
+            <button type="button" onclick="openLeadForm()" class="btn-primary animate-blur-fade-up" style="animation-delay:600ms">Discuss your task and pilot plan</button>
+            <a href="#solutions" class="btn-secondary liquid-glass animate-blur-fade-up" style="animation-delay:700ms"><span data-lang="en">Learn more</span></a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="how">
-      <div class="wrap">
-        <div class="label">How a pilot works</div>
-        <h2 id="how">From a one-process audit to a measured result</h2>
-        <div class="grid steps">
-          <div class="card step"><h3>Audit</h3><p>1–2 days to map one process, the data behind it and the systems involved.</p></div>
-          <div class="card step"><h3>Connect</h3><p>We plug into your existing POS, ERP, CRM or spreadsheets. Nothing is replaced.</p></div>
-          <div class="card step"><h3>Pilot on one site</h3><p>Launch in about 7–10 days, then roughly 3–4 weeks of live operation.</p></div>
-          <div class="card step"><h3>Measure &amp; scale</h3><p>Results are compared with the baseline we record before launch. Rollout follows only if the pilot works.</p></div>
+        <div class="hero-right">
+          <a href="#solutions" class="btn-nav liquid-glass animate-blur-fade-up" style="animation-delay:800ms"><span data-lang="en">All solutions</span><i data-lucide="chevron-right" style="width:18px;height:18px"></i></a>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section aria-labelledby="terms">
-      <div class="wrap">
-        <div class="label">Terms</div>
-        <h2 id="terms">What we put in the contract</h2>
-        <div class="terms">
-          <div class="term"><strong>KPIs fixed before launch</strong><span>Target metrics and how they are measured are agreed in writing first.</span></div>
-          <div class="term"><strong>One-site pilot</strong><span>Full rollout starts only after a successful pilot, not before.</span></div>
-          <div class="term"><strong>30-day exit</strong><span>You can leave the project within 30 days without penalty.</span></div>
-          <div class="term"><strong>Your data stays yours</strong><span>No sharing with third parties. On-premise deployment is possible.</span></div>
-        </div>
-        <p class="note">Typical systems we connect to: POS and ERP (for example Foodics, SAP), Microsoft 365 and WhatsApp Business. Languages, channels and scope are agreed at the audit. Results from our projects in Russia show what is possible, but they are not a guarantee for another business.</p>
-      </div>
-    </section>
-
-    <section aria-labelledby="faq">
-      <div class="wrap">
-        <div class="label">FAQ</div>
-        <h2 id="faq">Questions UAE operators ask us</h2>
-        <details><summary>How does an AI pilot with ST8 AI work?</summary><p>We start with a short audit of one costly process, connect to the data you already have, and launch a pilot on a single site in about 7 to 10 days. The pilot runs for roughly 3 to 4 weeks, and the target KPIs are written into the contract before launch.</p></details>
-        <details><summary>Do we have to replace our POS, ERP or CRM?</summary><p>No. ST8 AI works as an AI layer on top of the systems you already use and connects through their existing exports or APIs.</p></details>
-        <details><summary>What does a pilot cost?</summary><p>Scope and price depend on the process and the systems involved, so we agree them after a short audit instead of publishing a single price.</p></details>
-        <details><summary>What happens to our data?</summary><p>Your data stays yours and is not shared with third parties. For sensitive environments an on-premise deployment is possible.</p></details>
-        <details><summary>Can we stop if the pilot does not work?</summary><p>Yes. Our contracts include a 30-day exit without penalty, and full rollout only starts after a successful single-site pilot.</p></details>
-        <details><summary>Where is the team based?</summary><p>ST8 AI is a Moscow-based team. We work with UAE operators remotely, and on-site work can be agreed per project.</p></details>
-      </div>
-    </section>
-
-    <section class="cta" aria-labelledby="contact">
-      <div class="wrap">
-        <h2 id="contact">Tell us one process that costs you money</h2>
-        <p class="sub">Describe it in two or three lines. We will reply with whether a pilot makes sense and what it would involve.</p>
-        <div class="btns">
-          <a class="btn btn-gold" href="https://wa.me/79856905252?text=Hello%20ST8%20AI%2C%20I%27d%20like%20to%20discuss%20an%20AI%20pilot%20for%20my%20business%20in%20the%20UAE" target="_blank" rel="noopener noreferrer" data-goal="contact_whatsapp_ae">WhatsApp</a><button class="btn btn-line" type="button" data-open-lead>Discuss a one-site pilot</button>
-          <a class="btn btn-line" href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" data-goal="contact_telegram_ae">Telegram</a>
-          <a class="btn btn-line" href="mailto:info@st8-ai.ru?subject=AI%20pilot%20in%20the%20UAE" data-goal="contact_email_ae">Email</a>
+    <div class="trust-badges">
+      <div class="trust-inner animate-blur-fade-up" style="animation-delay:1000ms">
+        <span class="trust-label" data-lang="en">Integrations</span>
+        <div class="trust-logos">
+          <span class="trust-logo" data-lang="en">iiko</span><span class="trust-logo" data-lang="en">R-Keeper</span><span class="trust-logo" data-lang="en">Remarket</span>
+          <span class="trust-logo" data-lang="en">1C</span><span class="trust-logo" data-lang="en">Telegram</span><span class="trust-logo" data-lang="en">Mango Office</span>
+          <!-- International (EN) integrations mirror the names already used in the Solutions accordion below -->
+          
+          
         </div>
       </div>
-    </section>
-  </main>
+      <div class="trust-inner animate-blur-fade-up" style="animation-delay:1050ms">
+        <span class="trust-label" data-lang="en">Partners</span>
+        <div class="trust-logos">
+          <a href="https://airi.net" target="_blank" rel="noopener noreferrer" class="trust-logo" style="text-decoration:none">AIRI</a><span class="trust-logo" data-lang="en">ODISpro </span>
+          
+          
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator"><span data-lang="en">Down</span><i data-lucide="chevron-down" style="width:20px;height:20px;color:#6b7280"></i></div>
+  </section>
 
-  <footer>
-    <div class="wrap row">
+<div class="scroll-story" id="scroll-story"><section class="ss-pin" id="story-scene-1"><div class="ss-stick"><div class="ss-glow"></div><div class="ss-wrap"><div class="ss-two">
+<div><h2>Every action is written to the tape</h2>
+<p class="ss-t">24/7 digital host, predictive purchasing, stock control, menu personalisation, computer vision in the kitchen</p>
+<ul class="ss-steps"><li>Booking accepted</li><li>Purchase assembled</li><li>Review handled</li><li>Substitute suggested</li></ul></div>
+<div class="ss-receipt-figure"><div class="ss-rwrap"><div class="ss-slot"></div><div class="ss-rc ss-paper ss-perf" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Details: 24/7 digital host"><div class="ss-rin">
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">19:12</span> guest</span><span><span class="paper-num">#0412</span></span></div><p>“A table for four, tonight after seven”</p><p class="ss-res"><mark class="ss-mark">Table <span class="paper-num">12</span> for <span class="paper-num">19:30</span>. Guest was sent an SMS.</mark></p></div>
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">21:40</span> stock</span><span><span class="paper-num">#0413</span></span></div><p>Cream <span class="paper-num">33%</span>: stock <span class="paper-num">4</span> l, tomorrow we need <span class="paper-num">14</span> l</p><p class="ss-res"><mark class="ss-mark">Supplier order assembled, awaiting your OK.</mark><span aria-hidden="true" class="paper-ink paper-ink--red">just press OK</span></p></div>
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">09:20</span> review</span><span><span class="paper-num">#0415</span></span></div><p>“The main course took <span class="paper-num">40</span> minutes”, <span class="paper-num">2</span> out of <span class="paper-num">5</span></p><p class="ss-res"><mark class="ss-mark">Reply ready, sent to the manager.</mark><span aria-hidden="true" class="paper-ink">reply ready ✓</span></p></div>
+<div class="ss-tk"><div class="ss-m"><span><span class="paper-num">12:30</span> supplier</span><span><span class="paper-num">#0417</span></span></div><p>Salmon went up in price</p><p class="ss-res"><mark class="ss-mark">Substitute from your price list suggested.</mark></p></div>
+</div></div></div><p class="ss-demo-caption">Illustrative scenario. Figures are conditional. Tap the tape to learn more.</p></div>
+</div></div></div></section><section class="ss-pin" id="story-scene-2"><div class="ss-stick"><div class="ss-glow"></div><div class="ss-bgs" aria-hidden="true"><div class="ss-bg ss-on" data-bg="/assets/bg/ind-1.webp"></div><div class="ss-bg" data-bg="/assets/bg/ind-2.webp"></div><div class="ss-bg" data-bg="/assets/bg/ind-3.webp"></div><div class="ss-bg" data-bg="/assets/bg/ind-4.webp"></div><div class="ss-bg" data-bg="/assets/bg/ind-5.webp"></div></div><div class="ss-wrap"><div class="ss-two">
+<div><p class="ss-kick">Choose your industry by scrolling down</p>
+<div class="ss-ind">
+<div class="ss-big ss-on"><div class="ss-num">-35%*</div><h3>HoReCa</h3><p>24/7 digital host, predictive purchasing, stock control, menu personalisation, computer vision in the kitchen</p><div class="ss-row"><span><b>+17%*</b> Average check</span><span><b>-40%*</b> No-show</span></div></div>
+<div class="ss-big"><div class="ss-num">-60%*</div><h3>Manufacturing</h3><p>Computer vision for quality control, predictive equipment maintenance, line optimisation</p><div class="ss-row"><span><b>99.7%*</b> Accuracy</span><span><b>-25%*</b> Downtime</span></div></div>
+<div class="ss-big"><div class="ss-num">-30%*</div><h3>Retail & E-commerce</h3><p>Demand forecasting, auto-purchasing, stock redistribution, personalisation, marketplace integration</p><div class="ss-row"><span><b>94%*</b> Accuracy</span><span><b>+22%*</b> Turnover</span></div></div>
+<div class="ss-big"><div class="ss-num">-25%*</div><h3>Logistics</h3><p>Route optimisation, computer vision for order completeness checks, warehouse load forecasting</p><div class="ss-row"><span><b>-40%*</b> Errors</span><span><b>+18%*</b> Cargo turnover</span></div></div>
+<div class="ss-big"><div class="ss-num">-70%*</div><h3>Offices & property management</h3><p>Document workflow automation, AI assistants, scan recognition, task routing, analytics</p><div class="ss-row"><span><b>5x*</b> Faster</span><span><b>+35%*</b> Efficiency</span></div></div>
+</div>
+<div class="ss-dots"><i class="ss-on"></i><i></i><i></i><i></i><i></i></div>
+<button type="button" class="ss-more" id="ss-more">More details and request</button>
+<p class="ss-foot">* Results are from specific projects and are not a guarantee of the same result for another business.</p></div>
+<div class="ss-art">
+<div class="ss-sh ss-on"><div class="ss-paper ss-perf ss-pp"><h4>Shift log, restaurant</h4><div class="ss-l"><span><span class="paper-num">19:12</span> booking</span><span>table <span class="paper-num">12</span></span></div><div class="ss-l"><span><span class="paper-num">21:40</span> purchase</span><span>cream ×<span class="paper-num">14</span> l</span></div><div class="ss-l"><span><span class="paper-num">09:20</span> review</span><span><mark class="ss-mark">reply ready</mark></span></div><span aria-hidden="true" class="paper-ink">reply ready ✓</span></div><p class="ss-demo-caption">Illustrative scenario. Figures are conditional.</p></div>
+<div class="ss-sh"><div class="ss-paper ss-perf ss-pp"><h4>Shift log, line <span class="paper-num">2</span></h4><div class="ss-l"><span><span class="paper-num">02:15</span> batch <span class="paper-num">118</span></span><b>chip</b></div><div class="ss-l"><span><span class="paper-num">02:15</span> removed from line</span><span><mark class="ss-mark">photo to the technologist</mark></span></div><div class="ss-l"><span><span class="paper-num">04:40</span> pump</span><span>vibration rising</span></div><div class="ss-l"><span><span class="paper-num">04:40</span> service overnight</span><span><mark class="ss-mark">part ordered</mark></span></div><span aria-hidden="true" class="paper-ink">photo to the technologist</span></div><p class="ss-demo-caption">Illustrative scenario. Figures are conditional.</p></div>
+<div class="ss-sh"><div class="ss-paper ss-perf ss-pp"><h4>Supplier order</h4><div class="ss-l"><span>Milk <span class="paper-num">3,2%</span></span><span>stock <span class="paper-num">8</span> → ×<span class="paper-num">13</span></span></div><div class="ss-l"><span>Coffee beans <span class="paper-num">1</span> kg</span><span>stock <span class="paper-num">3</span> → ×<span class="paper-num">15</span></span></div><div class="ss-l"><span>Buckwheat <span class="paper-num">800</span> g</span><span>stock <span class="paper-num">40</span>, OK</span></div><div class="ss-l"><span><mark class="ss-mark">Assembled, awaiting OK</mark></span><span></span></div><span aria-hidden="true" class="paper-ink paper-ink--red">just press OK</span></div><p class="ss-demo-caption">Illustrative scenario. Figures are conditional.</p></div>
+<div class="ss-sh"><div><div class="ss-stampx">REROUTED</div><div class="ss-paper ss-perf ss-pp"><h4>Trip <span class="paper-num">14</span>, MKAD</h4><div class="ss-l"><span>Accident on the highway</span><span><mark class="ss-mark">new route</mark></span></div><div class="ss-l"><span>Optika Sever, <span class="paper-num">13–15</span></span><span><span class="paper-num">14:25</span> in window</span></div><div class="ss-l"><span>Cafe by the station, <span class="paper-num">15–17</span></span><span><span class="paper-num">15:50</span> in window</span></div><span aria-hidden="true" class="paper-ink">new route</span></div></div><p class="ss-demo-caption">Illustrative scenario. Figures are conditional.</p></div>
+<div class="ss-sh"><div class="ss-paper ss-perf ss-pp"><h4>Invoice #<span class="paper-num">418</span> recognised</h4><div class="ss-l"><span>type</span><span><mark class="ss-mark">payment invoice</mark></span></div><div class="ss-l"><span>amount</span><span><mark class="ss-mark"><span class="paper-num">84 300</span> ₽</mark></span></div><div class="ss-l"><span>pay by</span><span><span class="paper-num">28.10.2026</span></span></div><div class="ss-l"><span>status</span><span>with the accountant for review</span></div><span aria-hidden="true" class="paper-ink">under review</span></div><p class="ss-demo-caption">Illustrative scenario. Figures are conditional.</p></div>
+</div>
+</div></div></div></section><section class="ss-pin" id="story-scene-3"><div class="ss-stick"><div class="ss-glow"></div><div class="ss-wrap">
+<p class="ss-rev"><span class="ss-word">Payback<span aria-hidden="true" class="ss-word-lit">Payback</span></span> <span class="ss-word">2-3<span aria-hidden="true" class="ss-word-lit">2-3</span></span> <span class="ss-word">mo.<span aria-hidden="true" class="ss-word-lit">mo.</span></span> <span class="ss-word">Pilot<span aria-hidden="true" class="ss-word-lit">Pilot</span></span> <span class="ss-word">at<span aria-hidden="true" class="ss-word-lit">at</span></span> <span class="ss-word">1<span aria-hidden="true" class="ss-word-lit">1</span></span> <span class="ss-word">location.<span aria-hidden="true" class="ss-word-lit">location.</span></span> <span class="ss-word">Exit<span aria-hidden="true" class="ss-word-lit">Exit</span></span> <span class="ss-word">without<span aria-hidden="true" class="ss-word-lit">without</span></span> <span class="ss-word">penalty.<span aria-hidden="true" class="ss-word-lit">penalty.</span></span> </p>
+</div></div></section><section class="ss-fin" id="story-scene-4"><div class="ss-wrap">
+<h2><span data-lang="en">A new market — <span style="color:var(--gold)">not a risk</span></span></h2>
+<div class="ss-gar">
+<div class="ss-paper ss-perf"><b>Pilot KPIs are fixed before launch</b>Target metrics are written into the contract before the project starts</div>
+<div class="ss-paper ss-perf"><b>Pilot at <span class="paper-num">1</span> location</b>Full rollout only after a successful pilot, not the other way round</div>
+<div class="ss-paper ss-perf"><b>Exit without penalty</b><span class="paper-num">30</span> days to exit the project without penalties</div>
+<div class="ss-paper ss-perf"><b>Exclusive per city</b>We do not work with your direct competitors in the same city</div>
+</div>
+<div class="ss-tiers"><span>Basic <b>from 650 EUR</b></span><span>Business <b>from 1 650 EUR</b></span><span>Network <b>from 3 850 EUR</b></span></div>
+<div class="ss-act"><button class="ss-btn" onclick="openLeadForm()" type="button">Discuss your task and pilot plan</button><a class="ss-link contact-link" href="https://t.me/Zzima686" rel="noopener noreferrer" target="_blank"><span class="contact-link-label">Message on Telegram</span></a></div>
+<p class="ss-legal">* Results are from specific projects and are not a guarantee of the same result for another business. Demo figures are conditional.</p>
+</div></section></div>
+
+
+
+  <section class="section-roi" id="roi">
+
+<div class="roi-calculator reveal">
+<div class="roi-grid">
+<div class="roi-controls"><div class="section-header reveal">
+<div class="section-label"><span data-lang="en">Calculator</span></div>
+<h2 class="section-title"><span data-lang="en">How much will you <span style="color:var(--gold)">save</span> in a year?</span></h2>
+<p class="section-desc"><span data-lang="en">The sliders below estimate approximate savings from averaged data of our projects</span></p>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="points"><span data-lang="en">Number of locations</span><span class="roi-input-value" id="pointsValue">1</span></label>
+<input class="roi-slider" id="points" max="50" min="1" oninput="calculateROI()" type="range" value="1"/>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="check"><span data-lang="en">Average check, EUR</span><span class="roi-input-value" id="checkValue">1 000</span></label>
+<input class="roi-slider" id="check" max="10000" min="500" oninput="calculateROI()" step="100" type="range" value="1000"/>
+</div>
+<div class="roi-input-group">
+<label class="roi-input-label" for="guests"><span data-lang="en">Guests per day (per location)</span><span class="roi-input-value" id="guestsValue">20</span></label>
+<input class="roi-slider" id="guests" max="500" min="20" oninput="calculateROI()" step="10" type="range" value="20"/>
+</div>
+</div>
+<div>
+<div class="roi-results">
+<div aria-live="polite" class="roi-result-value" id="roiTotal">2 376 000 <span data-lang="en">EUR</span></div>
+<div class="roi-result-label"><span data-lang="en">estimated savings over 12 months*</span></div>
+<button class="btn-primary" onclick="openLeadForm('roi')" style="width:100%;justify-content:center" type="button"><i data-lucide="file-text" style="width:18px;height:18px"></i><span data-lang="en">Discuss your task and pilot plan</span></button>
+<div class="roi-result-note"><span data-lang="en">* A model estimate, not a guarantee of results. We agree the measurement method and target metrics after the audit.</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+  <!-- SOLUTIONS -->
+<section class="section-solutions" id="solutions">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="en">Solutions</span></div>
+<h2 class="section-title"><span data-lang="en">AI for <span style="color:var(--gold)">your industry</span></span></h2>
+<p class="section-desc"><span data-lang="en">Custom solutions for a specific client — not off-the-shelf products</span></p>
+</div>
+<div aria-label="Industries" class="industry-tabs" role="tablist"><button aria-controls="industry-panel-horeca" aria-selected="true" class="industry-tab" id="industry-tab-horeca" role="tab" tabindex="0" type="button">HoReCa</button><button aria-controls="industry-panel-production" aria-selected="false" class="industry-tab" id="industry-tab-production" role="tab" tabindex="-1" type="button"><span data-lang="en">Manufacturing</span></button><button aria-controls="industry-panel-retail" aria-selected="false" class="industry-tab" id="industry-tab-retail" role="tab" tabindex="-1" type="button"><span data-lang="en">Retail & E-commerce</span></button><button aria-controls="industry-panel-logistics" aria-selected="false" class="industry-tab" id="industry-tab-logistics" role="tab" tabindex="-1" type="button"><span data-lang="en">Logistics</span></button><button aria-controls="industry-panel-office" aria-selected="false" class="industry-tab" id="industry-tab-office" role="tab" tabindex="-1" type="button"><span data-lang="en">Offices & property management</span></button><button aria-controls="industry-panel-custom" aria-selected="false" class="industry-tab" id="industry-tab-custom" role="tab" tabindex="-1" type="button"><span data-lang="en">Custom development</span></button></div><div class="industry-panels"><article aria-labelledby="industry-tab-horeca" class="industry-panel" id="industry-panel-horeca" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="utensils" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title">HoReCa</h3>
+<p class="solution-desc"><span data-lang="en">24/7 digital host, predictive purchasing, stock control, menu personalisation, computer vision in the kitchen</span></p>
+<span class="solution-metric"><i data-lucide="trending-down" style="width:14px;height:14px"></i><span data-lang="en">Write-offs -35%*</span></span>
+</div><h4 data-lang="en">Client results*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">-35%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Write-offs</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+17%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Average check</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-40%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label">No-show</span></div>
+</div><p class="industry-footnote"><span data-lang="en">* Results are from specific projects and are not a guarantee of the same result for another business.</span></p><h4 data-lang="en">How it works</h4><p><span data-lang="en">Integration with iiko / R-Keeper in 3 days. The AI learns from your data — menu, sales, bookings. After a week the system predicts demand better than a manager with 10 years of experience.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a><a class="solution-more-link" href="/en/horeca.html" onclick="event.stopPropagation()"><span data-lang="en">Learn more on the page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="en">What the solution includes</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="en">Digital host <span class="paper-num">24/7</span></strong> — <span data-lang="en">takes bookings, answers in messengers, remembers guest preferences, allergies, birthdays</span></li>
+<li class="industry-ticket"><strong data-lang="en">Predictive purchasing</strong> — <span data-lang="en">forecasts demand for <span class="paper-num">7</span> days ahead, cuts write-offs by <span class="paper-num">35%</span></span></li>
+<li class="industry-ticket"><strong data-lang="en">Stock control</strong> — <span data-lang="en">shelf-life control, automatic alerts, FIFO</span></li>
+<li class="industry-ticket"><strong data-lang="en">Menu personalisation</strong> — <span data-lang="en">dish recommendations based on the guest's order history</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="en">portion, cleanliness and standards control in the kitchen</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-production" class="industry-panel" hidden="" id="industry-panel-production" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="factory" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="en">Manufacturing</span></h3>
+<p class="solution-desc"><span data-lang="en">Computer vision for quality control, predictive equipment maintenance, line optimisation</span></p>
+<span class="solution-metric"><i data-lucide="zap" style="width:14px;height:14px"></i><span data-lang="en">Accuracy 99.7%*</span></span>
+</div><h4 data-lang="en">Client results*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">99.7%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Accuracy</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-25%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Downtime</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-60%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Defects</span></div>
+</div><p class="industry-footnote"><span data-lang="en">* Results are from specific projects and are not a guarantee of the same result for another business.</span></p><h4 data-lang="en">How it works</h4><p><span data-lang="en">We install cameras on the line and integrate with MES/ERP. The AI learns from samples of defects. The system runs on-premise — data never leaves the plant.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a><a class="solution-more-link" href="/en/proizvodstvo.html" onclick="event.stopPropagation()"><span data-lang="en">Learn more on the page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="en">What the solution includes</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="en">defect detection in <span class="paper-num">50</span> ms, accuracy <span class="paper-num">99.7%</span></span></li>
+<li class="industry-ticket"><strong data-lang="en">Predictive maintenance</strong> — <span data-lang="en">breakdown forecast <span class="paper-num">72</span> hours ahead, maintenance planning</span></li>
+<li class="industry-ticket"><strong data-lang="en">Line optimisation</strong> — <span data-lang="en">load balancing, cutting downtime by <span class="paper-num">25%</span></span></li>
+<li class="industry-ticket"><strong data-lang="en">Quality control</strong> — <span data-lang="en">automatic checks against standards and internal rules</span></li>
+<li class="industry-ticket"><strong data-lang="en">OEE analytics</strong> — <span data-lang="en">Overall Equipment Effectiveness in real time</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-retail" class="industry-panel" hidden="" id="industry-panel-retail" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="shopping-cart" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="en">Retail & E-commerce</span></h3>
+<p class="solution-desc"><span data-lang="en">Demand forecasting, auto-purchasing, stock redistribution, personalisation, marketplace integration</span></p>
+<span class="solution-metric"><i data-lucide="target" style="width:14px;height:14px"></i><span data-lang="en">Forecast 94%*</span></span>
+</div><h4 data-lang="en">Client results*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">94%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Accuracy</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-30%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Shortage</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+22%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Turnover</span></div>
+</div><p class="industry-footnote"><span data-lang="en">* Results are from specific projects and are not a guarantee of the same result for another business.</span></p><h4 data-lang="en">How it works</h4><p><span data-lang="en">We connect to your accounting system in 1 day. The AI analyses sales history, stock and deliveries. After 2 weeks the system predicts demand better than Excel with macros.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a><a class="solution-more-link" href="/en/retail.html" onclick="event.stopPropagation()"><span data-lang="en">Learn more on the page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="en">What the solution includes</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="en">Demand forecast</strong> — <span data-lang="en">accuracy <span class="paper-num">94%</span>, accounting for seasonality, weather, events</span></li>
+<li class="industry-ticket"><strong data-lang="en">Auto-purchasing</strong> — <span data-lang="en">supplier orders created with no human involved</span></li>
+<li class="industry-ticket"><strong data-lang="en">Redistribution</strong> — <span data-lang="en">automatic stock balance between locations and warehouses</span></li>
+<li class="industry-ticket"><strong data-lang="en">Personalisation</strong> — <span data-lang="en">product recommendations based on customer behaviour</span></li>
+<li class="industry-ticket"><strong data-lang="en">Integration</strong> — <span data-lang="en"><span class="paper-num">1</span>C, MoySklad, Wildberries, Ozon, Yandex.Market</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-logistics" class="industry-panel" hidden="" id="industry-panel-logistics" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="truck" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="en">Logistics</span></h3>
+<p class="solution-desc"><span data-lang="en">Route optimisation, computer vision for order completeness checks, warehouse load forecasting</span></p>
+<span class="solution-metric"><i data-lucide="fuel" style="width:14px;height:14px"></i><span data-lang="en">Fuel -25%*</span></span>
+</div><h4 data-lang="en">Client results*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">-25%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Fuel</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-40%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Errors</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+18%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Cargo turnover</span></div>
+</div><p class="industry-footnote"><span data-lang="en">* Results are from specific projects and are not a guarantee of the same result for another business.</span></p><h4 data-lang="en">How it works</h4><p><span data-lang="en">Integration with WMS/TMS in 2-3 days. The AI builds routes using 50+ parameters. The system adapts to changes in real time — an accident on the MKAD = route rebuilt in 30 seconds.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a><a class="solution-more-link" href="/en/logistika.html" onclick="event.stopPropagation()"><span data-lang="en">Learn more on the page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="en">What the solution includes</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="en">Route optimisation</strong> — <span data-lang="en">mileage reduced by <span class="paper-num">25%</span>, accounting for traffic and time windows</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="en">order completeness check at dispatch, protection from errors</span></li>
+<li class="industry-ticket"><strong data-lang="en">Load forecast</strong> — <span data-lang="en">warehouse capacity planning for <span class="paper-num">14</span> days</span></li>
+<li class="industry-ticket"><strong data-lang="en">Real-time tracking</strong> — <span data-lang="en">GPS + AI arrival-time forecast</span></li>
+<li class="industry-ticket"><strong data-lang="en">Eco-driving</strong> — <span data-lang="en">driving style analysis, lower fuel consumption</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-office" class="industry-panel" hidden="" id="industry-panel-office" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="building-2" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="en">Offices & property management</span></h3>
+<p class="solution-desc"><span data-lang="en">Document workflow automation, AI assistants, scan recognition, task routing, analytics</span></p>
+<span class="solution-metric"><i data-lucide="clock" style="width:14px;height:14px"></i><span data-lang="en">5x faster*</span></span>
+</div><h4 data-lang="en">Client results*</h4><div class="solution-stats">
+<div class="solution-stat"><span class="solution-stat-val">5x<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Faster</span></div>
+<div class="solution-stat"><span class="solution-stat-val">-70%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Routine</span></div>
+<div class="solution-stat"><span class="solution-stat-val">+35%<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Efficiency</span></div>
+</div><p class="industry-footnote"><span data-lang="en">* Results are from specific projects and are not a guarantee of the same result for another business.</span></p><h4 data-lang="en">How it works</h4><p><span data-lang="en">We connect to your CRM/ECM in 1 day. The AI learns from your documents and processes. The secretary stops answering the same questions 20 times a day.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a><a class="solution-more-link" href="/en/ofisy.html" onclick="event.stopPropagation()"><span data-lang="en">Learn more on the page</span><i data-lucide="arrow-right" style="width:12px;height:12px"></i></a></div></div><div class="industry-modules"><h4 data-lang="en">What the solution includes</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong>AI<span data-lang="en">assistant</span></strong> — <span data-lang="en">answers employee questions, finds documents, creates tasks</span></li>
+<li class="industry-ticket"><strong data-lang="en">Document recognition</strong> — <span data-lang="en">scans, PDFs, photos → structured data in <span class="paper-num">2</span> sec</span></li>
+<li class="industry-ticket"><strong data-lang="en">Task routing</strong> — <span data-lang="en">the AI distributes requests between staff by workload</span></li>
+<li class="industry-ticket"><strong data-lang="en">Analytics</strong> — <span data-lang="en">dashboards, forecasts, automatic reports for management</span></li>
+<li class="industry-ticket"><strong data-lang="en">Integration</strong> — <span data-lang="en">Bitrix<span class="paper-num">24</span>, amoCRM, <span class="paper-num">1</span>C, SAP, Google Workspace</span></li>
+</ul></div></article><article aria-labelledby="industry-tab-custom" class="industry-panel" hidden="" id="industry-panel-custom" role="tabpanel" tabindex="0"><div class="industry-copy"><div class="industry-intro">
+<div class="solution-icon"><i data-lucide="sparkles" style="width:24px;height:24px"></i></div>
+<h3 class="solution-title"><span data-lang="en">Custom development</span></h3>
+<p class="solution-desc"><span data-lang="en">Any task: from a voice digital host to full supply-chain automation. We train on your data</span></p>
+</div><h4 data-lang="en">Why ST8 AI</h4><div class="solution-stats" style="grid-template-columns:1fr">
+<div class="solution-stat"><span class="solution-stat-val">2-3<sup aria-hidden="true">*</sup></span><span class="solution-stat-label" data-lang="en">Months to payback</span></div>
+</div><p class="industry-footnote"><span data-lang="en">* Results are from specific projects and are not a guarantee of the same result for another business.</span></p><h4 data-lang="en">How it works</h4><p><span data-lang="en">You describe the task — we audit and propose a solution in 2-3 days. Development from 2 weeks. Before launch we fix baseline metrics and project KPIs. After rollout we assess the actual effect on the client's data.</span></p><div class="industry-actions"><a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Message on Telegram</span></span></a><a class="solution-more-link" href="/en/about.html"><span data-lang="en">Learn more on the page</span></a></div></div><div class="industry-modules"><h4 data-lang="en">What we do</h4><ul class="industry-tickets">
+<li class="industry-ticket"><strong data-lang="en">Voice assistants</strong> — <span data-lang="en">for call centres, reception, support services</span></li>
+<li class="industry-ticket"><strong>Computer vision</strong> — <span data-lang="en">any tasks: from counting visitors to PPE control</span></li>
+<li class="industry-ticket"><strong data-lang="en">Forecasting models</strong> — <span data-lang="en">demand, churn, pricing, risks</span></li>
+<li class="industry-ticket"><strong data-lang="en">Process automation</strong> — <span data-lang="en">from request to report with no human involved</span></li>
+<li class="industry-ticket"><strong data-lang="en">System integration</strong> — <span data-lang="en">we connect what refuses to work together</span></li>
+</ul></div></article></div>
+</section>
+<!-- PRICING -->
+<section class="section-pricing s6-block" id="pricing">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="en">Pricing</span></div>
+<h2 class="section-title"><span data-lang="en">Choose the <span style="color:var(--gold)">scale</span> of rollout</span></h2>
+<p class="section-desc"><span data-lang="en">All plans include training models on your data and integration with no business downtime</span></p>
+</div>
+<div class="pr-printer" aria-hidden="true"><i></i><span>ST8 AI prints your plan</span><b>№ 0001</b></div>
+<div class="pricing-grid">
+<div class="pricing-card reveal">
+<div class="pr-hd"><b>ST8 AI · plan no. 01</b>digital host till</div>
+<div class="pricing-name"><span data-lang="en">Basic</span></div>
+<div class="pricing-subtitle"><span data-lang="en"><span class="paper-num">1-3</span> location</span></div>
+<div class="pricing-price"><span data-lang="en">from <span class="paper-num">650</span> <span>EUR</span></span></div>
+<div class="pricing-period"><span data-lang="en">one-off + support</span></div>
+<span class="pr-hand" aria-hidden="true">to get started</span>
+<ul class="pricing-features">
+<li><i data-lucide="check"></i><span data-lang="en">Digital booking host</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Telegram + Max messenger</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">iiko / R-Keeper integration</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Basic CRM and reminders</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Setup in <span class="paper-num">3</span> days</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Support <span class="paper-num">24/7</span></span></li>
+</ul>
+<div class="pr-tot"><span>total</span><span>from 650 EUR</span></div>
+<button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('basic')"><span data-lang="en">Launch a pilot</span></button>
+<div class="pr-bc" aria-hidden="true"></div><div class="pr-bcn" aria-hidden="true">ST8-0001-BAS</div>
+</div>
+<div class="pricing-card featured reveal">
+<div class="pricing-badge"><span data-lang="en">Popular</span></div>
+<div class="pr-stamp" aria-hidden="true">CHOICE<br>AI</div>
+<div class="pr-hd"><b>ST8 AI · plan no. 02</b>digital host till</div>
+<div class="pricing-name"><span data-lang="en">Business</span></div>
+<div class="pricing-subtitle"><span data-lang="en"><span class="paper-num">4-10</span> locations</span></div>
+<div class="pricing-price"><span data-lang="en">from <span class="paper-num">1 650</span> <span>EUR</span></span></div>
+<div class="pricing-period"><span data-lang="en">one-off + support</span></div>
+<span class="pr-hand" aria-hidden="true">the golden mean</span>
+<ul class="pricing-features">
+<li><i data-lucide="check"></i><span data-lang="en">Everything in Basic</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Remarket integration</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Predictive purchasing (<span class="paper-num">7</span> days)</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Cross-location analytics</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">VIP personalisation</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Dedicated manager</span></li>
+</ul>
+<div class="pr-tot"><span>total</span><span>from 1 650 EUR</span></div>
+<button class="pricing-btn pricing-btn-primary" onclick="openLeadForm('business')"><i data-lucide="rocket" style="width:16px;height:16px"></i><span data-lang="en">Launch a pilot</span></button>
+<div class="pr-bc" aria-hidden="true"></div><div class="pr-bcn" aria-hidden="true">ST8-0002-BIZ</div>
+</div>
+<div class="pricing-card reveal">
+<div class="pr-hd"><b>ST8 AI · plan no. 03</b>digital host till</div>
+<div class="pricing-name"><span data-lang="en">Network</span></div>
+<div class="pricing-subtitle"><span data-lang="en"><span class="paper-num">10</span>+ locations</span></div>
+<div class="pricing-price"><span data-lang="en">from <span class="paper-num">3 850</span> <span>EUR</span></span></div>
+<div class="pricing-period"><span data-lang="en">one-off + support</span></div>
+<span class="pr-hand" aria-hidden="true">for chains</span>
+<ul class="pricing-features">
+<li><i data-lucide="check"></i><span data-lang="en">Everything in Business</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Unified chain management system</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Computer vision in kitchens</span></li>
+<li><i data-lucide="check"></i><span data-lang="en">Auto-purchasing from suppliers</span></li>
+<li><i data-lucide="check"></i>On-premise deployment</li>
+<li><i data-lucide="check"></i><span data-lang="en">Team training</span></li>
+</ul>
+<div class="pr-tot"><span>total</span><span>from 3 850 EUR</span></div>
+<button class="pricing-btn pricing-btn-secondary" onclick="openLeadForm('enterprise')"><span data-lang="en">Discuss a project</span></button>
+<div class="pr-bc" aria-hidden="true"></div><div class="pr-bcn" aria-hidden="true">ST8-0003-NET</div>
+</div>
+</div>
+</section>
+
+
+  <!-- HOW IT WORKS -->
+  <section class="section-how s6-block" id="how">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="en">Process</span></div>
+<h2 class="section-title"><span data-lang="en">From audit to <span style="color:var(--gold)">result</span></span></h2>
+<p class="section-desc"><span data-lang="en">Rollout with no business downtime — we work nights and weekends</span></p>
+</div>
+<div class="how-grid">
+<div class="how-step reveal">
+<div class="how-number">1</div>
+<h3 class="how-title"><span data-lang="en">Audit</span></h3>
+<p class="how-desc"><span data-lang="en">We analyse processes, data and infrastructure in 1-2 days</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number">2</div>
+<h3 class="how-title"><span data-lang="en">Setup</span></h3>
+<p class="how-desc"><span data-lang="en">We train models on your data and set up integrations</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number">3</div>
+<h3 class="how-title"><span data-lang="en">Launch</span></h3>
+<p class="how-desc"><span data-lang="en">Pilot at 1 location, testing, tuning to real load</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number">4</div>
+<h3 class="how-title"><span data-lang="en">Scaling</span></h3>
+<p class="how-desc"><span data-lang="en">We roll out across the whole network, train the team, hand over documentation</span></p>
+</div>
+</div>
+</section>
+
+
+  <!-- PROJECTS / DEMOS -->
+  <section class="section-projects s6-block" id="projects">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="en">Case studies</span></div>
+<h2 class="section-title"><span data-lang="en">Solutions for <span style="color:var(--gold)">key clients</span></span></h2>
+<p class="section-desc"><span data-lang="en">Working pilots and deployed systems — from dark kitchens to construction holdings</span></p>
+</div>
+<div class="projects-grid">
+<!-- Azbuka -->
+<a class="project-card reveal" href="https://kosmos686-bit.github.io/st8-dark/kitchen/" rel="noopener noreferrer" target="_blank">
+<div class="project-preview">
+<div class="project-client-badge">
+<span class="client-dot"></span>
+<span data-lang="en">ST8 AI client</span>
+</div>
+<div class="project-visual kitchen-visual">
+<div class="kitchen-station">
+<span class="station-label" data-lang="en">Hot station</span>
+<span class="station-queue" data-lang="en">0 in queue</span>
+</div>
+<div class="kitchen-ai-msg">
+<i data-lucide="sparkles" style="width:14px;height:14px"></i>
+<span data-lang="en">AI: cook portions in batches — saves time</span>
+</div>
+<div class="kitchen-station">
+<span class="station-label" data-lang="en">Cold station</span>
+<span class="station-queue" data-lang="en">0 in queue</span>
+</div>
+<div class="kitchen-ai-msg">
+<i data-lucide="sparkles" style="width:14px;height:14px"></i>
+<span data-lang="en">AI: prepare dishes for peak load</span>
+</div>
+</div>
+<span class="s6-demo-note">Demo figures are conditional.</span></div>
+<div class="project-body">
+<div class="project-client-row">
+<div class="client-logo azbuka">AV</div>
+<div class="client-info">
+<div class="client-name"><span data-lang="en">Azbuka Vkusa</span> <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
+<div class="client-type"><span data-lang="en">Dark kitchen chain · Moscow</span></div>
+</div>
+</div>
+<h3 class="project-title">ST8 Dark Intelligence</h3>
+<p class="project-desc"><span data-lang="en">AI production planning. Forecasts peak hours, optimises batch cooking. Integration with iiko and the warehouse.</span></p>
+<div class="project-tags">
+<span class="project-tag" data-lang="en">Demand forecast</span>
+<span class="project-tag" data-lang="en">Kitchen optimisation</span>
+<span class="project-tag">iiko</span>
+</div>
+<div class="project-cta">
+<span class="project-cta-btn"><span data-lang="en">More about the project</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
+</div>
+</div>
+</a>
+<!-- Level Group -->
+<a class="project-card reveal" href="https://kosmos686-bit.github.io/st8-stroy/" rel="noopener noreferrer" target="_blank">
+<div class="project-preview">
+<div class="project-client-badge">
+<span class="client-dot"></span>
+<span data-lang="en">ST8 AI client</span>
+</div>
+<div class="project-visual stroy-visual">
+<div class="stroy-header">
+<span class="stroy-logo">ST8 BUILD</span>
+<span class="stroy-sub">AI MASTER</span>
+</div>
+<div class="stroy-progress">
+<div class="stroy-progress-bar" style="width:0%"></div>
+</div>
+<div class="stroy-tags">
+<span data-lang="en">Construction</span>
+<span data-lang="en">Estimates</span>
+<span data-lang="en">GOST</span>
+</div>
+</div>
+<span class="s6-demo-note">Demo figures are conditional.</span></div>
+<div class="project-body">
+<div class="project-client-row">
+<div class="client-logo level">LG</div>
+<div class="client-info">
+<div class="client-name">Level Group <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
+<div class="client-type"><span data-lang="en">Developer · Moscow</span></div>
+</div>
+</div>
+<h3 class="project-title">ST8 BUILD — AI Master</h3>
+<p class="project-desc"><span data-lang="en">An AI site foreman for a large developer. Estimate automation, GOST checks, construction schedule control, risk and overspend forecasts.</span></p>
+<div class="project-tags">
+<span class="project-tag" data-lang="en">Estimates</span>
+<span class="project-tag" data-lang="en">GOST</span>
+<span class="project-tag" data-lang="en">Schedule control</span>
+</div>
+<div class="project-cta">
+<span class="project-cta-btn"><span data-lang="en">More about the project</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
+</div>
+</div>
+</a>
+<!-- Unik Food -->
+<a class="project-card reveal" href="https://kosmos686-bit.github.io/st8-resto/unikfood.html" rel="noopener noreferrer" target="_blank">
+<div class="project-preview">
+<div class="project-client-badge">
+<span class="client-dot"></span>
+<span data-lang="en">ST8 AI client</span>
+</div>
+<div class="project-visual resto-visual">
+<div class="resto-header">
+<span class="resto-logo">ST8 RESTO</span>
+<span class="resto-sub">CHEFF AI</span>
+</div>
+<div class="resto-progress">
+<div class="resto-progress-bar" style="width:0%"></div>
+</div>
+<div class="resto-tags">
+<span data-lang="en">Recipe cards</span>
+<span>HACCP</span>
+<span data-lang="en">Nutrition</span>
+</div>
+</div>
+<span class="s6-demo-note">Demo figures are conditional.</span></div>
+<div class="project-body">
+<div class="project-client-row">
+<div class="client-logo unik">UF</div>
+<div class="client-info">
+<div class="client-name">Unik Food <i data-lucide="arrow-up-right" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-left:2px"></i></div>
+<div class="client-type"><span data-lang="en">Dark Kitchen · Yekaterinburg</span></div>
+</div>
+</div>
+<h3 class="project-title">CHEFF AI</h3>
+<p class="project-desc"><span data-lang="en">An AI technologist for a dark kitchen. Nutrition calculation, recipe-card generation, HACCP control, supplier ordering, cost analysis. iiko + 1C integration.</span></p>
+<div class="project-tags">
+<span class="project-tag" data-lang="en">Recipe cards</span>
+<span class="project-tag">HACCP</span>
+<span class="project-tag">1C</span>
+</div>
+<div class="project-cta">
+<span class="project-cta-btn"><span data-lang="en">More about the project</span> <i data-lucide="arrow-right" style="width:14px;height:14px"></i></span>
+</div>
+</div>
+</a>
+<!-- Future markets placeholder -->
+<div class="project-card reveal" style="align-items:center;justify-content:center;text-align:center;padding:32px 24px">
+<div style="width:48px;height:48px;border-radius:50%;border:1px dashed rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;margin:24px auto 16px;color:var(--gold)"><i data-lucide="rocket" style="width:20px;height:20px"></i></div>
+<h3 class="project-title"><span data-lang="en">Coming soon: pilots in the UAE and Turkey</span></h3>
+<p class="project-desc"><span data-lang="en">We are taking the approach we proved in Russia to new markets. Become one of the first clients.</span></p>
+<a class="solution-cta-btn contact-link" href="https://t.me/Zzima686" rel="noopener noreferrer" style="margin:8px auto 0" target="_blank"><i data-lucide="send" style="width:14px;height:14px"></i><span class="contact-link-label"><span data-lang="en">Become the first</span></span></a>
+</div>
+</div>
+<p class="legal-note reveal"><span data-lang="en">* Client names and logos are used with their consent. Results are from specific projects and are not a guarantee of the same result for another business.</span></p>
+</section>
+
+  <!-- RISK REDUCTION FOR NEW MARKETS -->
+<section class="section-how s6-block" id="guarantees">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="en">Guarantees</span></div>
+<h2 class="section-title"><span data-lang="en">A new market — <span style="color:var(--gold)">not a risk</span></span></h2>
+<p class="section-desc"><span data-lang="en">Terms from our real contracts — not marketing</span></p>
+</div>
+<div class="how-grid">
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="en">Pilot KPIs are fixed before launch</span></h3>
+<p class="how-desc"><span data-lang="en">Target metrics are written into the contract before the project starts</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="flask-conical" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="en">Pilot at <span class="paper-num">1</span> location</span></h3>
+<p class="how-desc"><span data-lang="en">Full rollout only after a successful pilot, not the other way round</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="door-open" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="en">Exit without penalty</span></h3>
+<p class="how-desc"><span data-lang="en"><span class="paper-num">30</span> days to exit the project without penalties</span></p>
+</div>
+<div class="how-step reveal">
+<div class="how-number"><i data-lucide="lock" style="width:20px;height:20px"></i></div>
+<h3 class="how-title"><span data-lang="en">Exclusive per city</span></h3>
+<p class="how-desc"><span data-lang="en">We do not work with your direct competitors in the same city</span></p>
+</div>
+</div>
+</section>
+
+
+  <!-- FAQ -->
+  <section class="section-solutions s6-block" id="faq">
+<div class="section-header reveal">
+<div class="section-label"><span data-lang="en">FAQ</span></div>
+<h2 class="section-title"><span data-lang="en">Frequently asked <span style="color:var(--gold)">questions</span></span></h2>
+</div>
+<div class="s6-faq reveal"><details class="s6-faq-item" name="stage6-faq" open=""><summary><h3 class="solution-title"><span data-lang="en">What if we have no data to train the model on?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="en">We start with what you already have in your accounting system (tills, CRM, warehouse) — that is usually enough for a first working version. The model keeps learning as data accumulates during the pilot.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="en">What happens to our data?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="en">Your data stays yours and is not passed to third parties. For manufacturing tasks an on-premise mode is possible — the data never leaves your site.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="en">What if the solution does not pay back?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="en">Target KPIs are fixed in the contract before work begins. After rollout we transparently show the actual effect on the client's data.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="en">How long does rollout take?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="en">Audit — 1-2 days, setup and integration — from 3 days to 2-3 weeks depending on scale, with a pilot at one location before full launch.</span></p>
+</div></details><details class="s6-faq-item" name="stage6-faq"><summary><h3 class="solution-title"><span data-lang="en">What does support include?</span></h3><span aria-hidden="true" class="s6-faq-icon"></span></summary><div class="s6-faq-answer">
+<p><span data-lang="en">24/7 support, retraining the model on new data, improvements as the business grows. Terms depend on the plan.</span></p>
+</div></details></div>
+</section>
+<!-- FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/ae/" class="logo"><div class="logo-icon">ST8</div><div class="logo-text">ST8<span>AI</span></div></a>
+        <p><span data-lang="en">Custom AI solutions for business. Result guaranteed by contract.</span></p>
+        <div style="display:flex;gap:12px">
+          <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="liquid-glass contact-link" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="send" style="width:18px;height:18px"></i></a>
+          <a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="message-circle" style="width:18px;height:18px"></i></a>
+          <a href="tel:+79856905252" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="phone" style="width:18px;height:18px"></i></a>
+          <a href="mailto:info@st8-ai.ru" target="_blank" rel="noopener noreferrer" class="liquid-glass" style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><i data-lucide="mail" style="width:18px;height:18px"></i></a>
+        </div>
+      </div>
       <div>
-        <p><strong style="color:#fff">ST8 AI</strong> · Alexey Gagarin, CEO &amp; Co-founder</p>
-        <p><a href="mailto:info@st8-ai.ru">info@st8-ai.ru</a> · <a href="tel:+79856905252">+7 985 690-52-52</a> · <a href="https://wa.me/79856905252" rel="noopener noreferrer">WhatsApp</a></p>
-        <p>Sole proprietor Popova Yu.D. · Tax ID 662607100653 · Reg. No. 326965800048074</p>
+        <h4 class="footer-heading"><span data-lang="en">Solutions</span></h4>
+        <ul class="footer-links">
+          <li><a href="/en/horeca.html">HoReCa</a></li>
+          <li><a href="/en/proizvodstvo.html"><span data-lang="en">Manufacturing</span></a></li>
+          <li><a href="/en/retail.html"><span data-lang="en">Retail</span></a></li>
+          <li><a href="/en/logistika.html"><span data-lang="en">Logistics</span></a></li>
+          <li><a href="/en/ofisy.html"><span data-lang="en">Offices & property management</span></a></li>
+        </ul>
       </div>
       <div>
-        <p><a href="/en/">International site</a> · <a href="/tr/" hreflang="tr" lang="tr">Türkiye</a> · <a href="/" hreflang="ru" lang="ru">Россия</a></p>
-        <p><a href="/legal.html">Privacy &amp; legal</a></p>
-        <p id="international-services">Services: <a href="/ae/ai-facility-management.html">AI facility management UAE</a> · <a href="/ae/restaurant-automation.html">AI for restaurants UAE</a> · <a href="/ae/ai-for-hotels-hospitality.html">AI automation hospitality UAE</a> · <a href="/ae/ai-concierge.html">AI concierge for restaurants and hotels</a></p><p><a href="/ae/blog/">Insights</a></p><p>© ST8 AI. All rights reserved.</p>
+        <h4 class="footer-heading"><span data-lang="en">Company</span></h4>
+        <ul class="footer-links">
+          <li><a href="/en/about.html"><span data-lang="en">About</span></a></li>
+          <li><a href="/cases/"><span data-lang="en">Case studies</span></a></li>
+          <li><a href="/ae/blog/"><span data-lang="en">Blog</span></a></li>
+          <li><a href="/ae/" hreflang="en-AE" lang="en">UAE</a></li>
+          <li><a href="/tr/" hreflang="tr" lang="tr">Türkiye</a></li><li><a href="/ae/blog/">UAE pilot guides</a></li><li><a href="/tr/blog/" lang="tr">Turkey pilot guides</a></li>
+        </ul>
       </div>
+      <div>
+        <h4 class="footer-heading"><span data-lang="en">Contact</span></h4>
+        <div class="footer-contact">
+          <p><strong>Alexey Gagarin</strong><br>CEO & Co-founder<br><span style="font-size:12px" data-lang="en">15+ years in B2B sales</span></p>
+          <p style="margin-top:8px"><a href="tel:+79856905252" target="_blank" rel="noopener noreferrer">+7 985 690-52-52</a><br><a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">@Zzima686</a><br><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          <p style="margin-top:12px"><strong>Yulia Popova</strong><br>Co-founder<br><span style="font-size:12px" data-lang="en">AI systems development</span><br><a href="tel:+79826210101" target="_blank" rel="noopener noreferrer">+7 982 621-01-01</a><br><a href="https://wa.me/79826210101" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;gap:4px">
+      
+      <p id="legalRequisites" style="font-size:11px;color:var(--gray-600)"><span data-lang="en">Sole proprietor Popova Yu.D. · INN 662607100653 · OGRNIP 326965800048074 · Polevskoy, Sverdlovsk region </span></p>
+      <p>ST8 AI. <span data-lang="en">All rights reserved.</span></p>
+      <p id="legalLine"><a href="/en/legal.html" class="legal-link"><span data-lang="en">152-FZ</span></a> | <span data-lang="en">24/7 support</span></p>
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[data-goal]');
-      if (!a) return;
-      var goal = a.getAttribute('data-goal');
-      if (/^contact_(telegram|whatsapp)_/.test(goal)) return;
-      try { if (typeof ym === 'function') ym(112836376, 'reachGoal', goal); } catch (err) {}
+  <!-- LEGAL / PRIVACY MODAL -->
+  <div id="legalModal" style="display:none;position:fixed;inset:0;z-index:110;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:640px;width:100%;max-height:80vh;overflow-y:auto">
+      <h3 class="section-title" style="font-size:20px;margin-bottom:16px" id="legalModalTitle"><span data-lang="en">Personal data processing</span></h3>
+      <div id="legalModalBody" style="font-size:14px;color:var(--gray-400);line-height:1.7">
+        
+        <p data-lang="en">By submitting a request via a messenger (Telegram / WhatsApp), you agree to the processing of the personal data you provide (name, phone number) by the ST8 AI operator for the purpose of handling your request and contacting you, in accordance with Federal Law 152-FZ “On Personal Data”. Data is not passed to third parties without your consent and is not used for any other purpose.</p>
+        
+        <p style="margin-top:12px"><a href="/en/legal.html" style="color:var(--gold)"><span data-lang="en">Read the full personal data processing policy →</span></a></p>
+      </div>
+      <button class="pricing-btn pricing-btn-secondary" style="margin-top:20px" onclick="closeLegalModal()"><span data-lang="en">Close</span></button>
+    </div>
+  </div>
+
+  <!-- LEAD FORM MODAL -->
+  <div id="storyModal" class="story-modal" role="dialog" aria-modal="true" aria-labelledby="storyModalTitle" hidden>
+    <div class="story-modal-card ss-paper">
+      <button type="button" class="story-modal-x" id="storyModalClose" aria-label="Close">×</button>
+      <p class="story-modal-kick" id="storyModalKick"></p>
+      <h3 id="storyModalTitle"></h3>
+      <p class="story-modal-text" id="storyModalText"></p>
+      <ul class="story-modal-list" id="storyModalList"></ul>
+      <p class="story-modal-foot" id="storyModalFoot"></p>
+      <div class="story-modal-act">
+        <button type="button" class="ss-btn" id="storyModalCta">Leave a request</button>
+        <button type="button" class="ss-link story-modal-skip" id="storyModalSkip">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px">
+    <div class="liquid-glass" style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
+      <div id="leadFormStep1">
+        <h3 id="leadFormTitle" class="section-title" style="font-size:22px;margin-bottom:8px"><span data-lang="en">Discuss your task and pilot plan</span></h3>
+        <p style="font-size:14px;color:var(--gray-400);margin-bottom:24px"><span data-lang="en">Describe one process and your current system. We will contact you, clarify the details and discuss the pilot scope, timing and cost.</span></p>
+        <form id="leadForm" onsubmit="submitLeadForm(event)">
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadName"><span data-lang="en">Name *</span></label>
+            <input type="text" id="leadName" name="name" required style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px">
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadPhone"><span data-lang="en">Phone *</span></label>
+            <input type="tel" id="leadPhone" name="phone" required style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px">
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadCompany"><span data-lang="en">Company</span></label>
+            <input type="text" id="leadCompany" name="company" style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px">
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;font-size:13px;color:var(--gray-400);margin-bottom:6px" for="leadMessage"><span data-lang="en">Message</span></label>
+            <textarea id="leadMessage" name="message" rows="4" style="width:100%;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:14px;resize:vertical"></textarea>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;cursor:pointer">
+            <input type="checkbox" id="leadConsent" name="consent" value="accepted" required onchange="document.getElementById('leadSubmitBtn').disabled = !this.checked" style="margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--gold)">
+            <span style="font-size:12px;color:var(--gray-400);line-height:1.5">
+              <span data-lang="en">By submitting a request, you agree to the processing of the personal data you provide (name, phone number) by the ST8 AI operator for the purpose of handling your request and contacting you, in accordance with Federal Law 152-FZ “On Personal Data”. Data is not passed to third parties without your consent and is not used for any other purpose.</span>
+              
+            </span>
+          </label>
+          <p style="font-size:12px;margin-bottom:16px"><a href="/en/legal.html" target="_blank" rel="noopener">Personal data processing policy</a></p>
+          <input type="hidden" name="subject" value="Новая заявка с сайта st8-ai.ru">
+          <input type="hidden" name="from_name" value="ST8 AI Website">
+          <!-- Web3Forms recipient is configured for the access key: info@st8-ai.ru. -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="submit" id="leadSubmitBtn" disabled class="pricing-btn pricing-btn-primary" style="flex:1;min-width:160px">
+              <span data-lang="en">Send request</span>
+            </button>
+            <button type="button" class="pricing-btn pricing-btn-secondary" style="flex:0 0 auto;width:auto;padding:14px 20px" onclick="closeLeadForm()"><span data-lang="en">Cancel</span></button>
+          </div>
+        </form>
+<p style="font-size:14px;margin-top:16px"><a href="https://t.me/Zzima686" target="_blank" rel="noopener">Telegram</a> · <a href="https://wa.me/79856905252" target="_blank" rel="noopener">WhatsApp</a></p>
+      </div>
+      <div id="leadFormSuccess" role="status" aria-live="polite" style="display:none;text-align:center;padding:20px 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--gold)"><i data-lucide="check" style="width:28px;height:28px"></i></div>
+        <h3 class="section-title" style="font-size:20px;margin-bottom:12px"><span data-lang="en">Thank you!</span></h3>
+        <p style="font-size:15px;color:var(--gray-400);line-height:1.6"><span data-lang="en">We will prepare a personal proposal for you and get in touch within a working day.</span></p>
+        <button class="pricing-btn pricing-btn-secondary" style="margin-top:24px" onclick="closeLeadForm()"><span data-lang="en">Close</span></button>
+      </div>
+      <div id="leadFormError" role="alert" style="display:none;text-align:center;padding:20px 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#f87171"><i data-lucide="alert-triangle" style="width:28px;height:28px"></i></div>
+        <h3 class="section-title" style="font-size:20px;margin-bottom:12px"><span data-lang="en">Could not send</span></h3>
+        <p style="font-size:15px;color:var(--gray-400);line-height:1.6;margin-bottom:20px"><span data-lang="en">There seems to be a connection problem. Message us directly on Telegram — we reply fast.</span></p>
+        <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:inline-flex"><span data-lang="en">Message on Telegram</span></a>
+      </div>
+    </div>
+  </div>
+<script>
+    // Курс для отображения в EUR — тот же коэффициент (~100:1), что используется в разделе "Тарифы",
+    // чтобы цифры на сайте были согласованы между собой. TODO: заменить на актуальный курс ЦБ при необходимости.
+    // ВАЖНО: объявлена в самом начале script — calculateROI() вызывается уже при загрузке (через setLang),
+    // а const с TDZ (temporal dead zone) кидает ReferenceError, если объявлена ниже места первого вызова.
+    const EUR_RATE = 100;
+
+    // Web3Forms — ключ доступа (форма "ST8 AI сайт" на web3forms.com, получатель info@st8-ai.ru).
+    const WEB3FORMS_KEY = "97c53ebb-40b7-4389-ad3c-09d8fc6f6fdc";
+
+    // Последние значения калькулятора ROI — читаются формой заявки при открытии с контекстом 'roi'.
+    // Объявлена здесь же (а не внутри calculateROI), чтобы не наступить на тот же TDZ-баг, что был с EUR_RATE.
+    var __roiState = { points: 1, check: 1000, guests: 20, total: 2376000 };
+
+    // Language switcher
+    function setLang(lang) {
+      if (lang === 'ru') { location.href = '/'; return; }
+      document.documentElement.lang = 'en';
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.id === 'btnEn' || btn.id === 'btnEnMobile');
+      });
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      calculateROI();
+    }
+    var savedLang = 'en';
+    setLang(savedLang);
+    calculateROI();
+
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    function openLegalModal() {
+      document.getElementById('legalModal').style.display = 'flex';
+    }
+    function closeLegalModal() {
+      document.getElementById('legalModal').style.display = 'none';
+    }
+
+    // Market selector — Russia / UAE / Turkey
+    // NOTE (TODO for content team): AE and TR currently share the EN copy on the page.
+    // Real localized channels/legal lines still need to be filled in below once available:
+    //  - AE contact channel: TODO (Telegram @Zzima686 used as fallback — confirm WhatsApp Business number for UAE)
+    //  - TR contact channel: TODO (Telegram @Zzima686 used as fallback — confirm WhatsApp Business number for Turkey)
+    //  - TR legal line: TODO (KVKK reference — needs legal review)
+    var MARKET_LABELS = {
+      ru: { ru: 'Россия', en: 'Russia' },
+      ae: { ru: 'ОАЭ', en: 'UAE' },
+      tr: { ru: 'Турция', en: 'Turkey' }
+    };
+    var MARKET_LEGAL = {
+      ru: '<a href="/en/legal.html" class="legal-link"><span data-lang="ru">152-ФЗ</span><span data-lang="en">152-FZ (Russia)</span></a> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      ae: '<a href="/en/legal.html" class="legal-link"><span data-lang="ru">PDPL UAE</span><span data-lang="en">PDPL UAE</span></a> | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>',
+      tr: '<a href="/en/legal.html" class="legal-link"><span data-lang="ru">KVKK</span><span data-lang="en">KVKK</span></a>  | <span data-lang="ru">Поддержка 24/7</span><span data-lang="en">24/7 Support</span>'
+    };
+    function openMarketModal() {
+      document.getElementById('marketModal').style.display = 'flex';
+    }
+    function closeMarketModal() {
+      document.getElementById('marketModal').style.display = 'none';
+    }
+    // Contact channel per market. WhatsApp Business is tied to Alexey's existing number (sales lead).
+    // AE/TR intentionally share the RU number — decided against dedicated per-market numbers.
+    var CONTACT_CHANNEL = {
+      ru: { url: 'https://t.me/Zzima686', icon: 'send' },
+      ae: { url: 'https://wa.me/79856905252', icon: 'message-circle' },
+      tr: { url: 'https://wa.me/79856905252', icon: 'message-circle' }
+    };
+    function updateContactLinks(market) {
+      var channel = CONTACT_CHANNEL[market] || CONTACT_CHANNEL.ru;
+      document.querySelectorAll('.contact-link').forEach(function(el) {
+        el.setAttribute('href', channel.url);
+        var icon = el.querySelector('i[data-lucide]');
+        if (icon) icon.setAttribute('data-lucide', channel.icon);
+      });
+      document.querySelectorAll('.contact-link-label').forEach(function(el) {
+        if (market === 'ru') {
+          el.innerHTML = '<span data-lang="ru">Написать в Telegram</span><span data-lang="en">Message on Telegram</span>';
+        } else {
+          el.innerHTML = '<span data-lang="ru">Написать в WhatsApp</span><span data-lang="en">Message on WhatsApp</span>';
+        }
+      });
+    }
+    function setMarket(market, restoring) {
+      if (!restoring) { location.href = {ru: '/en/', ae: '/ae/', tr: '/tr/'}[market]; return; }
+      window.currentMarket = market;
+      var labelEl = document.getElementById('marketBtnLabel');
+      if (labelEl) {
+        labelEl.innerHTML = '<span data-lang="ru">' + MARKET_LABELS[market].ru + '</span><span data-lang="en">' + MARKET_LABELS[market].en + '</span>';
+      }
+      var legalEl = document.getElementById('legalLine');
+      if (legalEl) legalEl.innerHTML = MARKET_LEGAL[market];
+      // RU market defaults to Russian copy; AE/TR use the international (EN) copy for now
+      updateContactLinks(market);
+      closeMarketModal();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    setMarket('ae', true);
+    // Modal no longer auto-opens on first visit — hero (incl. video) stays fully visible.
+    // Market selector is available only via the button in the navbar (openMarketModal()).
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const icon = document.getElementById('hamburgerIcon');
+      menu.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // ROI Calculator
+    function calculateROI() {
+      const points = parseInt(document.getElementById('points').value);
+      const check = parseInt(document.getElementById('check').value); // всегда хранится в рублях — единственный источник истины
+      const guests = parseInt(document.getElementById('guests').value);
+      const isEn = document.documentElement.lang === 'en';
+
+      document.getElementById('pointsValue').textContent = points;
+      // ФИКС: раньше при EN чек показывался в "сырых" рублях, хотя подпись рядом говорила "EUR" —
+      // цифра на слайдере не совпадала по масштабу с итоговой суммой экономии (та уже делилась на EUR_RATE).
+      // Теперь оба места используют один и тот же коэффициент конвертации.
+      if (isEn) {
+        document.getElementById('checkValue').textContent = Math.round(check / EUR_RATE).toLocaleString('en-US');
+      } else {
+        document.getElementById('checkValue').textContent = check.toLocaleString('ru-RU');
+      }
+      document.getElementById('guestsValue').textContent = guests;
+
+      const dailyRevenue = points * guests * check;
+      const monthlyRevenue = dailyRevenue * 30;
+      const noShowSavings = monthlyRevenue * 0.05 * 12;
+      const procurementSavings = monthlyRevenue * 0.08 * 12;
+      const checkGrowth = monthlyRevenue * 0.17 * 12;
+      const writeOffSavings = monthlyRevenue * 0.03 * 12;
+      const total = Math.round(noShowSavings + procurementSavings + checkGrowth + writeOffSavings);
+      __roiState = { points: points, check: check, guests: guests, total: total };
+
+      const totalEl = document.getElementById('roiTotal');
+      if (isEn) {
+        const totalEur = Math.round(total / EUR_RATE);
+        totalEl.innerHTML = totalEur.toLocaleString('en-US') + ' <span data-lang="ru">руб.</span><span data-lang="en">EUR</span>';
+      } else {
+        totalEl.innerHTML = total.toLocaleString('ru-RU') + ' <span data-lang="ru">руб.</span><span data-lang="en">EUR</span>';
+      }
+
+      // Консоль для отладки калькулятора — открой DevTools (F12) → Console на сайте, чтобы видеть эти значения вживую
+      console.log('[ST8 ROI Calculator]', {
+        lang: isEn ? 'en' : 'ru',
+        points: points,
+        checkRub: check,
+        checkDisplayed: isEn ? Math.round(check / EUR_RATE) : check,
+        guests: guests,
+        dailyRevenueRub: dailyRevenue,
+        monthlyRevenueRub: monthlyRevenue,
+        breakdownRub: {
+          noShowSavings: Math.round(noShowSavings),
+          procurementSavings: Math.round(procurementSavings),
+          checkGrowth: Math.round(checkGrowth),
+          writeOffSavings: Math.round(writeOffSavings)
+        },
+        totalRub: total,
+        totalDisplayed: isEn ? Math.round(total / EUR_RATE) : total,
+        eurRate: EUR_RATE
+      });
+    }
+
+    // Intersection Observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Create floating particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.animationDelay = Math.random() * 15 + 's';
+        p.style.animationDuration = (10 + Math.random() * 10) + 's';
+        container.appendChild(p);
+      }
+    }
+    createParticles();
+
+    // Solution accordion toggle
+    var solutionResizeObservers = new WeakMap();
+    function closeSolutionCard(c) {
+      c.classList.remove('active');
+      c.querySelector('.solution-detail').style.maxHeight = null;
+      var obs = solutionResizeObservers.get(c);
+      if (obs) { obs.disconnect(); solutionResizeObservers.delete(c); }
+    }
+    function toggleSolution(card) {
+      const isActive = card.classList.contains('active');
+      document.querySelectorAll('.solution-card.active').forEach(function(c) {
+        if (c !== card) closeSolutionCard(c);
+      });
+      if (isActive) {
+        closeSolutionCard(card);
+      } else {
+        card.classList.add('active');
+        var detail = card.querySelector('.solution-detail');
+        var inner = card.querySelector('.solution-detail-inner');
+        detail.style.maxHeight = detail.scrollHeight + 'px';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        // Content height can still change after this point (web font swap,
+        // language switch, window resize) — keep max-height in sync while open.
+        if (typeof ResizeObserver !== 'undefined') {
+          var obs = new ResizeObserver(function() {
+            detail.style.maxHeight = detail.scrollHeight + 'px';
+          });
+          obs.observe(inner);
+          solutionResizeObservers.set(card, obs);
+        } else {
+          setTimeout(function() {
+            detail.style.maxHeight = detail.scrollHeight + 'px';
+          }, 50);
+        }
+      }
+    }
+
+    // Lead form modal — opens the popup form (Web3Forms), optionally prefilling the message.
+    // context: 'roi' prefills the message with the ROI calculator's current numbers;
+    // a plan key ('basic' | 'business' | 'enterprise') prefills which tariff the visitor is interested in;
+    // no argument opens a blank form.
+    function openLeadForm(context) {
+      var modal = document.getElementById('leadFormModal');
+      var form = document.getElementById('leadForm');
+      form.reset();
+      document.getElementById('leadFormStep1').style.display = 'block';
+      document.getElementById('leadFormSuccess').style.display = 'none';
+      document.getElementById('leadFormError').style.display = 'none';
+      document.getElementById('leadSubmitBtn').disabled = true;
+      document.getElementById('leadSubmitBtn').dataset.sending = 'false';
+
+      var isEn = document.documentElement.lang === 'en';
+      var msg = '';
+      if (context === 'roi') {
+        if (isEn) {
+          msg = 'ROI calculator data:\n' +
+                'Locations: ' + __roiState.points + '\n' +
+                'Average check: ' + Math.round(__roiState.check / EUR_RATE).toLocaleString('en-US') + ' EUR\n' +
+                'Guests/day per location: ' + __roiState.guests + '\n' +
+                'Estimated annual savings: ' + Math.round(__roiState.total / EUR_RATE).toLocaleString('en-US') + ' EUR';
+        } else {
+          msg = 'Данные из калькулятора ROI:\n' +
+                'Точек: ' + __roiState.points + '\n' +
+                'Средний чек: ' + __roiState.check.toLocaleString('ru-RU') + ' руб.\n' +
+                'Гостей в день на точку: ' + __roiState.guests + '\n' +
+                'Ориентировочная экономия за год: ' + __roiState.total.toLocaleString('ru-RU') + ' руб.';
+        }
+      } else if (context) {
+        var names = isEn
+          ? { basic: 'Basic', business: 'Business', enterprise: 'Enterprise' }
+          : { basic: 'Базовый', business: 'Бизнес', enterprise: 'Сеть' };
+        msg = (isEn ? 'Interested in the ' : 'Интересует тариф: ') + (names[context] || context) + (isEn ? ' plan' : '');
+      }
+      document.getElementById('leadMessage').value = msg;
+
+      modal.style.display = 'flex';
+      window.__leadFocus = document.activeElement;
+      window.__leadBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('leadName').focus();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function closeLeadForm() {
+      document.getElementById('leadFormModal').style.display = 'none';
+      document.body.style.overflow = window.__leadBodyOverflow || '';
+      if (window.__leadFocus) window.__leadFocus.focus();
+    }
+
+    function submitLeadForm(e) {
+      e.preventDefault();
+      var form = document.getElementById('leadForm');
+      if (!form.reportValidity()) return;
+      var btn = document.getElementById('leadSubmitBtn');
+      if (btn.dataset.sending === 'true') return;
+      btn.dataset.sending = 'true';
+      btn.disabled = true;
+      var formData = new FormData(document.getElementById('leadForm'));
+      formData.append('access_key', WEB3FORMS_KEY);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      })
+        .then(function(res) { if (!res.ok) throw new Error('Form request failed'); return res.json(); })
+        .then(function(data) {
+          document.getElementById('leadFormStep1').style.display = 'none';
+          if (data && data.success === true) {
+            document.getElementById('leadFormSuccess').style.display = 'block';
+            try { if (typeof ym === 'function') ym(112836376, 'reachGoal', 'lead_form'); } catch (_) {}
+            try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: 'lead_form', method: 'form' }); } catch (_) {}
+          } else {
+            document.getElementById('leadFormError').style.display = 'block';
+          }
+        })
+        .catch(function() {
+          document.getElementById('leadFormStep1').style.display = 'none';
+          document.getElementById('leadFormError').style.display = 'block';
+        });
+    }
+
+    // Opens the lead form automatically when arriving via #lead-form
+    // (used by the CTA buttons on /about.html, /cases/*.html and /blog/*.html,
+    // which link to index.html#lead-form since those static pages don't carry the modal themselves).
+    function openLeadFormFromHash() { if (location.hash === '#lead-form') openLeadForm(); }
+    window.addEventListener('hashchange', openLeadFormFromHash);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', openLeadFormFromHash);
+    else openLeadFormFromHash();
+
+    // Solution detail placeholder
+    function showSolutionDetail(type) {
+      var names = {
+        horeca: 'HoReCa', production: 'Производство', retail: 'Ритейл',
+        logistics: 'Логистика', office: 'Офисы', custom: 'Кастом'
+      };
+      alert('Направление: ' + (names[type] || type) + '\n\nКликните по карточке ниже для подробного описания');
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
     });
   </script>
-<div id="leadFormModal" role="dialog" aria-modal="true" aria-labelledby="leadFormTitle" hidden>
- <div class="lead-panel"><div id="leadFormStep1"><h2 id="leadFormTitle">Discuss your pilot</h2><p>Describe one process and your current systems. We will discuss the data, scope, timing and cost.</p>
- <form id="leadForm"><label for="leadName">Name *</label><input id="leadName" name="name" type="text" required autocomplete="name"><label for="leadPhone">Phone *</label><input id="leadPhone" name="phone" type="tel" required autocomplete="tel"><label for="leadCompany">Company</label><input id="leadCompany" name="company" type="text" autocomplete="organization"><label for="leadMessage">Message</label><textarea id="leadMessage" name="message" rows="4"></textarea>
- <label class="lead-consent"><input type="checkbox" id="leadConsent" name="consent" value="accepted" required><span>I agree to the processing of my name, phone, company and message to handle this enquiry and contact me. <a href="/en/legal.html" target="_blank" rel="noopener" lang="en">Privacy notice</a></span></label>
- <div class="btns"><button class="btn btn-gold" type="submit" id="leadSubmitBtn" disabled>Send enquiry</button><button class="btn btn-line" type="button" data-close-lead>Close</button></div></form></div>
- <div id="leadFormSuccess" role="status" tabindex="-1" hidden><h2>Thank you</h2><p>Your enquiry has been received. We will contact you about the process you described.</p><button class="btn btn-line" type="button" data-close-lead>Close</button></div>
- <div id="leadFormError" role="alert" tabindex="-1" hidden><h2>Submission not confirmed</h2><p>We will not resend automatically. You can contact us through WhatsApp to check the request.</p><button class="btn btn-line" type="button" data-close-lead>Close</button></div>
- <p class="note"><a href="https://wa.me/79856905252" target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="https://t.me/Zzima686" target="_blank" rel="noopener noreferrer">Telegram</a></p></div></div><script src="/assets/international-leads.js" defer></script></body>
+<script src="/assets/conversions.js" defer></script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(typeof lucide!=='undefined')lucide.createIcons();});</script>
+<script>
+ document.addEventListener('keydown',function(event){if(event.key==='Escape' && document.getElementById('leadFormModal').style.display==='flex')closeLeadForm();});
+ document.addEventListener('click',function(event){var link=event.target.closest('a[href]');if(link && link.getAttribute('href')==='#lead-form'){event.preventDefault();event.stopImmediatePropagation();openLeadForm();}},true);
+</script>
+<script>document.addEventListener('keydown',function(e){var modal=document.getElementById('leadFormModal');if(e.key!=='Tab'||modal.style.display!=='flex')return;var items=Array.from(modal.querySelectorAll('a[href],button:not([disabled]),input:not([type="hidden"]),textarea')).filter(function(el){return el.getClientRects().length;});var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});</script>
+  <script src="/assets/receipt-industries.js" defer></script>
+  <script>window.SS_I18N={"kick": "Industry", "main": "Key metric", "foot": "* Results are from specific projects and are not a guarantee of the same result for another business.", "lead": "Interested in automation: ", "from": " (from the home page)", "menu": "Menu", "tape": {"kick": "How it works", "title": "24/7 digital host", "text": "Every action is written to the tape: booking, purchase, review, supplier substitute. You see what the system did and confirm what matters. We start with one process at one location.", "rows": [["19:12 guest", "booking accepted"], ["21:40 stock", "purchase assembled"], ["09:20 review", "reply ready"], ["12:30 supplier", "substitute suggested"]], "foot": "Illustrative scenario. Figures are conditional.", "lead": "Interested in the 24/7 digital host"}};</script>
+  <script src="/assets/scroll-story.js" defer></script>
+  <script src="/assets/pricing-receipt.js" defer></script>
+  <script src="/assets/hero-media.js" defer></script>
+</body>
 </html>
