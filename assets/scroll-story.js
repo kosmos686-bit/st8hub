@@ -25,7 +25,8 @@
     var reduced = reduce.matches;
     var p = reduced ? 1 : state.p1;
     tickets.forEach(function (ticket, index) {
-      var shown = reduced ? 1 : clamp((p * 1.15 - index / tickets.length * .9 - .04) / .22);
+      var raw = reduced ? 1 : clamp((p * 1.15 - index / tickets.length * .9 - .04) / .22);
+      var shown = reduced ? 1 : 1 - Math.pow(1 - raw, 3);
       ticket.style.opacity = String(shown);
       ticket.style.transform = 'translateY(' + (-(1 - shown) * 34) + 'px)';
       ticket.style.setProperty('--ss-marker', clamp((shown - .5) / .5));
@@ -45,7 +46,7 @@
       paper.classList.toggle('ss-click', visible);
       paper.tabIndex = visible ? 0 : -1;
       paper.setAttribute('aria-hidden', String(!visible));
-      paper.style.transform = reduced ? 'none' : 'translateY(-50%) rotate(3deg) translateY(' + (visible ? 0 : 36) + 'px)';
+      paper.style.transform = reduced ? 'none' : 'translateY(-50%) rotate(3deg) translateY(' + (visible ? 0 : 36) + 'px) scale(' + (visible ? 1 : .97) + ')';
     });
     backdrops.forEach(function (bg, index) { bg.classList.toggle('ss-on', index === selected); });
     dots.forEach(function (dot, index) { dot.style.opacity = index <= selected || reduced ? '1' : '.2'; });
