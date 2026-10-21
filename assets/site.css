@@ -204,3 +204,12 @@ a.cta-btn:hover { background: var(--gold-light); color: #000 !important; transfo
 .ba-table td strong { color: #fff; font-weight: 600; }
 .ba-table td:first-child { width: 22%; }
 @media (max-width: 480px) { .article-body .stat-row .stat-val { font-size: 20px; white-space: nowrap; } .article-body .stat-row .stat-label { font-size: 11px; } }
+@media (max-width: 640px) {
+  .ba-wrap { overflow: visible; border: 0; background: none; }
+  .ba-table, .ba-table tbody, .ba-table tr, .ba-table td { display: block; width: 100%; min-width: 0; }
+  .ba-table thead { display: none; }
+  .ba-table tr { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+  .ba-table td { padding: 6px 0; border: 0; }
+  .ba-table td:first-child { width: 100%; font-size: 15px; padding-bottom: 8px; }
+  .ba-table td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+}
