@@ -12,6 +12,17 @@
   var papers = Array.prototype.slice.call(root.querySelectorAll('.ss-art .ss-sh'));
   var backdrops = Array.prototype.slice.call(root.querySelectorAll('.ss-bg'));
   var dots = Array.prototype.slice.call(root.querySelectorAll('.ss-dots i'));
+  // Backdrop photos load only when the industries scene is close to the viewport: first the visible one, then the rest.
+  function loadBg(bg) { if (bg && bg.dataset.bg) { bg.style.backgroundImage = 'url(' + bg.dataset.bg + ')'; delete bg.dataset.bg; } }
+  var bgScene = root.querySelector('#story-scene-2');
+  if (bgScene && backdrops.length) {
+    var loadAll = function () { loadBg(backdrops[0]); setTimeout(function () { backdrops.slice(1).forEach(loadBg); }, 600); };
+    if ('IntersectionObserver' in window) {
+      var bgIo = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { loadAll(); bgIo.disconnect(); } }, { rootMargin: '300px 0px' });
+      bgIo.observe(bgScene);
+    } else loadAll();
+  }
+
   var words = Array.prototype.slice.call(root.querySelectorAll('.ss-word'));
   var DUR = [3000, 2400, 2000];
   var state = { p1: 0, p2: 0, p3: 0 };
